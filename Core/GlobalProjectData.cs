@@ -150,7 +150,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         {
             GlobalProjectData.CurrentImageSectionList = GetSectionsNames();
             GlobalProjectData.CurrentImageReleveList = GetRelevesNames();
-            // GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
+             GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
 
 
         }

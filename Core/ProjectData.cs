@@ -121,6 +121,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CreateDirectory(this.ImageRelevePath);
             CreateDirectory(this.TmpPath);
             CreateFile(this.DatabasePath);
+            CreateFile(this.ExcelPath);
 
 
         }
@@ -129,6 +130,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             if (FilePath != null && !File.Exists(FilePath))
             {
                 FileStream fileStream = File.Create(FilePath);
+                fileStream.Close();
             }
         }
         private void CreateDirectory(string DirectoryPath)
@@ -204,12 +206,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public ProjectData(ProjectInfos project)
         {
-            try
-            {
-                File.Copy(project.TmpExcelPath, project.ExcelPath, true);
+           
+                File.Copy(project.ExcelPath, project.TmpExcelPath,  true);
 
-            }
-            catch (Exception ex) { }
+            
+           
 
             Database database = new Database(project.DatabasePath);
             if (database.IsDatabaseInitialized())
@@ -277,12 +278,12 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public void InitializePieceFromExcel()
         {
-            CellInfo PresentCell = this.myExcelFile.FindValue("Pr�sent");
+            CellInfo PresentCell = this.myExcelFile.FindValue("Présent");
             foreach (Section i in this.mySections)
             {
                 foreach (Piece j in i.PiecesList)
                 {
-                    CellInfo cellInfo = myTmpExcelFile.FindValue(j.PieceName);
+                    CellInfo cellInfo = myExcelFile.FindValue(j.PieceName);
                     if (cellInfo.Sheet != null)
                     {
                         j.ExcelColumn = cellInfo.Column;
