@@ -122,6 +122,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CreateDirectory(this.TmpPath);
             CreateFile(this.DatabasePath);
             CreateFile(this.ExcelPath);
+            CreateFile(this.TmpExcelPath);
 
 
         }
@@ -206,8 +207,13 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public ProjectData(ProjectInfos project)
         {
-           
-                File.Copy(project.ExcelPath, project.TmpExcelPath,  true);
+            try
+            {
+
+
+                File.Copy(project.ExcelPath, project.TmpExcelPath, true);
+            }
+            catch(Exception hehehaha) { }
 
             
            

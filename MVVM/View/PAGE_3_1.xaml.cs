@@ -49,26 +49,30 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
             GlobalProjectData.InitializeGlobalProjectData();
+            InitializePAGE_3_2_Section();
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
+            openFileDialog.DefaultExt = ".xls";
+
+            // Set the file filters
             openFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
 
             bool? result = openFileDialog.ShowDialog();
 
-            if (result == true)
+            if (openFileDialog.ShowDialog() == true)
             {
                 string selectedFilePath = openFileDialog.FileName;
                 File.Copy(selectedFilePath, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath);
-                InitializePAGE_3_2_Section();
-
-                GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
-
-
-                // Use the selected file path as needed
             }
+           
+
 
 
         }
+
+
+        
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
