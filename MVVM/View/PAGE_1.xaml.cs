@@ -51,7 +51,6 @@ namespace ApplicationInventaire.MVVM.View
         {
             Button clickedButton = (Button)sender;
             GlobalProjectData.CurrentProjectName=clickedButton.Content.ToString();
-            GlobalProjectData.InitializeGlobalProjectData();
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
            
         }

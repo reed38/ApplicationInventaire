@@ -278,32 +278,52 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public void InitializePieceFromExcel()
         {
-            CellInfo PresentCell = this.myExcelFile.FindValue("Présent");
+            CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
+            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
+            List<CoupleCellInfo> coupleCellInfo = new List<CoupleCellInfo>();
+
+            int n = PresentCell.Row + 1;
+            string res;
+            do
+            {
+                res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column);
+                CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
+                CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
+                coupleCellInfo.Add(new CoupleCellInfo(TagCellTmp, ContentCellTmp));
+                n++;
+
+            } while (!res.Equals(""));
+
             foreach (Section i in this.mySections)
             {
                 foreach (Piece j in i.PiecesList)
                 {
-                    CellInfo cellInfo = myExcelFile.FindValue(j.PieceName);
-                    if (cellInfo.Sheet != null)
+
+                    foreach (CoupleCellInfo k in coupleCellInfo)
                     {
-                        j.ExcelColumn = cellInfo.Column;
-                        j.ExcelRow = cellInfo.Row;
-                        j.SheetName = cellInfo.Sheet;
-                        string cellPresentValue = this.myTmpExcelFile.GetCellValue(cellInfo.Sheet, cellInfo.Row, PresentCell.Column);
-                        if (cellPresentValue.IndexOf("1") > 0)
+                        if (k.tag.Content.Equals(j.PieceName))
                         {
-                            j.IsPresent = 1;
+                            if (k.Present.Content.Equals("1"))
+                            {
+                                j.IsPresent = 1;
+                            }
+                            else
+                            {
+                                j.IsPresent = 0;
+                            }
 
-                        }
-                        else
-                        {
-                            j.IsPresent = 0;
+                            
+                                j.SheetName = PresentCell.Sheet;
+                                j.ExcelColumn = PresentCell.Column;
+                                j.ExcelRow = k.Present.Row;
 
+                            
                         }
+
                     }
                 }
-            }
 
+            }
         }
 
 

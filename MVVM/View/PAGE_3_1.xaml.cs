@@ -48,6 +48,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
+            GlobalProjectData.InitializeGlobalProjectData();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
             openFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
@@ -71,6 +72,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
+            GlobalProjectData.InitializeGlobalProjectData();
             GlobalProjectData.CurrentProjectData.ResetPiecePresent(); //to restart the project from nothing
             InitializePAGE_3_2_Section();
 

@@ -148,12 +148,15 @@ namespace ApplicationInventaire.MVVM.View
             
             if (GlobalProjectData.IndicePiece < CurrentSection.PiecesList.Count )
             {
+                GlobalProjectData.CurrentProjectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, answ, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow);
+
                 UpdateCurrent();
                 if (CurrentPiece.IsPresent == 1) //we don't do piece already present
                 {
                     return;
                 }
                 SetBorderPosition();
+
 
             }
 
@@ -186,7 +189,6 @@ namespace ApplicationInventaire.MVVM.View
             }
 
 
-            //GlobalProjectData.CurrentProjectData.myExcelFile.SetCellValue(CurrentPiece.SheetName, answ, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow);
 
 
                
@@ -244,7 +246,7 @@ namespace ApplicationInventaire.MVVM.View
             if (result == true)
             {
                 string filePath = saveFileDialog.FileName;
-                File.Copy(GlobalProjectData.CurrentProjectData.myProjectInfos.TmpPath + "/tmpExcel.xls", filePath, true);
+                File.Copy(GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath, filePath, true);
             }
 
             GlobalPages.SetCurrentPageBack(GlobalPages.PAGE_3_1);

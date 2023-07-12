@@ -27,10 +27,32 @@ namespace ApplicationInventaire.Core.ExcelManagement
         public int Row { get; set; }
         public int Column { get; set; }
         public string Sheet { get; set; }
+        public string Content { set; get; }
+
+        public CellInfo(int Row, int Column, string Sheet, string Content)
+        {
+            this.Row = Row;
+            this.Sheet=Sheet;
+            this.Column = Column;   
+            this.Content = Content; 
+        }
+        public CellInfo() { }
 
 
 
-        // Other members and methods
+
+    }
+
+    public class CoupleCellInfo
+    {
+        public CellInfo tag { set; get; }
+        public CellInfo Present { set; get; }
+
+        public CoupleCellInfo(CellInfo tag, CellInfo present)
+        {
+            this.tag = tag;
+            this.Present = present;
+        }
 
     }
     /// <summary>
