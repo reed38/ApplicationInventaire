@@ -1,0 +1,26 @@
+﻿<Page x:Class="ApplicationInventaire.MVVM.View.PAGE_3_1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationInventaire.MVVM.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PAGE_3_1"
+      Background="#116396"
+      >
+
+    <Grid>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="350" Margin="50,70,510,10">
+            
+            <Button Content="Plan" Height="50" Margin="0,5"  x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
+            <Button Content="Continue Inventory" Height="50" Margin="0,5"  x:Name="ButtonContinueInventory" Click="ButtonContinueInventoryClick"/>
+            <Button Content="New inventory" Height="50" Margin="0,5" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
+            <Button Content="Search with tag" Height="50" Margin="0,5" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
+            <Button Content="Search with Image" Height="50" Margin="0,5" x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
+            <Button Content="Modify" Height="50" Margin="0,5"  x:Name="ButtonModify" Click="ButtonModifyClick"/>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

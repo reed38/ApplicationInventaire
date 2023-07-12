@@ -1,0 +1,77 @@
+﻿<Window x:Class="ApplicationInventaire.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationInventaire"
+        xmlns:GlobalProjectData="clr-namespace:ApplicationInventaire.Core.GlobalProjectData"
+
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="1080"
+        Width="1920"
+                >
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="930" />
+        </Grid.RowDefinitions>
+
+
+
+
+        <Grid Grid.Row="0" Background="#074067" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock Text="Demo1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="30" Height="43"
+                       Width="245"
+                       Margin="295,33,0,0"
+                       Foreground="White"
+                       />
+
+
+            <Button
+                x:Name="goBackButton"
+                  Click="ButtonGoBackClick"
+                Content="go back"
+                Width="55"
+                Height="32"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Margin="30,0,0,0"
+                />
+
+
+
+        </Grid>
+
+
+
+
+
+
+
+        <!-- Content for the second row -->
+        <Grid  Grid.Row="1" Background="#116396" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"    >
+
+        </Grid>
+        <Frame x:Name="MainFrame" 
+               NavigationUIVisibility="Hidden"
+               Grid.Row="1"
+               
+               VerticalAlignment="Stretch"
+               HorizontalAlignment="Stretch"
+               >
+
+            <Frame.Content>
+                <Page HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                    
+                      x:Name="pagetoto">
+                    <!-- Page content goes here -->
+                </Page>
+            </Frame.Content>
+        </Frame>
+
+
+    </Grid>
+</Window>
