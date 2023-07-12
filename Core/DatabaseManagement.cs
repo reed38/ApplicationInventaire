@@ -24,6 +24,13 @@ namespace ApplicationInventaire.Core.DatabaseManagement
     /// There is the possibility to create a relation between tables using secondary key.
     /// DO NOT write a Section with Id=, it will not work. I don't know why it must be a maraboutage
     /// </summary>
+    /// <summary>
+    /// To create Database object. A database Object has the methods to read and write Objects in a .db sqlite database file. These objects are Section, Piece, and ProjectInfos
+    /// the sqlite-net-pcl library let you directly create Table in the database to stock objects. You can then get those objects using a system of pimarykey.
+    ///  But it DOESN'T ALLOW complex types such as bol or nested objects.
+    /// There is the possibility to create a relation between tables using secondary key.
+    /// DO NOT write a Section with Id=, it will not work. I don't know why it must be a maraboutage
+    /// </summary>
     public class Database
     {
         #region variables
@@ -130,7 +137,11 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         public ProjectInfos ReadProjectInfos()
         {
             List<ProjectInfos> tmp = connection.Table<ProjectInfos>().ToList();
-            return tmp[0];
+            if (tmp.Count > 0)
+                return tmp[0];
+
+            else
+                return null;
         }
         /// <summary>
         /// 
@@ -150,7 +161,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         #region methods
         public bool IsDatabaseInitialized()
         {
-            if(this.GetAllSections().Count <1)
+            if (this.GetAllSections().Count < 1)
             {
                 return false;
             }
@@ -177,7 +188,6 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         }
 
     }
-
 
 }
 

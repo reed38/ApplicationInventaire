@@ -59,6 +59,13 @@ namespace ApplicationInventaire.Core.PieceSections
         {
 
         }
+        public Piece(int x, int y, string pieceName, int SectionId)
+        {
+            this.X = x;
+            this.Y = y;
+            this.PieceName = pieceName;
+            this.SectionId = SectionId;
+        }
         #endregion
 
 
@@ -122,7 +129,6 @@ namespace ApplicationInventaire.Core.PieceSections
         }
         #endregion
     }
-
 
 }
 

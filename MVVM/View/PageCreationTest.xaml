@@ -15,18 +15,11 @@
       
 
       >
-    <Page.Resources>
-    <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-            <ResourceDictionary Source="ApplicationInventaire.Model/Images.xaml" />
-        </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
-</Page.Resources>
 
     <Grid    Margin="50,50,45,185" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="122*" />
-            <ColumnDefinition Width="19*" />
+            <ColumnDefinition Width="36*" />
+            <ColumnDefinition Width="11*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -37,16 +30,18 @@
 
 
 
-                <Canvas  Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+        <Canvas  Grid.Row="0" Grid.Column="0" x:Name="myCanva" >
 
 
-                    <Image  x:Name="CurrentSectionImage"  
+            <Image  x:Name="CurrentSectionImage"  
                     Stretch="UniformToFill"
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"
                     Source="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="0,0,0,50"/>
-            <Image Source="{StaticResource ResourceKey=RedCircle}" Height="50" Width="50"/>
+                    Margin="0,0,0,50"
+                    MouseLeftButtonDown="CurrentSectionImage_MouseLeftButtonDown"/>
+            <Image x:Name="RedCircleImage" 
+                   Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png" Height="50" Width="50"/>
 
         </Canvas>
 
@@ -76,7 +71,8 @@
                            Background="Gray"
                            Height="30"
                            Width="90"
-                           HorizontalAlignment="Left"/>
+                           HorizontalAlignment="Center"
+                           />
                     <Label
                 x:Name="xCoordinate"
                 Content="{Binding XCoordinate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"             

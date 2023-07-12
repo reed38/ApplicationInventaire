@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
 
-        <Canvas  Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+        <Canvas  Grid.Row="0" Grid.Column="0" x:Name="myCanva" >
 
 
             <Image  x:Name="CurrentSectionImage"  
@@ -34,11 +34,19 @@
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"
                     Source="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="0,0,0,50"/>
+                    Margin="0,0,0,50"
+                    />
+            <Image x:Name="RedCircleImage" 
+                   Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
+                   Height="25"
+                   Width="25"/>
+            <Label Foreground="Red" x:Name="LabelNameTag" Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   ></Label>
 
-            </Canvas>
+        </Canvas>
 
-            <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,14,0">
+
+        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,14,0">
 
 
             <StackPanel Orientation="Horizontal"

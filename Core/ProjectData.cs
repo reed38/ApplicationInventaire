@@ -24,6 +24,9 @@ using ApplicationInventaire.Core.GlobalProjectData;
 namespace ApplicationInventaire.Core.ProjectDataSet
 {
 
+
+
+
     /// <summary>
     /// used to contain image path and image name
     /// </summary>
@@ -42,12 +45,19 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         #endregion
 
+
+
         public void DispImageInfo()
         {
             Console.WriteLine("name: " + this.Name);
             Console.WriteLine("Path: " + this.Path);
         }
     }
+
+
+    /// <summary>
+    /// used to contain image path and image name
+    /// </summary>
 
     public class ProjectInfos
     {
@@ -62,8 +72,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region set_get
         public string DatabasePath { set; get; }
         public string ExcelPath { set; get; }
-        public string AppPath { set; get; } = AppDomain.CurrentDomain.BaseDirectory ;
-        public string TmpPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tmp");
+        public string AppPath { set; get; } = AppDomain.CurrentDomain.BaseDirectory;
+        public string TmpPath { set; get; } 
+        public string TmpExcelPath { set; get; }
 
         public string ProjectPath { set; get; }
         public string ImagePath { set; get; }
@@ -87,6 +98,8 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.ImageRelevePath = Path.Combine(this.ImagePath, "ImageReleve");
             this.DatabasePath = Path.Combine(this.ProjectPath, "Database.db");
             this.ExcelPath = Path.Combine(this.ProjectPath, "Excel_" + this.ProjectName + ".xls");
+            this.TmpPath= Path.Combine(this.ProjectPath, "Tmp");
+            this.TmpExcelPath = Path.Combine(TmpPath, this.ProjectName + "tmp.xls");
             this.InitializeFileTree();
 
 
@@ -107,20 +120,21 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CreateDirectory(this.ImageRelevePath);
             CreateDirectory(this.TmpPath);
             CreateFile(this.DatabasePath);
-            CreateFile(this.ExcelPath);
+
 
         }
         private void CreateFile(string FilePath)
         {
             if (FilePath != null && !File.Exists(FilePath))
             {
-                File.Create(FilePath);
+                FileStream fileStream = File.Create(FilePath);
             }
         }
         private void CreateDirectory(string DirectoryPath)
         {
             if (DirectoryPath != null && !Directory.Exists(DirectoryPath))
             {
+
                 Directory.CreateDirectory(DirectoryPath);
             }
         }
@@ -165,6 +179,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public ProjectInfos myProjectInfos;
         public List<Section> mySections;
         public ExcelFile myExcelFile;
+        public ExcelFile myTmpExcelFile;
         public Database myDatabase;
 
         #endregion
@@ -176,15 +191,25 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region constructor
         public ProjectData(ProjectInfos project, List<Section> mySections)
         {
+             File.Copy(project.ExcelPath, project.ExcelPath, true);
+
             this.mySections = mySections;
-            myExcelFile = new ExcelFile(myProjectInfos.ExcelPath);
-            myDatabase = new Database(myProjectInfos.DatabasePath);
+            this.myExcelFile = new ExcelFile(myProjectInfos.ExcelPath);
+            this.myTmpExcelFile = new ExcelFile(myProjectInfos.TmpExcelPath);
+            this.myDatabase = new Database(myProjectInfos.DatabasePath);
 
 
         }
 
         public ProjectData(ProjectInfos project)
         {
+            try
+            {
+                File.Copy(project.TmpExcelPath, project.ExcelPath, true);
+
+            }
+            catch (Exception ex) { }
+
             Database database = new Database(project.DatabasePath);
             if (database.IsDatabaseInitialized())
             {
@@ -202,7 +227,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 this.myProjectInfos = project;
 
             }
-            myExcelFile = new ExcelFile(myProjectInfos.ExcelPath);
+            myExcelFile = new ExcelFile(project.ExcelPath);
+            this.myTmpExcelFile = new ExcelFile(project.TmpExcelPath);
+
 
         }
 
@@ -249,18 +276,18 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public void InitializePieceFromExcel()
         {
-            CellInfo PresentCell = this.myExcelFile.FindValue("Présent");
+            CellInfo PresentCell = this.myExcelFile.FindValue("Pr�sent");
             foreach (Section i in this.mySections)
             {
                 foreach (Piece j in i.PiecesList)
                 {
-                    CellInfo cellInfo = myExcelFile.FindValue(j.PieceName);
+                    CellInfo cellInfo = myTmpExcelFile.FindValue(j.PieceName);
                     if (cellInfo.Sheet != null)
                     {
                         j.ExcelColumn = cellInfo.Column;
                         j.ExcelRow = cellInfo.Row;
-                        j.SheetName=cellInfo.Sheet;
-                        string cellPresentValue = this.myExcelFile.GetCellValue(cellInfo.Sheet, cellInfo.Row, PresentCell.Column);
+                        j.SheetName = cellInfo.Sheet;
+                        string cellPresentValue = this.myTmpExcelFile.GetCellValue(cellInfo.Sheet, cellInfo.Row, PresentCell.Column);
                         if (cellPresentValue.IndexOf("1") > 0)
                         {
                             j.IsPresent = 1;
@@ -308,7 +335,8 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
     }
-
-
 }
+
+
+
 

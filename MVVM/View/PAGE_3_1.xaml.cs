@@ -18,7 +18,7 @@ using Microsoft.Win32;
 using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.GlobalProjectData;
 using ApplicationInventaire.Core.ExcelManagement;
-
+using ApplicationInventaire.Core.PieceSections;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -48,6 +48,8 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
+            GlobalProjectData.InitializeGlobalProjectData();
+            GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
             openFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
@@ -57,13 +59,9 @@ namespace ApplicationInventaire.MVVM.View
             if (result == true)
             {
                 string selectedFilePath = openFileDialog.FileName;
-                GlobalProjectData.CurrentProjectData.myProjectInfos.ExcelPath = selectedFilePath;
-                
-                File.Copy(selectedFilePath, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpPath+"/tmpExcel.xls",true);
-               
-                GlobalProjectData.CurrentProjectData.myExcelFile = new ExcelFile(selectedFilePath);
-
+                File.Copy(selectedFilePath, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath);
                 InitializePAGE_3_2_Section();
+
                 GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
 
 
@@ -75,11 +73,10 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
-
-            File.Copy(GlobalProjectData.CurrentProjectData.myProjectInfos.ExcelPath, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpPath + "/tmpExcel.xls", true);
-            GlobalProjectData.CurrentProjectData.myExcelFile = new ExcelFile(GlobalProjectData.CurrentProjectData.myProjectInfos.TmpPath);
-
+            GlobalProjectData.InitializeGlobalProjectData();
             InitializePAGE_3_2_Section();
+
+            GlobalProjectData.CurrentProjectData.ResetPiecePresent(); //to restart the project from nothing
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
 
@@ -108,10 +105,18 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private static void InitializePAGE_3_2_Section()
         {
-            GlobalProjectData.InitializeGlobalProjectData();
 
+            //Used in case the user make two inventory without exiting the app
             if (GlobalPages.page_3_2!=null)
-                GlobalPages.page_3_2.ImageSection = GlobalProjectData.CurrentImageSectionList[0].Path ;
+            {
+                GlobalProjectData.IndicePiece = 0;
+                GlobalProjectData.IndiceSection = 0;
+                GlobalPages.page_3_2.CurrentPiece =  GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection].PiecesList[GlobalProjectData.IndicePiece];
+                GlobalPages.page_3_2.SetBorderPosition();
+
+
+
+            }
 
         }
         #endregion

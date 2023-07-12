@@ -52,7 +52,6 @@ namespace ApplicationInventaire.MVVM.View
             Button clickedButton = (Button)sender;
             GlobalProjectData.CurrentProjectName=clickedButton.Content.ToString();
             GlobalProjectData.InitializeGlobalProjectData();
-            GlobalProjectData.RemainingSections = GlobalProjectData.CurrentProjectData.mySections;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
            
         }

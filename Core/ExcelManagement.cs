@@ -11,6 +11,8 @@ using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
+using System.IO.Pipes;
+using System.Security.Policy;
 
 namespace ApplicationInventaire.Core.ExcelManagement
 {
@@ -40,19 +42,11 @@ namespace ApplicationInventaire.Core.ExcelManagement
         #region variables
 
 
-        private string filePath;
         #endregion
 
 
         #region set_get
-        public string FilePath
-
-
-        {
-            get { return filePath; }
-            set { filePath = value; }
-        }
-
+       public string FilePath { get; set; }
         #endregion
 
         #region constructor
@@ -76,9 +70,9 @@ namespace ApplicationInventaire.Core.ExcelManagement
             try
             {
 
-                if (filePath.IndexOf(".xlsx") > 0)
+                if (FilePath.IndexOf(".xlsx") > 0)
                 {
-                    using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                     {
                         XSSFWorkbook workbook = new XSSFWorkbook(file);
                         ISheet sheet = workbook.GetSheet(sheetName);
@@ -88,13 +82,14 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         {
                             cellValue = cell.ToString();
                         }
+                        file.Close();
                     }
 
 
                 }
-                else if (filePath.IndexOf(".xls") > 0)
+                else if (FilePath.IndexOf(".xls") > 0)
                 {
-                    using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                     {
                         HSSFWorkbook workbook = new HSSFWorkbook(file);
                         ISheet sheet = workbook.GetSheet(sheetName);
@@ -104,6 +99,8 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         {
                             cellValue = cell.ToString();
                         }
+                        file.Close();
+
                     }
 
 
@@ -133,37 +130,41 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
             try
             {
-                if (filePath.IndexOf(".xlsx") > 0)
+                if (FilePath.IndexOf(".xlsx") > 0)
                 {
-                    using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                     {
                         XSSFWorkbook workbook = new XSSFWorkbook(file);
                         ISheet sheet = workbook.GetSheet(sheetName);
                         IRow excelRow = sheet.GetRow(row);
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
                         cell.SetCellValue(content);
+                        file.Close();
 
-                        using (var outputFile = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                        using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
                         {
                             workbook.Write(outputFile);
+                            outputFile.Close();
                         }
                     }
 
 
                 }
-                else if (filePath.IndexOf(".xls") > 0)
+                else if (FilePath.IndexOf(".xls") > 0)
                 {
-                    using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                     {
                         HSSFWorkbook workbook = new HSSFWorkbook(file);
                         ISheet sheet = workbook.GetSheet(sheetName);
                         IRow excelRow = sheet.GetRow(row);
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
                         cell.SetCellValue(content);
+                        file.Close();
 
-                        using (var outputFile = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                        using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
                         {
                             workbook.Write(outputFile);
+                            outputFile.Close();
                         }
                     }
                 }
@@ -189,9 +190,9 @@ namespace ApplicationInventaire.Core.ExcelManagement
         public CellInfo FindValue(string content)
         {
             CellInfo cellInfo = new CellInfo();
-            if (filePath.IndexOf(".xlsx") > 0)
+            if (FilePath.IndexOf(".xlsx") > 0)
             {
-                using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 {
                     XSSFWorkbook workbook = new XSSFWorkbook(file);
 
@@ -224,52 +225,60 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                 }
                             }
                         }
+                        file.Close();
                     }
                 }
             }
 
 
 
-            else if (filePath.IndexOf(".xls") > 0)
+            else if (FilePath.IndexOf(".xls") > 0)
             {
-                using var file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                HSSFWorkbook workbook = new(file);
 
 
-                // Loop through each sheet in the workbook
-                for (int sheetIndex = 0; sheetIndex < workbook.NumberOfSheets; sheetIndex++)
+                using( var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 {
-                    ISheet sheet = workbook.GetSheetAt(sheetIndex);
+                    HSSFWorkbook workbook = new HSSFWorkbook(file);
 
-                    // Loop through each row in the sheet
-                    for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
+
+                    // Loop through each sheet in the workbook
+                    for (int sheetIndex = 0; sheetIndex < workbook.NumberOfSheets; sheetIndex++)
                     {
-                        IRow row = sheet.GetRow(rowIndex);
+                        ISheet sheet = workbook.GetSheetAt(sheetIndex);
 
-                        // Loop through each cell in the row
-                        if (row != null)
+                        // Loop through each row in the sheet
+                        for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
                         {
-                            for (int columnIndex = 0; columnIndex < row.LastCellNum; columnIndex++)
-                            {
-                                ICell cell = row.GetCell(columnIndex);
+                            IRow row = sheet.GetRow(rowIndex);
 
-                                if (cell != null && cell.CellType == CellType.String && cell.StringCellValue == content)
+                            // Loop through each cell in the row
+                            if (row != null)
+                            {
+                                for (int columnIndex = 0; columnIndex < row.LastCellNum; columnIndex++)
                                 {
-                                    // Cell with matching content found, populate the CellInfo struct
-                                    cellInfo.Row = rowIndex;
-                                    cellInfo.Column = columnIndex;
-                                    cellInfo.Sheet = sheet.SheetName;
-                                    return cellInfo;
+                                    ICell cell = row.GetCell(columnIndex);
+
+                                    if (cell != null && cell.CellType == CellType.String && cell.StringCellValue == content)
+                                    {
+                                        // Cell with matching content found, populate the CellInfo struct
+                                        cellInfo.Row = rowIndex;
+                                        cellInfo.Column = columnIndex;
+                                        cellInfo.Sheet = sheet.SheetName;
+                                        return cellInfo;
+                                    }
                                 }
                             }
                         }
                     }
+                    file.Close();
                 }
-            }
+
+        }
 
 
-            // Cell with matching content not found
-            cellInfo.Sheet = null; // return -1 for sheet by default if nothing is found
+
+        // Cell with matching content not found
+        cellInfo.Sheet = null; // return -1 for sheet by default if nothing is found
             return cellInfo;
         }
         #endregion
@@ -278,7 +287,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
         #region debugging
         public void DispDataExcel()
         {
-            Console.WriteLine(" Excel filePath: " + filePath);
+            Console.WriteLine(" Excel FilePath: " + FilePath);
 
         }
 
@@ -286,6 +295,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
         #endregion
 
     }
+
 }
 
 

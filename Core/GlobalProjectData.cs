@@ -50,6 +50,11 @@ namespace ApplicationInventaire.Core.GlobalProjectData
     }
 
 
+    /// <summary>
+    /// used to contain image path and image name
+    /// </summary>
+   
+
     public static class GlobalProjectData
     {
         #region variables
@@ -60,10 +65,11 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         public static ProjectData CurrentProjectData;
 
         #endregion
-
+        #region ImagePathVariable
+        public static string RedCirclePath = AppDomain.CurrentDomain.BaseDirectory + "Images/redCircle.png";
+        #endregion
 
         #region PAGE_3_1Variables
-        public static List<Section> RemainingSections;
         public static int IndiceSection;
         public static int IndicePiece;
         #endregion
@@ -74,7 +80,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         public static void InitializeGlobalProjectData()
         {
             ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
-            
+
             GlobalProjectData.CurrentProjectData = new ProjectData(tmp);
             GlobalProjectData.IndicePiece = 0;
             GlobalProjectData.IndiceSection = 0;
@@ -89,7 +95,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         private static ImageInfos[] GetSectionsNames()
         {
 
-            string ImageSectionPath = AppDomain.CurrentDomain.BaseDirectory + "UserData/" + GlobalProjectData.CurrentProjectName + "/Image"+"/ImageSection";
+            string ImageSectionPath =  GlobalProjectData.CurrentProjectData.myProjectInfos.ImageSectionPath ;
             string[] path = Directory.GetFiles(ImageSectionPath);
             ImageInfos[] result = new ImageInfos[path.Length];
 
@@ -126,7 +132,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         {
             string UserDataPath = AppDomain.CurrentDomain.BaseDirectory + "UserData";
             string[] result = Directory.GetDirectories(UserDataPath);
-        for (int i=0;i<result.Length;i++)            
+            for (int i = 0; i < result.Length; i++)
             {
                 result[i] = Path.GetFileNameWithoutExtension(result[i]);
 
@@ -138,13 +144,13 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         }
 
-        
+
 
         public static void LoadCurrentProject()
         {
             GlobalProjectData.CurrentImageSectionList = GetSectionsNames();
             GlobalProjectData.CurrentImageReleveList = GetRelevesNames();
-            GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
+           // GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
 
 
         }
@@ -155,12 +161,15 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         #endregion
 
-       
+        #region debugging
+
+        #endregion
 
 
 
 
     }
+
 }
 
 
