@@ -53,7 +53,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
     /// <summary>
     /// used to contain image path and image name
     /// </summary>
-   
+
 
     public static class GlobalProjectData
     {
@@ -95,7 +95,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         private static ImageInfos[] GetSectionsNames()
         {
 
-            string ImageSectionPath =  GlobalProjectData.CurrentProjectData.myProjectInfos.ImageSectionPath ;
+            string ImageSectionPath = GlobalProjectData.CurrentProjectData.myProjectInfos.ImageSectionPath;
             string[] path = Directory.GetFiles(ImageSectionPath);
             ImageInfos[] result = new ImageInfos[path.Length];
 
@@ -150,7 +150,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         {
             GlobalProjectData.CurrentImageSectionList = GetSectionsNames();
             GlobalProjectData.CurrentImageReleveList = GetRelevesNames();
-           // GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
+            // GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
 
 
         }

@@ -27,6 +27,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
 
+
     /// <summary>
     /// used to contain image path and image name
     /// </summary>
@@ -72,8 +73,8 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region set_get
         public string DatabasePath { set; get; }
         public string ExcelPath { set; get; }
-        public string AppPath { set; get; } = AppDomain.CurrentDomain.BaseDirectory;
-        public string TmpPath { set; get; } 
+        public string AppPath { set; get; } = AppDomain.CurrentDomain.BaseDirectory+"/UserData";
+        public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
 
         public string ProjectPath { set; get; }
@@ -92,13 +93,13 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public ProjectInfos(string ProjectName)
         {
             this.ProjectName = ProjectName;
-            this.ProjectPath = Path.Combine(AppPath, "UserData/" + ProjectName);
+            this.ProjectPath = Path.Combine(AppPath, ProjectName);
             this.ImagePath = Path.Combine(this.ProjectPath, "Image");
             this.ImageSectionPath = Path.Combine(this.ImagePath, "ImageSection");
             this.ImageRelevePath = Path.Combine(this.ImagePath, "ImageReleve");
             this.DatabasePath = Path.Combine(this.ProjectPath, "Database.db");
             this.ExcelPath = Path.Combine(this.ProjectPath, "Excel_" + this.ProjectName + ".xls");
-            this.TmpPath= Path.Combine(this.ProjectPath, "Tmp");
+            this.TmpPath = Path.Combine(this.ProjectPath, "Tmp");
             this.TmpExcelPath = Path.Combine(TmpPath, this.ProjectName + "tmp.xls");
             this.InitializeFileTree();
 
@@ -191,7 +192,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region constructor
         public ProjectData(ProjectInfos project, List<Section> mySections)
         {
-             File.Copy(project.ExcelPath, project.ExcelPath, true);
+            File.Copy(project.ExcelPath, project.ExcelPath, true);
 
             this.mySections = mySections;
             this.myExcelFile = new ExcelFile(myProjectInfos.ExcelPath);

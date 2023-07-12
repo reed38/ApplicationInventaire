@@ -30,11 +30,11 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
-    
 
-        
+
+
         public PAGE_3_1()
-                    {
+        {
             InitializeComponent();
             GlobalPages.page_3_1 = this;
         }
@@ -48,8 +48,6 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.InitializeGlobalProjectData();
-            GlobalProjectData.CurrentProjectData.InitializePieceFromExcel();
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
             openFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
@@ -73,14 +71,13 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.InitializeGlobalProjectData();
+            GlobalProjectData.CurrentProjectData.ResetPiecePresent(); //to restart the project from nothing
             InitializePAGE_3_2_Section();
 
-            GlobalProjectData.CurrentProjectData.ResetPiecePresent(); //to restart the project from nothing
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
 
-    
+
 
         private void ButtonsearchImageClick(object sender, RoutedEventArgs e)
         {
@@ -107,11 +104,11 @@ namespace ApplicationInventaire.MVVM.View
         {
 
             //Used in case the user make two inventory without exiting the app
-            if (GlobalPages.page_3_2!=null)
+            if (GlobalPages.page_3_2 != null)
             {
                 GlobalProjectData.IndicePiece = 0;
                 GlobalProjectData.IndiceSection = 0;
-                GlobalPages.page_3_2.CurrentPiece =  GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection].PiecesList[GlobalProjectData.IndicePiece];
+                GlobalPages.page_3_2.CurrentPiece = GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection].PiecesList[GlobalProjectData.IndicePiece];
                 GlobalPages.page_3_2.SetBorderPosition();
 
 

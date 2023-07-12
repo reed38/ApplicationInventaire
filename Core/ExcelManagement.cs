@@ -46,7 +46,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
 
         #region set_get
-       public string FilePath { get; set; }
+        public string FilePath { get; set; }
         #endregion
 
         #region constructor
@@ -236,7 +236,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
             {
 
 
-                using( var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 {
                     HSSFWorkbook workbook = new HSSFWorkbook(file);
 
@@ -273,12 +273,12 @@ namespace ApplicationInventaire.Core.ExcelManagement
                     file.Close();
                 }
 
-        }
+            }
 
 
 
-        // Cell with matching content not found
-        cellInfo.Sheet = null; // return -1 for sheet by default if nothing is found
+            // Cell with matching content not found
+            cellInfo.Sheet = null; // return -1 for sheet by default if nothing is found
             return cellInfo;
         }
         #endregion
