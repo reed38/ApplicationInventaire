@@ -300,37 +300,68 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
             } while (!res.Equals(""));
 
-            foreach (Section i in this.mySections)
-            {
-                foreach (Piece j in i.PiecesList)
-                {
 
+            for (int i = 0; i < this.mySections.Count; i++)
+            {
+                for (int j = 0; j < this.mySections[i].PiecesList.Count; j++)
+                {
                     foreach (CoupleCellInfo k in coupleCellInfo)
                     {
-                        if (k.tag.Content.Equals(j.PieceName))
+                        Piece tmp = this.mySections[i].PiecesList[j];
+                        if (k.tag.Content.Equals(this.mySections[i].PiecesList[j].PieceName))
                         {
                             if (k.Present.Content.Equals("1"))
                             {
-                                j.IsPresent = 1;
+                                this.mySections[i].PiecesList[j].IsPresent = 1;
                             }
                             else
                             {
-                                j.IsPresent = 0;
+                                this.mySections[i].PiecesList[j].IsPresent = 0;
                             }
 
-                            
-                                j.SheetName = PresentCell.Sheet;
-                                j.ExcelColumn = PresentCell.Column;
-                                j.ExcelRow = k.Present.Row;
 
-                            
+                            this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
+                            this.mySections[i].PiecesList[j].ExcelColumn = PresentCell.Column;
+                            this.mySections[i].PiecesList[j].ExcelRow = k.Present.Row;
+
+
                         }
 
                     }
                 }
-
             }
         }
+            //foreach (Section i in this.mySections)
+            //{
+            //    foreach (Piece j in i.PiecesList)
+            //    {
+
+            //        foreach (CoupleCellInfo k in coupleCellInfo)
+            //        {
+            //            if (k.tag.Content.Equals(j.PieceName))
+            //            {
+            //                if (k.Present.Content.Equals("1"))
+            //                {
+            //                    j.IsPresent = 1;
+            //                }
+            //                else
+            //                {
+            //                    j.IsPresent = 0;
+            //                }
+
+                            
+            //                    j.SheetName = PresentCell.Sheet;
+            //                    j.ExcelColumn = PresentCell.Column;
+            //                    j.ExcelRow = k.Present.Row;
+
+                            
+            //            }
+
+            //        }
+            //    }
+
+            //}
+        
 
 
         #endregion
