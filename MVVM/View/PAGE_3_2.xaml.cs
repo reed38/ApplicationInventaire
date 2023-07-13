@@ -24,6 +24,7 @@ using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.MVVM.View;
 using ApplicationInventaire.Core.GlobalProjectData;
 using Microsoft.Win32;
+using ApplicationInventaire.Core.ProjectDataSet;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -39,13 +40,22 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_3_2 = this;
             DataContext = this;
             RedCircleImage.Visibility = Visibility.Visible;
-            ImageSection = GlobalProjectData.CurrentImageSectionList[0].Path;
-            GlobalPages.page_3_2.CurrentPiece = GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection].PiecesList[GlobalProjectData.IndicePiece];
+            projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
+            ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
+            File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath);
+            projectData = new ProjectData(tmp);
+
+            ImageSection = projectData.ImageSectionList[0].Path;
+            IndicePiece = 0;
+            IndiceSection = 0;
             GlobalPages.page_3_2.SetBorderPosition();
 
 
         }
         #region Variables
+        public int IndiceSection { set; get; }
+        public int IndicePiece { set; get; }
+        public ProjectData projectData { set; get; }
         #endregion
 
         #region bindingVariablesSources
@@ -54,6 +64,7 @@ namespace ApplicationInventaire.MVVM.View
         private double xCoordinatevar;
         private double yCoordinatevar;
         private Piece currentPiece;
+       
        
         private Section currentSection;
 
@@ -135,8 +146,8 @@ namespace ApplicationInventaire.MVVM.View
 
         private void UpdateCurrent()
         {
-            this.CurrentSection = GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection];
-            this.CurrentPiece = GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection].PiecesList[GlobalProjectData.IndicePiece];
+            this.CurrentSection = projectData.mySections[IndiceSection];
+            this.CurrentPiece = projectData.mySections[IndiceSection].PiecesList[IndicePiece];
 
         }
 
@@ -144,9 +155,9 @@ namespace ApplicationInventaire.MVVM.View
         private  void GotoNextPiece(string answ)
         {
             UpdateCurrent(); //for the first time
-            GlobalProjectData.IndicePiece++;
+          IndicePiece++;
             
-            if (GlobalProjectData.IndicePiece < CurrentSection.PiecesList.Count )
+            if (IndicePiece < CurrentSection.PiecesList.Count )
             {
                 GlobalProjectData.CurrentProjectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, answ, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow);
 
@@ -161,16 +172,16 @@ namespace ApplicationInventaire.MVVM.View
             }
 
 
-            if (GlobalProjectData.IndicePiece==CurrentSection.PiecesList.Count) //end of section reached
+            if (IndicePiece==CurrentSection.PiecesList.Count) //end of section reached
             {
 
-                GlobalProjectData.IndiceSection++;
-                GlobalProjectData.IndicePiece = 0;
+                IndiceSection++;
+               IndicePiece = 0;
                 UpdateCurrent();
                 SetBorderPosition();
 
 
-                foreach (ImageInfos i in GlobalProjectData.CurrentImageSectionList)
+                foreach (ImageInfos i in this.projectData.ImageSectionList)
                 {
                     if (i.Name == CurrentSection.SectionName)
                     {
@@ -181,7 +192,7 @@ namespace ApplicationInventaire.MVVM.View
                 }
                
             }
-            if (GlobalProjectData.IndiceSection == GlobalProjectData.CurrentProjectData.mySections.Count-1)
+            if (IndiceSection == projectData.mySections.Count-1)
             {
                 SaveAndQuit();
 

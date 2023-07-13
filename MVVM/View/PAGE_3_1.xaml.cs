@@ -19,6 +19,7 @@ using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.GlobalProjectData;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.PieceSections;
+using ApplicationInventaire.Core.ProjectDataSet;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -48,7 +49,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.InitializeGlobalProjectData();
+            GlobalPages.page_3_2. projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             InitializePAGE_3_2_Section();
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -63,8 +64,20 @@ namespace ApplicationInventaire.MVVM.View
             if (openFileDialog.ShowDialog() == true)
             {
                 string selectedFilePath = openFileDialog.FileName;
-                File.Copy(selectedFilePath, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath);
+                if(GlobalPages.page_3_2 != null)
+                {
+                    File.Copy(selectedFilePath, GlobalPages.page_3_2.projectData.myProjectInfos.TmpExcelPath);
+
+
+                }
+                else
+                {
+                    GlobalProjectData.ExcelContinuPath = selectedFilePath;
+
+                }
             }
+
+
            
 
 
@@ -76,7 +89,6 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.InitializeGlobalProjectData();
             GlobalProjectData.CurrentProjectData.ResetPiecePresent(); //to restart the project from nothing
             InitializePAGE_3_2_Section();
 
@@ -112,9 +124,12 @@ namespace ApplicationInventaire.MVVM.View
             //Used in case the user make two inventory without exiting the app
             if (GlobalPages.page_3_2 != null)
             {
-                GlobalProjectData.IndicePiece = 0;
-                GlobalProjectData.IndiceSection = 0;
-                GlobalPages.page_3_2.CurrentPiece = GlobalProjectData.CurrentProjectData.mySections[GlobalProjectData.IndiceSection].PiecesList[GlobalProjectData.IndicePiece];
+                GlobalPages.page_3_2.projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
+                GlobalPages.page_3_2.ImageSection = GlobalPages.page_3_2.projectData.ImageSectionList[0].Path;
+                GlobalPages.page_3_2.IndicePiece = 0;
+                GlobalPages.page_3_2.IndiceSection = 0;
+                
+                GlobalPages.page_3_2.CurrentPiece = GlobalPages.page_3_2.projectData.mySections[GlobalPages.page_3_2.IndiceSection].PiecesList[GlobalPages.page_3_2.IndicePiece];
                 GlobalPages.page_3_2.SetBorderPosition();
 
 
