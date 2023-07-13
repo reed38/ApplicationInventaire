@@ -18,7 +18,7 @@
         <Grid Grid.Column="0">
 
 
-            <ListBox ItemsSource="{Binding Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center">
+            <ListBox ItemsSource="{Binding Items2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center">
                 <ListBox.Template>
                     <ControlTemplate TargetType="{x:Type ListBox}">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -43,7 +43,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.ColumnSpan="2"  HorizontalAlignment="Left" Margin="61,0,0,0">
-                <Button Content="Load" x:Name="page_1" Width="350" Height="60" Margin="5,50,15,10" />
+                <Button Content="Load" x:Name="page_1" Width="350" Height="60" Margin="5,50,15,10" Click="ButtonClickLoad"/>
                 <Button  Content="Export" x:Name="page_2"  Width="350" Height="60" Margin="5,10,15,10" />
                 <Button  Content="New" x:Name="page_3" Width="350" Height="60" Margin="5,10 ,15,10"  Click="ButtonClickNew" />
 

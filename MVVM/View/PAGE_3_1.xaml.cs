@@ -20,6 +20,7 @@ using ApplicationInventaire.Core.GlobalProjectData;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
+using System.Windows.Forms;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -52,7 +53,7 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_3_2. projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             InitializePAGE_3_2_Section();
 
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog openFileDialog  = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
             openFileDialog.DefaultExt = ".xls";
 
@@ -89,8 +90,11 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.CurrentProjectData.ResetPiecePresent(); //to restart the project from nothing
             InitializePAGE_3_2_Section();
+            if(GlobalPages.page_3_2!=null)
+            {
+                GlobalPages.page_3_2.projectData.ResetPiecePresent();
+            }
 
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
@@ -126,6 +130,8 @@ namespace ApplicationInventaire.MVVM.View
             {
                 GlobalPages.page_3_2.projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
                 GlobalPages.page_3_2.ImageSection = GlobalPages.page_3_2.projectData.ImageSectionList[0].Path;
+                GlobalPages.page_3_2.ImageReleve = GlobalPages.page_3_2.projectData.ImageReleveList[0].Path;
+
                 GlobalPages.page_3_2.IndicePiece = 0;
                 GlobalPages.page_3_2.IndiceSection = 0;
                 
@@ -136,6 +142,53 @@ namespace ApplicationInventaire.MVVM.View
 
             }
 
+        }
+        #endregion
+
+        private void ButtonExportClick(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new FolderBrowserDialog())
+            {
+                DialogResult result = dialog.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string dest = dialog.SelectedPath;
+                    string source =new ProjectInfos(GlobalProjectData.CurrentProjectName).ProjectPath;
+
+                    Directory.CreateDirectory(dest);
+                    CopyDirectory(source, dest);
+
+
+                }
+            }
+        }
+      
+
+        #region publicmethods
+        public void CopyDirectory(string sourceDirectory, string destinationDirectory)
+        {
+            // Create the destination directory if it doesn't exist
+            Directory.CreateDirectory(destinationDirectory);
+
+            // Get the files in the source directory
+            string[] files = Directory.GetFiles(sourceDirectory);
+
+            // Copy each file to the destination directory
+            foreach (string file in files)
+            {
+                string fileName = System.IO.Path.GetFileName(file);
+                string destinationPath = System.IO.Path.Combine(destinationDirectory, fileName);
+                File.Copy(file, destinationPath, true);
+            }
+
+            // Recursively copy subdirectories
+            string[] directories = Directory.GetDirectories(sourceDirectory);
+            foreach (string directory in directories)
+            {
+                string directoryName = System.IO.Path.GetFileName(directory);
+                string destinationPath = System.IO.Path.Combine(destinationDirectory, directoryName);
+                CopyDirectory(directory, destinationPath);
+            }
         }
         #endregion
     }

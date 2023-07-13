@@ -32,9 +32,9 @@ namespace ApplicationInventaire.Core.ExcelManagement
         public CellInfo(int Row, int Column, string Sheet, string Content)
         {
             this.Row = Row;
-            this.Sheet=Sheet;
-            this.Column = Column;   
-            this.Content = Content; 
+            this.Sheet = Sheet;
+            this.Column = Column;
+            this.Content = Content;
         }
         public CellInfo() { }
 

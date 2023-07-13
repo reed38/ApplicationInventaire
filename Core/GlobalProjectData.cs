@@ -22,7 +22,7 @@ using System.ComponentModel;
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
-   
+
 
 
     /// <summary>
@@ -30,11 +30,16 @@ namespace ApplicationInventaire.Core.GlobalProjectData
     /// </summary>
 
 
+
+
+
+
+
+
+
     public static class GlobalProjectData
     {
         #region variables
-        public static string[] ProjectListName;
- 
         public static string CurrentProjectName;
         public static ProjectData CurrentProjectData;
 
@@ -45,19 +50,23 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         #region PAGE_3_1Variables
         public static string ExcelContinuPath { set; get; }
+
         #endregion
 
 
         #region methodsInitializeData
 
-      
+
+
+
+
         /// <summary>
         /// Used to get an array of string containing the list of the name of the projects present in the UserData folder
         /// </summary>
         /// <returns> an array of string</returns>
         public static string[] GetProjectNames()
         {
-            string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
+            string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory , "UserData");
             string[] result = Directory.GetDirectories(UserDataPath);
             for (int i = 0; i < result.Length; i++)
             {
@@ -71,7 +80,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         }
 
-        
+
 
 
 
@@ -87,8 +96,8 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
     }
-
 }
+
 
 
 

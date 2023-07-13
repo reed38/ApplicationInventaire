@@ -12,13 +12,11 @@ using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.PieceSections;
-using ApplicationInventaire.Core.ProjectDataSet;
-using ApplicationInventaire.Core.GlobalProjectData;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace ApplicationInventaire.Core.ProjectDataSet
 {
-
 
 
 
@@ -68,7 +66,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region set_get
         public string DatabasePath { set; get; }
         public string ExcelPath { set; get; }
-        public string AppPath { set; get; } = AppDomain.CurrentDomain.BaseDirectory + "/UserData";
+        public string AppPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"UserData");
         public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
 
@@ -234,6 +232,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             }
             myExcelFile = new ExcelFile(project.ExcelPath);
             this.myTmpExcelFile = new ExcelFile(project.TmpExcelPath);
+            GetRelevesNames();
+            GetSectionsNames();
+            //this.InitializePieceFromExcel();
 
 
         }
@@ -250,7 +251,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// </summary>
         /// <param name="project"> name of the project</param>
         /// <returns></returns>
-        private void GetSectionsNames()
+        public void GetSectionsNames()
         {
 
             string ImageSectionPath = this.myProjectInfos.ImageSectionPath;
@@ -265,8 +266,8 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
             this.ImageSectionList = result;
 
-        }
-        private void GetRelevesNames()
+            }
+        public void GetRelevesNames()
         {
 
             string ImageRelevePath = this.myProjectInfos.ImageRelevePath;
@@ -365,23 +366,23 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 }
             }
         }
-        //foreach (Section i in this.mySections)
-        //{
-        //    foreach (Piece j in i.PiecesList)
+        //    foreach (Section i in this.mySections)
         //    {
-
-        //        foreach (CoupleCellInfo k in coupleCellInfo)
+        //        foreach (Piece j in i.PiecesList)
         //        {
-        //            if (k.tag.Content.Equals(j.PieceName))
+
+        //            foreach (CoupleCellInfo k in coupleCellInfo)
         //            {
-        //                if (k.Present.Content.Equals("1"))
+        //                if (k.tag.Content.Equals(j.PieceName))
         //                {
-        //                    j.IsPresent = 1;
-        //                }
-        //                else
-        //                {
-        //                    j.IsPresent = 0;
-        //                }
+        //                    if (k.Present.Content.Equals("1"))
+        //                    {
+        //                        j.IsPresent = 1;
+        //                    }
+        //                    else
+        //                    {
+        //                        j.IsPresent = 0;
+        //                    }
 
 
         //                    j.SheetName = PresentCell.Sheet;
@@ -389,13 +390,13 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         //                    j.ExcelRow = k.Present.Row;
 
 
+        //                }
+
         //            }
-
         //        }
+
         //    }
-
         //}
-
 
 
         #endregion
@@ -411,7 +412,6 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         }
     }
-
     #endregion
 
 

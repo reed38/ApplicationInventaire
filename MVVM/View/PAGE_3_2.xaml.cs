@@ -40,15 +40,27 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_3_2 = this;
             DataContext = this;
             RedCircleImage.Visibility = Visibility.Visible;
-            projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
-            File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath);
-            projectData = new ProjectData(tmp);
+            if (GlobalProjectData.ExcelContinuPath != null)
+            {
+                
+                tmp.ExcelPath = GlobalProjectData.ExcelContinuPath;
+                tmp.TmpExcelPath = GlobalProjectData.ExcelContinuPath;
+                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath);
+                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.ExcelPath);
 
+            }
+            projectData = new ProjectData(tmp);
+            projectData.GetSectionsNames();
+            projectData.GetRelevesNames();
             ImageSection = projectData.ImageSectionList[0].Path;
             IndicePiece = 0;
             IndiceSection = 0;
+            UpdateCurrent();
+
             GlobalPages.page_3_2.SetBorderPosition();
+
+
 
 
         }
@@ -64,8 +76,8 @@ namespace ApplicationInventaire.MVVM.View
         private double xCoordinatevar;
         private double yCoordinatevar;
         private Piece currentPiece;
-       
-       
+
+
         private Section currentSection;
 
         #endregion
@@ -80,7 +92,7 @@ namespace ApplicationInventaire.MVVM.View
                 OnPropertyChanged(nameof(CurrentSection));
             }
         }
-      
+
         public Piece CurrentPiece
         {
             get { return currentPiece; }
@@ -151,15 +163,15 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        
-        private  void GotoNextPiece(string answ)
+
+        private void GotoNextPiece(string answ)
         {
             UpdateCurrent(); //for the first time
-          IndicePiece++;
-            
-            if (IndicePiece < CurrentSection.PiecesList.Count )
+            IndicePiece++;
+
+            if (IndicePiece < CurrentSection.PiecesList.Count)
             {
-                GlobalProjectData.CurrentProjectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, answ, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow);
+                projectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, answ, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow);
 
                 UpdateCurrent();
                 if (CurrentPiece.IsPresent == 1) //we don't do piece already present
@@ -172,11 +184,11 @@ namespace ApplicationInventaire.MVVM.View
             }
 
 
-            if (IndicePiece==CurrentSection.PiecesList.Count) //end of section reached
+            if (IndicePiece == CurrentSection.PiecesList.Count) //end of section reached
             {
 
                 IndiceSection++;
-               IndicePiece = 0;
+                IndicePiece = 0;
                 UpdateCurrent();
                 SetBorderPosition();
 
@@ -190,9 +202,9 @@ namespace ApplicationInventaire.MVVM.View
 
                     }
                 }
-               
+
             }
-            if (IndiceSection == projectData.mySections.Count-1)
+            if (IndiceSection == projectData.mySections.Count - 1)
             {
                 SaveAndQuit();
 
@@ -202,13 +214,13 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
-               
 
 
-           
-        
 
-           
+
+
+
+
 
 
 
@@ -217,21 +229,21 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-        public  void SetBorderPosition()
+        public void SetBorderPosition()
         {
             Thickness thicknessRedFrame = new Thickness();
             thicknessRedFrame.Top = CurrentPiece.Y - 17;
             thicknessRedFrame.Bottom = CurrentPiece.Y - 17;
-            thicknessRedFrame.Left = CurrentPiece.X- 17;
+            thicknessRedFrame.Left = CurrentPiece.X - 17;
             thicknessRedFrame.Right = CurrentPiece.X;
             this.RedCircleImage.Margin = thicknessRedFrame;
 
             Thickness thicknessPieceName = new Thickness();
-            thicknessPieceName.Top = CurrentPiece.Y +5;
+            thicknessPieceName.Top = CurrentPiece.Y + 5;
             thicknessPieceName.Bottom = CurrentPiece.Y - 17;
             thicknessPieceName.Left = CurrentPiece.X - 30;
             thicknessPieceName.Right = CurrentPiece.X;
-            this.LabelNameTag.Margin= thicknessPieceName;
+            this.LabelNameTag.Margin = thicknessPieceName;
 
 
 
@@ -274,12 +286,12 @@ namespace ApplicationInventaire.MVVM.View
         {
             SaveAndQuit();
         }
-           
+
 
         private void ButtonClickNo(object sender, RoutedEventArgs e)
         {
             GotoNextPiece("0");
-            
+
         }
 
         private void ButtonClickYes(object sender, RoutedEventArgs e)
@@ -288,7 +300,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-       
+
 
 
 
@@ -296,7 +308,7 @@ namespace ApplicationInventaire.MVVM.View
 
     }
 
- #endregion
+    #endregion
 
 
 

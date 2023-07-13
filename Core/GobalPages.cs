@@ -32,6 +32,7 @@ namespace ApplicationInventaire.Core.GlobalPages
 
         public static MainWindow mainWindow;
         public static PAGE_1 page_1;
+
         public static PAGE_3_1 page_3_1;
         public static PAGE_3_2 page_3_2;
         public static PageCreationTest page_CreationTest;
