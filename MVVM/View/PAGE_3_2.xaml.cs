@@ -269,7 +269,7 @@ namespace ApplicationInventaire.MVVM.View
             if (result == true)
             {
                 string filePath = saveFileDialog.FileName;
-                File.Copy(GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath, filePath, true);
+                File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
             }
 
             GlobalPages.SetCurrentPageBack(GlobalPages.PAGE_3_1);
