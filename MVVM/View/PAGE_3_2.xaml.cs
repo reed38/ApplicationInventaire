@@ -44,10 +44,8 @@ namespace ApplicationInventaire.MVVM.View
             if (GlobalProjectData.ExcelContinuPath != null)
             {
                 
-                tmp.ExcelPath = GlobalProjectData.ExcelContinuPath;
                 tmp.TmpExcelPath = GlobalProjectData.ExcelContinuPath;
-                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath);
-                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.ExcelPath);
+                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath,true);
 
             }
             projectData = new ProjectData(tmp);
@@ -210,21 +208,6 @@ namespace ApplicationInventaire.MVVM.View
 
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

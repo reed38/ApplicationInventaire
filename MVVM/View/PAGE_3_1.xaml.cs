@@ -50,8 +50,8 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
-            GlobalPages.page_3_2. projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
-            InitializePAGE_3_2_Section();
+            
+          
 
             Microsoft.Win32.OpenFileDialog openFileDialog  = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
@@ -65,21 +65,16 @@ namespace ApplicationInventaire.MVVM.View
             if (openFileDialog.ShowDialog() == true)
             {
                 string selectedFilePath = openFileDialog.FileName;
-                if(GlobalPages.page_3_2 != null)
-                {
-                    File.Copy(selectedFilePath, GlobalPages.page_3_2.projectData.myProjectInfos.TmpExcelPath);
+                
+                 GlobalProjectData.ExcelContinuPath = selectedFilePath;
 
-
-                }
-                else
-                {
-                    GlobalProjectData.ExcelContinuPath = selectedFilePath;
-
-                }
+                
             }
 
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
 
-           
+
+
 
 
 
@@ -90,11 +85,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
-            InitializePAGE_3_2_Section();
-            if(GlobalPages.page_3_2!=null)
-            {
-                GlobalPages.page_3_2.projectData.ResetPiecePresent();
-            }
+
 
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
@@ -119,30 +110,6 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
         #region methodsStatic
 
-        /// <summary>
-        /// The page is only Loaded once, so its constructor is only called once. This funciton is used to reload section images each time a new inventory is started
-        /// </summary>
-        private static void InitializePAGE_3_2_Section()
-        {
-
-            //Used in case the user make two inventory without exiting the app
-            if (GlobalPages.page_3_2 != null)
-            {
-                GlobalPages.page_3_2.projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
-                GlobalPages.page_3_2.ImageSection = GlobalPages.page_3_2.projectData.ImageSectionList[0].Path;
-                GlobalPages.page_3_2.ImageReleve = GlobalPages.page_3_2.projectData.ImageReleveList[0].Path;
-
-                GlobalPages.page_3_2.IndicePiece = 0;
-                GlobalPages.page_3_2.IndiceSection = 0;
-                
-                GlobalPages.page_3_2.CurrentPiece = GlobalPages.page_3_2.projectData.mySections[GlobalPages.page_3_2.IndiceSection].PiecesList[GlobalPages.page_3_2.IndicePiece];
-                GlobalPages.page_3_2.SetBorderPosition();
-
-
-
-            }
-
-        }
         #endregion
 
         private void ButtonExportClick(object sender, RoutedEventArgs e)

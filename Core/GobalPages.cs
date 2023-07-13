@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
+using ApplicationInventaire.Core.GlobalProjectData;
 using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
@@ -54,6 +55,8 @@ namespace ApplicationInventaire.Core.GlobalPages
             GlobalPages.CurrentPage = newPage;
             mainWindow.MainFrame.Source = GlobalPages.CurrentPage;
             mainWindow.MainFrame.Visibility = Visibility.Visible;
+            GlobalProjectData.GlobalProjectData.ExcelContinuPath = null;
+
 
         }
 

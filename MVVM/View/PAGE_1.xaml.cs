@@ -100,6 +100,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             Button clickedButton = (Button)sender;
             GlobalProjectData.CurrentProjectName=clickedButton.Content.ToString();
+            GlobalProjectData.ExcelContinuPath = null;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
            
         }

@@ -49,7 +49,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         #endregion
 
         #region PAGE_3_1Variables
-        public static string ExcelContinuPath { set; get; }
+        public static string ExcelContinuPath;
 
         #endregion
 
