@@ -108,9 +108,7 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         #endregion
-        #region methodsStatic
-
-        #endregion
+        
 
         private void ButtonExportClick(object sender, RoutedEventArgs e)
         {

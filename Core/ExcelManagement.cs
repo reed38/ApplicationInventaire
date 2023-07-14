@@ -181,7 +181,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         IRow excelRow = sheet.GetRow(row);
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
                         cell.SetCellValue(content);
-                        file.Close();
+                         file.Close();
 
                         using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
                         {
@@ -247,8 +247,9 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                 }
                             }
                         }
-                        file.Close();
+                        
                     }
+                    file.Close();
                 }
             }
 

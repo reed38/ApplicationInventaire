@@ -39,24 +39,27 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_2 = this;
             DataContext = this;
-            RedCircleImage.Visibility = Visibility.Visible;
             ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
+            projectData = new ProjectData(tmp);
+
             if (GlobalProjectData.ExcelContinuPath != null)
             {
                 
-                tmp.TmpExcelPath = GlobalProjectData.ExcelContinuPath;
                 File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath,true);
 
             }
-            projectData = new ProjectData(tmp);
+            projectData.InitializePieceFromExcel();
             projectData.GetSectionsNames();
             projectData.GetRelevesNames();
             ImageSection = projectData.ImageSectionList[0].Path;
-            IndicePiece = 0;
+            RedCircleImage.Visibility = Visibility.Visible;
             IndiceSection = 0;
-            UpdateCurrent();
+            IndicePiece = 0;
+            FindNextNoPresent();
+            SetBorderPosition();
 
-            GlobalPages.page_3_2.SetBorderPosition();
+
+
 
 
 
@@ -164,54 +167,71 @@ namespace ApplicationInventaire.MVVM.View
 
         private void GotoNextPiece(string answ)
         {
-            UpdateCurrent(); //for the first time
-            IndicePiece++;
-
-            if (IndicePiece < CurrentSection.PiecesList.Count)
-            {
-                projectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, answ, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow);
-
-                UpdateCurrent();
-                if (CurrentPiece.IsPresent == 1) //we don't do piece already present
-                {
-                    return;
-                }
-                SetBorderPosition();
+            projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, answ, currentPiece.ExcelColumn, currentPiece.ExcelRow);
+            FindNextNoPresent();
+            SetBorderPosition();
 
 
-            }
-
-
-            if (IndicePiece == CurrentSection.PiecesList.Count) //end of section reached
-            {
-
-                IndiceSection++;
-                IndicePiece = 0;
-                UpdateCurrent();
-                SetBorderPosition();
-
-
-                foreach (ImageInfos i in this.projectData.ImageSectionList)
-                {
-                    if (i.Name == CurrentSection.SectionName)
-                    {
-                        ImageSection = i.Path;
-                        break;
-
-                    }
-                }
-
-            }
-            if (IndiceSection == projectData.mySections.Count - 1)
-            {
-                SaveAndQuit();
-
-
-            }
+            
+          
+         
 
 
 
         }
+
+        private void FindNextNoPresent()
+        {
+            if (IndiceSection == projectData.mySections.Count-1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
+            {
+                SaveAndQuit();
+                return;
+
+            }
+            else if ( IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)           
+            {
+                IndiceSection++;
+                IndicePiece = 0;
+                foreach (ImageInfos im in this.projectData.ImageSectionList)
+                {
+                    if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                    {
+                        ImageSection = im.Path;
+                        break;
+
+                    }
+                   
+                }
+
+            }
+
+
+            bool found = false;
+            for(int section=IndiceSection; section < projectData.mySections.Count; section++)
+            {
+               
+                for (int piece = IndicePiece; piece < projectData.mySections[section].PiecesList.Count; piece++)
+                {
+
+                    if (projectData.mySections[section].PiecesList[piece].IsPresent == 0)
+                    {
+                        this.IndicePiece = piece;
+                        this.IndiceSection = section;
+                        UpdateCurrent();
+                        found = true;
+                        IndicePiece++;
+                        return;
+                    }
+                    
+
+
+                }
+                
+
+            }
+        }
+
+
         public void SetBorderPosition()
         {
             Thickness thicknessRedFrame = new Thickness();
@@ -253,6 +273,7 @@ namespace ApplicationInventaire.MVVM.View
             {
                 string filePath = saveFileDialog.FileName;
                 File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
+                
             }
 
             GlobalPages.SetCurrentPageBack(GlobalPages.PAGE_3_1);
