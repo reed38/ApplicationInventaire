@@ -44,17 +44,21 @@ namespace ApplicationInventaire.MVVM.View
 
             if (GlobalProjectData.ExcelContinuPath != null)
             {
-                
-                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath,true);
+
+                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath, true);
 
             }
             projectData.InitializePieceFromExcel();
             projectData.GetSectionsNames();
             projectData.GetRelevesNames();
+            ResetTextBox();
+            HideTextBoxSerialNumberConstructor();
             ImageSection = projectData.ImageSectionList[0].Path;
             RedCircleImage.Visibility = Visibility.Visible;
             IndiceSection = 0;
             IndicePiece = 0;
+
+            projectData.mySections[0].PiecesList[0].IsReleveRequired = 1;
             FindNextNoPresent();
             SetBorderPosition();
 
@@ -167,14 +171,16 @@ namespace ApplicationInventaire.MVVM.View
 
         private void GotoNextPiece(string answ)
         {
+            ManageReleveImage();
             projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, answ, currentPiece.ExcelColumn, currentPiece.ExcelRow);
             FindNextNoPresent();
             SetBorderPosition();
 
 
-            
-          
-         
+
+
+
+
 
 
 
@@ -182,13 +188,16 @@ namespace ApplicationInventaire.MVVM.View
 
         private void FindNextNoPresent()
         {
-            if (IndiceSection == projectData.mySections.Count-1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
+            ImageReleve = null;
+
+            if (IndiceSection == projectData.mySections.Count - 1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
             {
                 SaveAndQuit();
                 return;
 
             }
-            else if ( IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)           
+
+            else if (IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
             {
                 IndiceSection++;
                 IndicePiece = 0;
@@ -200,16 +209,15 @@ namespace ApplicationInventaire.MVVM.View
                         break;
 
                     }
-                   
+
                 }
 
             }
 
 
-            bool found = false;
-            for(int section=IndiceSection; section < projectData.mySections.Count; section++)
+            for (int section = IndiceSection; section < projectData.mySections.Count; section++)
             {
-               
+
                 for (int piece = IndicePiece; piece < projectData.mySections[section].PiecesList.Count; piece++)
                 {
 
@@ -218,21 +226,47 @@ namespace ApplicationInventaire.MVVM.View
                         this.IndicePiece = piece;
                         this.IndiceSection = section;
                         UpdateCurrent();
-                        found = true;
+                        if (this.CurrentPiece.IsReleveRequired == 1)
+                        {
+                            ShowTextBoxSerialNumberConstructor();
+                            foreach (ImageInfos i in projectData.ImageReleveList)
+                            {
+                                if (i.Name.Equals(this.CurrentPiece.PieceName))
+                                {
+                                    ImageReleve = i.Path;
+                                    break;
+                                }
+
+                            }
+                        }
                         IndicePiece++;
                         return;
                     }
-                    
+
 
 
                 }
-                
+
 
             }
         }
+        private void ManageReleveImage()
+        {
+            if (this.CurrentPiece.IsReleveRequired == 1)
+            {
+                foreach (ImageInfos i in projectData.ImageReleveList)
+                {
+                    if (i.Name.Equals(this.CurrentPiece.PieceName))
+                    {
+                        imageReleve = i.Path;
+                        break;
+                    }
+                }
+            }
 
+        }
 
-        public void SetBorderPosition()
+        private void SetBorderPosition()
         {
             Thickness thicknessRedFrame = new Thickness();
             thicknessRedFrame.Top = CurrentPiece.Y - 17;
@@ -255,8 +289,12 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+
         private void SaveAndQuit()
         {
+
+
+          
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             // Set the default file name and extension
@@ -273,13 +311,72 @@ namespace ApplicationInventaire.MVVM.View
             {
                 string filePath = saveFileDialog.FileName;
                 File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
-                
+
             }
 
             GlobalPages.SetCurrentPageBack(GlobalPages.PAGE_3_1);
         }
 
+        private void UpdateComment()
+        {
+            if (!TextBoxComment.Text.Equals(string.Empty))
+            {
+                CellInfo tmp = projectData.myTmpExcelFile.FindValue("Commentaire");
+                projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxComment.Text, tmp.Column, CurrentPiece.ExcelRow);
+                TextBoxComment.Clear();
+            }
 
+
+
+        }
+
+        private void UpdateSerialNumber()
+        {
+            if (!TextBoxSerialNumber.Text.Equals(string.Empty))
+            {
+                CellInfo tmp = projectData.myTmpExcelFile.FindValue("N° SERIE");
+                projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxSerialNumber.Text, tmp.Column, CurrentPiece.ExcelRow);
+                TextBoxSerialNumber.Clear();
+                TextBoxSerialNumber.Visibility = Visibility.Hidden;
+            }
+
+
+        }
+
+        private void UpdateConstructor()
+        {
+            if (!TextBoxConstructor.Text.Equals(string.Empty))
+            {
+                CellInfo tmp = projectData.myTmpExcelFile.FindValue("FABRICANT");
+                projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxConstructor.Text, tmp.Column, CurrentPiece.ExcelRow);
+                TextBoxConstructor.Clear();
+            }
+
+
+        }
+
+        private void ResetTextBox()
+        {
+            TextBoxComment.Clear();
+            TextBoxConstructor.Clear();
+            TextBoxSerialNumber.Clear();
+
+        }
+
+        private void HideTextBoxSerialNumberConstructor()
+        {
+            TextBoxSerialNumber.Visibility = Visibility.Hidden;
+            TextBoxConstructor.Visibility = Visibility.Hidden;
+            labelConstructor.Visibility = Visibility.Hidden;
+            labelSerialNumber.Visibility = Visibility.Hidden;
+        }
+        private void ShowTextBoxSerialNumberConstructor()
+        {
+            TextBoxSerialNumber.Visibility = Visibility.Visible; 
+            labelConstructor.Visibility= Visibility.Visible;
+            labelSerialNumber.Visibility = Visibility.Visible;
+            TextBoxConstructor.Visibility = Visibility.Visible;
+        }
 
 
         #endregion
@@ -288,34 +385,59 @@ namespace ApplicationInventaire.MVVM.View
         #region methodsUI
         private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
         {
+            UpdateSerialNumber();
+            UpdateConstructor();
+            UpdateComment();
             SaveAndQuit();
         }
 
 
         private void ButtonClickNo(object sender, RoutedEventArgs e)
         {
+            ResetTextBox();
+            HideTextBoxSerialNumberConstructor();
             GotoNextPiece("0");
 
         }
 
         private void ButtonClickYes(object sender, RoutedEventArgs e)
         {
+            if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
+            {
+                PopupNoSerialNumberConstructor.IsOpen = true;
+                return;
+
+            }
+            UpdateComment();
+            UpdateSerialNumber();
+            UpdateConstructor();
+            ResetTextBox();
+            HideTextBoxSerialNumberConstructor();
             GotoNextPiece("1");
 
 
         }
 
+     
 
 
 
 
 
+
+
+
+
+
+
+
+        #endregion
+
+        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PopupNoSerialNumberConstructor.IsOpen = false;
+
+        }
     }
-
-    #endregion
-
-
-
-
 }
 

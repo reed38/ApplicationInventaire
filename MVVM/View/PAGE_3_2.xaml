@@ -13,10 +13,11 @@
 
       >
 
-    <Grid    Margin="50,50,45,185" >
+    <Grid  PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"  Margin="50,50,45,185" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="122*" />
-            <ColumnDefinition Width="19*" />
+            <ColumnDefinition Width="101*" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="39*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -47,7 +48,7 @@
 
 
         <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,14,0">
-
+            
 
             <StackPanel Orientation="Horizontal"
                         Width="300"
@@ -57,13 +58,13 @@
 
 
                 <Label Foreground="White" Content="Comment: " Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                <TextBox Width="300" Height="50" TextWrapping="WrapWithOverflow"/>
+                <TextBox x:Name="TextBoxComment"  Width="300" Height="50" TextWrapping="WrapWithOverflow"/>
             </StackPanel>
 
 
         </Grid>
 
-        <Grid Grid.Row="1"  Grid.Column="1">
+        <Grid Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="2">
 
 
             <Button
@@ -82,17 +83,59 @@
 
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="1" >
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" >
+
+            <Popup x:Name="PopupNoSerialNumberConstructor" Placement="Center" IsOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" Padding="10">
+                    <TextBlock Text="PLease enter a serial Number!" />
+                </Border>
+            </Popup>
+            <StackPanel  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+
+                <Image
+                       Height="150"
+                       Width="150"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Margin="10,0,0,20"
+                    Name="ReleveImagepage"
+                    Source="{Binding ImageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    
+                 />
+                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                    <Label x:Name="labelSerialNumber" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
+                    ></Label>
+                    <TextBox  x:Name="TextBoxSerialNumber"
+                              Width="150"
+                              Margin="10,0,0,10"
+                              />
+                    
+                    
 
 
-            <StackPanel  VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
 
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <Label                             
+                    Margin="10,0,0,10"
+                    Content="Constructor: " 
+                        x:Name="labelConstructor"
+                        Foreground="White"></Label>
+                    <TextBox  x:Name="TextBoxConstructor"
+                              Width="150"
+                              Margin="10,0,0,10"
+
+                              />
+                    
+                </StackPanel>
+               
                 <Button
                 x:Name="YesButton"
                   Click="ButtonClickYes"
                 Content="yes [Y]"
                 Width="66"
                 Height="30"
+                HorizontalAlignment="Center"
                  
                 />
 
@@ -106,6 +149,8 @@
                 
                 />
 
+               
+
             </StackPanel>
 
 
@@ -113,12 +158,6 @@
 
         </Grid>
 
-
-        <Border x:Name="ReleveImageBorder" Margin="365,10,-270,150" Grid.Column="1"  >
-            <Image  x:Name="CurrentReleveImage"  Stretch="Uniform" Source="{Binding imageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="1057,74,32,410"/>
-
-
-        </Border>
 
 
 

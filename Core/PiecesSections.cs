@@ -30,6 +30,7 @@ namespace ApplicationInventaire.Core.PieceSections
         public int ExcelColumn { get; set; }
         public int ExcelRow { get; set; }
         public string Comment { get; set; }
+        public string SerialNumber { get; set; }
         public string SectionName { get; set; }
         public string PieceName { get; set; }
         public string SheetName { get; set; }

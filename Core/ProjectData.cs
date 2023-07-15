@@ -234,6 +234,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.myTmpExcelFile = new ExcelFile(project.TmpExcelPath);
             GetRelevesNames();
             GetSectionsNames();
+            ResetSerialNumer();
             //this.InitializePieceFromExcel();
 
 
@@ -313,6 +314,17 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 foreach (Piece j in i.PiecesList)
                 {
                     j.IsPresent = 0;
+                }
+            }
+        }
+
+        public void ResetSerialNumer()
+        {
+            foreach (Section i in this.mySections)
+            {
+                foreach (Piece j in i.PiecesList)
+                {
+                    j.SerialNumber = string.Empty;
                 }
             }
         }
