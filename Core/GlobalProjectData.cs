@@ -20,6 +20,8 @@ using System.IO;
 using System.Security.Policy;
 using System.ComponentModel;
 using System.Windows.Media.Imaging;
+using NPOI.OpenXmlFormats.Dml;
+using Microsoft.Win32;
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
@@ -126,6 +128,67 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
 
+    }
+
+    public static class FileManager
+    {
+
+        public static string[] OpenImagePopup()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp";
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string[] selectedFiles = openFileDialog.FileNames;
+                return selectedFiles;
+
+                // Process the selected image files
+                
+            }
+            return null;
+        }
+
+        public static string OpenImagePopupSingle()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp";
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string selectedFiles = openFileDialog.FileName;
+                return selectedFiles;
+
+                // Process the selected image files
+
+            }
+            return null;
+        }
+
+
+        public static string OpenExcelFilePopup()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Files (*.xlsx;*.xls)|*.xlsx;*.xls";
+            openFileDialog.Multiselect = false;
+
+            bool? dialogResult = openFileDialog.ShowDialog();
+
+            if (dialogResult == true)
+            {
+                string filePath = openFileDialog.FileName;
+
+                return filePath;
+            }
+            return null;
+        }
+       
     }
 }
 

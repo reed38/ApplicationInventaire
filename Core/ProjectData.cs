@@ -36,6 +36,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.Name = name;
             this.Path = path;
         }
+       
 
         #endregion
 
@@ -76,7 +77,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public string ImageRelevePath { set; get; }
 
         public string ProjectName { set; get; }
-        public string Responsable { set; get; }
+        public string Author { set; get; }
         public string Description { set; get; }
 
 
@@ -145,7 +146,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         {
             Console.WriteLine("ProjectName: " + this.ProjectName);
             Console.WriteLine("Description: " + this.Description);
-            Console.WriteLine("Responsable: " + Responsable);
+            Console.WriteLine("Author: " + Author);
 
             Console.WriteLine("database path: " + this.DatabasePath);
             Console.WriteLine("ExcelPath: " + this.ExcelPath);

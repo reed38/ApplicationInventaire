@@ -48,17 +48,9 @@ namespace ApplicationInventaire
 
         public void ButtonGoBackClick(object sender, RoutedEventArgs e)
         {
-        
-                if (GlobalPages.LastPages.Count > 1)
-                {
-                    int i = GlobalPages.LastPages.Count - 1;
-                    Uri tmp = GlobalPages.LastPages[i];
-                   GlobalPages.LastPages.Remove(tmp);
-                    GlobalPages.CurrentPage = tmp;
-                    GlobalPages.SetCurrentPageBack(GlobalPages.CurrentPage);
+            GlobalPages.SetCurrentPageBack();
 
-                }
-        
+
             }
      
 

@@ -43,7 +43,7 @@ namespace ApplicationInventaire.MVVM.View
             ProjectData proj2 = new ProjectData(new ProjectInfos("proj2"));
             ProjectData proj3 = new ProjectData(new ProjectInfos("proj3"));
             Items2 =new( (GlobalProjectData.GetProjectNames()).ToList());
-            InitializeTestSet();
+            //InitializeTestSet();
             GlobalPages.page_1 = this;
         
 
@@ -54,7 +54,7 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         #region bindingVariable
-        private ObservableCollection<string> items2 { get; set; } = new ObservableCollection<string>();
+        private ObservableCollection<string> items2  = new ObservableCollection<string>();
 
         #endregion
         #region bindingMethods
@@ -107,7 +107,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonClickNew(object sender, RoutedEventArgs e)
         {
-            GlobalPages.SetCurrentPage(GlobalPages.PAGE_CREATIONTEST);
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_1);
 
         }
 
@@ -167,7 +167,7 @@ namespace ApplicationInventaire.MVVM.View
             GlobalProjectData.CurrentProjectName = ("TestSet");
             ProjectData tmp = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
 
-            tmp.myProjectInfos.Responsable = "respo";
+            tmp.myProjectInfos.Author = "respo";
             List<Section> listSection = new List<Section>();
 
 
