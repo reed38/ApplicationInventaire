@@ -202,21 +202,21 @@ namespace ApplicationInventaire.MVVM.View
 
             listSection.Add(Nombre);
 
-            //Section Couleur = new Section("SECTION_couleurs");
-            //Couleur.PiecesList.Add(new Piece(199, 80, "gris", 3));
-            //Couleur.PiecesList.Add(new Piece(422, 86, "marron", 3));
-            //Couleur.PiecesList.Add(new Piece(650, 80, "rouge", 3));
-            //Couleur.PiecesList.Add(new Piece(408, 44, "orange", 3));
-            //Couleur.PiecesList.Add(new Piece(543, 43, "jaune", 3));
-            //Couleur.PiecesList.Add(new Piece(38, 145, "blanc", 3));
-            //Couleur.PiecesList.Add(new Piece(168, 145, "rose", 3));
-            //Couleur.PiecesList.Add(new Piece(290, 136, "violet", 3));
-            //Couleur.PiecesList.Add(new Piece(406, 142, "bleu", 3));
-            //Couleur.PiecesList.Add(new Piece(543, 133, "vert", 3));
+            Section Couleur = new Section("SECTION_couleurs");
+            Couleur.PiecesList.Add(new Piece(199, 80, "gris", 3));
+            Couleur.PiecesList.Add(new Piece(422, 86, "marron", 3));
+            Couleur.PiecesList.Add(new Piece(650, 80, "rouge", 3));
+            Couleur.PiecesList.Add(new Piece(408, 44, "orange", 3));
+            Couleur.PiecesList.Add(new Piece(543, 43, "jaune", 3));
+            Couleur.PiecesList.Add(new Piece(38, 145, "blanc", 3));
+            Couleur.PiecesList.Add(new Piece(168, 145, "rose", 3));
+            Couleur.PiecesList.Add(new Piece(290, 136, "violet", 3));
+            Couleur.PiecesList.Add(new Piece(406, 142, "bleu", 3));
+            Couleur.PiecesList.Add(new Piece(543, 133, "vert", 3));
 
 
 
-            //listSection.Add(Couleur);
+            listSection.Add(Couleur);
 
             tmp.mySections = listSection;
             //Console.WriteLine("données contenues en mémoire");

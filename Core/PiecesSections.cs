@@ -25,8 +25,8 @@ namespace ApplicationInventaire.Core.PieceSections
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
         public int ExcelColumn { get; set; }
         public int ExcelRow { get; set; }
         public string Comment { get; set; }

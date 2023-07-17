@@ -41,7 +41,7 @@ namespace ApplicationInventaire.MVVM.View
             DataContext = this;
             ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
             projectData = new ProjectData(tmp);
-
+            this.RedFramePath = GlobalProjectData.RedFramePath;
             if (GlobalProjectData.ExcelContinuPath != null)
             {
 
@@ -54,7 +54,7 @@ namespace ApplicationInventaire.MVVM.View
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
             ImageSection = projectData.ImageSectionList[0].Path;
-            RedCircleImage.Visibility = Visibility.Visible;
+            RedFrameImage.Visibility = Visibility.Visible;
             IndiceSection = 0;
             IndicePiece = 0;
 
@@ -77,6 +77,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region bindingVariablesSources
         private string imageSection;
+        private string redFramePath;
         private string imageReleve;
         private double xCoordinatevar;
         private double yCoordinatevar;
@@ -115,6 +116,16 @@ namespace ApplicationInventaire.MVVM.View
             {
                 imageReleve = value;
                 OnPropertyChanged(nameof(ImageReleve));
+            }
+        }
+
+        public string RedFramePath
+        {
+            get { return redFramePath; }
+            set
+            {
+                redFramePath = value;
+                OnPropertyChanged(nameof(RedFramePath));
             }
         }
         public double XCoordinate
@@ -268,8 +279,8 @@ namespace ApplicationInventaire.MVVM.View
 
         private void SetBorderPosition()
         {
-            ChangeFrameCoordinates(CurrentPiece.X-this.RedCircleImage.Height/2, CurrentPiece.Y - this.RedCircleImage.Width / 2);
-            ChangeLabelcoordinates(CurrentPiece.X , CurrentPiece.Y);
+            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
+            ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
 
 
 
@@ -279,14 +290,14 @@ namespace ApplicationInventaire.MVVM.View
         }
         private void ChangeFrameCoordinates(double x, double y)
         {
-            Canvas.SetLeft(this.RedCircleImage, x);
-            Canvas.SetTop(this.RedCircleImage, y);
+            Canvas.SetLeft(this.RedFrameImage, x);
+            Canvas.SetTop(this.RedFrameImage, y);
         }
 
         private void ChangeLabelcoordinates(double x, double y)
         {
-            Canvas.SetLeft(this.LabelNameTag, x-30);
-            Canvas.SetTop(this.LabelNameTag, y-30);
+            Canvas.SetLeft(this.LabelNameTag, x - 30);
+            Canvas.SetTop(this.LabelNameTag, y - 30);
 
         }
 
@@ -295,7 +306,7 @@ namespace ApplicationInventaire.MVVM.View
         {
 
 
-          
+
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             // Set the default file name and extension
@@ -373,8 +384,8 @@ namespace ApplicationInventaire.MVVM.View
         }
         private void ShowTextBoxSerialNumberConstructor()
         {
-            TextBoxSerialNumber.Visibility = Visibility.Visible; 
-            labelConstructor.Visibility= Visibility.Visible;
+            TextBoxSerialNumber.Visibility = Visibility.Visible;
+            labelConstructor.Visibility = Visibility.Visible;
             labelSerialNumber.Visibility = Visibility.Visible;
             TextBoxConstructor.Visibility = Visibility.Visible;
         }
@@ -419,7 +430,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-     
+
 
 
 

@@ -19,6 +19,7 @@ using System.Runtime.CompilerServices;
 using System.IO;
 using System.Security.Policy;
 using System.ComponentModel;
+using System.Windows.Media.Imaging;
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
@@ -39,17 +40,24 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
     public static class GlobalProjectData
     {
+        
         #region variables
         public static string CurrentProjectName;
         public static string CurrentSectionName;
         public static string CurrentPieceName;
+        public static string AppRootDirectoryPath=GlobalProjectData.InitializeRootDirectory();
         public static ProjectData CurrentProjectData;
 
         #endregion
         #region ImagePathVariable
-        public static string RedCirclePath = AppDomain.CurrentDomain.BaseDirectory + "Images/redCircle.png";
+        public static string RedFramePath = Path.Combine(AppRootDirectoryPath, "Image\\RedFrame.png");
+        public static string RedCirclePath = Path.Combine(AppRootDirectoryPath, "Image\\RedCircle.png");
+
         #endregion
 
+        #region BindingMethods
+
+        #endregion
         #region PAGE_3_1Variables
         public static string ExcelContinuPath;
 
@@ -80,6 +88,27 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
 
+        }
+
+        private static  string InitializeRootDirectory()
+        {
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string projectDirectory = Directory.GetParent(baseDirectory).Parent.FullName;
+            for (int i = 0; i < 2; i++)
+            {
+                baseDirectory = Directory.GetParent(baseDirectory).Parent.FullName;
+            }
+           return baseDirectory;
+
+        }
+
+        private static BitmapImage GetImageSource(Uri imagePath)
+        {
+            BitmapImage imageSource = new BitmapImage();
+            imageSource.BeginInit();
+            imageSource.UriSource = imagePath;
+            imageSource.EndInit();
+            return imageSource;
         }
 
 

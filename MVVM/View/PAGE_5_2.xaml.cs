@@ -32,11 +32,13 @@ namespace ApplicationInventaire.MVVM.View
 
             InitializeComponent();
             GlobalPages.page_5_2 = this;
+            this.RedFramePath = GlobalProjectData.RedFramePath;
+
             this.projectData = new(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             DataContext = this;
 
             this.InitializeCurrentPiece();
-            
+
             SetBorderPosition();
         }
         #region Variables
@@ -44,16 +46,29 @@ namespace ApplicationInventaire.MVVM.View
         private Piece CurrentPiece;
         #endregion
         #region bindingVariables
+        private string redFramePath;
+
         private string imageSection2;
         #endregion
 
         #region BindingMethods
+
+        public string RedFramePath
+        {
+            get { return redFramePath; }
+            set
+            {
+                redFramePath = value;
+                OnPropertyChanged(nameof(RedFramePath));
+            }
+        }
+
         public string ImageSection2
         {
             get { return imageSection2; }
             set
             {
-               imageSection2 = value;
+                imageSection2 = value;
                 OnPropertyChanged(nameof(ImageSection2));
             }
         }
@@ -68,20 +83,20 @@ namespace ApplicationInventaire.MVVM.View
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
-       
+
         #region privateMethod
         private void InitializeCurrentPiece()
         {
-            
-            foreach(Section i in this.projectData.mySections)
+
+            foreach (Section i in this.projectData.mySections)
             {
-                foreach(Piece j in i.PiecesList)
+                foreach (Piece j in i.PiecesList)
                 {
-                    if(GlobalProjectData.CurrentPieceName.Equals(j.PieceName))
+                    if (GlobalProjectData.CurrentPieceName.Equals(j.PieceName))
                     {
                         foreach (ImageInfos k in this.projectData.ImageSectionList)
                         {
-                            if(k.Name.Equals(i.SectionName))
+                            if (k.Name.Equals(i.SectionName))
                             {
                                 this.ImageSection2 = k.Path;
                                 break;
@@ -96,16 +111,24 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
+
+
         private void SetBorderPosition()
         {
-            Thickness thicknessRedFrame = new Thickness();
-            thicknessRedFrame.Top = CurrentPiece.Y - 17;
-            thicknessRedFrame.Bottom = CurrentPiece.Y - 17;
-            thicknessRedFrame.Left = CurrentPiece.X - 17;
-            thicknessRedFrame.Right = CurrentPiece.X;
-            this.RedCircleImage.Margin = thicknessRedFrame;
+            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
+
+
+
+
+
 
         }
+        private void ChangeFrameCoordinates(double x, double y)
+        {
+            Canvas.SetLeft(this.RedFrameImage, x);
+            Canvas.SetTop(this.RedFrameImage, y);
+        }
+       
         #endregion
     }
 

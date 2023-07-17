@@ -94,7 +94,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonsearchImageClick(object sender, RoutedEventArgs e)
         {
-
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_4);
         }
 
         private void ButtonModifyClick(object sender, RoutedEventArgs e)

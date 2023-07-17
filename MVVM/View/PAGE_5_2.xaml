@@ -9,29 +9,42 @@
       Title="PAGE_5_2"
       Background="#116396"
       >
-    <Grid>
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="119*" />
+            <ColumnDefinition Width="41*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
 
 
         <Canvas 
                 x:Name="myCanva"
                 Margin="10,10,10,10"
-            
+           
                 >
             <Canvas.Background  >
-                <ImageBrush ImageSource="{Binding ImageSection2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform" />
+                <ImageBrush ImageSource="{Binding ImageSection2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
 
             </Canvas.Background>
 
 
-            <Image x:Name="RedCircleImage" 
-                   Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
+
+            <Image x:Name="RedFrameImage" 
+                   Source="{Binding RedFramePath,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    Height="70"
                    Width="70"/>
-          
 
         </Canvas>
 
-    </Grid>
 
+
+
+        </Grid>
 
 </Page>

@@ -20,6 +20,7 @@ using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 using ApplicationInventaire.Core.GlobalProjectData;
+using System.IO;
 
 
 namespace ApplicationInventaire
@@ -36,7 +37,8 @@ namespace ApplicationInventaire
             GlobalPages.mainWindow = this;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_1);
             GlobalPages.CurrentPage = GlobalPages.PAGE_1;
-
+            
+          
 
 
 

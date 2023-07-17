@@ -27,6 +27,8 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static Uri PAGE_1 = new Uri("MVVM/View/PAGE_1.xaml", UriKind.Relative);
         public static Uri PAGE_3_1 = new Uri("MVVM/View/PAGE_3_1.xaml", UriKind.Relative);
         public static Uri PAGE_3_2 = new Uri("MVVM/View/PAGE_3_2.xaml", UriKind.Relative);
+        public static Uri PAGE_3_4 = new Uri("MVVM/View/PAGE_3_4.xaml", UriKind.Relative);
+
         public static Uri PAGE_5_1 = new Uri("MVVM/View/PAGE_5_1.xaml", UriKind.Relative);
         public static Uri PAGE_5_2 = new Uri("MVVM/View/PAGE_5_2.xaml", UriKind.Relative);
 
@@ -40,6 +42,8 @@ namespace ApplicationInventaire.Core.GlobalPages
 
         public static PAGE_3_1 page_3_1;
         public static PAGE_3_2 page_3_2;
+        public static PAGE_3_4 page_3_4;
+
         public static PAGE_5_1 page_5_1;
         public static PAGE_5_2 page_5_2;
 

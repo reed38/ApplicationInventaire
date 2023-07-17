@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationInventaire.MVVM.View"
-      xmlns:GlobalProjectData="clr-namespace:ApplicationInventaire.Core.GlobalProjectData"
+      xmlns:globalProjectData="clr-namespace:ApplicationInventaire.Core.GlobalProjectData"
+
+      
       mc:Ignorable="d" 
       Title="PAGE_3_2"
       Background="#116396"
@@ -39,11 +41,10 @@
 
 
 
-            <Image x:Name="RedCircleImage" 
-                   Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
+            <Image x:Name="RedFrameImage" 
+                   Source="{Binding RedFramePath,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    Height="70"
                    Width="70"/>
-
 
         <Label Foreground="Red" 
                x:Name="LabelNameTag" 
