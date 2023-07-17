@@ -172,51 +172,51 @@ namespace ApplicationInventaire.MVVM.View
 
 
             Section Alphabet = new Section("SECTION_alphabet");
-            Alphabet.PiecesList.Add(new Piece(51, 51, "A", 1));
-            Alphabet.PiecesList.Add(new Piece(150, 58, "B", 1));
-            Alphabet.PiecesList.Add(new Piece(260, 57, "C", 1));
-            Alphabet.PiecesList.Add(new Piece(383, 59, "D", 1));
-            Alphabet.PiecesList.Add(new Piece(58, 129, "E", 1));
-            Alphabet.PiecesList.Add(new Piece(144, 138, "F", 1));
-            Alphabet.PiecesList.Add(new Piece(261, 143, "G", 1));
-            Alphabet.PiecesList.Add(new Piece(390, 132, "H", 1));
-            Alphabet.PiecesList.Add(new Piece(50, 232, "I", 1));
-            Alphabet.PiecesList.Add(new Piece(146, 220, "J", 1));
-            Alphabet.PiecesList.Add(new Piece(261, 221, "K", 1));
-            Alphabet.PiecesList.Add(new Piece(388, 239, "L", 1));
+            Alphabet.PiecesList.Add(new Piece(128, 60, "A", 1));
+            Alphabet.PiecesList.Add(new Piece(350, 66, "B", 1));
+            Alphabet.PiecesList.Add(new Piece(610, 72, "C", 1));
+            Alphabet.PiecesList.Add(new Piece(902, 77, "D", 1));
+            Alphabet.PiecesList.Add(new Piece(125, 234, "E", 1));
+            Alphabet.PiecesList.Add(new Piece(334, 254, "F", 1));
+            Alphabet.PiecesList.Add(new Piece(602, 268, "G", 1));
+            Alphabet.PiecesList.Add(new Piece(910, 240, "H", 1));
+            Alphabet.PiecesList.Add(new Piece(124, 466, "I", 1));
+            Alphabet.PiecesList.Add(new Piece(341, 446, "J", 1));
+            Alphabet.PiecesList.Add(new Piece(614, 456, "K", 1));
+            Alphabet.PiecesList.Add(new Piece(898, 493, "L", 1));
             listSection.Add(Alphabet);
 
             Section Nombre = new Section("SECTION_nombres");
-            Nombre.PiecesList.Add(new Piece(47, 59, "1", 2));
-            Nombre.PiecesList.Add(new Piece(150, 69, "8", 2));
-            Nombre.PiecesList.Add(new Piece(285, 270, "9", 2));
-            Nombre.PiecesList.Add(new Piece(393, 72, "7", 2));
-            Nombre.PiecesList.Add(new Piece(45, 124, "3", 2));
-            Nombre.PiecesList.Add(new Piece(140, 128, "2", 2));
-            Nombre.PiecesList.Add(new Piece(278, 132, "15", 2));
-            Nombre.PiecesList.Add(new Piece(393, 132, "5", 2));
-            Nombre.PiecesList.Add(new Piece(50, 215, "4", 2));
-            Nombre.PiecesList.Add(new Piece(132, 210, "6", 2));
-            Nombre.PiecesList.Add(new Piece(283, 216, "10", 2));
-            Nombre.PiecesList.Add(new Piece(393, 223, "12", 2));
+            Nombre.PiecesList.Add(new Piece(102, 69, "1", 2));
+            Nombre.PiecesList.Add(new Piece(342, 78, "8", 2));
+            Nombre.PiecesList.Add(new Piece(666, 98, "9", 2));
+            Nombre.PiecesList.Add(new Piece(924, 108, "7", 2));
+            Nombre.PiecesList.Add(new Piece(93, 231, "3", 2));
+            Nombre.PiecesList.Add(new Piece(336, 236, "2", 2));
+            Nombre.PiecesList.Add(new Piece(650, 247, "15", 2));
+            Nombre.PiecesList.Add(new Piece(916, 241, "5", 2));
+            Nombre.PiecesList.Add(new Piece(100, 422, "4", 2));
+            Nombre.PiecesList.Add(new Piece(304, 433, "6", 2));
+            Nombre.PiecesList.Add(new Piece(662, 440, "10", 2));
+            Nombre.PiecesList.Add(new Piece(920, 444, "12", 2));
 
             listSection.Add(Nombre);
 
-            Section Couleur = new Section("SECTION_couleurs");
-            Couleur.PiecesList.Add(new Piece(40, 44, "gris", 3));
-            Couleur.PiecesList.Add(new Piece(174, 48, "marron", 3));
-            Couleur.PiecesList.Add(new Piece(290, 48, "rouge", 3));
-            Couleur.PiecesList.Add(new Piece(408, 44, "orange", 3));
-            Couleur.PiecesList.Add(new Piece(543, 43, "jaune", 3));
-            Couleur.PiecesList.Add(new Piece(38, 145, "blanc", 3));
-            Couleur.PiecesList.Add(new Piece(168, 145, "rose", 3));
-            Couleur.PiecesList.Add(new Piece(290, 136, "violet", 3));
-            Couleur.PiecesList.Add(new Piece(406, 142, "bleu", 3));
-            Couleur.PiecesList.Add(new Piece(543, 133, "vert", 3));
+            //Section Couleur = new Section("SECTION_couleurs");
+            //Couleur.PiecesList.Add(new Piece(199, 80, "gris", 3));
+            //Couleur.PiecesList.Add(new Piece(422, 86, "marron", 3));
+            //Couleur.PiecesList.Add(new Piece(650, 80, "rouge", 3));
+            //Couleur.PiecesList.Add(new Piece(408, 44, "orange", 3));
+            //Couleur.PiecesList.Add(new Piece(543, 43, "jaune", 3));
+            //Couleur.PiecesList.Add(new Piece(38, 145, "blanc", 3));
+            //Couleur.PiecesList.Add(new Piece(168, 145, "rose", 3));
+            //Couleur.PiecesList.Add(new Piece(290, 136, "violet", 3));
+            //Couleur.PiecesList.Add(new Piece(406, 142, "bleu", 3));
+            //Couleur.PiecesList.Add(new Piece(543, 133, "vert", 3));
 
 
 
-            listSection.Add(Couleur);
+            //listSection.Add(Couleur);
 
             tmp.mySections = listSection;
             //Console.WriteLine("données contenues en mémoire");

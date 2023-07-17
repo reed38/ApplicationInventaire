@@ -8,47 +8,54 @@
       mc:Ignorable="d" 
       Title="PAGE_3_2"
       Background="#116396"
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800"
       
-
+        MouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
       >
 
-    <Grid  PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"  Margin="50,50,45,185" >
+
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="101*" />
-            <ColumnDefinition />
-            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="119*" />
+            <ColumnDefinition Width="41*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="21*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
 
 
-        <Canvas  Grid.Row="0" Grid.Column="0" x:Name="myCanva" >
+        <Canvas 
+                x:Name="myCanva"
+                Margin="10,10,10,10"
+           
+                >
+            <Canvas.Background  >
+                <ImageBrush ImageSource="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
+
+            </Canvas.Background>
 
 
-            <Image  x:Name="CurrentSectionImage"  
-                    Stretch="UniformToFill"
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center"
-                    Source="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="0,0,0,50"
-                    />
+
             <Image x:Name="RedCircleImage" 
                    Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
-                   Height="25"
-                   Width="25"/>
-            <Label Foreground="Red" x:Name="LabelNameTag" Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   Height="70"
+                   Width="70"/>
+
+
+        <Label Foreground="Red" 
+               x:Name="LabelNameTag" 
+               Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+               FontSize="20"
                    ></Label>
 
         </Canvas>
 
 
-        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,14,0">
-            
+        <Grid Grid.Row="1" Grid.Column="0">
+
 
             <StackPanel Orientation="Horizontal"
                         Width="300"
@@ -64,7 +71,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Grid.Column ="1">
 
 
             <Button
@@ -83,39 +90,42 @@
 
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" >
+        <Grid Grid.Row="0" Grid.Column="1"  >
 
-            <Popup x:Name="PopupNoSerialNumberConstructor" Placement="Center" IsOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Popup x:Name="PopupNoSerialNumberConstructor" Placement="Center" IsOpen="False" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <Border Background="LightGray" BorderBrush="Black" BorderThickness="1" Padding="10">
                     <TextBlock Text="PLease enter a serial Number!" />
                 </Border>
             </Popup>
-            <StackPanel  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+           
 
+              
+            <StackPanel  Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,20">
                 <Image
-                       Height="150"
-                       Width="150"
-                    VerticalAlignment="Stretch"
+                       Height="200"
+                       Width="200"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Stretch"
-                    Margin="10,0,0,20"
+                    Stretch="UniformToFill"
+                    Margin="0,10,0,20"
                     Name="ReleveImagepage"
                     Source="{Binding ImageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     
                  />
-                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                     <Label x:Name="labelSerialNumber" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
                     ></Label>
                     <TextBox  x:Name="TextBoxSerialNumber"
                               Width="150"
                               Margin="10,0,0,10"
                               />
-                    
-                    
+
+
 
 
 
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                     <Label                             
                     Margin="10,0,0,10"
                     Content="Constructor: " 
@@ -126,9 +136,9 @@
                               Margin="10,0,0,10"
 
                               />
-                    
+
                 </StackPanel>
-               
+
                 <Button
                 x:Name="YesButton"
                   Click="ButtonClickYes"
@@ -149,7 +159,7 @@
                 
                 />
 
-               
+
 
             </StackPanel>
 

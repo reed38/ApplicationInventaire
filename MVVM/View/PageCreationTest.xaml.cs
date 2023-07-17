@@ -108,6 +108,26 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Point position = e.GetPosition((Canvas)sender);
+            XCoordinate = position.X;
+            YCoordinate = position.Y;
+            Thickness thickness = new Thickness();
+            thickness.Top = YCoordinate - 25;
+            thickness.Bottom = YCoordinate - 25;
+            thickness.Left = XCoordinate - 25;
+            thickness.Right = XCoordinate;
+            this.RedCircleImage.Margin = thickness;
+
+        }
+
+
+        private void ChangeFrameCoordinates(double x, double y)
+        {
+            Canvas.SetLeft(this.RedCircleImage, x);
+            Canvas.SetTop(this.RedCircleImage, y);
+        }
 
         private void CurrentSectionImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -116,12 +136,9 @@ namespace ApplicationInventaire.MVVM.View
             Point position = e.GetPosition(image);
             XCoordinate = position.X;
             YCoordinate = position.Y;
-            Thickness thickness = new Thickness();
-            thickness.Top = YCoordinate-25 ;
-            thickness.Bottom=YCoordinate - 25;
-            thickness.Left = XCoordinate - 25;
-            thickness.Right= XCoordinate ;
-            this.RedCircleImage.Margin = thickness;
+
+            ChangeFrameCoordinates(XCoordinate, YCoordinate);
+            
 
 
         }

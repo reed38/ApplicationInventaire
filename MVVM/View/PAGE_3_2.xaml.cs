@@ -268,24 +268,25 @@ namespace ApplicationInventaire.MVVM.View
 
         private void SetBorderPosition()
         {
-            Thickness thicknessRedFrame = new Thickness();
-            thicknessRedFrame.Top = CurrentPiece.Y - 17;
-            thicknessRedFrame.Bottom = CurrentPiece.Y - 17;
-            thicknessRedFrame.Left = CurrentPiece.X - 17;
-            thicknessRedFrame.Right = CurrentPiece.X;
-            this.RedCircleImage.Margin = thicknessRedFrame;
-
-            Thickness thicknessPieceName = new Thickness();
-            thicknessPieceName.Top = CurrentPiece.Y + 5;
-            thicknessPieceName.Bottom = CurrentPiece.Y - 17;
-            thicknessPieceName.Left = CurrentPiece.X - 30;
-            thicknessPieceName.Right = CurrentPiece.X;
-            this.LabelNameTag.Margin = thicknessPieceName;
+            ChangeFrameCoordinates(CurrentPiece.X-this.RedCircleImage.Height/2, CurrentPiece.Y - this.RedCircleImage.Width / 2);
+            ChangeLabelcoordinates(CurrentPiece.X , CurrentPiece.Y);
 
 
 
 
 
+
+        }
+        private void ChangeFrameCoordinates(double x, double y)
+        {
+            Canvas.SetLeft(this.RedCircleImage, x);
+            Canvas.SetTop(this.RedCircleImage, y);
+        }
+
+        private void ChangeLabelcoordinates(double x, double y)
+        {
+            Canvas.SetLeft(this.LabelNameTag, x-30);
+            Canvas.SetTop(this.LabelNameTag, y-30);
 
         }
 

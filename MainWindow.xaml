@@ -14,14 +14,14 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="930" />
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
 
 
 
-        <Grid Grid.Row="0" Background="#074067" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid Grid.Row="0" Background="#074067" Margin="0,0,0,0">
             <TextBlock Text="Demo1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="30" Height="43"
                        Width="245"
                        Margin="295,33,0,0"

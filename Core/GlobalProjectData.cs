@@ -41,6 +41,8 @@ namespace ApplicationInventaire.Core.GlobalProjectData
     {
         #region variables
         public static string CurrentProjectName;
+        public static string CurrentSectionName;
+        public static string CurrentPieceName;
         public static ProjectData CurrentProjectData;
 
         #endregion

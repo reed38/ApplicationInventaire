@@ -104,7 +104,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonsearchTagClick(object sender, RoutedEventArgs e)
         {
-
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_1);
         }
 
         #endregion

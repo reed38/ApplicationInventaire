@@ -11,44 +11,52 @@
       Title="PageCreationTest"
        d:DesignWidth="800"     
 
-       d:DesignHeight="600" 
+       d:DesignHeight="450" 
       
 
       >
 
-    <Grid    Margin="50,50,45,185" >
+
+
+
+
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="36*" />
-            <ColumnDefinition Width="11*" />
+            <ColumnDefinition Width="119*" />
+            <ColumnDefinition Width="41*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="21*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
 
 
+        <Canvas 
+                x:Name="myCanva"
+                Margin="10,10,10,10"
+           
+             MouseLeftButtonDown="Canvas_MouseDown"
+                >
+            <Canvas.Background  >
+                <ImageBrush ImageSource="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
 
-        <Canvas  Grid.Row="0" Grid.Column="0" x:Name="myCanva" >
+            </Canvas.Background>
 
 
-            <Image  x:Name="CurrentSectionImage"  
-                    Stretch="UniformToFill"
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Center"
-                    Source="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="0,0,0,50"
-                    MouseLeftButtonDown="CurrentSectionImage_MouseLeftButtonDown"/>
+
             <Image x:Name="RedCircleImage" 
-                   Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png" Height="50" Width="50"/>
+                   Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
+                   Height="70"
+                   Width="70"/>
 
         </Canvas>
 
 
 
 
-        <Grid Grid.Row="1" Grid.Column="0"  >
+        <Grid Grid.Row="1" Grid.Column="0"   >
 
 
             <Button x:Name="selectFile" Click="ButtonClickOpenFile"
@@ -63,7 +71,7 @@
         </Grid>
 
 
-        <Grid Grid.Row="0" Grid.Column="1">
+        <Grid Grid.Row="0" Grid.Column="1" >
 
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
