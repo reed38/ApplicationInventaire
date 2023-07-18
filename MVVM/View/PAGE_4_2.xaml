@@ -51,7 +51,7 @@
                         <StackPanel Orientation="Vertical" Margin="10">
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                 <Label Content="NameTag: "/>
-                                <TextBox x:Name="TextBoxNameTag" Width="100" Height="25"/>
+                                <TextBox x:Name="TextBoxNameTag" Width="100" Height="25" KeyDown="TextBoxNameTagKeyDown"/>
 
 
                             </StackPanel>

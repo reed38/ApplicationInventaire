@@ -49,7 +49,7 @@ namespace ApplicationInventaire.MVVM.View
             this.RedFrameImage.Visibility = Visibility.Hidden;
 
         }
-
+        
         #region Variables
       
         private ProjectData projectData;
@@ -166,24 +166,17 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TextBoxNameTag.Text))
-            {
-                POPUP.ShowPopup("Please enter Name Tag");
-                return;
-            }
-            CurrentPiece.PieceName = TextBoxNameTag.Text;
-            CurrentPiece.SectionId = IndiceSection + 1;
-            projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);        
-            if (CurrentPiece.IsReleveRequired == 1)
-            {
-                string destPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, CurrentPiece.PieceName);
-                File.Copy(relevePath, destPath);
-            }          
-            InitializeOverlay();
-            this.RedFrameImage.Visibility = Visibility.Hidden;
-            this.popup.IsOpen = false;
+            SavePiece();
         }
+        private void TextBoxNameTagKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SavePiece();
 
+            }
+
+        }
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ResetPopup();
@@ -195,6 +188,7 @@ namespace ApplicationInventaire.MVVM.View
             CurrentPiece.X = x;
             CurrentPiece.Y = y;
             ChangeFrameCoordinates(x, y);
+            Keyboard.Focus(TextBoxNameTag);
 
 
 
@@ -250,8 +244,31 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-     
+        #region privateMethods
+        private void SavePiece()
+        {
+            if (string.IsNullOrEmpty(TextBoxNameTag.Text))
+            {
+                POPUP.ShowPopup("Please enter Name Tag");
+                return;
+            }
+            CurrentPiece.PieceName = TextBoxNameTag.Text;
+            CurrentPiece.SectionId = IndiceSection + 1;
+            projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
+            if (CurrentPiece.IsReleveRequired == 1)
+            {
+                string destPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, CurrentPiece.PieceName);
+                File.Copy(relevePath, destPath);
+            }
+            InitializeOverlay();
+            this.RedFrameImage.Visibility = Visibility.Hidden;
+            this.popup.IsOpen = false;
+        }
 
+
+        #endregion
+
+        
     }
 
 

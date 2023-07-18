@@ -27,14 +27,17 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="300" Width="350" Background="White" Margin="50">
 
             <StackPanel Orientation="Horizontal">
-                <Label FontSize="15" Content="Author: " FontWeight="SemiBold" Margin="0,20,0,20"/>
-                <Label x:Name ="LabelAuthorName" FontSize="15"  Background="White"  Margin="0,20,0,20"/>
+                <Label FontSize="15" Content="Author: " FontWeight="SemiBold" Margin="5,10,0,10"/>
+                <Label x:Name ="LabelAuthorName" FontSize="15"  Background="White"  Margin="5"/>
 
             </StackPanel>
 
             <StackPanel Orientation="Vertical">
-                <Label FontSize="15" Content="Description: " FontWeight="SemiBold" Margin="0,5,0,5"/>
-                <TextBlock x:Name="TextBlockDesciption" FontSize="15"  Background="White"  />
+                <Label FontSize="15" Content="Description: " FontWeight="SemiBold" Margin="5,10,0,10"/>
+                <TextBlock  HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                            Height="100" 
+                            TextWrapping="WrapWithOverflow"
+                            x:Name="TextBlockDesciption" FontSize="15"  Background="White" Margin="5" />
 
             </StackPanel>
             
