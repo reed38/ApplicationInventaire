@@ -21,6 +21,7 @@ using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -45,9 +46,27 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonPlanClick(object sender, RoutedEventArgs e)
         {
+            string pdfFilePath = "C:\\Users\\regnaulte\\Downloads\\toto.pdf";
+            string fileExtension = ".pdf";
+            // Get the file class key associated with the file extension
+            string fileClassKey = Registry.ClassesRoot.OpenSubKey(fileExtension)?.GetValue("")?.ToString();
 
+            if (fileClassKey != null)
+            {
+                // Get the default application command associated with the file class
+                string defaultApplicationCommand = Registry.ClassesRoot.OpenSubKey($"{fileClassKey}\\shell\\open\\command")?.GetValue("")?.ToString();
+
+                if (defaultApplicationCommand != null)
+                {
+                    // Extract the executable path from the command string
+                    string executablePath = defaultApplicationCommand.Split('"')[1];
+                    Process.Start(executablePath, pdfFilePath);
+
+
+                }
+
+            }
         }
-
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
             
@@ -110,23 +129,7 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
         
 
-        private void ButtonExportClick(object sender, RoutedEventArgs e)
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                DialogResult result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string dest = dialog.SelectedPath;
-                    string source =new ProjectInfos(GlobalProjectData.CurrentProjectName).ProjectPath;
-
-                    Directory.CreateDirectory(dest);
-                    CopyDirectory(source, dest);
-
-
-                }
-            }
-        }
+       
       
 
         #region publicmethods

@@ -18,8 +18,7 @@
             <Button Content="New inventory" Height="50" Margin="0,5" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
             <Button Content="Search with tag" Height="50" Margin="0,5" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
             <Button Content="Search with Image" Height="50" Margin="0,5" x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
-            <Button Content="Modify" Height="50" Margin="0,5"  x:Name="ButtonModify" Click="ButtonModifyClick"/>
-            <Button Content="Export" Height="50" Margin="0,5"  x:Name="ButtonExport" Click="ButtonExportClick"/>
+            <!--<Button Content="Modify" Height="50" Margin="0,5"  x:Name="ButtonModify" Click="ButtonModifyClick"/>-->
 
         </StackPanel>
 
