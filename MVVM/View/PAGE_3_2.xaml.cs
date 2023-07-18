@@ -187,14 +187,6 @@ namespace ApplicationInventaire.MVVM.View
             FindNextNoPresent();
             SetBorderPosition();
 
-
-
-
-
-
-
-
-
         }
 
         private void FindNextNoPresent()
@@ -242,7 +234,7 @@ namespace ApplicationInventaire.MVVM.View
                             ShowTextBoxSerialNumberConstructor();
                             foreach (ImageInfos i in projectData.ImageReleveList)
                             {
-                                if (i.Name.Equals(this.CurrentPiece.PieceName))
+                                if (i.Name.IndexOf(this.CurrentPiece.PieceName)>=0)
                                 {
                                     ImageReleve = i.Path;
                                     break;
@@ -294,8 +286,8 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ChangeLabelcoordinates(double x, double y)
         {
-            Canvas.SetLeft(this.LabelNameTag, x - 30);
-            Canvas.SetTop(this.LabelNameTag, y - 30);
+            Canvas.SetLeft(this.LabelNameTag, x - 60);
+            Canvas.SetTop(this.LabelNameTag, y - 60);
 
         }
 

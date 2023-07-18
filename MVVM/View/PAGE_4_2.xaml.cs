@@ -168,6 +168,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             SavePiece();
         }
+      
         private void TextBoxNameTagKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -177,6 +178,7 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
+       
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ResetPopup();

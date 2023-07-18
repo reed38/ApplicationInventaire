@@ -143,11 +143,32 @@ namespace ApplicationInventaire.MVVM.View
                 LabelNameTag.Content = res.Item2.PieceName;
             }
         }
-       
+
         #endregion
 
         #region privateMethods
+     
+        private (Image, Piece) GetClickedPieceImage(Point clickPosition)
+        {
 
+            foreach ((Image, Piece) i in OverlayImageList)
+            {
+                var imageBounds = new Rect(Canvas.GetLeft(i.Item1), Canvas.GetTop(i.Item1), i.Item1.ActualWidth, i.Item1.ActualHeight);
+                if (imageBounds.Contains(clickPosition.X, clickPosition.Y))
+                {
+                    return i;
+                }
+
+            }
+
+
+
+            return (null, null);
+        }
+
+        #endregion
+
+        #region GIMethods
         /// <summary>
         /// For each Section this function will create instances of red point image over existing Pieces
         /// </summary>
@@ -187,28 +208,10 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private (Image, Piece) GetClickedPieceImage(Point clickPosition)
-        {
-
-            foreach ((Image, Piece) i in OverlayImageList)
-            {
-                var imageBounds = new Rect(Canvas.GetLeft(i.Item1), Canvas.GetTop(i.Item1), i.Item1.ActualWidth, i.Item1.ActualHeight);
-                if (imageBounds.Contains(clickPosition.X, clickPosition.Y))
-                {
-                    return i;
-                }
-
-            }
-
-
-
-            return (null, null);
-        }
-
         private void ChangeLabelcoordinates(double x, double y)
         {
-            Canvas.SetLeft(this.LabelNameTag, x - 30);
-            Canvas.SetTop(this.LabelNameTag, y - 30);
+            Canvas.SetLeft(this.LabelNameTag, x - 60);
+            Canvas.SetTop(this.LabelNameTag, y - 60);
 
         }
         #endregion
