@@ -28,6 +28,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using ApplicationInventaire.Core.PieceSections;
 using Section = ApplicationInventaire.Core.PieceSections.Section;
+using System.IO.Compression;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -114,22 +115,14 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickLoad(object sender, RoutedEventArgs e) 
 
         {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                DialogResult result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    string selectedFolder = dialog.SelectedPath;
-                    string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(selectedFolder));
-
-                    Directory.CreateDirectory(dest);
-                    CopyDirectory(selectedFolder, dest);
-                    Items2.Add(System.IO.Path.GetFileNameWithoutExtension(selectedFolder));
+            string zipPath = FileManager.OpenSelectZipLoadPopup();
+            string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(zipPath));
+            ZipFile.ExtractToDirectory(zipPath, dest);
+          
+            Items2.Add(System.IO.Path.GetFileNameWithoutExtension(dest));
 
 
-                }
-            }
-
+           
 
         }
         #endregion

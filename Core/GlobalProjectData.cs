@@ -23,6 +23,10 @@ using System.Windows.Media.Imaging;
 using NPOI.OpenXmlFormats.Dml;
 using Microsoft.Win32;
 using System.IO.Compression;
+using System.Windows.Forms;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+using MessageBox = System.Windows.MessageBox;
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
@@ -182,6 +186,27 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+        public static string OpenSelectZipLoadPopup()
+        {
+           OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter =  "ZIP Files (*.zip)|*.zip|All Files (*.*)|*.*";
+
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string selectedFiles = openFileDialog.FileName;
+                return selectedFiles;
+
+                // Process the selected image files
+
+            }
+            return null;
+        }
+    
+
 
         public static string OpenExcelFilePopup()
         {
@@ -200,10 +225,11 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
-        public static string OpenFolderPopup()
+        public static string OpenSelectZipSavePopup(string defaultFileName)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "ZIP Files (*.zip)|*.zip|All Files (*.*)|*.*";
+            saveFileDialog.FileName = defaultFileName; // Set the default filename here
 
             bool? result = saveFileDialog.ShowDialog();
 
@@ -216,15 +242,20 @@ namespace ApplicationInventaire.Core.GlobalProjectData
                 {
                     Directory.CreateDirectory(directoryPath);
                 }
+
                 return selectedFilePath;
             }
+
             return null;
-            
         }
 
         public static void  CreateZipArchive(string folderPath, string zipFilePath)
         {
-            ZipFile.CreateFromDirectory(folderPath, zipFilePath);
+            if(!string.IsNullOrEmpty(zipFilePath))
+            {
+                ZipFile.CreateFromDirectory(folderPath, zipFilePath);
+
+            }
         }
 
 

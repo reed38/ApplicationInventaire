@@ -97,7 +97,7 @@ namespace ApplicationInventaire.MVVM.View
                 return;
             };
             string TemplateFolderPath = ProjectPathList[ProjectNameList.IndexOf(selectedValue)];
-            string destPath = FileManager.OpenFolderPopup();
+            string destPath = FileManager.OpenSelectZipSavePopup(selectedValue);
             ProjectInfos tmp = new(selectedValue);
             FileManager.CreateZipArchive(TemplateFolderPath, destPath);
             GlobalPages.SetCurrentPageBack();
