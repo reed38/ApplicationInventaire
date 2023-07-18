@@ -32,19 +32,17 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_1_1 = this;
             DataContext = this;
             ProjectNameList = new ObservableCollection<string>(GlobalProjectData.GetProjectNames());
-            ProjectPathList = GlobalProjectData.GetProjecPaths();
+            ProjectPathList = GlobalProjectData.GetProjecPaths(); //going through the UserData folder and initializing ProjectPathList
 
-            //loading templates present in memoty
 
         }
-        #region variables
+        #region Privatevariables
         private string [] ProjectPathList;
         #endregion
 
         #region BindingVariables
-        private ObservableCollection<string> projectNameList = new ObservableCollection<string>();
-
-        private string selectedValue;
+        private ObservableCollection<string> projectNameList = new ObservableCollection<string>();  //collection used to in  the listBox
+        private string selectedValue; //will be automatically updated to contain the string of the case the user is currently selecting
         #endregion
 
         #region BindingMethods
@@ -58,10 +56,6 @@ namespace ApplicationInventaire.MVVM.View
                 OnPropertyChanged(nameof(ProjectNameList));
             }
         }
-
-       
-
-
 
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -81,13 +75,17 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
+        #region privateMethods
+
         private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox listBox = (ListBox)sender;
             selectedValue = (string)listBox.SelectedItem;
-
-
         }
+
+        #endregion
+
+        #region UIMethods
 
         private void ButtonClickExportTemplate(object sender, RoutedEventArgs e)
         {
@@ -100,8 +98,10 @@ namespace ApplicationInventaire.MVVM.View
             string destPath = FileManager.OpenSelectZipSavePopup(selectedValue);
             ProjectInfos tmp = new(selectedValue);
             FileManager.CreateZipArchive(TemplateFolderPath, destPath);
-            GlobalPages.SetCurrentPageBack();
+            GlobalPages.PageGoBack();
         }
+
+        #endregion
     }
 }
 

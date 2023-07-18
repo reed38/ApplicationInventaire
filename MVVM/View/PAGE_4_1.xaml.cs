@@ -46,15 +46,15 @@ namespace ApplicationInventaire.MVVM.View
         #region PrivateVariables
         private string Description;
         private ObservableCollection<ImageInfos> imageSectionsInfos = new ObservableCollection<ImageInfos>();
-        private List<string> PlansPathList= new List<string> ();
+        private List<string> PlansPathList = new List<string>();
         private string excelPath;
         #endregion
 
         #region BindingVariables
-        private ObservableCollection<string> imageSectionsName = new ObservableCollection<string>();
-        private ObservableCollection<string> plansNameList= new ObservableCollection<string>();
-        private string excelName;
 
+        private ObservableCollection<string> imageSectionsName = new ObservableCollection<string>();
+        private ObservableCollection<string> plansNameList = new ObservableCollection<string>();
+        private string excelName;
         private string selectedValueSection;
         private string selectedValuePlan;
 
@@ -106,68 +106,68 @@ namespace ApplicationInventaire.MVVM.View
             CollectionChanged?.Invoke(this, e);
         }
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void ListBoxPlanFileSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            selectedValuePlan = (string)listBox.SelectedItem;
+
+
+
+        }
         #endregion
-
-
-
-
-
 
         #region privateMethods
         private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox listBox = (ListBox)sender;
             selectedValueSection = (string)listBox.SelectedItem;
-
         }
 
-    
-        
         private bool CheckAllIsHere()
         {
             bool res = true;
             if (string.IsNullOrEmpty(TextBoxAuthor.Text))
             {
                 res = false;
-                ShowPopup("please enter author");
+                POPUP.ShowPopup("please enter author");
             }
             if (string.IsNullOrEmpty(TextBoxDescription.Text))
             {
                 res = false;
-                ShowPopup("please enter description");
+                POPUP.ShowPopup("please enter description");
             }
             if (string.IsNullOrEmpty(TextBoxName.Text))
             {
                 res = false;
-                ShowPopup("please enter name");
+                POPUP.ShowPopup("please enter name");
             }
             if (string.IsNullOrEmpty(excelPath))
             {
                 res = false;
-                ShowPopup("please select an excel file");
+                POPUP.ShowPopup("please select an excel file");
             }
             if (imageSectionsInfos.Count == 0)
             {
                 res = false;
-                ShowPopup("please select at least 1 image");
+                POPUP.ShowPopup("please select at least 1 image");
             }
             if (PlansNameList.Count == 0)
             {
                 res = false;
-                ShowPopup("please select at least 1 Plan");
+                POPUP.ShowPopup("please select at least 1 Plan");
             }
 
 
-            string[] projectList=GlobalProjectData.GetProjectNames();
-            foreach(string project in projectList) 
+            string[] projectList = GlobalProjectData.GetProjectNames();
+            foreach (string project in projectList)
             {
-                if(project.Equals(TextBoxName.Text))
+                if (project.Equals(TextBoxName.Text))
                 {
                     res = false;
-                    ShowPopup("This name is already used ");
+                    POPUP.ShowPopup("This name is already used ");
+                    break;
                 }
             }
             return res;
@@ -177,14 +177,10 @@ namespace ApplicationInventaire.MVVM.View
 
         #region UImethods
 
-
-      
-
-
         private void ButtonClickSelectImage(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
-            if(tmp.Length>0)
+            if (tmp.Length > 0)
             {
                 foreach (string i in tmp)
                 {
@@ -192,23 +188,14 @@ namespace ApplicationInventaire.MVVM.View
                     ImageSectionsName.Add(Path.GetFileNameWithoutExtension(i));
                 }
             }
-        
-
         }
-
-
-        private void ShowPopup(string message)
-        {
-            MessageBox.Show(message, "Field Missing", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
 
         private void ButtonClickSelectExcel(object sender, RoutedEventArgs e)
         {
             excelPath = FileManager.OpenExcelFilePopup();
             ExcelName = Path.GetFileNameWithoutExtension(excelPath);
-
         }
+
         private void ButtonClickSaveContinu(object sender, RoutedEventArgs e)
         {
             if (CheckAllIsHere() == false)
@@ -221,7 +208,7 @@ namespace ApplicationInventaire.MVVM.View
             File.Copy(excelPath, projectInfos.ExcelPath, true);
             File.Copy(excelPath, projectInfos.TmpExcelPath, true);
             ProjectData projectData = new ProjectData(projectInfos);
-            
+
             File.Copy(excelPath, projectInfos.ExcelPath, true);
             File.Copy(excelPath, projectInfos.TmpExcelPath, true);
 
@@ -232,8 +219,8 @@ namespace ApplicationInventaire.MVVM.View
                 File.Copy(i.Path, destinationPath, true);
                 projectData.mySections.Add(new Core.PieceSections.Section(i.Name));
 
-           }
-            for (int i=0; i < PlansNameList.Count;i++)
+            }
+            for (int i = 0; i < PlansNameList.Count; i++)
             {
                 string destinationPath = Path.Combine(projectData.myProjectInfos.PlansPath, PlansNameList[i]);
                 File.Copy(PlansPathList[i], destinationPath, true);
@@ -246,17 +233,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private void ListBoxPlanFileSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBox listBox = (ListBox)sender;
-            selectedValuePlan = (string)listBox.SelectedItem;
-            
-
-
-    }
-
-
-    private void ButtonClickSelectPlans(object sender, RoutedEventArgs e)
+        private void ButtonClickSelectPlans(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenPdfPopup();
             foreach (string i in tmp)
@@ -280,7 +257,6 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
-
         private void ButtonClickDeletePlanSelected(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < PlansNameList.Count; i++)
@@ -295,5 +271,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
     }
+
+   
     #endregion
 }

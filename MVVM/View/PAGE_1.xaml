@@ -21,7 +21,7 @@
             <ListBox ItemsSource="{Binding Items2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center">
                 <ListBox.Template>
                     <ControlTemplate TargetType="{x:Type ListBox}">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ScrollViewer VerticalScrollBarVisibility="Visible">
                             <ItemsPresenter />
                         </ScrollViewer>
                     </ControlTemplate>

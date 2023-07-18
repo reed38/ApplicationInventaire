@@ -24,6 +24,7 @@ namespace ApplicationInventaire.Core.GlobalPages
     {
         public static Uri CurrentPage { get; set; }
         public static List<Uri> LastPages { get; set; } = new List<Uri>();
+        public static Uri MAINWINDOW = new Uri("MainWindow.xaml", UriKind.Relative);
         public static Uri PAGE_1 = new Uri("MVVM/View/PAGE_1.xaml", UriKind.Relative);
         public static Uri PAGE_1_1 = new Uri("MVVM/View/PAGE_1_1.xaml", UriKind.Relative);
         public static Uri PAGE_3_1 = new Uri("MVVM/View/PAGE_3_1.xaml", UriKind.Relative);
@@ -35,15 +36,9 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static Uri PAGE_5_1 = new Uri("MVVM/View/PAGE_5_1.xaml", UriKind.Relative);
         public static Uri PAGE_5_2 = new Uri("MVVM/View/PAGE_5_2.xaml", UriKind.Relative);
 
-
-        public static Uri PAGE_CREATIONTEST= new Uri("MVVM/View/PageCreationTest.xaml", UriKind.Relative);
-
-
-
         public static MainWindow mainWindow;
         public static PAGE_1 page_1;
         public static PAGE_1_1 page_1_1;
-
         public static PAGE_3_1 page_3_1;
         public static PAGE_3_2 page_3_2;
         public static PAGE_3_3 page_3_3;
@@ -53,18 +48,12 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static PAGE_5_1 page_5_1;
         public static PAGE_5_2 page_5_2;
 
-        public static PageCreationTest page_CreationTest;
-
-
-
-
         public static void SetCurrentPage(Uri newPage)
         {
             GlobalPages.LastPages.Add(GlobalPages.CurrentPage);
             GlobalPages.CurrentPage = newPage;
             mainWindow.MainFrame.Source = GlobalPages.CurrentPage;
             mainWindow.MainFrame.Visibility = Visibility.Visible;
-
         }
 
         public static void SetCurrentPageBack(Uri newPage)
@@ -73,11 +62,9 @@ namespace ApplicationInventaire.Core.GlobalPages
             mainWindow.MainFrame.Source = GlobalPages.CurrentPage;
             mainWindow.MainFrame.Visibility = Visibility.Visible;
             GlobalProjectData.GlobalProjectData.ExcelContinuPath = null;
-
-
         }
 
-        public static void SetCurrentPageBack()
+        public static void PageGoBack()
         {
 
             if (GlobalPages.LastPages.Count > 1)
@@ -87,13 +74,12 @@ namespace ApplicationInventaire.Core.GlobalPages
                 GlobalPages.LastPages.Remove(tmp);
                 GlobalPages.CurrentPage = tmp;
                 GlobalPages.SetCurrentPageBack(GlobalPages.CurrentPage);
-
             }
-
+            if(GlobalPages.CurrentPage==PAGE_1)
+            {
+                mainWindow.StackPanelCurrentTemplate.Visibility= Visibility.Collapsed;
+            }
         }
-
-
-
     }
 }
        

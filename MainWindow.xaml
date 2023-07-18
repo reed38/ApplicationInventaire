@@ -28,13 +28,25 @@
                        Foreground="White"
                        />
 
+            <StackPanel x:Name="StackPanelCurrentTemplate" Orientation="Vertical" VerticalAlignment="Stretch"
+                       HorizontalAlignment="Right"  Margin="0,10,20,0" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="White" FontSize="20"
+                           Content="Current Template:"/>
+                    <Label x:Name="labelTemplateName" Foreground="White" FontSize="20"
+                           />
+                </StackPanel>
+             
+
+            </StackPanel>
+
 
             <Button
                 x:Name="goBackButton"
                   Click="ButtonGoBackClick"
                 Content="go back"
-                Width="55"
-                Height="32"
+                Width="100"
+                Height="25"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
                  Margin="30,0,0,0"

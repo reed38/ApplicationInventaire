@@ -30,42 +30,21 @@ namespace ApplicationInventaire
         public List<string> Items { get; set; }
 
         public static MainWindow Instance { get; set; }
-       
+
         public MainWindow()
         {
             InitializeComponent();
             GlobalPages.mainWindow = this;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_1);
             GlobalPages.CurrentPage = GlobalPages.PAGE_1;
-            
-          
-
-
-
             DataContext = this;
         }
-        
+
 
         public void ButtonGoBackClick(object sender, RoutedEventArgs e)
         {
-            GlobalPages.SetCurrentPageBack();
-
-
-            }
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
+            GlobalPages.PageGoBack();
+        }
 
         public static void HidePage()
         {

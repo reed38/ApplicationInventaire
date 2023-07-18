@@ -32,13 +32,10 @@ namespace ApplicationInventaire.MVVM.View
     {
 
 
-
-
-
-
         public PAGE_3_1()
         {
             InitializeComponent();
+            InitializeAuthor_Description();
             GlobalPages.page_3_1 = this;
         }
 
@@ -48,40 +45,17 @@ namespace ApplicationInventaire.MVVM.View
         {
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_3);
         }
+       
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {
-            
-          
 
-            Microsoft.Win32.OpenFileDialog openFileDialog  = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.InitialDirectory = @"C:\";  // Set the initial directory if desired
-            openFileDialog.DefaultExt = ".xls";
-
-            // Set the file filters
-            openFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
-
-            bool? result = openFileDialog.ShowDialog();
-
-            if (openFileDialog.ShowDialog() == true)
+            string tmp = FileManager.OpenExcelFilePopup();
+            if (!string.IsNullOrEmpty(tmp))
             {
-                string selectedFilePath = openFileDialog.FileName;
-                
-                 GlobalProjectData.ExcelContinuPath = selectedFilePath;
-
-                
+                GlobalProjectData.ExcelContinuPath = tmp;
+                GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
             }
-
-            GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
-
-
-
-
-
-
         }
-
-
-        
 
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
@@ -90,55 +64,29 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
 
-
-
         private void ButtonsearchImageClick(object sender, RoutedEventArgs e)
         {
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_4);
         }
-
-        private void ButtonModifyClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+                
         private void ButtonsearchTagClick(object sender, RoutedEventArgs e)
         {
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_1);
         }
 
         #endregion
+
+        #region GIMethods
         
-
-       
-      
-
-        #region publicmethods
-        public void CopyDirectory(string sourceDirectory, string destinationDirectory)
+        private void InitializeAuthor_Description()
         {
-            // Create the destination directory if it doesn't exist
-            Directory.CreateDirectory(destinationDirectory);
-
-            // Get the files in the source directory
-            string[] files = Directory.GetFiles(sourceDirectory);
-
-            // Copy each file to the destination directory
-            foreach (string file in files)
-            {
-                string fileName = System.IO.Path.GetFileName(file);
-                string destinationPath = System.IO.Path.Combine(destinationDirectory, fileName);
-                File.Copy(file, destinationPath, true);
-            }
-
-            // Recursively copy subdirectories
-            string[] directories = Directory.GetDirectories(sourceDirectory);
-            foreach (string directory in directories)
-            {
-                string directoryName = System.IO.Path.GetFileName(directory);
-                string destinationPath = System.IO.Path.Combine(destinationDirectory, directoryName);
-                CopyDirectory(directory, destinationPath);
-            }
+            ProjectData tmpData=new (new ProjectInfos(GlobalProjectData.CurrentProjectName));
+            this.LabelAuthorName.Content = tmpData.myProjectInfos.Author;
+            this.TextBlockDesciption.Text = tmpData.myProjectInfos.Description;
         }
         #endregion
+
+
+
     }
 }

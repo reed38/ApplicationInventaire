@@ -97,8 +97,8 @@ namespace ApplicationInventaire.MVVM.View
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-
         #region UIMethods
+      
         private void ButtonClickPrevious(object sender, RoutedEventArgs e)
         {
             IndiceSection = (IndiceSection - 1);
@@ -129,13 +129,24 @@ namespace ApplicationInventaire.MVVM.View
             }
             InitializeOverlay();
 
-
         }
 
+        private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Point clickPosition = e.GetPosition(myCanva);
+            double x = clickPosition.X;
+            double y = clickPosition.Y;
+            (Image, Piece) res = GetClickedPieceImage(clickPosition);
+            if (res != (null, null))
+            {
+                ChangeLabelcoordinates(res.Item2.X, res.Item2.Y);
+                LabelNameTag.Content = res.Item2.PieceName;
+            }
+        }
+       
         #endregion
 
         #region privateMethods
-
 
         /// <summary>
         /// For each Section this function will create instances of red point image over existing Pieces
@@ -151,6 +162,7 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
+      
         private void ResetOverlay()
         {
             foreach (var i in OverlayImageList)
@@ -191,23 +203,6 @@ namespace ApplicationInventaire.MVVM.View
 
 
             return (null, null);
-        }
-
-        private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Point clickPosition = e.GetPosition(myCanva);
-            double x = clickPosition.X;
-            double y = clickPosition.Y;
-            (Image, Piece) res = GetClickedPieceImage(clickPosition);
-            if(res!=(null,null))
-            {
-                ChangeLabelcoordinates(res.Item2.X, res.Item2.Y);
-                LabelNameTag.Content = res.Item2.PieceName;
-            }
-          
-
-
-
         }
 
         private void ChangeLabelcoordinates(double x, double y)

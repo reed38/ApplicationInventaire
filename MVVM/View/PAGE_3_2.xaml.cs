@@ -42,37 +42,37 @@ namespace ApplicationInventaire.MVVM.View
             ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
             projectData = new ProjectData(tmp);
             this.RedFramePath = GlobalProjectData.RedFramePath;
+           
             if (GlobalProjectData.ExcelContinuPath != null)
             {
-
                 File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath, true);
 
             }
             projectData.InitializePieceFromExcel();
-            projectData.GetSectionsNames();
-            projectData.GetRelevesNames();
+
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
-            ImageSection = projectData.ImageSectionList[0].Path;
             RedFrameImage.Visibility = Visibility.Visible;
             IndiceSection = 0;
             IndicePiece = 0;
+            foreach (ImageInfos im in this.projectData.ImageSectionList)
+            {
+                if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                {
+                    ImageSection = im.Path;
+                    break;
 
-            projectData.mySections[0].PiecesList[0].IsReleveRequired = 1;
+                }
+            }
+
             FindNextNoPresent();
             SetBorderPosition();
 
-
-
-
-
-
-
         }
         #region Variables
-        public int IndiceSection { set; get; }
-        public int IndicePiece { set; get; }
-        public ProjectData projectData { set; get; }
+        private int IndiceSection { set; get; }
+        private int IndicePiece { set; get; }
+        private ProjectData projectData { set; get; }
         #endregion
 
         #region bindingVariablesSources
@@ -87,6 +87,7 @@ namespace ApplicationInventaire.MVVM.View
         private Section currentSection;
 
         #endregion
+     
         #region bindingMethods
 
         public Section CurrentSection
@@ -170,7 +171,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-        #region methods
+        #region PrivateMethods
 
         private void UpdateCurrent()
         {
@@ -178,7 +179,6 @@ namespace ApplicationInventaire.MVVM.View
             this.CurrentPiece = projectData.mySections[IndiceSection].PiecesList[IndicePiece];
 
         }
-
 
         private void GotoNextPiece(string answ)
         {
@@ -261,6 +261,7 @@ namespace ApplicationInventaire.MVVM.View
 
             }
         }
+       
         private void ManageReleveImage()
         {
             if (this.CurrentPiece.IsReleveRequired == 1)
@@ -283,11 +284,8 @@ namespace ApplicationInventaire.MVVM.View
             ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
 
 
-
-
-
-
         }
+       
         private void ChangeFrameCoordinates(double x, double y)
         {
             Canvas.SetLeft(this.RedFrameImage, x);
@@ -382,6 +380,7 @@ namespace ApplicationInventaire.MVVM.View
             labelConstructor.Visibility = Visibility.Hidden;
             labelSerialNumber.Visibility = Visibility.Hidden;
         }
+        
         private void ShowTextBoxSerialNumberConstructor()
         {
             TextBoxSerialNumber.Visibility = Visibility.Visible;
@@ -393,8 +392,8 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
+        #region UIMethods
 
-        #region methodsUI
         private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
         {
             UpdateSerialNumber();
@@ -402,7 +401,6 @@ namespace ApplicationInventaire.MVVM.View
             UpdateComment();
             SaveAndQuit();
         }
-
 
         private void ButtonClickNo(object sender, RoutedEventArgs e)
         {
@@ -430,26 +428,15 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #endregion
-
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             PopupNoSerialNumberConstructor.IsOpen = false;
 
         }
+
+     #endregion
+
+
     }
 }
 

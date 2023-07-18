@@ -25,37 +25,47 @@ namespace ApplicationInventaire.MVVM.View
     /// <summary>
     /// Logique d'interaction pour PAGE_4_2.xaml
     /// </summary>
-    public partial class PAGE_4_2 : Page,INotifyPropertyChanged
+    public partial class PAGE_4_2 : Page, INotifyPropertyChanged
     {
         public PAGE_4_2()
         {
             InitializeComponent();
-                        DataContext = this;
-
+            DataContext = this;
             GlobalPages.page_4_2 = this;
+
             IndiceSection = 0;
             this.RedFramePath = GlobalProjectData.RedFramePath;
             projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
-            ImageSection3 = projectData.ImageSectionList[0].Path;
+            foreach (ImageInfos im in this.projectData.ImageSectionList)
+            {
+                if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                {
+                    ImageSection3 = im.Path;
+                    break;
+
+                }
+            }
             ResetPopup();
             this.RedFrameImage.Visibility = Visibility.Hidden;
-
-
 
         }
 
         #region Variables
+      
         private ProjectData projectData;
         private Piece CurrentPiece;
         private string relevePath;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
         private int ImageMarkerWidth = 20;
+     
         #endregion
+             
         #region bindingVariables
+        
         private string redFramePath;
-
         private string imageSection3;
+       
         #endregion
 
         #region BindingMethods
@@ -91,26 +101,20 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-        #region privateMethod
-
-
         #region GIMethods
-        private void ShowPopup(string message)
-        {
-            MessageBox.Show(message, "Field Missing", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
+
         private void SetBorderPosition()
         {
             ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
 
 
         }
-      
+
         private void ChangeFrameCoordinates(double x, double y)
         {
             this.RedFrameImage.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.RedFrameImage, x-RedFrameImage.Width/2);
-            Canvas.SetTop(this.RedFrameImage, y-RedFrameImage.Height/2 );
+            Canvas.SetLeft(this.RedFrameImage, x - RedFrameImage.Width / 2);
+            Canvas.SetTop(this.RedFrameImage, y - RedFrameImage.Height / 2);
         }
 
         private void InitializeOverlay()
@@ -124,6 +128,7 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
+    
         private void ResetOverlay()
         {
             foreach (var i in OverlayImageList)
@@ -140,8 +145,8 @@ namespace ApplicationInventaire.MVVM.View
             image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
             image.Width = ImageMarkerWidth;
             image.Height = ImageMarkerWidth;
-            Canvas.SetLeft(image, piece.X- ImageMarkerWidth/2);
-            Canvas.SetTop(image, piece.Y- ImageMarkerWidth/2);
+            Canvas.SetLeft(image, piece.X - ImageMarkerWidth / 2);
+            Canvas.SetTop(image, piece.Y - ImageMarkerWidth / 2);
             myCanva.Children.Add(image);
             OverlayImageList.Add((image, piece));
 
@@ -151,55 +156,45 @@ namespace ApplicationInventaire.MVVM.View
         {
             TextBoxNameTag.Clear();
             LabelSelectedimage.Visibility = Visibility.Collapsed;
-            LabelSelectedimagePath.Visibility= Visibility.Collapsed;
+            LabelSelectedimagePath.Visibility = Visibility.Collapsed;
             ReleveRequiredNo.IsChecked = true;
         }
+       
         #endregion
-
-
-
-
-        #endregion
-
 
         #region UImethods
-      
+
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrEmpty(TextBoxNameTag.Text))
+            if (string.IsNullOrEmpty(TextBoxNameTag.Text))
             {
-                ShowPopup("Please enter Name Tag");
+                POPUP.ShowPopup("Please enter Name Tag");
                 return;
             }
             CurrentPiece.PieceName = TextBoxNameTag.Text;
             CurrentPiece.SectionId = IndiceSection + 1;
-
-            projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
-            if(CurrentPiece.IsReleveRequired==1)
+            projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);        
+            if (CurrentPiece.IsReleveRequired == 1)
             {
                 string destPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, CurrentPiece.PieceName);
                 File.Copy(relevePath, destPath);
-
-            }
+            }          
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;
-
             this.popup.IsOpen = false;
         }
-
-
 
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ResetPopup();
             Point clickPosition = e.GetPosition(myCanva);
-            double x = clickPosition.X ;
-            double y = clickPosition.Y ;
+            double x = clickPosition.X;
+            double y = clickPosition.Y;
             popup.IsOpen = true;
             CurrentPiece = new Piece();
             CurrentPiece.X = x;
             CurrentPiece.Y = y;
-            ChangeFrameCoordinates(x,y);
+            ChangeFrameCoordinates(x, y);
 
 
 
@@ -212,20 +207,20 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickSaveGoToNext(object sender, RoutedEventArgs e)
         {
             IndiceSection++;
-            if(IndiceSection==projectData.mySections.Count-1)
+            if (IndiceSection == projectData.mySections.Count - 1)
             {
                 ButtonsaveGoNext.Content = "Save and exit";
             }
 
-            else if (IndiceSection == projectData.mySections.Count )
+            else if (IndiceSection == projectData.mySections.Count)
             {
                 projectData.Save();
-                GlobalPages.SetCurrentPageBack();
-                GlobalPages.SetCurrentPageBack();
+                GlobalPages.PageGoBack();
+                GlobalPages.PageGoBack();
                 return;
             }
-           
-            foreach(ImageInfos i in  projectData.ImageSectionList) 
+
+            foreach (ImageInfos i in projectData.ImageSectionList)
             {
                 if (i.Name == projectData.mySections[IndiceSection].SectionName)
                 {
@@ -236,13 +231,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-
-        #endregion
-
-        #region privateMethods
-
-
-
+      
         private void ButtonClickReleveNo(object sender, RoutedEventArgs e)
         {
             CurrentPiece.IsReleveRequired = 0;
@@ -252,17 +241,16 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickReleveYes(object sender, RoutedEventArgs e)
         {
             CurrentPiece.IsReleveRequired = 1;
-             relevePath = FileManager.OpenImagePopupSingle();
+            relevePath = FileManager.OpenImagePopupSingle();
             LabelSelectedimage.Visibility = Visibility.Visible;
             LabelSelectedimagePath.Visibility = Visibility.Visible;
-            LabelSelectedimagePath.Content=Path.GetFileNameWithoutExtension(relevePath);
-
-
+            LabelSelectedimagePath.Content = Path.GetFileNameWithoutExtension(relevePath);
 
         }
 
         #endregion
 
+     
 
     }
 

@@ -42,10 +42,11 @@ namespace ApplicationInventaire.MVVM.View
             AutoSuggestionList = listPieceName;
         }
 
-        #region variables
+        #region PrivateVariables
         private ProjectData projectData;
         private List<string> listPieceName = new List<string>();
         #endregion
+     
         #region Private properties.  
 
         /// <summary>  
@@ -54,9 +55,7 @@ namespace ApplicationInventaire.MVVM.View
         private List<string> autoSuggestionList = new List<string>();
 
         #endregion
-
-       
-
+               
         #region Protected / Public properties.  
 
         /// <summary>  
@@ -209,6 +208,8 @@ namespace ApplicationInventaire.MVVM.View
 
 
         #endregion
+       
+        #region UIMethods
 
         private void ButtonClickSeachEnter(object sender, RoutedEventArgs e)
         {
@@ -217,6 +218,7 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
 
         }
+        #endregion
     }
 }
 

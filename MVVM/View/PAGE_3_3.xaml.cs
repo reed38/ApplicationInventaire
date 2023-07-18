@@ -38,7 +38,7 @@ namespace ApplicationInventaire.MVVM.View
             InitilizePdfReaderExe();
         }
 
-        #region variables
+        #region Privatevariables
         private string[] PlansPathList;
         private string PdfReaderExecutablePath;
         #endregion
@@ -61,11 +61,11 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
-
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
@@ -73,20 +73,12 @@ namespace ApplicationInventaire.MVVM.View
             CollectionChanged?.Invoke(this, e);
         }
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
-        private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBox listBox = (ListBox)sender;
-            selectedValue = (string)listBox.SelectedItem;
-
-
-        }
-
+        #region UIMethods
+       
         private void ButtonClickOpenFile(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(selectedValue))
@@ -97,6 +89,15 @@ namespace ApplicationInventaire.MVVM.View
             string PdfPath = PlansPathList[PlansNameList.IndexOf(selectedValue)];
             OpenPdf(PdfPath);
 
+        }
+
+        #endregion
+
+        #region PrivateMethods
+        private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            selectedValue = (string)listBox.SelectedItem;
         }
 
         private void InitilizePdfReaderExe()
@@ -129,6 +130,8 @@ namespace ApplicationInventaire.MVVM.View
             Process.Start(PdfReaderExecutablePath, modifiedPdfFilePath);
 
         }
+
+        #endregion
 
     }
 }

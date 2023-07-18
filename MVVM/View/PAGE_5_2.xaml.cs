@@ -33,18 +33,19 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_5_2 = this;
             this.RedFramePath = GlobalProjectData.RedFramePath;
-
-            this.projectData = new(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             DataContext = this;
 
+            this.projectData = new(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             this.InitializeCurrentPiece();
-
             SetBorderPosition();
         }
+       
         #region Variables
+    
         private ProjectData projectData;
         private Piece CurrentPiece;
         #endregion
+  
         #region bindingVariables
         private string redFramePath;
 
@@ -85,6 +86,7 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region privateMethod
+     
         private void InitializeCurrentPiece()
         {
 
@@ -111,18 +113,12 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
-
-
         private void SetBorderPosition()
         {
             ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
 
-
-
-
-
-
         }
+      
         private void ChangeFrameCoordinates(double x, double y)
         {
             Canvas.SetLeft(this.RedFrameImage, x);
