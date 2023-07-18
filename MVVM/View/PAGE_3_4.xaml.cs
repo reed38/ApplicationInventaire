@@ -130,6 +130,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
+
         #endregion
 
         #region privateMethods
@@ -156,6 +157,7 @@ namespace ApplicationInventaire.MVVM.View
                 myCanva.Children.Remove(i.Item1);
             }
             OverlayImageList.Clear();
+            this.LabelNameTag.Content = string.Empty;
 
         }
 

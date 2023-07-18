@@ -49,7 +49,7 @@ namespace ApplicationInventaire.MVVM.View
         private string relevePath;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
-
+        private int ImageMarkerWidth = 20;
         #endregion
         #region bindingVariables
         private string redFramePath;
@@ -136,8 +136,8 @@ namespace ApplicationInventaire.MVVM.View
         {
             Image image = new Image();
             image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
-            image.Width = 20;
-            image.Height = 20;
+            image.Width = ImageMarkerWidth;
+            image.Height = ImageMarkerWidth;
             Canvas.SetLeft(image, piece.X);
             Canvas.SetTop(image, piece.Y);
             myCanva.Children.Add(image);
@@ -179,7 +179,8 @@ namespace ApplicationInventaire.MVVM.View
                 File.Copy(relevePath, destPath);
 
             }
-           
+            InitializeOverlay();
+
 
             this.popup.IsOpen = false;
         }
@@ -190,8 +191,8 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetPopup();
             Point clickPosition = e.GetPosition(myCanva);
-            double x = clickPosition.X;
-            double y = clickPosition.Y;
+            double x = clickPosition.X - ImageMarkerWidth / 2;
+            double y = clickPosition.Y - ImageMarkerWidth / 2;
             popup.IsOpen = true;
             CurrentPiece = new Piece();
             CurrentPiece.X = x;
@@ -228,6 +229,8 @@ namespace ApplicationInventaire.MVVM.View
                     ImageSection3 = i.Path;
                 }
             }
+            InitializeOverlay();
+
 
         }
 
@@ -235,8 +238,8 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateMethods
 
-      
-       
+
+
         private void ButtonClickReleveNo(object sender, RoutedEventArgs e)
         {
             CurrentPiece.IsReleveRequired = 0;
