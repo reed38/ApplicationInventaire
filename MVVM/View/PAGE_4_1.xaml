@@ -16,110 +16,145 @@
 
 
     <Grid>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left"
+        <StackPanel Orientation="Horizontal" >
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" 
                     Margin="20,20,20,20">
 
-            <StackPanel Orientation="Horizontal">
-                <Label FontSize="20" Content="Name: " Foreground="White"/>
-                <TextBox x:Name="TextBoxName" Background="White" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="15" Content="Name: " Foreground="White"/>
+                    <TextBox x:Name="TextBoxName" Background="White" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Label FontSize="15" Content="Description: " Foreground="White"/>
+                    <TextBox Height="100" x:Name="TextBoxDescription" Background="White" Width="200" TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Label FontSize="15" Content="Author: " Foreground="White"/>
+                    <TextBox Height="25" x:Name="TextBoxAuthor" Background="White" Width="200" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"   Margin="0,30,0,0" VerticalAlignment="Top">
+                    <Label Content="Selected Excel File: " 
+                       Foreground="White"
+                       FontSize="15"
+
+                   />
+                    <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
+                       Height="25" Width="150"
+                      Background="White" HorizontalAlignment="Center"
+                           
+                          />
+                </StackPanel>
+
+
+
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                <Label FontSize="20" Content="Description: " Foreground="White"/>
-                <TextBox Height="100" x:Name="TextBoxDescription" Background="White" Width="200" TextWrapping="WrapWithOverflow" />
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="350" Width="500"  VerticalAlignment="Top"
+                    HorizontalAlignment="Right" Margin="0,-2,42,0">
 
-            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                <Label FontSize="20" Content="Author: " Foreground="White"/>
-                <TextBox Height="25" x:Name="TextBoxAuthor" Background="White" Width="200" />
-            </StackPanel>
 
-                 
-            
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <Button Height="25" Width="120"
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Height="25" Width="120"
                    HorizontalAlignment="Center"
                     Margin="5"
                     Content="Select Images"
                     Click="ButtonClickSelectImage"/>
 
 
-                <Button Height="25" Width="120" Content="Select Excel File"
+                    <Button Height="25" Width="120" Content="Select Excel File"
                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Margin="10"
-                    Click="ButtonClickSelectExcel"
-         />
+                    Click="ButtonClickSelectExcel" />
 
-                        <Button Height="25" Width="120"
-               HorizontalAlignment="Center"
-                Margin="5"
+                    <Button Height="25" Width="120"
+                   HorizontalAlignment="Center"
+                    Margin="5"
+                    Content="Select Plans"
+                    Click="ButtonClickSelectPlans"/>
+                </StackPanel>
+
+
+
+                <StackPanel HorizontalAlignment="Right" Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="Selected images: "  Foreground="White" FontSize="15"/>
+                    <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Center"
+                      Height="200"
+                      Width="150">
+                        <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="150" Height="200"
+                          SelectionChanged="ListBoxSectionFileSelectionChanged"
+>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+
+                    <Button Height="25" Width="100"
+                x:Name="ButtonDeleteImage"
                 Content="Delete selected"
-                Click="ButtonClickDeleteSelected"/>
+                Click="ButtonClickDeleteImageSelected"/>
 
-                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="10" Height="300" HorizontalAlignment="Right">
+                    <Label Content="Selected Plans: "  Foreground="White" FontSize="15" />
+                    <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Center"
+                      Height="200"
+                      Width="150">
+                        <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="150" Height="200"
+                          SelectionChanged="ListBoxPlanFileSelectionChanged"
+>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
 
-             
+
+                    </ScrollViewer>
+
+                    <Button Height="25" Width="100"
+                 x:Name="ButtonDeletePlan"
+                Content="Delete selected"
+                Click="ButtonClickDeletePlanSelected"/>
+
+                </StackPanel>
 
 
 
 
 
 
+
+
+
+
+            </StackPanel>
 
 
 
         </StackPanel>
+        
+        
+        
         <Button Height="25" Width="120" Content="save and continue"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
                 Margin="10"
                 Click="ButtonClickSaveContinu"
          />
 
-        <StackPanel Orientation="Horizontal" Height="200" Width="400"  VerticalAlignment="Top"
-                    HorizontalAlignment="Right">
-
-            <StackPanel Orientation="Vertical" Height="100" Width="150"  Margin="10" VerticalAlignment="Top">
-                <Label Content="Selected Excel File: "  Foreground="White"
-                   />
-                <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="100"
-                      Background="White" HorizontalAlignment="Center"
-                           
-                          />            
-            </StackPanel>
-
-
-
-            <StackPanel Orientation="Vertical" Margin="10">
-                <Label Content="Selected images: "  Foreground="White"/>
-                <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
-                      VerticalAlignment="Center"
-                      Height="200"
-                      Width="150">
-                    <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"
-                          SelectionChanged="ListBoxSectionFileSelectionChanged"
->
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}" Margin="5"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </ScrollViewer>
-
-            </StackPanel>
-
-
-
-
-
-
-
-
-
-
-        </StackPanel>
-
+        
 
 
 

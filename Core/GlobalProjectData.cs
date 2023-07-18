@@ -232,8 +232,25 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             }
             return null;
         }
-    
 
+        public static string[] OpenPdfPopup()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            openFileDialog.Filter = "PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
+
+            bool? result = openFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string[] selectedFiles = openFileDialog.FileNames;
+                return selectedFiles;
+
+                // Process the selected image files
+
+            }
+            return null;
+        }
 
         public static string OpenExcelFilePopup()
         {

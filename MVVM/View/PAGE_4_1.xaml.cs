@@ -46,14 +46,18 @@ namespace ApplicationInventaire.MVVM.View
         #region PrivateVariables
         private string Description;
         private ObservableCollection<ImageInfos> imageSectionsInfos = new ObservableCollection<ImageInfos>();
+        private List<string> PlansPathList= new List<string> ();
         private string excelPath;
         #endregion
 
         #region BindingVariables
         private ObservableCollection<string> imageSectionsName = new ObservableCollection<string>();
+        private ObservableCollection<string> plansNameList= new ObservableCollection<string>();
         private string excelName;
 
-        private string selectedValue;
+        private string selectedValueSection;
+        private string selectedValuePlan;
+
         #endregion
 
         #region BindingMethods
@@ -65,6 +69,16 @@ namespace ApplicationInventaire.MVVM.View
             {
                 imageSectionsName = value;
                 OnPropertyChanged(nameof(ImageSectionsName));
+            }
+        }
+
+        public ObservableCollection<string> PlansNameList
+        {
+            get { return plansNameList; }
+            set
+            {
+                plansNameList = value;
+                OnPropertyChanged(nameof(PlansNameList));
             }
         }
 
@@ -106,7 +120,7 @@ namespace ApplicationInventaire.MVVM.View
         private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBox listBox = (ListBox)sender;
-            selectedValue = (string)listBox.SelectedItem;
+            selectedValueSection = (string)listBox.SelectedItem;
 
         }
 
@@ -140,6 +154,12 @@ namespace ApplicationInventaire.MVVM.View
                 res = false;
                 ShowPopup("please select at least 1 image");
             }
+            if (PlansNameList.Count == 0)
+            {
+                res = false;
+                ShowPopup("please select at least 1 Plan");
+            }
+
 
             string[] projectList=GlobalProjectData.GetProjectNames();
             foreach(string project in projectList) 
@@ -158,21 +178,7 @@ namespace ApplicationInventaire.MVVM.View
         #region UImethods
 
 
-        private void ButtonClickDeleteSelected(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < imageSectionsInfos.Count; i++)
-            {
-
-                if (imageSectionsInfos[i].Name.Equals(selectedValue))
-                {
-                    ImageSectionsName.Remove(imageSectionsInfos[i].Name);
-                    imageSectionsInfos.Remove(imageSectionsInfos[i]);
-                }
-            }
-
-
-        }
-
+      
 
 
         private void ButtonClickSelectImage(object sender, RoutedEventArgs e)
@@ -208,10 +214,14 @@ namespace ApplicationInventaire.MVVM.View
             ProjectInfos projectInfos = new ProjectInfos(TextBoxName.Text);
             projectInfos.Description = TextBoxDescription.Text;
             projectInfos.Author = TextBoxAuthor.Text;
+            File.Copy(excelPath, projectInfos.ExcelPath, true);
+            File.Copy(excelPath, projectInfos.TmpExcelPath, true);
             ProjectData projectData = new ProjectData(projectInfos);
-            File.Copy(excelPath, projectData.myProjectInfos.ExcelPath, true);
-            File.Copy(excelPath, projectData.myProjectInfos.TmpExcelPath, true);
-           
+            
+            File.Copy(excelPath, projectInfos.ExcelPath, true);
+            File.Copy(excelPath, projectInfos.TmpExcelPath, true);
+
+
             foreach (ImageInfos i in imageSectionsInfos)
             {
                 string destinationPath = Path.Combine(projectData.myProjectInfos.ImageSectionPath, i.Name);
@@ -219,10 +229,65 @@ namespace ApplicationInventaire.MVVM.View
                 projectData.mySections.Add(new Core.PieceSections.Section(i.Name));
 
            }
+            for (int i=0; i < PlansNameList.Count;i++)
+            {
+                string destinationPath = Path.Combine(projectData.myProjectInfos.PlansPath, PlansNameList[i]);
+                File.Copy(PlansPathList[i], destinationPath, true);
+
+            }
             projectData.Save();
             GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_2);
 
+
+        }
+
+        private void ListBoxPlanFileSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            selectedValuePlan = (string)listBox.SelectedItem;
+            
+
+
+    }
+
+
+    private void ButtonClickSelectPlans(object sender, RoutedEventArgs e)
+        {
+            string[] tmp = FileManager.OpenPdfPopup();
+            foreach (string i in tmp)
+            {
+                PlansNameList.Add(Path.GetFileNameWithoutExtension(i));
+                PlansPathList.Add(i);
+            }
+
+        }
+
+        private void ButtonClickDeleteImageSelected(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < imageSectionsInfos.Count; i++)
+            {
+
+                if (imageSectionsInfos[i].Name.Equals(selectedValueSection))
+                {
+                    ImageSectionsName.Remove(imageSectionsInfos[i].Name);
+                    imageSectionsInfos.Remove(imageSectionsInfos[i]);
+                }
+            }
+        }
+
+
+        private void ButtonClickDeletePlanSelected(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < PlansNameList.Count; i++)
+            {
+
+                if (PlansNameList[i].Equals(selectedValuePlan))
+                {
+                    PlansPathList.Remove(PlansNameList[i]);
+                    PlansNameList.Remove(PlansNameList[i]);
+                }
+            }
 
         }
     }
