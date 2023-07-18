@@ -226,6 +226,9 @@ namespace ApplicationInventaire.MVVM.View
             tmp.Save();
         }
 
-      
+        private void ButtonClickExport(object sender, RoutedEventArgs e)
+        {
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_1_1);
+        }
     }
 }

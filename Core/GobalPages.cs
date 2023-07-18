@@ -25,6 +25,7 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static Uri CurrentPage { get; set; }
         public static List<Uri> LastPages { get; set; } = new List<Uri>();
         public static Uri PAGE_1 = new Uri("MVVM/View/PAGE_1.xaml", UriKind.Relative);
+        public static Uri PAGE_1_1 = new Uri("MVVM/View/PAGE_1_1.xaml", UriKind.Relative);
         public static Uri PAGE_3_1 = new Uri("MVVM/View/PAGE_3_1.xaml", UriKind.Relative);
         public static Uri PAGE_3_2 = new Uri("MVVM/View/PAGE_3_2.xaml", UriKind.Relative);
         public static Uri PAGE_3_4 = new Uri("MVVM/View/PAGE_3_4.xaml", UriKind.Relative);
@@ -40,6 +41,8 @@ namespace ApplicationInventaire.Core.GlobalPages
 
         public static MainWindow mainWindow;
         public static PAGE_1 page_1;
+        public static PAGE_1_1 page_1_1;
+
         public static PAGE_3_1 page_3_1;
         public static PAGE_3_2 page_3_2;
         public static PAGE_3_4 page_3_4;

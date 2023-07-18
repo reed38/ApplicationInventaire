@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Windows.Media.Imaging;
 using NPOI.OpenXmlFormats.Dml;
 using Microsoft.Win32;
+using System.IO.Compression;
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
@@ -87,6 +88,16 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             }
 
             return (result);
+
+
+
+        }
+
+        public static string[] GetProjecPaths()
+        {
+            string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
+            string[] result = Directory.GetDirectories(UserDataPath);
+            return result;
 
 
 
@@ -188,7 +199,44 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             }
             return null;
         }
-       
+
+        public static string OpenFolderPopup()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "ZIP Files (*.zip)|*.zip|All Files (*.*)|*.*";
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string selectedFilePath = saveFileDialog.FileName;
+                string directoryPath = Path.GetDirectoryName(selectedFilePath);
+
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+                return selectedFilePath;
+            }
+            return null;
+            
+        }
+
+        public static void  CreateZipArchive(string folderPath, string zipFilePath)
+        {
+            ZipFile.CreateFromDirectory(folderPath, zipFilePath);
+        }
+
+
+    }
+
+    public static class POPUP
+    {
+
+        public static  void ShowPopup(string message)
+        {
+            MessageBox.Show(message, "Field Missing", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
 
