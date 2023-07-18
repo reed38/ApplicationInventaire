@@ -45,6 +45,7 @@ namespace ApplicationInventaire.MVVM.View
         private ProjectData projectData;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
+        private int ImageMarkerWidth = 20;
         #endregion
 
         #region bindingVariables
@@ -165,10 +166,10 @@ namespace ApplicationInventaire.MVVM.View
         {
             Image image = new Image();
             image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
-            image.Width = 20;
-            image.Height = 20;
-            Canvas.SetLeft(image, piece.X);
-            Canvas.SetTop(image, piece.Y);
+            image.Width = ImageMarkerWidth;
+            image.Height = ImageMarkerWidth;
+            Canvas.SetLeft(image, piece.X- ImageMarkerWidth/2);
+            Canvas.SetTop(image, piece.Y - ImageMarkerWidth / 2);
             myCanva.Children.Add(image);
             OverlayImageList.Add((image, piece));
 

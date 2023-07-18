@@ -38,6 +38,7 @@ namespace ApplicationInventaire.MVVM.View
             projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             ImageSection3 = projectData.ImageSectionList[0].Path;
             ResetPopup();
+            this.RedFrameImage.Visibility = Visibility.Hidden;
 
 
 
@@ -107,8 +108,9 @@ namespace ApplicationInventaire.MVVM.View
       
         private void ChangeFrameCoordinates(double x, double y)
         {
-            Canvas.SetLeft(this.RedFrameImage, x);
-            Canvas.SetTop(this.RedFrameImage, y);
+            this.RedFrameImage.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.RedFrameImage, x-RedFrameImage.Width/2);
+            Canvas.SetTop(this.RedFrameImage, y-RedFrameImage.Height/2 );
         }
 
         private void InitializeOverlay()
@@ -138,8 +140,8 @@ namespace ApplicationInventaire.MVVM.View
             image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
             image.Width = ImageMarkerWidth;
             image.Height = ImageMarkerWidth;
-            Canvas.SetLeft(image, piece.X);
-            Canvas.SetTop(image, piece.Y);
+            Canvas.SetLeft(image, piece.X- ImageMarkerWidth/2);
+            Canvas.SetTop(image, piece.Y- ImageMarkerWidth/2);
             myCanva.Children.Add(image);
             OverlayImageList.Add((image, piece));
 
@@ -180,7 +182,7 @@ namespace ApplicationInventaire.MVVM.View
 
             }
             InitializeOverlay();
-
+            this.RedFrameImage.Visibility = Visibility.Hidden;
 
             this.popup.IsOpen = false;
         }
@@ -191,12 +193,13 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetPopup();
             Point clickPosition = e.GetPosition(myCanva);
-            double x = clickPosition.X - ImageMarkerWidth / 2;
-            double y = clickPosition.Y - ImageMarkerWidth / 2;
+            double x = clickPosition.X ;
+            double y = clickPosition.Y ;
             popup.IsOpen = true;
             CurrentPiece = new Piece();
             CurrentPiece.X = x;
             CurrentPiece.Y = y;
+            ChangeFrameCoordinates(x,y);
 
 
 

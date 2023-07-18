@@ -21,7 +21,7 @@
                     Margin="20,20,20,20">
 
                 <StackPanel Orientation="Horizontal">
-                    <Label FontSize="15" Content="Name: " Foreground="White"/>
+                    <Label FontSize="15" Content="Name:          " Foreground="White"/>
                     <TextBox x:Name="TextBoxName" Background="White" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
                 </StackPanel>
 
@@ -31,32 +31,13 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                    <Label FontSize="15" Content="Author: " Foreground="White"/>
+                    <Label FontSize="15" Content="Author:        " Foreground="White"/>
                     <TextBox Height="25" x:Name="TextBoxAuthor" Background="White" Width="200" />
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal"   Margin="0,30,0,0" VerticalAlignment="Top">
-                    <Label Content="Selected Excel File: " 
-                       Foreground="White"
-                       FontSize="15"
-
-                   />
-                    <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
-                       Height="25" Width="150"
-                      Background="White" HorizontalAlignment="Center"
-                           
-                          />
-                </StackPanel>
 
 
-
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Height="350" Width="500"  VerticalAlignment="Top"
-                    HorizontalAlignment="Right" Margin="0,-2,42,0">
-
-
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
                     <Button Height="25" Width="120"
                    HorizontalAlignment="Center"
                     Margin="5"
@@ -64,22 +45,37 @@
                     Click="ButtonClickSelectImage"/>
 
 
-                    <Button Height="25" Width="120" Content="Select Excel File"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                        Margin="10"
-                    Click="ButtonClickSelectExcel" />
+                  
 
                     <Button Height="25" Width="120"
                    HorizontalAlignment="Center"
                     Margin="5"
                     Content="Select Plans"
                     Click="ButtonClickSelectPlans"/>
+
+                    <Button Height="25" Width="120" Content="Select Excel File"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                        Margin="5"
+                    Click="ButtonClickSelectExcel" />
+                    
                 </StackPanel>
+                
+                
+              
 
 
 
-                <StackPanel HorizontalAlignment="Right" Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="Selected images: "  Foreground="White" FontSize="15"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Height="350" Width="500"  VerticalAlignment="Top"
+                    HorizontalAlignment="Center" >
+
+
+
+
+
+                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="   Selected images: "  Foreground="White" FontSize="15"/>
                     <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
@@ -96,15 +92,15 @@
                         </ListBox>
                     </ScrollViewer>
 
-                    <Button Height="25" Width="100"
+                    <Button Height="25" Width="150"
                 x:Name="ButtonDeleteImage"
                 Content="Delete selected"
                 Click="ButtonClickDeleteImageSelected"/>
 
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="10" Height="300" HorizontalAlignment="Right">
-                    <Label Content="Selected Plans: "  Foreground="White" FontSize="15" />
+                <StackPanel Orientation="Vertical" Margin="10" Height="300" >
+                    <Label Content="    Selected Plans: "  Foreground="White" FontSize="15" />
                     <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
@@ -124,11 +120,24 @@
 
                     </ScrollViewer>
 
-                    <Button Height="25" Width="100"
+                    <Button Height="25" Width="150"
                  x:Name="ButtonDeletePlan"
                 Content="Delete selected"
                 Click="ButtonClickDeletePlanSelected"/>
 
+                </StackPanel>
+
+                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="Selected Excel File: " 
+                       Foreground="White"
+                       FontSize="15"
+
+                   />
+                    <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
+                       Height="25" Width="150"
+                      Background="White" HorizontalAlignment="Center"
+                           
+                          />
                 </StackPanel>
 
 

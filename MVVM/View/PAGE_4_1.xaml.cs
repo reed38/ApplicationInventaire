@@ -184,11 +184,15 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickSelectImage(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
-            foreach (string i in tmp)
+            if(tmp.Length>0)
             {
-                imageSectionsInfos.Add(new ImageInfos(Path.GetFileNameWithoutExtension(i), i));
-                ImageSectionsName.Add(Path.GetFileNameWithoutExtension(i));
+                foreach (string i in tmp)
+                {
+                    imageSectionsInfos.Add(new ImageInfos(Path.GetFileNameWithoutExtension(i), i));
+                    ImageSectionsName.Add(Path.GetFileNameWithoutExtension(i));
+                }
             }
+        
 
         }
 
