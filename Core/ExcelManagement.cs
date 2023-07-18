@@ -178,6 +178,9 @@ namespace ApplicationInventaire.Core.ExcelManagement
                     {
                         HSSFWorkbook workbook = new HSSFWorkbook(file);
                         ISheet sheet = workbook.GetSheet(sheetName);
+                        if(row==0) { 
+                            return ; 
+                        }
                         IRow excelRow = sheet.GetRow(row);
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
                         cell.SetCellValue(content);
@@ -235,7 +238,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                 {
                                     ICell cell = row.GetCell(columnIndex);
 
-                                    if (cell != null && cell.CellType == CellType.String && cell.StringCellValue == content)
+                                    if (cell != null && cell.CellType == CellType.String && cell.StringCellValue.Equals(content))
                                     {
                                         // Cell with matching content found, populate the CellInfo struct
                                         cellInfo.Row = rowIndex;

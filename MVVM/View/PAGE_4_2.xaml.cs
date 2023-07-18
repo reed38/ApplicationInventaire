@@ -260,7 +260,11 @@ namespace ApplicationInventaire.MVVM.View
             if (CurrentPiece.IsReleveRequired == 1)
             {
                 string destPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, CurrentPiece.PieceName);
-                File.Copy(relevePath, destPath);
+                if(!string.IsNullOrEmpty(relevePath))
+                {
+                    File.Copy(relevePath, destPath);
+
+                }
             }
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;
@@ -268,9 +272,13 @@ namespace ApplicationInventaire.MVVM.View
         }
 
 
+
         #endregion
 
-        
+        private void AutoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
 

@@ -35,7 +35,7 @@
            
                 >
             <Canvas.Background  >
-                <ImageBrush ImageSource="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
+                <ImageBrush ImageSource="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform" />
 
             </Canvas.Background>
 
@@ -107,7 +107,7 @@
                        Width="200"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Stretch"
-                    Stretch="UniformToFill"
+                    Stretch="Uniform"
                     Margin="0,10,0,20"
                     Name="ReleveImagepage"
                     Source="{Binding ImageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

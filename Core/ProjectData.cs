@@ -325,13 +325,16 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         {
             CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
+            CellInfo AmountCell=this.myTmpExcelFile.FindValue("Besoin Qté Totale");
             List<CoupleCellInfo> coupleCellInfo = new List<CoupleCellInfo>();
+
+            List<string> PieceAcount=new List<string>();
 
             int n = PresentCell.Row + 1;
             string res;
             do
             {
-                res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column);
+                res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
                 CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
                 coupleCellInfo.Add(new CoupleCellInfo(TagCellTmp, ContentCellTmp));
@@ -362,6 +365,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                             this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
                             this.mySections[i].PiecesList[j].ExcelColumn = PresentCell.Column;
                             this.mySections[i].PiecesList[j].ExcelRow = k.Present.Row;
+                            this.mySections[i].PiecesList[j].Amount=myTmpExcelFile.GetCellValue()
 
 
                         }

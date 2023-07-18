@@ -33,6 +33,7 @@ namespace ApplicationInventaire.Core.PieceSections
         public string SheetName { get; set; }
         public int IsPresent { get; set; }
         public int IsReleveRequired { get; set; }
+        public int Amount { get; set; }
 
         public int SectionId { get; set; } // Foreign key to Section
 
