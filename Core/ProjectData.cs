@@ -70,12 +70,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public string AppPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"UserData");
         public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
-
         public string ProjectPath { set; get; }
         public string ImagePath { set; get; }
         public string ImageSectionPath { set; get; }
         public string ImageRelevePath { set; get; }
-
+        public string PlansPath { set; get; }
         public string ProjectName { set; get; }
         public string Author { set; get; }
         public string Description { set; get; }
@@ -95,6 +94,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.ExcelPath = Path.Combine(this.ProjectPath, "Excel_" + this.ProjectName + ".xls");
             this.TmpPath = Path.Combine(this.ProjectPath, "Tmp");
             this.TmpExcelPath = Path.Combine(TmpPath, this.ProjectName + "tmp.xls");
+            this.PlansPath = Path.Combine(ProjectPath, "Plans");
             this.InitializeFileTree();
 
 
@@ -114,6 +114,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CreateDirectory(this.ImageSectionPath);
             CreateDirectory(this.ImageRelevePath);
             CreateDirectory(this.TmpPath);
+            CreateDirectory(this.PlansPath);
             CreateFile(this.DatabasePath);
             CreateFile(this.ExcelPath);
             CreateFile(this.TmpExcelPath);
@@ -235,8 +236,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.myTmpExcelFile = new ExcelFile(project.TmpExcelPath);
             GetRelevesNames();
             GetSectionsNames();
-            ResetSerialNumer();
-            //this.InitializePieceFromExcel();
+            this.InitializePieceFromExcel();
 
 
         }
@@ -319,16 +319,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             }
         }
 
-        public void ResetSerialNumer()
-        {
-            foreach (Section i in this.mySections)
-            {
-                foreach (Piece j in i.PiecesList)
-                {
-                    j.SerialNumber = string.Empty;
-                }
-            }
-        }
+    
 
         public void InitializePieceFromExcel()
         {

@@ -46,26 +46,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonPlanClick(object sender, RoutedEventArgs e)
         {
-            string pdfFilePath = "C:\\Users\\regnaulte\\Downloads\\toto.pdf";
-            string fileExtension = ".pdf";
-            // Get the file class key associated with the file extension
-            string fileClassKey = Registry.ClassesRoot.OpenSubKey(fileExtension)?.GetValue("")?.ToString();
-
-            if (fileClassKey != null)
-            {
-                // Get the default application command associated with the file class
-                string defaultApplicationCommand = Registry.ClassesRoot.OpenSubKey($"{fileClassKey}\\shell\\open\\command")?.GetValue("")?.ToString();
-
-                if (defaultApplicationCommand != null)
-                {
-                    // Extract the executable path from the command string
-                    string executablePath = defaultApplicationCommand.Split('"')[1];
-                    Process.Start(executablePath, pdfFilePath);
-
-
-                }
-
-            }
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_3);
         }
         private void ButtonContinueInventoryClick(object sender, RoutedEventArgs e)
         {

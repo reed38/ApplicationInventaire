@@ -29,9 +29,6 @@ namespace ApplicationInventaire.Core.PieceSections
         public double Y { get; set; }
         public int ExcelColumn { get; set; }
         public int ExcelRow { get; set; }
-        public string Comment { get; set; }
-        public string SerialNumber { get; set; }
-        public string SectionName { get; set; }
         public string PieceName { get; set; }
         public string SheetName { get; set; }
         public int IsPresent { get; set; }
@@ -42,18 +39,16 @@ namespace ApplicationInventaire.Core.PieceSections
         #endregion
 
         #region constructor
-        public Piece(int x, int y, int excelColumn, int excelRow, string comment, string pieceName, string SectionName, int isPresent, int isReleveRequired, int SectionId)
+        public Piece(int x, int y, int excelColumn, int excelRow, string pieceName, int isPresent, int isReleveRequired, int SectionId)
         {
             X = x;
             Y = y;
             ExcelColumn = excelColumn;
             ExcelRow = excelRow;
-            Comment = comment;
             PieceName = pieceName;
             IsPresent = isPresent;
             IsReleveRequired = isReleveRequired;
             this.SectionId = SectionId;
-            this.SectionName = SectionName;
         }
 
         public Piece()
@@ -82,7 +77,6 @@ namespace ApplicationInventaire.Core.PieceSections
             Console.WriteLine("y: " + Y);
             Console.WriteLine("excel column: " + ExcelColumn);
             Console.WriteLine("excel row: " + ExcelRow);
-            Console.WriteLine("comment: " + Comment);
             Console.WriteLine("Present: " + IsPresent);
             Console.WriteLine("Releve: " + IsReleveRequired);
             Console.WriteLine();

@@ -56,6 +56,8 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         public static ProjectData CurrentProjectData;
 
         #endregion
+       
+        
         #region ImagePathVariable
         public static string RedFramePath = Path.Combine(AppRootDirectoryPath, "Image\\RedFrame.png");
         public static string RedCirclePath = Path.Combine(AppRootDirectoryPath, "Image\\RedCircle.png");
@@ -65,13 +67,13 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         #region BindingMethods
 
         #endregion
+        
         #region PAGE_3_1Variables
         public static string ExcelContinuPath;
 
         #endregion
 
 
-        #region methodsInitializeData
 
 
 
@@ -103,10 +105,35 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             string[] result = Directory.GetDirectories(UserDataPath);
             return result;
 
+        }
 
+        public static string[] GetPlansNames()
+        {
+            ProjectInfos tmp = new(CurrentProjectName);
+            string PlansPath = tmp.PlansPath;
+            string[] result = Directory.GetFiles(PlansPath);
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = Path.GetFileNameWithoutExtension(result[i]);
+
+            }
+
+            return (result);
 
         }
 
+        public static string[] GetPlansPath()
+        {
+            ProjectInfos tmp = new(CurrentProjectName);
+            string PlansPath = tmp.PlansPath;
+            string[] result = Directory.GetFiles(PlansPath);
+          
+            return (result);
+
+        }
+
+
+        #region methodsInitializeData
         private static  string InitializeRootDirectory()
         {
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
