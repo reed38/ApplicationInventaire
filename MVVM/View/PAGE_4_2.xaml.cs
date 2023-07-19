@@ -52,7 +52,7 @@ namespace ApplicationInventaire.MVVM.View
             this.RedFrameImage.Visibility = Visibility.Hidden;
 
         }
-       
+        #region autoTextBox
 
         #region Private properties.  
 
@@ -199,8 +199,26 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
+        #endregion
 
+        #region PrivateVariables
 
+        private ProjectData projectData;
+        private Piece CurrentPiece;
+        private string relevePath;
+        private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
+        private (Image, Piece) tmp; //used to pass argument
+        private int IndiceSection;
+        private int ImageMarkerWidth = 20;
+
+        #endregion
+
+        #region bindingVariables
+
+        private string redFramePath;
+        private string imageSection3;
+
+        #endregion
 
         #region privateMethods
 
@@ -208,6 +226,23 @@ namespace ApplicationInventaire.MVVM.View
         {
             AutoSuggestionList = projectData.GetPieceNames();
         }
+
+        private (Image, Piece) GetClickedPieceImage(Point clickPosition)
+        {
+
+            foreach ((Image, Piece) i in OverlayImageList)
+            {
+                var imageBounds = new Rect(Canvas.GetLeft(i.Item1), Canvas.GetTop(i.Item1), i.Item1.ActualWidth, i.Item1.ActualHeight);
+                if (imageBounds.Contains(clickPosition.X, clickPosition.Y))
+                {
+                    return i;
+                }
+
+            }
+
+            return (null, null);
+        }
+
 
 
         #endregion
@@ -226,23 +261,7 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
       
         
-        #region Variables
-
-        private ProjectData projectData;
-        private Piece CurrentPiece;
-        private string relevePath;
-        private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
-        private int IndiceSection;
-        private int ImageMarkerWidth = 20;
-     
-        #endregion
-             
-        #region bindingVariables
-        
-        private string redFramePath;
-        private string imageSection3;
        
-        #endregion
 
         #region BindingMethods
 
@@ -291,6 +310,29 @@ namespace ApplicationInventaire.MVVM.View
             this.RedFrameImage.Visibility = Visibility.Visible;
             Canvas.SetLeft(this.RedFrameImage, x - RedFrameImage.Width / 2);
             Canvas.SetTop(this.RedFrameImage, y - RedFrameImage.Height / 2);
+        }
+
+        private void ChangeLabelcoordinates(double x, double y)
+        {
+            this.LabelNameTag.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.LabelNameTag, x - 80);
+            Canvas.SetTop(this.LabelNameTag, y - 80);
+
+        }
+
+        private void ChangeButtonDeleteSelectedlcoordinates(double x, double y)
+        {
+            this.ButtonDeleteSelected.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.ButtonDeleteSelected,x);
+            Canvas.SetTop(this.ButtonDeleteSelected, y + 50);
+
+        }
+
+        private void HideEditPieceOverlay()
+        {
+            LabelNameTag.Visibility = Visibility.Hidden;
+            ButtonDeleteSelected.Visibility = Visibility.Collapsed;
+
         }
 
         private void InitializeOverlay()
@@ -356,19 +398,28 @@ namespace ApplicationInventaire.MVVM.View
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ResetFields();
+            HideEditPieceOverlay();
+
             Point clickPosition = e.GetPosition(myCanva);
             double x = clickPosition.X;
             double y = clickPosition.Y;
+            (Image, Piece) res = GetClickedPieceImage(clickPosition);
+         
+            if(res!=(null,null))
+            {
+                LabelNameTag.Content = res.Item2.PieceName;
+               ChangeLabelcoordinates(x,y);
+               ChangeButtonDeleteSelectedlcoordinates(x,y);
+                tmp=res;
+
+
+            }
+
             CurrentPiece = new Piece();
             CurrentPiece.X = x;
             CurrentPiece.Y = y;
             ChangeFrameCoordinates(x, y);
             Keyboard.Focus(autoTextBox);
-
-
-
-
-
 
 
         }
@@ -421,6 +472,23 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        private void ButtonClickDeleteSelected(object sender, RoutedEventArgs e)
+        {
+            for  (int  i=0;i< OverlayImageList.Count;i++)
+            {
+                if (OverlayImageList[i].Item2==tmp.Item2)
+                {
+                    ResetOverlay();
+                    projectData.mySections[IndiceSection].PiecesList.Remove(tmp.Item2);
+                    break;
+                }
+            }
+            HideEditPieceOverlay();
+            this.RedFrameImage.Visibility = Visibility.Hidden;
+            InitializeOverlay();
+
+        }
+
         #endregion
 
         #region privateMethods
@@ -442,9 +510,10 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
+
         #endregion
 
-       
+      
     }
 
 

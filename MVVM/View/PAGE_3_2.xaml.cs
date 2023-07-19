@@ -105,8 +105,8 @@ namespace ApplicationInventaire.MVVM.View
         private void ChangeLabelcoordinates(double x, double y)
         {
             this.LabelNameTag.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.LabelNameTag, x - 90);
-            Canvas.SetTop(this.LabelNameTag, y - 90);
+            Canvas.SetLeft(this.LabelNameTag, x - 80);
+            Canvas.SetTop(this.LabelNameTag, y - 80);
 
         }
 
@@ -427,6 +427,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
             {
+                POPUP.ShowPopup("Please enter Serial Number and constructor");
                 return;
 
             }

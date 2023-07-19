@@ -35,11 +35,20 @@
             </Canvas.Background>
 
 
+            <Label Foreground="GreenYellow" 
+               x:Name="LabelNameTag" 
+               Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+               FontSize="22"
+                   Visibility="Hidden"
+               FontWeight="Normal"/>
+
 
             <Image x:Name="RedFrameImage" 
                    Source="{Binding RedFramePath,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                    Height="50"
                    Width="50"/>
+
+            <Button x:Name="ButtonDeleteSelected" Content="Delete Selected" Click="ButtonClickDeleteSelected" Visibility="Collapsed"/>
 
         </Canvas>
         <Border Height="300" Width="200" Grid.Column="1" 
