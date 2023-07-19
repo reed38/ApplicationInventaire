@@ -19,6 +19,7 @@ using ApplicationInventaire.Core.GlobalProjectData;
 using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 using Path = System.IO.Path;
+using Section = ApplicationInventaire.Core.PieceSections.Section;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -36,6 +37,7 @@ namespace ApplicationInventaire.MVVM.View
             IndiceSection = 0;
             this.RedFramePath = GlobalProjectData.RedFramePath;
             projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
+
             foreach (ImageInfos im in this.projectData.ImageSectionList)
             {
                 if (im.Name == projectData.mySections[IndiceSection].SectionName)
@@ -45,13 +47,187 @@ namespace ApplicationInventaire.MVVM.View
 
                 }
             }
-            ResetPopup();
+            InitializeAutoSuggestionList();
+            ResetFields();
             this.RedFrameImage.Visibility = Visibility.Hidden;
 
         }
+       
+
+        #region Private properties.  
+
+        /// <summary>  
+        /// Auto suggestion list property.  
+        /// </summary>  
+        private List<string> autoSuggestionList = new List<string>();
+
+        #endregion
+
+        #region Protected / Public properties.  
+
+        /// <summary>  
+        /// Gets or sets Auto suggestion list property.  
+        /// </summary>  
+        public List<string> AutoSuggestionList
+        {
+            get { return this.autoSuggestionList; }
+            set { this.autoSuggestionList = value; }
+        }
+
+        #endregion
+
+        #region Open Auto Suggestion box method  
+
+        /// <summary>  
+        ///  Open Auto Suggestion box method  
+        /// </summary>  
+        private void OpenAutoSuggestionBox()
+        {
+            try
+            {
+                // Enable.  
+                this.autoListPopup.Visibility = Visibility.Visible;
+                this.autoListPopup.IsOpen = true;
+                this.autoList.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
+
+        #region Close Auto Suggestion box method  
+
+        /// <summary>  
+        ///  Close Auto Suggestion box method  
+        /// </summary>  
+        private void CloseAutoSuggestionBox()
+        {
+            try
+            {
+                // Enable.  
+                this.autoListPopup.Visibility = Visibility.Collapsed;
+                this.autoListPopup.IsOpen = false;
+                this.autoList.Visibility = Visibility.Collapsed;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
+
+        #region Auto Text Box text changed the method  
+
+        /// <summary>  
+        ///  Auto Text Box text changed method.  
+        /// </summary>  
+        /// <param name="sender">Sender parameter</param>  
+        /// <param name="e">Event parameter</param>  
+        private void AutoTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                // Verification.  
+                if (string.IsNullOrEmpty(this.autoTextBox.Text))
+                {
+                    // Disable.  
+                    this.CloseAutoSuggestionBox();
+
+                    // Info.  
+                    return;
+                }
+
+                // Enable.  
+                this.OpenAutoSuggestionBox();
+
+                // Settings.  
+                this.autoList.ItemsSource = this.AutoSuggestionList.Where(p => p.ToLower().Contains(this.autoTextBox.Text.ToLower())).ToList();
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
+
+        #region Auto list selection changed method  
+
+        /// <summary>  
+        ///  Auto list selection changed method.  
+        /// </summary>  
+        /// <param name="sender">Sender parameter</param>  
+        /// <param name="e">Event parameter</param>  
+        private void AutoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                // Verification.  
+                if (this.autoList.SelectedIndex <= -1)
+                {
+                    // Disable.  
+                    this.CloseAutoSuggestionBox();
+
+                    // Info.  
+                    return;
+                }
+
+                // Disable.  
+                this.CloseAutoSuggestionBox();
+
+                // Settings.  
+                this.autoTextBox.Text = this.autoList.SelectedItem.ToString();
+                this.autoList.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                // Info.  
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Console.Write(ex);
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region privateMethods
+
+        private void InitializeAutoSuggestionList()
+        {
+            AutoSuggestionList = projectData.GetPieceNames();
+        }
+
+
+        #endregion
+
+        #region UIMethods
+
+        private void ButtonClickSeachEnter(object sender, RoutedEventArgs e)
+        {
+            GlobalProjectData.CurrentPieceName = autoTextBox.Text;
+            autoTextBox.Clear();
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
+
+        }
+       
+        
+        #endregion
+      
         
         #region Variables
-      
+
         private ProjectData projectData;
         private Piece CurrentPiece;
         private string relevePath;
@@ -152,11 +328,9 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private void ResetPopup()
+        private void ResetFields()
         {
-            TextBoxNameTag.Clear();
-            LabelSelectedimage.Visibility = Visibility.Collapsed;
-            LabelSelectedimagePath.Visibility = Visibility.Collapsed;
+            autoTextBox.Clear();
             ReleveRequiredNo.IsChecked = true;
         }
        
@@ -181,16 +355,15 @@ namespace ApplicationInventaire.MVVM.View
        
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ResetPopup();
+            ResetFields();
             Point clickPosition = e.GetPosition(myCanva);
             double x = clickPosition.X;
             double y = clickPosition.Y;
-            popup.IsOpen = true;
             CurrentPiece = new Piece();
             CurrentPiece.X = x;
             CurrentPiece.Y = y;
             ChangeFrameCoordinates(x, y);
-            Keyboard.Focus(TextBoxNameTag);
+            Keyboard.Focus(autoTextBox);
 
 
 
@@ -230,12 +403,20 @@ namespace ApplicationInventaire.MVVM.View
       
         private void ButtonClickReleveNo(object sender, RoutedEventArgs e)
         {
+            if (CurrentPiece == null)
+            {
+                return;
+            }
             CurrentPiece.IsReleveRequired = 0;
 
         }
 
         private void ButtonClickReleveYes(object sender, RoutedEventArgs e)
         {
+            if(CurrentPiece==null)
+            {
+                return;
+            }
             CurrentPiece.IsReleveRequired = 1;
             relevePath = FileManager.OpenImagePopupSingle();
             LabelSelectedimage.Visibility = Visibility.Visible;
@@ -249,12 +430,12 @@ namespace ApplicationInventaire.MVVM.View
         #region privateMethods
         private void SavePiece()
         {
-            if (string.IsNullOrEmpty(TextBoxNameTag.Text))
+            if (string.IsNullOrEmpty(autoTextBox.Text))
             {
                 POPUP.ShowPopup("Please enter Name Tag");
                 return;
             }
-            CurrentPiece.PieceName = TextBoxNameTag.Text;
+            CurrentPiece.PieceName = autoTextBox.Text;
             CurrentPiece.SectionId = IndiceSection + 1;
             projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
             if (CurrentPiece.IsReleveRequired == 1)
@@ -268,17 +449,13 @@ namespace ApplicationInventaire.MVVM.View
             }
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;
-            this.popup.IsOpen = false;
         }
 
 
 
         #endregion
 
-        private void AutoList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+       
     }
 
 

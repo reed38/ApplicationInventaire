@@ -14,6 +14,7 @@ using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.PieceSections;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using NPOI.OpenXmlFormats.Dml.Diagram;
 
 namespace ApplicationInventaire.Core.ProjectDataSet
 {
@@ -319,7 +320,27 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             }
         }
 
-    
+
+        public List<string> GetPieceNames()
+        {
+            if (this==null)
+            {
+                return null;
+            }
+            List<string> result = new List<string>();
+            foreach(Section i in this.mySections)
+            {
+
+                foreach(Piece j in i.PiecesList)
+                {
+                    result.Add(j.PieceName);
+                }
+            }
+
+            return result;
+
+
+        }
 
         public void InitializePieceFromExcel()
         {
@@ -328,17 +349,18 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CellInfo AmountCell=this.myTmpExcelFile.FindValue("Besoin Qté Totale");
             List<CoupleCellInfo> coupleCellInfo = new List<CoupleCellInfo>();
 
-            List<string> PieceAcount=new List<string>();
 
             int n = PresentCell.Row + 1;
             string res;
             do
             {
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
+               
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
                 CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
                 coupleCellInfo.Add(new CoupleCellInfo(TagCellTmp, ContentCellTmp));
                 n++;
+              
 
             } while (!res.Equals(""));
 
@@ -365,7 +387,6 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                             this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
                             this.mySections[i].PiecesList[j].ExcelColumn = PresentCell.Column;
                             this.mySections[i].PiecesList[j].ExcelRow = k.Present.Row;
-                            this.mySections[i].PiecesList[j].Amount=myTmpExcelFile.GetCellValue()
 
 
                         }
@@ -374,37 +395,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 }
             }
         }
-        //    foreach (Section i in this.mySections)
-        //    {
-        //        foreach (Piece j in i.PiecesList)
-        //        {
-
-        //            foreach (CoupleCellInfo k in coupleCellInfo)
-        //            {
-        //                if (k.tag.Content.Equals(j.PieceName))
-        //                {
-        //                    if (k.Present.Content.Equals("1"))
-        //                    {
-        //                        j.IsPresent = 1;
-        //                    }
-        //                    else
-        //                    {
-        //                        j.IsPresent = 0;
-        //                    }
-
-
-        //                    j.SheetName = PresentCell.Sheet;
-        //                    j.ExcelColumn = PresentCell.Column;
-        //                    j.ExcelRow = k.Present.Row;
-
-
-        //                }
-
-        //            }
-        //        }
-
-        //    }
-        //}
+        
 
 
         #endregion

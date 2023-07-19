@@ -77,16 +77,22 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region GIMethods
-        
+
         private void InitializeAuthor_Description()
         {
             ProjectData tmpData=new (new ProjectInfos(GlobalProjectData.CurrentProjectName));
-            this.LabelAuthorName.Content = tmpData.myProjectInfos.Author;
+            this.TextBlocklAuthorName.Text = tmpData.myProjectInfos.Author;
             this.TextBlockDesciption.Text = tmpData.myProjectInfos.Description;
         }
+
+
         #endregion
 
-
-
+        private void ButtonDeleteProjectClick(object sender, RoutedEventArgs e)
+        {
+            ProjectData tmp=new(new ProjectInfos (GlobalProjectData.CurrentProjectName));
+            Directory.Delete(tmp.myProjectInfos.ProjectPath,true);
+            GlobalPages.PageGoBack();
+        }
     }
 }

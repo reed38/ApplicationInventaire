@@ -43,13 +43,14 @@
 
             <Image x:Name="RedFrameImage" 
                    Source="{Binding RedFramePath,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   Height="70"
-                   Width="70"/>
+                   Height="50"
+                   Width="50"/>
 
-        <Label Foreground="Red" 
+        <Label Foreground="GreenYellow" 
                x:Name="LabelNameTag" 
                Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-               FontSize="20"
+               FontSize="22"
+               FontWeight="Normal"
                    ></Label>
 
         </Canvas>
@@ -101,7 +102,7 @@
            
 
               
-            <StackPanel  Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+            <StackPanel  Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,20">
                 <Image
                        Height="200"
                        Width="200"
@@ -117,8 +118,8 @@
                     <Label x:Name="labelSerialNumber" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
                     ></Label>
                     <TextBox  x:Name="TextBoxSerialNumber"
-                              Width="150"
-                              Margin="10,0,0,10"
+                              Width="100"
+                              Margin="0,0,0,10"
                               />
 
 
@@ -129,11 +130,11 @@
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                     <Label                             
                     Margin="10,0,0,10"
-                    Content="Constructor: " 
+                    Content="Constructor:  " 
                         x:Name="labelConstructor"
                         Foreground="White"></Label>
                     <TextBox  x:Name="TextBoxConstructor"
-                              Width="150"
+                              Width="100"
                               Margin="10,0,0,10"
 
                               />
