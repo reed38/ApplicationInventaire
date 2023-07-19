@@ -92,12 +92,8 @@
 
                     
                             
-                            
-                        <Label Content="Serial Number?" Margin="0,70,0,0"/>
-                            <RadioButton x:Name="ReleveRequiredYes" Width="100" Height="25"  Content="yes"  Click="ButtonClickReleveYes"/>
-                            <RadioButton x:Name="ReleveRequiredNo" Width="100" Height="25"  Content="no" Click="ButtonClickReleveNo"/>
-
-                            <Button Content="Save" Width="80" Height="30" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                      
+                            <Button Content="Save" Width="80" Height="30" Margin="10,150" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                             Click="ButtonSave_Click"/>
                         </StackPanel>
 

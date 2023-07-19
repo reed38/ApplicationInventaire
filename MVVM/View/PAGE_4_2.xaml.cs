@@ -205,7 +205,6 @@ namespace ApplicationInventaire.MVVM.View
 
         private ProjectData projectData;
         private Piece CurrentPiece;
-        private string relevePath;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private (Image, Piece) tmp; //used to pass argument
         private int IndiceSection;
@@ -373,7 +372,6 @@ namespace ApplicationInventaire.MVVM.View
         private void ResetFields()
         {
             autoTextBox.Clear();
-            ReleveRequiredNo.IsChecked = true;
         }
        
         #endregion
@@ -452,25 +450,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
       
-        private void ButtonClickReleveNo(object sender, RoutedEventArgs e)
-        {
-            if (CurrentPiece == null)
-            {
-                return;
-            }
-            CurrentPiece.IsReleveRequired = 0;
-
-        }
-
-        private void ButtonClickReleveYes(object sender, RoutedEventArgs e)
-        {
-            if(CurrentPiece==null)
-            {
-                return;
-            }
-            CurrentPiece.IsReleveRequired = 1;
-
-        }
+     
 
         private void ButtonClickDeleteSelected(object sender, RoutedEventArgs e)
         {
