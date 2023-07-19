@@ -35,7 +35,7 @@
             </Canvas.Background>
 
 
-            <Label Foreground="GreenYellow" 
+            <Label Foreground="Red" 
                x:Name="LabelNameTag" 
                Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                FontSize="22"
@@ -65,7 +65,7 @@
                             <TextBox x:Name="autoTextBox"  
                              KeyDown="TextBoxNameTagKeyDown"
                              Width="110" Height="25"    
-                             FontSize="18"      
+                             FontSize="14"      
                              HorizontalAlignment="Center"     
                              VerticalAlignment="Top"     
                              BorderThickness="2"    
