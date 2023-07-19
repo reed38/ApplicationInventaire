@@ -13,6 +13,8 @@ using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 using System.IO.Pipes;
 using System.Security.Policy;
+using NPOI.SS.Formula.Functions;
+using NPOI.HSSF.Util;
 
 namespace ApplicationInventaire.Core.ExcelManagement
 {
@@ -43,18 +45,6 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
     }
 
-    public class CoupleCellInfo
-    {
-        public CellInfo tag { set; get; }
-        public CellInfo Present { set; get; }
-
-        public CoupleCellInfo(CellInfo tag, CellInfo present)
-        {
-            this.tag = tag;
-            this.Present = present;
-        }
-
-    }
     /// <summary>
     /// used to operate on excel sheet
     /// INDEXES START AT ZERO
@@ -140,6 +130,71 @@ namespace ApplicationInventaire.Core.ExcelManagement
             return cellValue;
         }
 
+        public byte[] GetCellColor(string sheetName, int row, int column)
+        {
+            string cellValue = string.Empty;
+            try
+            {
+
+                if (FilePath.IndexOf(".xlsx") > 0)
+                {
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        XSSFWorkbook workbook = new XSSFWorkbook(file);
+                        ISheet sheet = workbook.GetSheet(sheetName);
+                        IRow excelRow = sheet.GetRow(row);
+                        ICell cell = excelRow.GetCell(column);
+                        if (cell != null)
+                        {
+                            ICellStyle cellStyle = cell.CellStyle;
+                            XSSFColor color = cell.CellStyle.FillForegroundColorColor as XSSFColor;
+                            byte[] rgb = color.RGB;
+
+                            return rgb;
+
+
+                        }
+                        file.Close();
+                    }
+
+
+                }
+                else if (FilePath.IndexOf(".xls") > 0)
+                {
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        HSSFWorkbook workbook = new HSSFWorkbook(file);
+                        ISheet sheet = workbook.GetSheet(sheetName);
+                        IRow excelRow = sheet.GetRow(row);
+                        ICell cell = excelRow.GetCell(column);
+                        if (cell != null)
+                        {
+                            ICellStyle cellStyle = cell.CellStyle;
+                            IFont font = cellStyle.GetFont(workbook);
+
+
+                            HSSFColor color = cell.CellStyle.FillForegroundColorColor as HSSFColor;
+                            byte[] rgb = color.RGB;
+                            return rgb;
+                        }
+                        file.Close();
+
+                    }
+
+
+                }
+
+
+
+            }
+            catch (IOException ex)
+            {
+                // Handle file-related errors
+                Console.WriteLine("Une erreur s'est produite lors de la lecture du fichier Excel: " + ex.Message);
+            }
+
+            return null;
+        }
         /// <summary>
         /// set the cell in a given row column and sheet to a given string
         /// </summary>

@@ -94,6 +94,8 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
             GlobalPages.mainWindow.labelTemplateName.Content = GlobalProjectData.CurrentProjectName;// we update the banner to display the current projectName
             GlobalPages.mainWindow.StackPanelCurrentTemplate.Visibility = Visibility.Visible;
+            ProjectData tmp = new(new(GlobalProjectData.CurrentProjectName));
+        
 
 
             }

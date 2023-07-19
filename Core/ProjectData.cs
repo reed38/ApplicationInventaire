@@ -15,6 +15,8 @@ using ApplicationInventaire.Core.PieceSections;
 using System.Runtime.CompilerServices;
 using System.Linq;
 using NPOI.OpenXmlFormats.Dml.Diagram;
+using NPOI.SS.UserModel;
+using static SQLite.SQLite3;
 
 namespace ApplicationInventaire.Core.ProjectDataSet
 {
@@ -205,15 +207,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public ProjectData(ProjectInfos project)
         {
-            try
-            {
+        
 
 
                 File.Copy(project.ExcelPath, project.TmpExcelPath, true);
-            }
-            catch (Exception hehehaha) { }
-
-
+         
 
 
             Database database = new Database(project.DatabasePath);
@@ -321,10 +319,15 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         }
 
 
+ 
+
         public List<string> GetPieceNames()
         {
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
             CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
+            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
+
+
 
             List<string> pieceNames = new List<string>();
 
@@ -341,7 +344,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
 
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
-                pieceNames.Add(TagCellTmp.Content);
+                pieceNames.Add((TagCellTmp.Content));
                 n++;
 
 
@@ -359,10 +362,12 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
             CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
+            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
 
-            List<CoupleCellInfo> coupleCellInfo = new List<CoupleCellInfo>();
+            List<(CellInfo, CellInfo, int)> CellData = new List<(CellInfo, CellInfo, int)>();
 
-            if (PresentCell == null || PIDtCell == null || AmountCell == null)
+
+            if (PresentCell == null || PIDtCell == null || AmountCell == null ||ConstructorCell==null)
             {
 
                 return;
@@ -376,7 +381,19 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
                 CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
-                coupleCellInfo.Add(new CoupleCellInfo(TagCellTmp, ContentCellTmp));
+                ////IsReleveRequire, we check if the cell color is yellow
+                int isYellow;
+                byte[] color = myTmpExcelFile.GetCellColor(ConstructorCell.Sheet, n, ConstructorCell.Column);
+      
+                if (color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
+                {
+                    isYellow = 1;
+                }
+                else
+                {
+                    isYellow = 0;
+                }
+                CellData.Add((TagCellTmp, ContentCellTmp,isYellow));
                 n++;
 
 
@@ -387,12 +404,12 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             {
                 for (int j = 0; j < this.mySections[i].PiecesList.Count; j++)
                 {
-                    foreach (CoupleCellInfo k in coupleCellInfo)
+                    foreach (var k in CellData)
                     {
                         Piece tmp = this.mySections[i].PiecesList[j];
-                        if (k.tag.Content.Equals(this.mySections[i].PiecesList[j].PieceName))
+                        if (k.Item1.Content.Equals(this.mySections[i].PiecesList[j].PieceName))
                         {
-                            if (k.Present.Content.Equals("1"))
+                            if (k.Item2.Content.Equals("1"))
                             {
                                 this.mySections[i].PiecesList[j].IsPresent = 1;
                             }
@@ -400,11 +417,16 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                             {
                                 this.mySections[i].PiecesList[j].IsPresent = 0;
                             }
+                            this.mySections[i].PiecesList[j].IsReleveRequired = k.Item3; 
 
 
                             this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
                             this.mySections[i].PiecesList[j].ExcelColumn = PresentCell.Column;
-                            this.mySections[i].PiecesList[j].ExcelRow = k.Present.Row;
+                            this.mySections[i].PiecesList[j].ExcelRow = k.Item2.Row;
+
+
+                            //we use the color of the cell to determine if Serial number is required
+
 
 
                         }
