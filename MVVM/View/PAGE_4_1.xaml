@@ -9,7 +9,7 @@
       Background="#116396"
 
       Title="PAGE_4_1"
-       d:DesignWidth="800"     
+       d:DesignWidth="1920"     
 
        d:DesignHeight="450"    >
 
@@ -41,11 +41,17 @@
                     <Button Height="25" Width="120"
                    HorizontalAlignment="Center"
                     Margin="5"
-                    Content="Select Images"
-                    Click="ButtonClickSelectImage"/>
+                    Content="Select Sections Images"
+                    Click="ButtonClickSelectImageSection"/>
+
+                    <Button Height="25" Width="120"
+                   HorizontalAlignment="Center"
+                    Margin="5"
+                    Content="Select Releve Image"
+                    Click="ButtonClickSelectImageReleve"/>
 
 
-                  
+
 
                     <Button Height="25" Width="120"
                    HorizontalAlignment="Center"
@@ -67,7 +73,7 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="350" Width="500"  VerticalAlignment="Top"
+            <StackPanel Orientation="Horizontal" Height="350" Width="800"  VerticalAlignment="Top"
                     HorizontalAlignment="Center" >
 
 
@@ -75,14 +81,14 @@
 
 
                 <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="   Selected images: "  Foreground="White" FontSize="15"/>
+                    <Label Content="   Selected Section images: "  Foreground="White" FontSize="15"/>
                     <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
                       Width="150">
                         <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                              Width="150" Height="200"
-                          SelectionChanged="ListBoxSectionFileSelectionChanged"
+                          SelectionChanged="ListBoxSectionSelectionChanged"
 >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -95,9 +101,40 @@
                     <Button Height="25" Width="150"
                 x:Name="ButtonDeleteImage"
                 Content="Delete selected"
-                Click="ButtonClickDeleteImageSelected"/>
+                Click="ButtonClickDeleteSectionSelected"/>
 
                 </StackPanel>
+
+
+
+                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="   Selected Releve images: "  Foreground="White" FontSize="15"/>
+                    <ScrollViewer x:Name="ListBoxReleveFile"   VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Center"
+                      Height="200"
+                      Width="150">
+                        <ListBox ItemsSource="{Binding ImageReleveName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="150" Height="200"
+                          SelectionChanged="ListBoxReleveSelectionChanged"
+>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+
+                    <Button Height="25" Width="150"
+                x:Name="ButtonDeleteImageReleve"
+                Content="Delete selected"
+                Click="ButtonClickDeleteReleveSelected"/>
+
+                </StackPanel>
+                
+                
+                
+                
 
                 <StackPanel Orientation="Vertical" Margin="10" Height="300" >
                     <Label Content="    Selected Plans: "  Foreground="White" FontSize="15" />

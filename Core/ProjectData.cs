@@ -37,7 +37,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.Name = name;
             this.Path = path;
         }
-       
+
 
         #endregion
 
@@ -68,7 +68,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region set_get
         public string DatabasePath { set; get; }
         public string ExcelPath { set; get; }
-        public string AppPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"UserData");
+        public string AppPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
         public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
         public string ProjectPath { set; get; }
@@ -269,7 +269,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
             this.ImageSectionList = result;
 
-            }
+        }
         public void GetRelevesNames()
         {
 
@@ -323,21 +323,33 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         public List<string> GetPieceNames()
         {
-            if (this==null)
+            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
+            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
+
+            List<string> pieceNames = new List<string>();
+
+            if (PIDtCell == null || AmountCell == null)
             {
+
                 return null;
             }
-            List<string> result = new List<string>();
-            foreach(Section i in this.mySections)
+
+            int n = AmountCell.Row + 1;
+            string res;
+            do
             {
+                res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
 
-                foreach(Piece j in i.PiecesList)
-                {
-                    result.Add(j.PieceName);
-                }
-            }
+                CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
+                pieceNames.Add(TagCellTmp.Content);
+                n++;
 
-            return result;
+
+            } while (!res.Equals(""));
+
+
+
+            return pieceNames;
 
 
         }
@@ -346,21 +358,27 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         {
             CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
-            CellInfo AmountCell=this.myTmpExcelFile.FindValue("Besoin Qté Totale");
+            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
+
             List<CoupleCellInfo> coupleCellInfo = new List<CoupleCellInfo>();
 
+            if (PresentCell == null || PIDtCell == null || AmountCell == null)
+            {
+
+                return;
+            }
 
             int n = PresentCell.Row + 1;
             string res;
             do
             {
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
-               
+
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
                 CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
                 coupleCellInfo.Add(new CoupleCellInfo(TagCellTmp, ContentCellTmp));
                 n++;
-              
+
 
             } while (!res.Equals(""));
 
@@ -395,7 +413,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 }
             }
         }
-        
+
 
 
         #endregion

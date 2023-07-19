@@ -87,7 +87,63 @@ namespace ApplicationInventaire.MVVM.View
         private Section currentSection;
 
         #endregion
-     
+        private void SetBorderPosition()
+        {
+            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
+            ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
+
+
+        }
+       
+        private void ChangeFrameCoordinates(double x, double y)
+        {
+            this.RedFrameImage.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.RedFrameImage, x);
+            Canvas.SetTop(this.RedFrameImage, y);
+        }
+
+        private void ChangeLabelcoordinates(double x, double y)
+        {
+            this.LabelNameTag.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.LabelNameTag, x - 90);
+            Canvas.SetTop(this.LabelNameTag, y - 90);
+
+        }
+
+        private void HideTextBoxSerialNumberConstructor()
+        {
+            TextBoxSerialNumber.Visibility = Visibility.Hidden;
+            TextBoxConstructor.Visibility = Visibility.Hidden;
+            labelConstructor.Visibility = Visibility.Hidden;
+            labelSerialNumber.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowTextBoxSerialNumberConstructor()
+        {
+            TextBoxSerialNumber.Visibility = Visibility.Visible;
+            labelConstructor.Visibility = Visibility.Visible;
+            labelSerialNumber.Visibility = Visibility.Visible;
+            TextBoxConstructor.Visibility = Visibility.Visible;
+        }
+
+        private void ResetTextBox()
+        {
+            TextBoxComment.Clear();
+            TextBoxConstructor.Clear();
+            TextBoxSerialNumber.Clear();
+
+        }
+
+        private void HideFrameAndLabel()
+        
+        {
+            this.LabelNameTag.Visibility = Visibility.Hidden;
+            this.RedFrameImage.Visibility=Visibility.Hidden;
+        }
+       
+       
+
+
         #region bindingMethods
 
         public Section CurrentSection
@@ -168,6 +224,9 @@ namespace ApplicationInventaire.MVVM.View
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+        #region GIMethods 
 
         #endregion
 
@@ -270,26 +329,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private void SetBorderPosition()
-        {
-            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
-            ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
 
-
-        }
-       
-        private void ChangeFrameCoordinates(double x, double y)
-        {
-            Canvas.SetLeft(this.RedFrameImage, x);
-            Canvas.SetTop(this.RedFrameImage, y);
-        }
-
-        private void ChangeLabelcoordinates(double x, double y)
-        {
-            Canvas.SetLeft(this.LabelNameTag, x - 60);
-            Canvas.SetTop(this.LabelNameTag, y - 60);
-
-        }
 
 
         private void SaveAndQuit()
@@ -357,29 +397,9 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private void ResetTextBox()
-        {
-            TextBoxComment.Clear();
-            TextBoxConstructor.Clear();
-            TextBoxSerialNumber.Clear();
 
-        }
 
-        private void HideTextBoxSerialNumberConstructor()
-        {
-            TextBoxSerialNumber.Visibility = Visibility.Hidden;
-            TextBoxConstructor.Visibility = Visibility.Hidden;
-            labelConstructor.Visibility = Visibility.Hidden;
-            labelSerialNumber.Visibility = Visibility.Hidden;
-        }
-        
-        private void ShowTextBoxSerialNumberConstructor()
-        {
-            TextBoxSerialNumber.Visibility = Visibility.Visible;
-            labelConstructor.Visibility = Visibility.Visible;
-            labelSerialNumber.Visibility = Visibility.Visible;
-            TextBoxConstructor.Visibility = Visibility.Visible;
-        }
+
 
 
         #endregion
@@ -398,6 +418,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
+            HideFrameAndLabel();
             GotoNextPiece("0");
 
         }
@@ -406,7 +427,6 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
             {
-                PopupNoSerialNumberConstructor.IsOpen = true;
                 return;
 
             }
@@ -415,6 +435,7 @@ namespace ApplicationInventaire.MVVM.View
             UpdateConstructor();
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
+            HideFrameAndLabel();
             GotoNextPiece("1");
 
 

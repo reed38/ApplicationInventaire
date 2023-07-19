@@ -45,7 +45,7 @@
                
             </Canvas.Background>
 
-            <Label Foreground="Red" 
+            <Label Foreground="GreenYellow" 
                x:Name="LabelNameTag" 
                Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                FontSize="20"

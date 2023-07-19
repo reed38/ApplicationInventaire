@@ -46,6 +46,7 @@ namespace ApplicationInventaire.MVVM.View
         #region PrivateVariables
         private string Description;
         private ObservableCollection<ImageInfos> imageSectionsInfos = new ObservableCollection<ImageInfos>();
+        private ObservableCollection<ImageInfos> imageReleveInfos = new ObservableCollection<ImageInfos>();
         private List<string> PlansPathList = new List<string>();
         private string excelPath;
         #endregion
@@ -53,9 +54,11 @@ namespace ApplicationInventaire.MVVM.View
         #region BindingVariables
 
         private ObservableCollection<string> imageSectionsName = new ObservableCollection<string>();
+        private ObservableCollection<string> imageReleveName = new ObservableCollection<string>();
         private ObservableCollection<string> plansNameList = new ObservableCollection<string>();
         private string excelName;
         private string selectedValueSection;
+        private string selectedValueReleve;
         private string selectedValuePlan;
 
         #endregion
@@ -69,6 +72,15 @@ namespace ApplicationInventaire.MVVM.View
             {
                 imageSectionsName = value;
                 OnPropertyChanged(nameof(ImageSectionsName));
+            }
+        }
+        public ObservableCollection<string> ImageReleveName
+        {
+            get { return imageReleveName; }
+            set
+            {
+                imageReleveName = value;
+                OnPropertyChanged(nameof(ImageReleveName));
             }
         }
 
@@ -95,18 +107,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        {
-            CollectionChanged?.Invoke(this, e);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         private void ListBoxPlanFileSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -116,6 +117,33 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
+
+        private void ListBoxReleveSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            selectedValueReleve = (string)listBox.SelectedItem;
+        }
+
+        private void ListBoxSectionSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            selectedValueSection = (string)listBox.SelectedItem;
+        }
+
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+      
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            CollectionChanged?.Invoke(this, e);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region privateMethods
@@ -177,7 +205,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region UImethods
 
-        private void ButtonClickSelectImage(object sender, RoutedEventArgs e)
+        private void ButtonClickSelectImageSection(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
             if (tmp.Length > 0)
@@ -186,6 +214,19 @@ namespace ApplicationInventaire.MVVM.View
                 {
                     imageSectionsInfos.Add(new ImageInfos(Path.GetFileNameWithoutExtension(i), i));
                     ImageSectionsName.Add(Path.GetFileNameWithoutExtension(i));
+                }
+            }
+        }
+
+        private void ButtonClickSelectImageReleve(object sender, RoutedEventArgs e)
+        {
+            string[] tmp = FileManager.OpenImagePopup();
+            if (tmp.Length > 0)
+            {
+                foreach (string i in tmp)
+                {
+                    imageReleveInfos.Add(new ImageInfos(Path.GetFileNameWithoutExtension(i), i));
+                    ImageReleveName.Add(Path.GetFileNameWithoutExtension(i));
                 }
             }
         }
@@ -213,12 +254,18 @@ namespace ApplicationInventaire.MVVM.View
             File.Copy(excelPath, projectInfos.TmpExcelPath, true);
 
 
-            foreach (ImageInfos i in imageSectionsInfos)
+            foreach (ImageInfos i in imageSectionsInfos) //saving selected image section to memory
             {
                 string destinationPath = Path.Combine(projectData.myProjectInfos.ImageSectionPath, i.Name);
                 File.Copy(i.Path, destinationPath, true);
                 projectData.mySections.Add(new Core.PieceSections.Section(i.Name));
 
+            }
+
+            foreach(ImageInfos i in imageReleveInfos)
+            {
+                string destinationPath=Path.Combine(projectData.myProjectInfos.ImageRelevePath, i.Name);
+                File.Copy(i.Path, destinationPath);
             }
             for (int i = 0; i < PlansNameList.Count; i++)
             {
@@ -244,18 +291,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private void ButtonClickDeleteImageSelected(object sender, RoutedEventArgs e)
-        {
-            for (int i = 0; i < imageSectionsInfos.Count; i++)
-            {
-
-                if (imageSectionsInfos[i].Name.Equals(selectedValueSection))
-                {
-                    ImageSectionsName.Remove(imageSectionsInfos[i].Name);
-                    imageSectionsInfos.Remove(imageSectionsInfos[i]);
-                }
-            }
-        }
+        
 
         private void ButtonClickDeletePlanSelected(object sender, RoutedEventArgs e)
         {
@@ -270,6 +306,37 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
+
+        private void ButtonClickDeleteSectionSelected(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < imageSectionsInfos.Count; i++)
+            {
+
+                if (imageSectionsInfos[i].Name.Equals(selectedValueSection))
+                {
+                    ImageSectionsName.Remove(imageSectionsInfos[i].Name);
+                    imageSectionsInfos.Remove(imageSectionsInfos[i]);
+                }
+            }
+
+        }
+
+        private void ButtonClickDeleteReleveSelected(object sender, RoutedEventArgs e)
+        {
+
+            for (int i = 0; i < imageReleveInfos.Count; i++)
+            {
+
+                if (imageReleveInfos[i].Name.Equals(selectedValueReleve))
+                {
+                    ImageReleveName.Remove(imageReleveInfos[i].Name);
+                    imageReleveInfos.Remove(imageReleveInfos[i]);
+                }
+            }
+
+        }
+
+        
     }
 
    

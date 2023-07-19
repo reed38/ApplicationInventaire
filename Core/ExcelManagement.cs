@@ -264,7 +264,15 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
                 using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
                 {
-                    HSSFWorkbook workbook = new HSSFWorkbook(file);
+                    HSSFWorkbook workbook;
+                    try
+                    {
+                        workbook = new HSSFWorkbook(file);
+                    }
+                    catch(Exception e) //problem with file format, abort da mission
+                    {
+                        return null;
+                    } 
 
 
                     // Loop through each sheet in the workbook

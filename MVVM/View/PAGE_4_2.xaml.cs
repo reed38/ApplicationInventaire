@@ -418,10 +418,6 @@ namespace ApplicationInventaire.MVVM.View
                 return;
             }
             CurrentPiece.IsReleveRequired = 1;
-            relevePath = FileManager.OpenImagePopupSingle();
-            LabelSelectedimage.Visibility = Visibility.Visible;
-            LabelSelectedimagePath.Visibility = Visibility.Visible;
-            LabelSelectedimagePath.Content = Path.GetFileNameWithoutExtension(relevePath);
 
         }
 
@@ -438,17 +434,10 @@ namespace ApplicationInventaire.MVVM.View
             CurrentPiece.PieceName = autoTextBox.Text;
             CurrentPiece.SectionId = IndiceSection + 1;
             projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
-            if (CurrentPiece.IsReleveRequired == 1)
-            {
-                string destPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, CurrentPiece.PieceName);
-                if(!string.IsNullOrEmpty(relevePath))
-                {
-                    File.Copy(relevePath, destPath);
-
-                }
-            }
+           
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;
+            ResetFields();
         }
 
 

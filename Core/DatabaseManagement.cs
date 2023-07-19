@@ -34,7 +34,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
     public class Database
     {
         #region variables
-        public SQLiteConnection connection;
+        public string DatabasePath { get; set; }
 
         #endregion
 
@@ -45,10 +45,13 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <param name="databasePath"></param>
         public Database(string databasePath)
         {
-            connection = new SQLiteConnection(databasePath);
+           
+            SQLiteConnection connection = new SQLiteConnection(databasePath);
+            this.DatabasePath = databasePath;
             connection.CreateTable<Piece>();
             connection.CreateTable<Section>();
             connection.CreateTable<ProjectInfos>();
+            connection.Close();
         }
         #endregion
 
@@ -59,7 +62,9 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <param name="piece">Piece object</param>
         public void InsertPiece(Piece piece)
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             connection.Insert(piece);
+            connection.Close();
         }
         /// <summary>
         ///To get a Piece object from the database using the primaryKey id
@@ -68,7 +73,10 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <returns></returns>
         public Piece GetPiece(int id)
         {
-            return connection.Table<Piece>().FirstOrDefault(s => s.Id == id);
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
+            Piece result=connection.Table<Piece>().FirstOrDefault(s => s.Id == id);
+            connection.Close();
+            return result;
         }
 
         /// <summary>
@@ -77,7 +85,10 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <param name="section"><Section to insert/param>
         public void InsertSection(Section section)
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             connection.Insert(section);
+            connection.Close();
+
         }
         /// <summary>
         /// To get a Section in the database
@@ -86,7 +97,10 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <returns></returns>
         public Section GetSection(int id)
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             return connection.Table<Section>().FirstOrDefault(s => s.Id == id);
+            connection.Close();
+
         }
 
 
@@ -96,11 +110,13 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <returns>List of Section</returns>
         public List<Section> GetAllSections()
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             List<Section> sections = connection.Table<Section>().ToList();
             foreach (Section section in sections)
             {
                 section.PiecesList = connection.Table<Piece>().Where(p => p.SectionId == section.Id).ToList();
             }
+            connection.Close();
             return sections;
         }
 
@@ -111,11 +127,11 @@ namespace ApplicationInventaire.Core.DatabaseManagement
 
         public void InsertAllSections(List<Section> sections)
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             connection.DropTable<Section>(); //reset the Primary Key Counter. Code doesn't work if this line isn't here, because Piece.SectionId doen't match 
             connection.CreateTable<Section>();
             connection.DropTable<Piece>();
             connection.CreateTable<Piece>();
-
 
 
             foreach (var section in sections)
@@ -123,6 +139,8 @@ namespace ApplicationInventaire.Core.DatabaseManagement
                 connection.Insert(section);
                 connection.InsertAll(section.PiecesList);
             }
+            connection.Close();
+
         }
 
         //Project Info
@@ -136,12 +154,17 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <returns>ProjectInfos corresponding to the given project</returns>
         public ProjectInfos ReadProjectInfos()
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             List<ProjectInfos> tmp = connection.Table<ProjectInfos>().ToList();
+            ProjectInfos result;
             if (tmp.Count > 0)
-                return tmp[0];
+                result=tmp[0];
 
             else
-                return null;
+                result = null;
+
+            connection.Close();
+            return result;
         }
         /// <summary>
         /// 
@@ -150,9 +173,11 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <param name="project"></param>
         public void WriteProjectInfos(ProjectInfos project)
         {
+            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
             connection.DropTable<ProjectInfos>();
             connection.CreateTable<ProjectInfos>();
             connection.Insert(project);
+            connection.Close();
 
         }
 
