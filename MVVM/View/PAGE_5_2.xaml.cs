@@ -38,6 +38,8 @@ namespace ApplicationInventaire.MVVM.View
             this.projectData = new(new ProjectInfos(GlobalProjectData.CurrentProjectName));
             this.InitializeCurrentPiece();
             SetBorderPosition();
+
+            InitializeNameTagAndDesciption();
         }
        
         #region Variables
@@ -112,6 +114,13 @@ namespace ApplicationInventaire.MVVM.View
                 }
             }
         }
+        
+        private void InitializeNameTagAndDesciption()
+        {
+            this.TextBlockDesciption.Text = CurrentPiece.Description;
+            this.TextBlockName.Text = CurrentPiece.PieceName;
+        }
+
 
         private void SetBorderPosition()
         {

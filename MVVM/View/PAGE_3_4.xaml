@@ -47,7 +47,6 @@
 
             <Label Foreground="Red" 
                x:Name="LabelNameTag" 
-               Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                FontSize="20"
                    />
 
@@ -59,7 +58,22 @@
 
         </Canvas>
 
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="5">
 
+            <StackPanel Orientation="Horizontal">
+                <Label Foreground="White" Content="NameTag:    " FontSize="13" Margin="5"/>
+                <TextBlock Background="White" Height="25" Width="150" x:Name="TextBlockName" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Foreground="White" Content="Description:" FontSize="13" Margin="5"/>
+                <TextBlock VerticalAlignment="Bottom" Background="White" 
+                           Height="50" Width="150"
+                           x:Name="TextBlockDesciption"
+                           Margin="0,10,0,0"
+                           TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+        </StackPanel>
 
 
         <Grid Grid.Row="1" Grid.Column="0"   >

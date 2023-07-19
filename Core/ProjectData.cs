@@ -363,8 +363,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
             CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
             CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
+            CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation");
 
-            List<(CellInfo, CellInfo, int)> CellData = new List<(CellInfo, CellInfo, int)>();
+            List<(CellInfo, CellInfo, int, string)> CellData = new List<(CellInfo, CellInfo, int,string)>();
 
 
             if (PresentCell == null || PIDtCell == null || AmountCell == null ||ConstructorCell==null)
@@ -380,7 +381,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
 
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
+                
                 CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
+
+                string description =  myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, DescriptionCell.Column);
+
                 ////IsReleveRequire, we check if the cell color is yellow
                 int isYellow;
                 byte[] color = myTmpExcelFile.GetCellColor(ConstructorCell.Sheet, n, ConstructorCell.Column);
@@ -393,7 +398,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 {
                     isYellow = 0;
                 }
-                CellData.Add((TagCellTmp, ContentCellTmp,isYellow));
+                CellData.Add((TagCellTmp, ContentCellTmp,isYellow,description));
                 n++;
 
 
@@ -423,6 +428,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                             this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
                             this.mySections[i].PiecesList[j].ExcelColumn = PresentCell.Column;
                             this.mySections[i].PiecesList[j].ExcelRow = k.Item2.Row;
+                            this.mySections[i].PiecesList[j].Description = k.Item4;
 
 
                             //we use the color of the cell to determine if Serial number is required

@@ -42,10 +42,12 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         #region privateVariables
+        
         private ProjectData projectData;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
         private int ImageMarkerWidth = 20;
+        private Piece CurrentPiece;
         #endregion
 
         #region bindingVariables
@@ -140,14 +142,23 @@ namespace ApplicationInventaire.MVVM.View
             if (res != (null, null))
             {
                 ChangeLabelcoordinates(res.Item2.X, res.Item2.Y);
-                LabelNameTag.Content = res.Item2.PieceName;
+                CurrentPiece = res.Item2;
+                this.LabelNameTag.Content = CurrentPiece.PieceName;
+                InitializeNameTagAndDesciption();
             }
         }
 
         #endregion
 
         #region privateMethods
-     
+
+        private void InitializeNameTagAndDesciption()
+        {
+            this.TextBlockDesciption.Text = CurrentPiece.Description;
+            this.TextBlockName.Text = CurrentPiece.PieceName;
+        }
+
+
         private (Image, Piece) GetClickedPieceImage(Point clickPosition)
         {
 
