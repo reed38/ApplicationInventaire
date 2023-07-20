@@ -144,7 +144,7 @@
                 <Button
                 x:Name="YesButton"
                   Click="ButtonClickYes"
-                Content="yes [Y]"
+                Content="yes"
                 Width="66"
                 Height="30"
                 HorizontalAlignment="Center"
@@ -154,7 +154,7 @@
                 <Button
                 x:Name="NoButton"
                   Click="ButtonClickNo"
-                Content="no [N]"
+                Content="no"
                 Width="66"
                 Height="30"
                  HorizontalAlignment="Center"
