@@ -176,6 +176,7 @@ namespace ApplicationInventaire.MVVM.View
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+     
         #region GIMethods 
 
         private void SetBorderPosition()
@@ -339,7 +340,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void SaveAndQuit()
         {
-
+            projectData.myTmpExcelFile.UpdateExcelFormula();
 
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();

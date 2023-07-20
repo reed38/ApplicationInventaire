@@ -15,6 +15,8 @@ using System.IO.Pipes;
 using System.Security.Policy;
 using NPOI.SS.Formula.Functions;
 using NPOI.HSSF.Util;
+using static SQLite.TableMapping;
+using System.Reflection.Metadata;
 
 namespace ApplicationInventaire.Core.ExcelManagement
 {
@@ -215,7 +217,27 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         ISheet sheet = workbook.GetSheet(sheetName);
                         IRow excelRow = sheet.GetRow(row);
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
-                        cell.SetCellValue(content);
+                        if(content.Equals("1"))
+                        {
+                            cell.SetCellValue(1);
+
+                        }
+                       else if (content.Equals("0"))
+                        {
+                            cell.SetCellValue(0);
+
+                        }
+                        else 
+                        {
+                            cell.SetCellValue(content);
+
+
+                        }
+                        var formulaEvaluator = workbook.GetCreationHelper().CreateFormulaEvaluator();
+
+                        // Evaluate the formulas
+                        formulaEvaluator.EvaluateAll();
+
                         file.Close();
 
                         using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
@@ -238,8 +260,29 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         }
                         IRow excelRow = sheet.GetRow(row);
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
-                        cell.SetCellValue(content);
-                         file.Close();
+                        if (content.Equals("1"))
+                        {
+                            cell.SetCellValue(1);
+
+                        }
+                        else if (content.Equals("0"))
+                        {
+                            cell.SetCellValue(0);
+
+                        }
+                        else
+                        {
+                            cell.SetCellValue(content);
+
+
+                        }
+
+                        //var formulaEvaluator = workbook.GetCreationHelper().CreateFormulaEvaluator();
+
+                        //// Evaluate the formulas
+                        //formulaEvaluator.EvaluateAll();
+
+                        file.Close();
 
                         using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
                         {
@@ -259,6 +302,68 @@ namespace ApplicationInventaire.Core.ExcelManagement
             }
 
         }
+
+        public void UpdateExcelFormula()
+        {
+
+            try
+            {
+                if (FilePath.IndexOf(".xlsx") > 0)
+                {
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        XSSFWorkbook workbook = new XSSFWorkbook(file);
+                        
+                        var formulaEvaluator = workbook.GetCreationHelper().CreateFormulaEvaluator();
+
+                        // Evaluate the formulas
+                        formulaEvaluator.EvaluateAll();
+
+                        file.Close();
+
+                        using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
+                        {
+                            workbook.Write(outputFile);
+                            outputFile.Close();
+                        }
+                    }
+
+
+                }
+                else if (FilePath.IndexOf(".xls") > 0)
+                {
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        HSSFWorkbook workbook = new HSSFWorkbook(file);
+
+
+                        var formulaEvaluator = workbook.GetCreationHelper().CreateFormulaEvaluator();
+
+                        // Evaluate the formulas
+                        formulaEvaluator.EvaluateAll();
+
+                        file.Close();
+
+                        using (var outputFile = new FileStream(FilePath, FileMode.Create, FileAccess.Write))
+                        {
+                            workbook.Write(outputFile);
+                            outputFile.Close();
+                        }
+                    }
+                }
+
+
+
+            }
+            catch (IOException ex)
+            {
+                // Handle file-related errors
+                Console.WriteLine("Une erreur s'est produite lors de la modification du fichier Excel: " + ex.Message);
+            }
+
+        }
+
+
 
         /// <summary>
         /// find the first cell in a given file (.xls or .xlsx) containing a given string
@@ -300,6 +405,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                         cellInfo.Column = columnIndex;
 
                                         cellInfo.Sheet = sheet.SheetName;
+                                 
                                         return cellInfo;
                                     }
                                 }
@@ -353,6 +459,8 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                         cellInfo.Row = rowIndex;
                                         cellInfo.Column = columnIndex;
                                         cellInfo.Sheet = sheet.SheetName;
+
+                                    
                                         return cellInfo;
                                     }
                                 }
