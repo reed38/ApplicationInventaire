@@ -456,6 +456,12 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             }
 
         }
+
+       
+        public void ResetTmpExcel()
+        {
+            File.Copy(myProjectInfos.ExcelPath,myProjectInfos.TmpExcelPath,true);
+        }
     }
     #endregion
 

@@ -44,7 +44,6 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         #region PrivateVariables
-        private string Description;
         private ObservableCollection<ImageInfos> imageSectionsInfos = new ObservableCollection<ImageInfos>();
         private ObservableCollection<ImageInfos> imageReleveInfos = new ObservableCollection<ImageInfos>();
         private List<string> PlansPathList = new List<string>();
@@ -275,6 +274,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             projectData.Save();
             GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;
+            GlobalProjectData.CurrentProjectData = new ProjectData(new ProjectInfos(new(projectInfos.ProjectName)));
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_2);
 
 

@@ -39,13 +39,13 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_2 = this;
             DataContext = this;
-            ProjectInfos tmp = new ProjectInfos(GlobalProjectData.CurrentProjectName);
-            projectData = new ProjectData(tmp);
+            projectData = GlobalProjectData.CurrentProjectData;
             this.RedFramePath = GlobalProjectData.RedFramePath;
-           
+           projectData.ResetTmpExcel();
+          
             if (GlobalProjectData.ExcelContinuPath != null)
             {
-                File.Copy(GlobalProjectData.ExcelContinuPath, tmp.TmpExcelPath, true);
+                File.Copy(GlobalProjectData.ExcelContinuPath, projectData.myProjectInfos.TmpExcelPath, true);
 
             }
             projectData.InitializePieceFromExcel();
@@ -55,6 +55,9 @@ namespace ApplicationInventaire.MVVM.View
             RedFrameImage.Visibility = Visibility.Visible;
             IndiceSection = 0;
             IndicePiece = 0;
+            FindNextNoPresent();
+            IndiceSection = CurrentPiece.SectionId - 1;
+
             foreach (ImageInfos im in this.projectData.ImageSectionList)
             {
                 if (im.Name == projectData.mySections[IndiceSection].SectionName)
@@ -65,7 +68,6 @@ namespace ApplicationInventaire.MVVM.View
                 }
             }
 
-            FindNextNoPresent();
             SetBorderPosition();
 
         }

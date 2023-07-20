@@ -35,7 +35,7 @@ namespace ApplicationInventaire.MVVM.View
             this.RedFramePath = GlobalProjectData.RedFramePath;
             DataContext = this;
 
-            this.projectData = new(new ProjectInfos(GlobalProjectData.CurrentProjectName));
+            this.projectData = GlobalProjectData.CurrentProjectData;
             this.InitializeCurrentPiece();
             SetBorderPosition();
 

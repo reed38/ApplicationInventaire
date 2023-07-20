@@ -39,6 +39,10 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_3_1 = this;
         }
 
+        #region variable
+        ProjectData projectData = GlobalProjectData.CurrentProjectData;
+
+        #endregion
         #region methodsUI
 
         private void ButtonPlanClick(object sender, RoutedEventArgs e)
@@ -74,25 +78,25 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_1);
         }
 
+        private void ButtonDeleteProjectClick(object sender, RoutedEventArgs e)
+        {
+            Directory.Delete(projectData.myProjectInfos.ProjectPath, true);
+            GlobalPages.PageGoBack();
+        }
+
         #endregion
 
         #region GIMethods
 
         private void InitializeAuthor_Description()
         {
-            ProjectData tmpData=new (new ProjectInfos(GlobalProjectData.CurrentProjectName));
-            this.TextBlocklAuthorName.Text = tmpData.myProjectInfos.Author;
-            this.TextBlockDesciption.Text = tmpData.myProjectInfos.Description;
+            this.TextBlocklAuthorName.Text = projectData.myProjectInfos.Author;
+            this.TextBlockDesciption.Text = projectData.myProjectInfos.Description;
         }
 
 
         #endregion
 
-        private void ButtonDeleteProjectClick(object sender, RoutedEventArgs e)
-        {
-            ProjectData tmp=new(new ProjectInfos (GlobalProjectData.CurrentProjectName));
-            Directory.Delete(tmp.myProjectInfos.ProjectPath,true);
-            GlobalPages.PageGoBack();
-        }
+       
     }
 }

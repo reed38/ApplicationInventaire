@@ -36,7 +36,7 @@ namespace ApplicationInventaire.MVVM.View
 
             IndiceSection = 0;
             this.RedFramePath = GlobalProjectData.RedFramePath;
-            projectData = new ProjectData(new ProjectInfos(GlobalProjectData.CurrentProjectName));
+            projectData = GlobalProjectData.CurrentProjectData;
 
             foreach (ImageInfos im in this.projectData.ImageSectionList)
             {

@@ -32,7 +32,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             DataContext = this;
             GlobalPages.page_3_4 = this;
-            this.projectData = new(new ProjectInfos(GlobalProjectData.CurrentProjectName));
+            this.projectData = GlobalProjectData.CurrentProjectData;
             this.IndiceSection = 0;
             this.ImageSection3 = this.projectData.ImageSectionList[IndiceSection].Path;
             InitializeOverlay();
