@@ -80,6 +80,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonDeleteProjectClick(object sender, RoutedEventArgs e)
         {
+           
             Directory.Delete(projectData.myProjectInfos.ProjectPath, true);
             GlobalPages.PageGoBack();
         }
