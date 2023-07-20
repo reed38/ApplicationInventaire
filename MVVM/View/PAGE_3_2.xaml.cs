@@ -89,60 +89,8 @@ namespace ApplicationInventaire.MVVM.View
         private Section currentSection;
 
         #endregion
-        private void SetBorderPosition()
-        {
-            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
-            ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
 
-
-        }
-       
-        private void ChangeFrameCoordinates(double x, double y)
-        {
-            this.RedFrameImage.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.RedFrameImage, x);
-            Canvas.SetTop(this.RedFrameImage, y);
-        }
-
-        private void ChangeLabelcoordinates(double x, double y)
-        {
-            this.LabelNameTag.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.LabelNameTag, x - 80);
-            Canvas.SetTop(this.LabelNameTag, y - 80);
-
-        }
-
-        private void HideTextBoxSerialNumberConstructor()
-        {
-            TextBoxSerialNumber.Visibility = Visibility.Hidden;
-            TextBoxConstructor.Visibility = Visibility.Hidden;
-            labelConstructor.Visibility = Visibility.Hidden;
-            labelSerialNumber.Visibility = Visibility.Hidden;
-        }
-
-        private void ShowTextBoxSerialNumberConstructor()
-        {
-            TextBoxSerialNumber.Visibility = Visibility.Visible;
-            labelConstructor.Visibility = Visibility.Visible;
-            labelSerialNumber.Visibility = Visibility.Visible;
-            TextBoxConstructor.Visibility = Visibility.Visible;
-        }
-
-        private void ResetTextBox()
-        {
-            TextBoxComment.Clear();
-            TextBoxConstructor.Clear();
-            TextBoxSerialNumber.Clear();
-
-        }
-
-        private void HideFrameAndLabel()
         
-        {
-            this.LabelNameTag.Visibility = Visibility.Hidden;
-            this.RedFrameImage.Visibility=Visibility.Hidden;
-        }
-       
        
 
 
@@ -230,6 +178,60 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
         #region GIMethods 
 
+        private void SetBorderPosition()
+        {
+            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
+            ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
+
+
+        }
+       
+        private void ChangeFrameCoordinates(double x, double y)
+        {
+            this.RedFrameImage.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.RedFrameImage, x);
+            Canvas.SetTop(this.RedFrameImage, y);
+        }
+
+        private void ChangeLabelcoordinates(double x, double y)
+        {
+            this.LabelNameTag.Visibility = Visibility.Visible;
+            Canvas.SetLeft(this.LabelNameTag, x - 80);
+            Canvas.SetTop(this.LabelNameTag, y - 80);
+
+        }
+
+        private void HideTextBoxSerialNumberConstructor()
+        {
+            TextBoxSerialNumber.Visibility = Visibility.Hidden;
+            TextBoxConstructor.Visibility = Visibility.Hidden;
+            labelConstructor.Visibility = Visibility.Hidden;
+            labelSerialNumber.Visibility = Visibility.Hidden;
+        }
+
+        private void ShowTextBoxSerialNumberConstructor()
+        {
+            TextBoxSerialNumber.Visibility = Visibility.Visible;
+            labelConstructor.Visibility = Visibility.Visible;
+            labelSerialNumber.Visibility = Visibility.Visible;
+            TextBoxConstructor.Visibility = Visibility.Visible;
+        }
+
+        private void ResetTextBox()
+        {
+            TextBoxComment.Clear();
+            TextBoxConstructor.Clear();
+            TextBoxSerialNumber.Clear();
+
+        }
+
+        private void HideFrameAndLabel()
+        
+        {
+            this.LabelNameTag.Visibility = Visibility.Hidden;
+            this.RedFrameImage.Visibility=Visibility.Hidden;
+        }
+       
         #endregion
 
         #region PrivateMethods
@@ -253,6 +255,7 @@ namespace ApplicationInventaire.MVVM.View
         private void FindNextNoPresent()
         {
             ImageReleve = null;
+            ImageReleveName.Source = null;
 
             if (IndiceSection == projectData.mySections.Count - 1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
             {
@@ -354,7 +357,15 @@ namespace ApplicationInventaire.MVVM.View
             if (result == true)
             {
                 string filePath = saveFileDialog.FileName;
-                File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
+                try
+                {
+                    File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
+                }
+                catch(Exception e )
+                {
+                    POPUP.ShowPopup("error this file is already open by another process");
+                    SaveAndQuit();
+                }
 
             }
 
@@ -450,8 +461,9 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-     #endregion
+        #endregion
 
+       
 
     }
 }

@@ -80,8 +80,15 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonDeleteProjectClick(object sender, RoutedEventArgs e)
         {
-           
-            Directory.Delete(projectData.myProjectInfos.ProjectPath, true);
+            try
+            {
+                Directory.Delete(projectData.myProjectInfos.ProjectPath, true);
+
+            }
+            catch (Exception ex)
+            {
+                POPUP.ShowPopup("error when deleting a file is being used");
+            }
             GlobalPages.PageGoBack();
         }
 
@@ -99,5 +106,7 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
        
+
+
     }
 }

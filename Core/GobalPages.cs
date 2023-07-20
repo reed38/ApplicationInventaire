@@ -72,6 +72,12 @@ namespace ApplicationInventaire.Core.GlobalPages
                 int i = GlobalPages.LastPages.Count - 1;
                 Uri tmp = GlobalPages.LastPages[i];
                 GlobalPages.LastPages.Remove(tmp);
+                if(GlobalPages.CurrentPage==PAGE_3_2)
+                {
+               
+                   page_3_2.BackgroundImageSection.ImageSource = null;
+                    page_3_2.ImageReleveName.Source = null;
+                        }
                 GlobalPages.CurrentPage = tmp;
                 GlobalPages.SetCurrentPageBack(GlobalPages.CurrentPage);
             }
@@ -79,6 +85,7 @@ namespace ApplicationInventaire.Core.GlobalPages
             {
                 mainWindow.StackPanelCurrentTemplate.Visibility= Visibility.Collapsed;
             }
+            
         }
     }
 }

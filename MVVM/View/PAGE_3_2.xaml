@@ -35,7 +35,7 @@
            
                 >
             <Canvas.Background  >
-                <ImageBrush ImageSource="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform" />
+                <ImageBrush x:Name="BackgroundImageSection" ImageSource="{Binding ImageSection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform" />
 
             </Canvas.Background>
 
@@ -110,10 +110,12 @@
                     HorizontalAlignment="Stretch"
                     Stretch="Uniform"
                     Margin="0,10,0,20"
-                    Name="ReleveImagepage"
+                    x:Name="ImageReleveName"
+                   
                     Source="{Binding ImageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     
-                 />
+                 /> 
+
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                     <Label x:Name="labelSerialNumber" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
                     ></Label>
