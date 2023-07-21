@@ -45,6 +45,11 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
         #region methodsUI
 
+        private void ButtonEditProjectClick(object sender, RoutedEventArgs e)
+        {
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_6_1);
+        }
+
         private void ButtonPlanClick(object sender, RoutedEventArgs e)
         {
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_3);
@@ -103,10 +108,11 @@ namespace ApplicationInventaire.MVVM.View
         }
 
 
+
+
+
         #endregion
 
        
-
-
     }
 }

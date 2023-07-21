@@ -5,28 +5,29 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationInventaire.MVVM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1200"
       Title="PAGE_3_1"
       Background="#116396"
       >
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="350" Margin="50,70,510,10">
-            
+
             <Button Content="Plan" Height="50" Margin="0,5"  x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
             <Button Content="Continue Inventory" Height="50" Margin="0,5"  x:Name="ButtonContinueInventory" Click="ButtonContinueInventoryClick"/>
             <Button Content="New inventory" Height="50" Margin="0,5" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
             <Button Content="Search with tag" Height="50" Margin="0,5" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
             <Button Content="Search with Image" Height="50" Margin="0,5" x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
+            <Button Content="Edit Template" Height="50" Margin="0,5" x:Name="ButtonEditProject" Click="ButtonEditProjectClick"/>
             <Button Content="DeleteTemplate" Height="50" Margin="0,5" x:Name="ButtonDeleteProject" Click="ButtonDeleteProjectClick"/>
 
             <!--<Button Content="Modify" Height="50" Margin="0,5"  x:Name="ButtonModify" Click="ButtonModifyClick"/>-->
 
         </StackPanel>
-        
-        
-        
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Height="300" Width="350" Background="White" Margin="50">
+
+
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="590" Background="White" Margin="0,70,50,75">
 
             <StackPanel Orientation="Vertical">
                 <Label FontSize="15" Content="Author: " FontWeight="SemiBold" Margin="5,10,0,0"/>
@@ -42,7 +43,7 @@
                             x:Name="TextBlockDesciption" FontSize="15"  Background="White"  />
 
             </StackPanel>
-            
+
         </StackPanel>
 
 

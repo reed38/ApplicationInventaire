@@ -34,7 +34,13 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_3_4 = this;
             this.projectData = GlobalProjectData.CurrentProjectData;
             this.IndiceSection = 0;
-            this.ImageSection3 = this.projectData.ImageSectionList[IndiceSection].Path;
+            foreach(var i in projectData.ImageSectionList)
+            {
+                if (i.Name.Equals(projectData.mySections[IndiceSection].SectionName))
+                {
+                    this.ImageSection3 = i.Path;
+                }
+            }
             InitializeOverlay();
 
 

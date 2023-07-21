@@ -1,0 +1,221 @@
+﻿<Page x:Class="ApplicationInventaire.MVVM.View.PAGE_3_6_1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ApplicationInventaire.MVVM.View"
+      xmlns:StaticVar="clr-namespace:ApplicationInventaire.Core.GlobalProjectData"
+      mc:Ignorable="d"  
+      Background="#116396"
+
+      Title="PAGE_3_6_1"
+       d:DesignWidth="1920"     
+
+       d:DesignHeight="450"    >
+
+
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" >
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" 
+                    Margin="20,20,20,20">
+
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="15" Content="Name:          " Foreground="White"/>
+                    <TextBox x:Name="TextBoxName" Background="White" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Label FontSize="15" Content="Description: " Foreground="White"/>
+                    <TextBox Height="100" x:Name="TextBoxDescription" Background="White" Width="200" TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                    <Label FontSize="15" Content="Author:        " Foreground="White"/>
+                    <TextBox Height="25" x:Name="TextBoxAuthor" Background="White" Width="200" />
+                </StackPanel>
+
+
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                    <Button Height="25" Width="120"
+                   HorizontalAlignment="Center"
+                    Margin="5"
+                    Content="Add Sections Images"
+                    Click="ButtonClickSelectImageSection"/>
+
+                    <Button Height="25" Width="120"
+                   HorizontalAlignment="Center"
+                    Margin="5"
+                    Content="Add Releve Image"
+                    Click="ButtonClickSelectImageReleve"/>
+
+
+
+
+                    <Button Height="25" Width="120"
+                   HorizontalAlignment="Center"
+                    Margin="5"
+                    Content="Add Plans"
+                    Click="ButtonClickSelectPlans"/>
+
+                    <Button Height="25" Width="120" Content="Select Excel File"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                        Margin="5"
+                    Click="ButtonClickSelectExcel" />
+
+                </StackPanel>
+
+
+
+
+
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Height="350" Width="800"  VerticalAlignment="Top"
+                    HorizontalAlignment="Center" >
+
+
+
+
+
+                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="   Selected Section images: "  Foreground="White" FontSize="15"/>
+                    <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Center"
+                      Height="200"
+                      Width="150">
+                        <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="150" Height="200"
+                          SelectionChanged="ListBoxSectionSelectionChanged"
+>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+
+                    <Button Height="25" Width="150"
+                x:Name="ButtonDeleteImage"
+                Content="Delete selected"
+                Click="ButtonClickDeleteSectionSelected"/>
+
+                </StackPanel>
+
+
+
+                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="   Selected Releve images: "  Foreground="White" FontSize="15"/>
+                    <ScrollViewer x:Name="ListBoxReleveFile"   VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Center"
+                      Height="200"
+                      Width="150">
+                        <ListBox ItemsSource="{Binding ImageReleveName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="150" Height="200"
+                          SelectionChanged="ListBoxReleveSelectionChanged"
+>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+
+                    <Button Height="25" Width="150"
+                x:Name="ButtonDeleteImageReleve"
+                Content="Delete selected"
+                Click="ButtonClickDeleteReleveSelected"/>
+
+                </StackPanel>
+
+
+
+
+
+                <StackPanel Orientation="Vertical" Margin="10" Height="300" >
+                    <Label Content="    Selected Plans: "  Foreground="White" FontSize="15" />
+                    <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Center"
+                      Height="200"
+                      Width="150">
+                        <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="150" Height="200"
+                          SelectionChanged="ListBoxPlanFileSelectionChanged"
+>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+
+
+                    </ScrollViewer>
+
+                    <Button Height="25" Width="150"
+                 x:Name="ButtonDeletePlan"
+                Content="Delete selected"
+                Click="ButtonClickDeletePlanSelected"/>
+
+                </StackPanel>
+
+                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                    <Label Content="Selected Excel File: " 
+                       Foreground="White"
+                       FontSize="15"
+
+                   />
+                    <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
+                       Height="25" Width="150"
+                      Background="White" HorizontalAlignment="Center"
+                           
+                          />
+                </StackPanel>
+
+
+
+
+
+
+
+
+
+
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+
+
+        <Button Height="25" Width="120" Content="save and continue"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                Margin="10"
+                Click="ButtonClickSaveContinu"
+         />
+
+
+
+
+
+
+
+
+
+
+
+
+    </Grid>
+
+
+
+
+
+
+</Page>
