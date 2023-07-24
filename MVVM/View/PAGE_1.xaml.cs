@@ -112,10 +112,15 @@ namespace ApplicationInventaire.MVVM.View
 
         {
             string zipPath = FileManager.OpenSelectZipLoadPopup();
-            string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(zipPath));
-            ZipFile.ExtractToDirectory(zipPath, dest);
+            if(!string.IsNullOrEmpty(zipPath))
+            {
+                string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(zipPath));
+                ZipFile.ExtractToDirectory(zipPath, dest);
 
-            Items2.Add(System.IO.Path.GetFileNameWithoutExtension(dest)); //we add the name of te new project to the project list
+                Items2.Add(System.IO.Path.GetFileNameWithoutExtension(dest)); //we add the name of te new project to the project list
+
+
+            }
 
 
 
