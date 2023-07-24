@@ -22,7 +22,7 @@ using ApplicationInventaire.Core.ProjectDataSet;
 namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour PAGE_1_1.xaml
+    /// The user clicked on export
     /// </summary>
     public partial class PAGE_1_1 : Page, INotifyCollectionChanged, INotifyPropertyChanged
     {
@@ -31,7 +31,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_1_1 = this;
             DataContext = this;
-            ProjectNameList = new ObservableCollection<string>(GlobalProjectData.GetProjectNames());
+            ProjectNameList = new ObservableCollection<string>(GlobalProjectData.GetProjectNames()); //we get the list of the project available in the UserData folder
             ProjectPathList = GlobalProjectData.GetProjecPaths(); //going through the UserData folder and initializing ProjectPathList
 
 
@@ -77,27 +77,27 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateMethods
 
-        private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListBoxSectionFileSelectionChanged(object sender, SelectionChangedEventArgs e) //used to kow when the user change selection
         {
             ListBox listBox = (ListBox)sender;
-            selectedValue = (string)listBox.SelectedItem;
+            selectedValue = (string)listBox.SelectedItem; //update the value of the currently selected item
         }
 
         #endregion
 
         #region UIMethods
 
-        private void ButtonClickExportTemplate(object sender, RoutedEventArgs e)
+        private void ButtonClickExportTemplate(object sender, RoutedEventArgs e) //the user click on the export button 
         {
-            if(string.IsNullOrEmpty(selectedValue))
+            if(string.IsNullOrEmpty(selectedValue)) //nothing is selected => problem
             {
                 POPUP.ShowPopup("Please select a template to export");
                 return;
             };
             string TemplateFolderPath = ProjectPathList[ProjectNameList.IndexOf(selectedValue)];
             string destPath = FileManager.OpenSelectZipSavePopup(selectedValue);
-            FileManager.CreateZipArchive(TemplateFolderPath, destPath);
-            GlobalPages.PageGoBack();
+            FileManager.CreateZipArchive(TemplateFolderPath, destPath); //a zip archive is created at the selected location
+            GlobalPages.PageGoBack(); //going back to main menu
         }
 
         #endregion

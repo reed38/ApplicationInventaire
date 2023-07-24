@@ -38,21 +38,22 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_2 = this;
             DataContext = this;
-            projectData = GlobalProjectData.CurrentProjectData;
-            this.RedFramePath = GlobalProjectData.RedFramePath;
+            projectData = GlobalProjectData.CurrentProjectData; //Loading project Data from classic class
+            this.RedFramePath = GlobalProjectData.RedFramePath; //the image used in multiples pages have their path stored in the static class
           
           
-            projectData.InitializePieceFromExcel();
+            projectData.InitializePieceFromExcel(); //We re initialize the data using the excel file. This is useful if a new inventory is made without reloading the project, or if
+            //the user clicked on "continu inventory"
 
-            ResetTextBox();
-            HideTextBoxSerialNumberConstructor();
-            RedFrameImage.Visibility = Visibility.Visible;
+            ResetTextBox(); //reset Comment, Serial Number, and Constructot textBox
+            HideTextBoxSerialNumberConstructor(); //Hide it by default since we don't know if upcomming piece require it or not
+            RedFrameImage.Visibility = Visibility.Visible; //hide red frame
             IndiceSection = 0;
-            IndicePiece = 0;
-            FindNextNoPresent();
-            IndiceSection = CurrentPiece.SectionId - 1;
+            IndicePiece = 0; 
+            FindNextNoPresent(); //this will update the Indice Section and IndicePiece with the ones corresponding to the first Piece with the field "IsPresent=0"
+            IndiceSection = CurrentPiece.SectionId - 1; //The library used to store data in a sqlite database have an Indice starting at 1
 
-            foreach (ImageInfos im in this.projectData.ImageSectionList)
+            foreach (ImageInfos im in this.projectData.ImageSectionList) //initializing the current Section Image on the path
             {
                 if (im.Name == projectData.mySections[IndiceSection].SectionName)
                 {
@@ -62,7 +63,7 @@ namespace ApplicationInventaire.MVVM.View
                 }
             }
 
-            SetBorderPosition();
+            SetBorderPosition(); //initializing the position of the red frame  and the label containing NameTag
 
         }
         #region Variables
@@ -71,7 +72,7 @@ namespace ApplicationInventaire.MVVM.View
         private ProjectData projectData { set; get; }
         #endregion
 
-        #region bindingVariablesSources
+        #region bindingVariablesSources 
         private string imageSection;
         private string redFramePath;
         private string imageReleve;
@@ -170,9 +171,15 @@ namespace ApplicationInventaire.MVVM.View
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
-     
+
         #region GIMethods 
 
+        /// <summary>
+        /// This function changes the postion of the frame and the label  in function of CurrentPiece.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// 
         private void SetBorderPosition()
         {
             ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
@@ -180,7 +187,6 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-       
         private void ChangeFrameCoordinates(double x, double y)
         {
             this.RedFrameImage.Visibility = Visibility.Visible;
@@ -188,6 +194,11 @@ namespace ApplicationInventaire.MVVM.View
             Canvas.SetTop(this.RedFrameImage, y);
         }
 
+        /// <summary>
+        /// Change the coodinate of the NameTag Label.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void ChangeLabelcoordinates(double x, double y)
         {
             this.LabelNameTag.Visibility = Visibility.Visible;
@@ -231,6 +242,9 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateMethods
 
+        /// <summary>
+        /// Update the value of currentPiece in function on the value of IndiceSection and IndicePiece
+        /// </summary>
         private void UpdateCurrent()
         {
             this.CurrentSection = projectData.mySections[IndiceSection];
@@ -238,28 +252,34 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// this function is used when the targeted Piece change
+        /// </summary>
+        /// <param name="answ"> the value written in the cell of the excel file. "1" or "0" </param>
         private void GotoNextPiece(string answ)
         {
-            ManageReleveImage();
             projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, answ, currentPiece.ExcelColumn, currentPiece.ExcelRow);
-            FindNextNoPresent();
+            FindNextNoPresent(); //Find the next Piece with the field "IsPresent" set to 0, and Update Section image, IndiceSection , IndicePiece accordingly
             SetBorderPosition();
 
         }
 
+        /// <summary>
+        /// Thuis function is used to find the next Piece with the fiels "IsPresent" set to . It Updates IndiceSection, IndicePiece, Image section and ImageReleve by doing so.
+        /// </summary>
         private void FindNextNoPresent()
         {
             ImageReleve = null;
             ImageReleveName.Source = null;
 
-            if (IndiceSection == projectData.mySections.Count - 1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
+            if (IndiceSection == projectData.mySections.Count - 1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)//if the user wen through everything
             {
                 SaveAndQuit();
                 return;
 
             }
 
-            else if (IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)
+            else if (IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count) //if the user went throuht all the Pieces in the current Section
             {
                 IndiceSection++;
                 IndicePiece = 0;
@@ -267,7 +287,7 @@ namespace ApplicationInventaire.MVVM.View
                 {
                     if (im.Name == projectData.mySections[IndiceSection].SectionName)
                     {
-                        ImageSection = im.Path;
+                        ImageSection = im.Path; //updating Section image on te page
                         break;
 
                     }
@@ -288,7 +308,7 @@ namespace ApplicationInventaire.MVVM.View
                         this.IndicePiece = piece;
                         this.IndiceSection = section;
                         UpdateCurrent();
-                        if (this.CurrentPiece.IsReleveRequired == 1)
+                        if (this.CurrentPiece.IsReleveRequired == 1) 
                         {
                             ShowTextBoxSerialNumberConstructor();
                             foreach (ImageInfos i in projectData.ImageReleveList)
@@ -313,25 +333,14 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
        
-        private void ManageReleveImage()
-        {
-            if (this.CurrentPiece.IsReleveRequired == 1)
-            {
-                foreach (ImageInfos i in projectData.ImageReleveList)
-                {
-                    if (i.Name.Equals(this.CurrentPiece.PieceName))
-                    {
-                        imageReleve = i.Path;
-                        break;
-                    }
-                }
-            }
-
-        }
+ 
 
 
 
-
+        /// <summary>
+        /// Called when the User reached the end of the inventory or when he chosses to save and quit. 
+        /// This function shows a pop up asking to select a location where to save the excelfile, and then save it to that location, 
+        /// </summary>
         private void SaveAndQuit()
         {
             projectData.myTmpExcelFile.UpdateExcelFormula();
@@ -366,7 +375,9 @@ namespace ApplicationInventaire.MVVM.View
 
             GlobalPages.SetCurrentPageBack(GlobalPages.PAGE_3_1);
         }
-
+        /// <summary>
+        /// This function is used to write in the excel file int the comment column at the corresponding row  the string contained in the Comment textBox.
+        /// </summary>
         private void UpdateComment()
         {
             if (!TextBoxComment.Text.Equals(string.Empty))
@@ -379,7 +390,9 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-
+        /// <summary>
+        /// This function is used to write in the excel file the serial number at the corresponding row and column.
+        /// </summary>
         private void UpdateSerialNumber()
         {
             if (!TextBoxSerialNumber.Text.Equals(string.Empty))
@@ -392,7 +405,9 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-
+        /// <summary>
+        /// This function writes the constructor name in the excel file at the corresponding column and row.
+        /// </summary>
         private void UpdateConstructor()
         {
             if (!TextBoxConstructor.Text.Equals(string.Empty))
@@ -414,6 +429,11 @@ namespace ApplicationInventaire.MVVM.View
 
         #region UIMethods
 
+        /// <summary>
+        /// The user clicked on the button Save and Quit. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
         {
             UpdateSerialNumber();
@@ -422,6 +442,11 @@ namespace ApplicationInventaire.MVVM.View
             SaveAndQuit();
         }
 
+        /// <summary>
+        /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 0 int the excel file in the colum Present
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickNo(object sender, RoutedEventArgs e)
         {
             ResetTextBox();
@@ -430,7 +455,11 @@ namespace ApplicationInventaire.MVVM.View
             GotoNextPiece("0");
 
         }
-
+        /// <summary>
+        /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 1 in the excel file in the colum Present
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickYes(object sender, RoutedEventArgs e)
         {
             if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
@@ -449,13 +478,8 @@ namespace ApplicationInventaire.MVVM.View
 
 
         }
-
-        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            PopupNoSerialNumberConstructor.IsOpen = false;
-
-        }
-
+  
+     
         #endregion
 
        

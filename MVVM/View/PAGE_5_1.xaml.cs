@@ -29,6 +29,7 @@ namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
     /// Logique d'interaction pour PAGE_5_1.xaml
+    /// The user clicked on the button Search with Tags
     /// </summary>
     public partial class PAGE_5_1 : Page
     {
@@ -52,7 +53,7 @@ namespace ApplicationInventaire.MVVM.View
         /// <summary>  
         /// Auto suggestion list property.  
         /// </summary>  
-        private List<string> autoSuggestionList = new List<string>();
+        private List<string> autoSuggestionList = new List<string>(); //used to contains the names of the Piece and shw suggestions
 
         #endregion
                
@@ -211,11 +212,20 @@ namespace ApplicationInventaire.MVVM.View
        
         #region UIMethods
 
+        /// <summary>
+        /// The user clicked on the button Enter after having entered a NameTag.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSeachEnter(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.CurrentPieceName = autoTextBox.Text;
-            autoTextBox.Clear();
-            GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
+            if(!String.IsNullOrEmpty(autoTextBox.Text))
+            {
+             GlobalProjectData.CurrentPieceName = autoTextBox.Text;
+             autoTextBox.Clear();
+              GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
+            }
+           
 
         }
         #endregion

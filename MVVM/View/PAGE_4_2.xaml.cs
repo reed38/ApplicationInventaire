@@ -25,6 +25,7 @@ namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
     /// Logique d'interaction pour PAGE_4_2.xaml
+    /// The user was on PAGE_4_1 and clicked on Save and Continu
     /// </summary>
     public partial class PAGE_4_2 : Page, INotifyPropertyChanged
     {
@@ -204,11 +205,11 @@ namespace ApplicationInventaire.MVVM.View
         #region PrivateVariables
 
         private ProjectData projectData;
-        private Piece CurrentPiece;
+        private Piece CurrentPiece; 
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private (Image, Piece) tmp; //used to pass argument
         private int IndiceSection;
-        private int ImageMarkerWidth = 20;
+        private const int ImageMarkerWidth = 20;
 
         #endregion
 

@@ -53,7 +53,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
     /// <summary>
-    /// used to contain image path and image name
+    /// Used to store Path of the application data as well as other infomations such as name, description author.
     /// </summary>
 
     public class ProjectInfos
@@ -267,6 +267,10 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.ImageSectionList = result;
 
         }
+
+        /// <summary>
+        /// Used to Initialize ImageReleveList with the list of the image name and path used for releve
+        /// </summary>
         public void GetRelevesNames()
         {
 
@@ -319,7 +323,10 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
  
-
+        /// <summary>
+        /// Used to return the nameTag presents in the given excel file
+        /// </summary>
+        /// <returns>List<string> containing the nameTags</string></returns>
         public List<string> GetPieceNames()
         {
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
@@ -356,6 +363,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         }
 
+        /// <summary>
+        /// Go through the excelfile and initialize the data structure using it. It is used to know which piece is already present and which one require its serial number to be be written down
+        /// </summary>
         public void InitializePieceFromExcel()
         {
             CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
@@ -446,6 +456,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #endregion
 
         #region debuging
+        /// <summary>
+        /// used fo debugging and displaying all data relative to a ProjectData object in the terminal
+        /// </summary>
         public void DispDataProjectData()
         {
             myProjectInfos.DispDataProjectInfos();

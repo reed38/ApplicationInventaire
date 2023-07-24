@@ -26,6 +26,7 @@ namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
     /// Logique d'interaction pour PAGE_3_6_1.xaml
+    /// The user clicked on the button edit template.
     /// </summary>
     public partial class PAGE_3_6_1 : Page, INotifyPropertyChanged, INotifyCollectionChanged
     {
@@ -51,13 +52,13 @@ namespace ApplicationInventaire.MVVM.View
 
         #region BindingVariables
 
-        private ObservableCollection<string> imageSectionsName = new ObservableCollection<string>();
-        private ObservableCollection<string> imageReleveName = new ObservableCollection<string>();
-        private ObservableCollection<string> plansNameList = new ObservableCollection<string>();
+        private ObservableCollection<string> imageSectionsName = new ObservableCollection<string>(); //used to display sections names on the page
+        private ObservableCollection<string> imageReleveName = new ObservableCollection<string>(); //used to display releve names on the age
+        private ObservableCollection<string> plansNameList = new ObservableCollection<string>(); //used to display plan names on the page
         private string excelName;
-        private string selectedValueSection;
-        private string selectedValueReleve;
-        private string selectedValuePlan;
+        private string selectedValueSection;//field in the section list currently selected by the user
+        private string selectedValueReleve; //field in the Releve list currently selected by the user
+        private string selectedValuePlan; //field in the Plan list currently selected by the user
 
         #endregion
 
@@ -142,9 +143,8 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateMethods
         /// <summary>
-        /// this function will load curent project informations about author, descriptio, Section Image, plan ... in the textbox
+        /// this function will load curent project informations about author, description, Section Image, plan  in the TextBoxes and List as well as in the data structure. 
         /// </summary>
-
         private void InitializeFields()
         {
             ///textBox
@@ -224,8 +224,13 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region UIMethods
-        #region UImethods
 
+        /// <summary>
+        /// The user clicked on the Button SelectImageSection. It opens pop up windows to select images files on the computer. If images were selected, their names and paths are 
+        /// are added to private variables  imageSectionsInfos and  ImageSectionName
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSelectImageSection(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
@@ -239,6 +244,12 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
+        /// <summary>
+        /// The user clicked on the Button SelectImageReleve. It opens pop up windows to select images files on the computer. If images were selected, their names and paths are 
+        /// are added to private variables  imageReleveInfos and  ImageReleveName
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSelectImageReleve(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
@@ -252,12 +263,22 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
+        /// <summary>
+        /// This function open a pop up window to select an excel file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSelectExcel(object sender, RoutedEventArgs e)
         {
             excelPath = FileManager.OpenExcelFilePopup();
             ExcelName = Path.GetFileNameWithoutExtension(excelPath);
         }
 
+        /// <summary>
+        /// The user clicked on the button Save and Continu. This function create the file structure correponding to a project (ith the right name), and copy selected files in it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSaveContinu(object sender, RoutedEventArgs e)
         {
             if (CheckAllIsHere() == false)
@@ -332,6 +353,11 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// This function open a pop up windows to select pdf files.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSelectPlans(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenPdfPopup();
@@ -348,6 +374,11 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// The User clicked on the button delete selected under the plans list. This will remove the path and name of the pdf from the data structure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickDeletePlanSelected(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < PlansNameList.Count; i++)
@@ -361,7 +392,11 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
-
+        /// <summary>
+        /// The User clicked on the button delete selected under the Sections Image list. This will remove the path and name of the Image from the data structure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickDeleteSectionSelected(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < imageSectionsInfos.Count; i++)
@@ -375,7 +410,11 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
-
+        /// <summary>
+        /// The User clicked on the button delete selected under the Releve Image list. This will remove the path and name of the Image from the data structure.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickDeleteReleveSelected(object sender, RoutedEventArgs e)
         {
 
@@ -390,14 +429,13 @@ namespace ApplicationInventaire.MVVM.View
             }
 
         }
+        #endregion
+
 
 
     }
 
 
-    #endregion
-
-    #endregion
 }
 
 

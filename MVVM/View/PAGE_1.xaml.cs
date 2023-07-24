@@ -43,7 +43,7 @@ namespace ApplicationInventaire.MVVM.View
             DataContext = this;
             InitializeComponent();
 
-            Items2 = new((GlobalProjectData.GetProjectNames()).ToList());
+            Items2 = new((GlobalProjectData.GetProjectNames()).ToList()); //list of the project present in the UserData  folder
             GlobalPages.page_1 = this;
 
         }
@@ -56,7 +56,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region bindingMethods
 
-        public ObservableCollection<string> Items2
+        public ObservableCollection<string> Items2  //used to automatically update the list 
         {
             get { return items2; }
             set
@@ -69,7 +69,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName) //same
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -87,11 +87,12 @@ namespace ApplicationInventaire.MVVM.View
 
         #region UImethods
 
-        private void ButtonMainMenuSelectTypeClick(object sender, RoutedEventArgs e)
+        private void ButtonMainMenuSelectTypeClick(object sender, RoutedEventArgs e) //when the user click on a given project
         {
             Button clickedButton = (Button)sender;
-            GlobalProjectData.CurrentProjectName = clickedButton.Content.ToString();
-            GlobalProjectData.CurrentProjectData = new(new(GlobalProjectData.CurrentProjectName));
+            GlobalProjectData.CurrentProjectName = clickedButton.Content.ToString(); //to pass variables through page a static class "GlobalProjectData" is used. It's probably not the bes
+            //way to do it but  it works
+            GlobalProjectData.CurrentProjectData = new(new(GlobalProjectData.CurrentProjectName)); //initializing the corresponding GlobalProjectData in the static class
 
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
             GlobalPages.mainWindow.labelTemplateName.Content = GlobalProjectData.CurrentProjectName;// we update the banner to display the current projectName
@@ -101,20 +102,20 @@ namespace ApplicationInventaire.MVVM.View
 
             }
 
-        private void ButtonClickNew(object sender, RoutedEventArgs e)
+        private void ButtonClickNew(object sender, RoutedEventArgs e) //creating a new template/project
         {
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_1);
 
         }
 
-        private void ButtonClickLoad(object sender, RoutedEventArgs e)
+        private void ButtonClickLoad(object sender, RoutedEventArgs e) //loading a project from a zip file
 
         {
             string zipPath = FileManager.OpenSelectZipLoadPopup();
             string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(zipPath));
             ZipFile.ExtractToDirectory(zipPath, dest);
 
-            Items2.Add(System.IO.Path.GetFileNameWithoutExtension(dest));
+            Items2.Add(System.IO.Path.GetFileNameWithoutExtension(dest)); //we add the name of te new project to the project list
 
 
 

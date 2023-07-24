@@ -31,6 +31,8 @@ namespace ApplicationInventaire.MVVM.View
 
     /// <summary>
     /// Logique d'interaction pour PAGE_4_1.xaml
+    /// The user clicked on the button new.
+    /// Most of the code used here is the same as PAGE_3_6_1
     /// </summary>
     public partial class PAGE_4_1 : Page, INotifyPropertyChanged, INotifyCollectionChanged
     {

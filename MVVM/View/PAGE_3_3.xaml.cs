@@ -24,7 +24,7 @@ using Microsoft.Win32;
 namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour PAGE_3_3.xaml
+    ///The User clicked on the Plan button.
     /// </summary>
     public partial class PAGE_3_3 : Page, INotifyCollectionChanged, INotifyPropertyChanged
     {
@@ -33,8 +33,8 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_3 = this;
             DataContext = this;
-            PlansNameList = new ObservableCollection<string>(GlobalProjectData.GetPlansNames());
-            PlansPathList = GlobalProjectData.GetPlansPath();
+            PlansNameList = new ObservableCollection<string>(GlobalProjectData.GetPlansNames());// we get the list of tha plans
+            PlansPathList = GlobalProjectData.GetPlansPath(); //we het th path to the plan pdf
             InitilizePdfReaderExe();
         }
 
@@ -78,7 +78,11 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region UIMethods
-       
+       /// <summary>
+       /// The user clicked on the button slect file
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void ButtonClickOpenFile(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(selectedValue))
@@ -100,6 +104,9 @@ namespace ApplicationInventaire.MVVM.View
             selectedValue = (string)listBox.SelectedItem;
         }
 
+        /// <summary>
+        /// This used is used to gat the path of the excecutable cofigured as default pdf reader on windows. It updates the private variable PdfReaderExecutablePath
+        /// </summary>
         private void InitilizePdfReaderExe()
         {
             string fileExtension = ".pdf";
@@ -122,6 +129,10 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
+        /// <summary>
+        /// This function Open the pdf given in argument using the path of the executable found earlier with InitilizePdfReaderExe()
+        /// </summary>
+        /// <param name="pdfFilePath"> path to the pdf file</param>
         private void OpenPdf(string pdfFilePath)
 
         {

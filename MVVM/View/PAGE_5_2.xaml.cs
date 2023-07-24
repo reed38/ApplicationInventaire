@@ -24,6 +24,7 @@ namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
     /// Logique d'interaction pour PAGE_5_2.xaml
+    /// The User wad on PAGE_5_1 and clicked on "Enter"
     /// </summary>
     public partial class PAGE_5_2 : Page, INotifyPropertyChanged
     {

@@ -24,9 +24,9 @@
                              Background="White"
                              Width="220"     
                              Height="30"    
-                             FontSize="18"      
+                             FontSize="15"      
                              HorizontalAlignment="Center"     
-                             VerticalAlignment="Top"     
+                             VerticalAlignment="Center"     
                              BorderThickness="0"    
                              VerticalContentAlignment="Center"    
                              HorizontalContentAlignment="Center"    
@@ -35,7 +35,7 @@
                              TextChanged="AutoTextBox_TextChanged"/>
                     <Button Content="Enter" 
                             VerticalAlignment="Center"
-                            Width="55" Height="30"
+                            Width="55" Height="32"
                             x:Name="ButtonSearchEnter"
                             Click="ButtonClickSeachEnter" 
                             Visibility="Visible"/>

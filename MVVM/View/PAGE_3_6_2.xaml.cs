@@ -22,6 +22,8 @@ namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
     /// Logique d'interaction pour PAGE_3_6_2.xaml
+    /// The user was on  PAGE_3_6_1 and clicked on Save And Continu.
+    /// Most of the functions used in ths page are similars to the one used before.
     /// </summary>
     public partial class PAGE_3_6_2 : Page,INotifyPropertyChanged
     {
@@ -83,6 +85,7 @@ namespace ApplicationInventaire.MVVM.View
 
         /// <summary>  
         ///  Open Auto Suggestion box method  
+        ///  The user was on 3_6_1 and clicked on save and continu
         /// </summary>  
         private void OpenAutoSuggestionBox()
         {
@@ -208,10 +211,10 @@ namespace ApplicationInventaire.MVVM.View
 
         private ProjectData projectData;
         private Piece CurrentPiece;
-        private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
+        private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();//list containing infos about the instances of little red circles on the Image
         private (Image, Piece) tmp; //used to pass argument
         private int IndiceSection;
-        private int ImageMarkerWidth = 20;
+        private int ImageMarkerWidth = 20;//used to define the width of the little red circles
 
         #endregion
 
@@ -258,12 +261,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region GIMethods
 
-        private void SetBorderPosition()
-        {
-            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
-
-
-        }
+        
 
         private void ChangeFrameCoordinates(double x, double y)
         {
@@ -280,6 +278,11 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// Used to change the coordinate of the Delete Selected button
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void ChangeButtonDeleteSelectedlcoordinates(double x, double y)
         {
             this.ButtonDeleteSelected.Visibility = Visibility.Visible;
@@ -288,6 +291,9 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// Hide the elements appearing when clicking on an already existing Piece
+        /// </summary>
         private void HideEditPieceOverlay()
         {
             LabelNameTag.Visibility = Visibility.Hidden;
@@ -339,11 +345,21 @@ namespace ApplicationInventaire.MVVM.View
 
         #region UImethods
 
+        /// <summary>
+        /// The user clicked on the button Save after having created a new Piece and entered its name. The function add the Piece to the data structure
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             SavePiece();
         }
 
+        /// <summary>
+        /// Used to save the Piece when the user press the "enter"key
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxNameTagKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -354,6 +370,15 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+
+        /// <summary>
+        /// This function is called whenever the user click on the canva. 
+        /// The function will check if the user clicked on an already existing Piece. 
+        /// If yes it will show the piece name tag and description and propose to delete it.
+        /// If no a text box with a "Save" button will appear for the user to create a new Piece.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ResetFields();
@@ -394,6 +419,12 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// The User has finished working with current section and clicked on the Button Next.
+        /// This will cycle forward of 1 throught Sections, and update the Section Image as well as the overlay.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSaveGoToNext(object sender, RoutedEventArgs e)
         {
             IndiceSection = (IndiceSection + 1) % (projectData.mySections.Count );
@@ -401,7 +432,12 @@ namespace ApplicationInventaire.MVVM.View
          
 
         }
-
+        /// <summary>
+        /// The User has finished working with current section and clicked on the Button Previous.
+        /// This will cycle forwbackward of 1 throught Sections, and update the Section Image as well as the overlay.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickSaveGoPrevious(object sender, RoutedEventArgs e)
         {
             IndiceSection--;
@@ -413,7 +449,13 @@ namespace ApplicationInventaire.MVVM.View
         }
 
 
-
+        /// <summary>
+        /// The user click on the Button Delete.
+        /// This button appears when the user click on an already existing Piece.
+        /// This will remove the Piece from the data structure and update the overlay accordingly.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickDeleteSelected(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < OverlayImageList.Count; i++)
@@ -435,6 +477,11 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateMethods
 
+        /// <summary>
+        /// This function is called when the user clicked on Next or Previous. 
+        /// It update the overlay ands hide currently  displaying informations.
+        /// It also change the Section Image
+        /// </summary>
         private void ChangeSection()
         {
 
@@ -458,6 +505,10 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+
+        /// <summary>
+        /// This function save the CurrentPiece to the data structure and update the overla accordingly.
+        /// </summary>
         private void SavePiece()
         {
             if (string.IsNullOrEmpty(autoTextBox.Text))
@@ -474,6 +525,7 @@ namespace ApplicationInventaire.MVVM.View
             ResetFields();
         }
 
+      
         private void ClearNameAndDescription()
         {
             this.TextBlockDesciption.Text = "";
@@ -531,6 +583,12 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
+        /// <summary>
+        /// This function is called when the user click on the button save and quit.
+        /// It saves the current data structure in the Database.db file and return to the main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSaveAndQuit(object sender, RoutedEventArgs e)
         {
             projectData.Save();

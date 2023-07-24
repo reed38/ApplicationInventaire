@@ -24,6 +24,7 @@ namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
     /// Logique d'interaction pour PAGE_3_4.xaml
+    /// The user Clicked on the button Search with Image
     /// </summary>
     public partial class PAGE_3_4 : Page, INotifyPropertyChanged
     {
@@ -34,14 +35,14 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_3_4 = this;
             this.projectData = GlobalProjectData.CurrentProjectData;
             this.IndiceSection = 0;
-            foreach(var i in projectData.ImageSectionList)
+            foreach(var i in projectData.ImageSectionList) //Initializig Section Name
             {
                 if (i.Name.Equals(projectData.mySections[IndiceSection].SectionName))
                 {
                     this.ImageSection3 = i.Path;
                 }
             }
-            InitializeOverlay();
+            InitializeOverlay(); //initlizing Overlay. It is the little red circles put in sur impression over each referenced piece
 
 
 
@@ -52,7 +53,7 @@ namespace ApplicationInventaire.MVVM.View
         private ProjectData projectData;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
-        private int ImageMarkerWidth = 20;
+        private int ImageMarkerWidth = 20; //used to define the size of he little red circles
         private Piece CurrentPiece;
         #endregion
 
@@ -107,6 +108,11 @@ namespace ApplicationInventaire.MVVM.View
 
         #region UIMethods
       
+        /// <summary>
+        /// This function is used to "go back" a section. It update the section image displayed on the page as well  as the private variable IndiceSection.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickPrevious(object sender, RoutedEventArgs e)
         {
             IndiceSection = (IndiceSection - 1);
@@ -125,6 +131,12 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+
+        /// <summary>
+        /// This function is used to "go forward" a section. It update the section image displayed on the page as well  as the private variable IndiceSection.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickNext(object sender, RoutedEventArgs e)
         {
             IndiceSection = (IndiceSection + 1) % (this.projectData.ImageSectionList.Length);
@@ -139,6 +151,12 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// This function is called whenever the user click on the canva. it detects if a user click on a red circle, and update the private varible CurrentPiece as well as 
+        /// the position of the label, its content, and the text in text Block Name and description
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Canva_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Point clickPosition = e.GetPosition(myCanva);
@@ -157,14 +175,20 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region privateMethods
-
+        /// <summary>
+        /// This function updates the content of textBlock name and description with CurrentPiece
+        /// </summary>
         private void InitializeNameTagAndDesciption()
         {
             this.TextBlockDesciption.Text = CurrentPiece.Description;
             this.TextBlockName.Text = CurrentPiece.PieceName;
         }
 
-
+        /// <summary>
+        /// This function return the image corresponding to the instance of red circle image clicked on
+        /// </summary>
+        /// <param name="clickPosition"></param>
+        /// <returns></returns>
         private (Image, Piece) GetClickedPieceImage(Point clickPosition)
         {
 
@@ -201,6 +225,9 @@ namespace ApplicationInventaire.MVVM.View
 
         }
       
+        /// <summary>
+        /// This function reset the overlay. Delete instances of red circle on the image. Used whan changing section image.
+        /// </summary>
         private void ResetOverlay()
         {
             foreach (var i in OverlayImageList)
@@ -215,6 +242,10 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// This fonction creates an instance of the red circle image at coordinates given by the Piece objects given in argument.
+        /// </summary>
+        /// <param name="piece">Piece object used to set coordinates and Name</param>
         private void CreateImageInstance(Piece piece)
         {
             Image image = new Image();
@@ -228,6 +259,11 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// Change the coordinates of the label.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void ChangeLabelcoordinates(double x, double y)
         {
             Canvas.SetLeft(this.LabelNameTag, x - 60);

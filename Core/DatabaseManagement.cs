@@ -84,7 +84,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         /// <param name="section"><Section to insert/param>
         public void InsertSection(Section section)
         {
-            SQLiteConnection connection = new SQLiteConnection(DatabasePath);
+            SQLiteConnection connection = new (DatabasePath);
             connection.Insert(section);
             connection.Close();
 
