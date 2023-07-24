@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 using System;
 
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
@@ -19,6 +18,9 @@ using ApplicationInventaire.Core.ProjectDataSet;
 
 namespace ApplicationInventaire.Core.PieceSections
 {
+    /// <summary>
+    /// Used to store data relative to a piece
+    /// </summary>
     public class Piece
     {
         #region set_get
@@ -36,7 +38,7 @@ namespace ApplicationInventaire.Core.PieceSections
         public string Description { get;set; }
         public int Amount { get; set; }
 
-        public int SectionId { get; set; } // Foreign key to Section
+        public int SectionId { get; set; } // Foreign key to Section, used in the database to know in which Section the Piece is stored
 
         #endregion
 

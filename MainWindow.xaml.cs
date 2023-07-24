@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;

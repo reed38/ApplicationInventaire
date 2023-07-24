@@ -61,7 +61,7 @@ namespace ApplicationInventaire.MVVM.View
             string tmp = FileManager.OpenExcelFilePopup();
             if (!string.IsNullOrEmpty(tmp))
             {
-                GlobalProjectData.ExcelContinuPath = tmp;
+                File.Copy(tmp, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath, true); ;
                 GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
             }
         }
@@ -69,6 +69,7 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
 
+            GlobalProjectData.CurrentProjectData.ResetTmpExcel();
 
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
@@ -92,7 +93,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             catch (Exception ex)
             {
-                POPUP.ShowPopup("error when deleting a file is being used");
+                POPUP.ShowPopup("error this project contains a file  being used");
             }
             GlobalPages.PageGoBack();
         }

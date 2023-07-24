@@ -17,7 +17,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.PieceSections;
@@ -41,13 +40,8 @@ namespace ApplicationInventaire.MVVM.View
             DataContext = this;
             projectData = GlobalProjectData.CurrentProjectData;
             this.RedFramePath = GlobalProjectData.RedFramePath;
-           projectData.ResetTmpExcel();
           
-            if (GlobalProjectData.ExcelContinuPath != null)
-            {
-                File.Copy(GlobalProjectData.ExcelContinuPath, projectData.myProjectInfos.TmpExcelPath, true);
-
-            }
+          
             projectData.InitializePieceFromExcel();
 
             ResetTextBox();

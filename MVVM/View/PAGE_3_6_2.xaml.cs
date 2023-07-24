@@ -45,6 +45,9 @@ namespace ApplicationInventaire.MVVM.View
 
                 }
             }
+            this.RedFrameImage.Visibility = Visibility.Hidden;
+
+            HideNameAndDescription();
             InitializeAutoSuggestionList();
             ResetFields();
             InitializeOverlay();
@@ -356,6 +359,7 @@ namespace ApplicationInventaire.MVVM.View
             ResetFields();
             HideEditPieceOverlay();
             ClearNameAndDescription();
+            HideNameAndDescription();
 
             Point clickPosition = e.GetPosition(myCanva);
             double x = clickPosition.X;
@@ -433,9 +437,10 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ChangeSection()
         {
-          
 
 
+            HideNameAndDescription();
+            HideEditPieceOverlay();
            
            
 
@@ -475,8 +480,21 @@ namespace ApplicationInventaire.MVVM.View
             this.TextBlockName.Text = "";
 
         }
+        private void HideNameAndDescription()
+        {
+            this.StackPanelDescription.Visibility = Visibility.Collapsed;
+            this.RedFrameImage.Visibility = Visibility.Hidden;
+
+        }
+        private void ShowNameAndDescription()
+        {
+            this.StackPanelDescription.Visibility = Visibility.Visible;
+            this.RedFrameImage.Visibility=Visibility.Visible;
+
+        }
         private void InitializeNameAndDesciption()
         {
+            ShowNameAndDescription();
             this.TextBlockDesciption.Text = CurrentPiece.Description;
             this.TextBlockName.Text = CurrentPiece.PieceName;
         }

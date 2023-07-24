@@ -5,7 +5,6 @@ using NPOI.HSSF.UserModel;
 using System;
 
 
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
@@ -53,11 +52,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
     /// </summary>
     public class ExcelFile
     {
-        #region variables
-
-
-        #endregion
-
+       
 
         #region set_get
         public string FilePath { get; set; }
@@ -132,6 +127,13 @@ namespace ApplicationInventaire.Core.ExcelManagement
             return cellValue;
         }
 
+        /// <summary>
+        /// Return the color of a given cell presents on a given sheet, at a given row and column
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <returns> byte[3] array, containing RGB values</returns>
         public byte[] GetCellColor(string sheetName, int row, int column)
         {
             string cellValue = string.Empty;
@@ -197,6 +199,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
             return null;
         }
+     
         /// <summary>
         /// set the cell in a given row column and sheet to a given string
         /// </summary>
@@ -303,6 +306,9 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
         }
 
+        /// <summary>
+        /// Go through all excel file and update the  cell according to their value. This is used because just changing the value with the function SetCellValue doesn't do anything.
+        /// </summary>
         public void UpdateExcelFormula()
         {
 

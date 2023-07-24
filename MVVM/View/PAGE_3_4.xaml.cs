@@ -209,6 +209,9 @@ namespace ApplicationInventaire.MVVM.View
             }
             OverlayImageList.Clear();
             this.LabelNameTag.Content = string.Empty;
+            this.TextBlockDesciption.Text = "";
+            this.TextBlockName.Text = "";
+
 
         }
 

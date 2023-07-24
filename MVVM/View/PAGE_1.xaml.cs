@@ -93,7 +93,6 @@ namespace ApplicationInventaire.MVVM.View
             GlobalProjectData.CurrentProjectName = clickedButton.Content.ToString();
             GlobalProjectData.CurrentProjectData = new(new(GlobalProjectData.CurrentProjectName));
 
-            GlobalProjectData.ExcelContinuPath = null;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
             GlobalPages.mainWindow.labelTemplateName.Content = GlobalProjectData.CurrentProjectName;// we update the banner to display the current projectName
             GlobalPages.mainWindow.StackPanelCurrentTemplate.Visibility = Visibility.Visible;

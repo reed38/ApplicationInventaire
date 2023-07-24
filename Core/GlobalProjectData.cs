@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
@@ -27,6 +26,7 @@ using System.Windows.Forms;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using MessageBox = System.Windows.MessageBox;
+
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
@@ -59,6 +59,9 @@ namespace ApplicationInventaire.Core.GlobalProjectData
        
         
         #region ImagePathVariable
+        /// <summary>
+        /// Contain the path to image asset used in application
+        /// </summary>
         public static string RedFramePath = Path.Combine(AppRootDirectoryPath, "Image\\RedFrame.png");
         public static string RedCirclePath = Path.Combine(AppRootDirectoryPath, "Image\\RedCircle.png");
 
@@ -69,7 +72,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         #endregion
         
         #region PAGE_3_1Variables
-        public static string ExcelContinuPath;
+       //is used to store the excel Path if the user choose to continu the inventory. This can now be implemented diferently by directly changing the value in CurrentProjectData
 
         #endregion
 
@@ -99,6 +102,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         }
 
+        /// <summary>
+        /// Go through the directory User Data to return the paths of the directories of the differents templates
+        /// </summary>
+        /// <returns> string [] containing the paths</returns>
         public static string[] GetProjecPaths()
         {
             string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
@@ -106,7 +113,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return result;
 
         }
-
+        /// <summary>
+        /// Go through the directory User Data to returs the names of the directories of the differents templates
+        /// </summary>
+        /// <returns> string [] containing the names</returns>
         public static string[] GetPlansNames()
         {
             ProjectInfos tmp = new(CurrentProjectName);
@@ -121,7 +131,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return (result);
 
         }
-
+        /// <summary>
+        /// Go through the directory Plans to returs the paths of the plans presents in the given template
+        /// </summary>
+        /// <returns> string [] containing the names</returns>
         public static string[] GetPlansPath()
         {
             ProjectInfos tmp = new(CurrentProjectName);
@@ -134,6 +147,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
         #region methodsInitializeData
+/// <summary>
+/// Get the root directory in which the app is currently running
+/// </summary>
+/// <returns> Path of that directory </returns>
         private static  string InitializeRootDirectory()
         {
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -146,14 +163,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         }
 
-        private static BitmapImage GetImageSource(Uri imagePath)
-        {
-            BitmapImage imageSource = new BitmapImage();
-            imageSource.BeginInit();
-            imageSource.UriSource = imagePath;
-            imageSource.EndInit();
-            return imageSource;
-        }
+       
 
 
 
@@ -175,6 +185,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
     public static class FileManager
     {
 
+        /// <summary>
+        /// Open a pop up menu to select image file, and return the paths to these images.
+        /// </summary>
+        /// <returns> string [] containing these paths</returns>
         public static string[] OpenImagePopup()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -194,6 +208,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+        /// <summary>
+        /// Open a popup menu to select a single windows, and return the path the the file of that image
+        /// </summary>
+        /// <returns>string correspondind to the path of the image</returns>
         public static string OpenImagePopupSingle()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -212,7 +230,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             }
             return null;
         }
-
+        /// <summary>
+        /// Open a pop up menu to select a single zip file and return the path to that zip file.
+        /// </summary>
+        /// <returns> string corresponding to the path of the given zip file</returns>
         public static string OpenSelectZipLoadPopup()
         {
            OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -233,6 +254,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+        /// <summary>
+        /// Open a pop up menu to select multiple pdf files and return the paths to these files
+        /// </summary>
+        /// <returns> string[] containing the paths to the pdf files</returns>
         public static string[] OpenPdfPopup()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -252,6 +277,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+        /// <summary>
+        /// Open a pop up menu to select a single Excel file, and return the path of that file
+        /// </summary>
+        /// <returns>string corresponding to the ppath of the excel file</returns>
         public static string OpenExcelFilePopup()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -269,6 +298,11 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+        /// <summary>
+        /// Open a pop up menu to select under which name and where to create a zip archive.
+        /// </summary>
+        /// <param name="defaultFileName"> default name of the zip archive</param>
+        /// <returns>string corresponding to the path of the zip file</returns>
         public static string OpenSelectZipSavePopup(string defaultFileName)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -293,6 +327,11 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+        /// <summary>
+        /// Create a zip archive from the given folder to the given path
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <param name="zipFilePath"></param>
         public static void  CreateZipArchive(string folderPath, string zipFilePath)
         {
             if(!string.IsNullOrEmpty(zipFilePath))
@@ -307,7 +346,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
     public static class POPUP
     {
-
+        /// <summary>
+        /// display an error window containing the given string
+        /// </summary>
+        /// <param name="message"></param>
         public static  void ShowPopup(string message)
         {
             MessageBox.Show(message, "Field Missing", MessageBoxButton.OK, MessageBoxImage.Information);

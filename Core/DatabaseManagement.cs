@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System;
 using System.Collections.Generic;
 
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
@@ -29,7 +28,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
     /// the sqlite-net-pcl library let you directly create Table in the database to stock objects. You can then get those objects using a system of pimarykey.
     ///  But it DOESN'T ALLOW complex types such as bol or nested objects.
     /// There is the possibility to create a relation between tables using secondary key.
-    /// DO NOT write a Section with Id=, it will not work. I don't know why it must be a maraboutage
+    /// DO NOT write a Section with Id=0, it will not work. I don't know why it must be a maraboutage. Took me 6 hours to figure it out.
     /// </summary>
     public class Database
     {
@@ -184,6 +183,10 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         #endregion
 
         #region methods
+        /// <summary>
+        /// Check id the database already contains fields. To do so the function just count how much Sections are in the sqlite database
+        /// </summary>
+        /// <returns> Return true if initialized false if not</returns>
         public bool IsDatabaseInitialized()
         {
             if (this.GetAllSections().Count < 1)

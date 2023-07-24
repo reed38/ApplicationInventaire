@@ -206,7 +206,7 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickSelectImageSection(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
-            if (tmp.Length > 0)
+            if( tmp!=null && (tmp.Length > 0))
             {
                 foreach (string i in tmp)
                 {
@@ -219,8 +219,8 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickSelectImageReleve(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenImagePopup();
-            if (tmp.Length > 0)
-            {
+            if( tmp!=null && (tmp.Length > 0))
+            { 
                 foreach (string i in tmp)
                 {
                     imageReleveInfos.Add(new ImageInfos(Path.GetFileNameWithoutExtension(i), i));
@@ -282,11 +282,15 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonClickSelectPlans(object sender, RoutedEventArgs e)
         {
             string[] tmp = FileManager.OpenPdfPopup();
-            foreach (string i in tmp)
+            if(tmp!=null)
             {
-                PlansNameList.Add(Path.GetFileNameWithoutExtension(i));
-                PlansPathList.Add(i);
+                foreach (string i in tmp)
+                {
+                    PlansNameList.Add(Path.GetFileNameWithoutExtension(i));
+                    PlansPathList.Add(i);
+                }
             }
+        
 
         }
 

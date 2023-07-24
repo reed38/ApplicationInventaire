@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 using ApplicationInventaire.Core.GlobalProjectData;
-using ApplicationInventaire.Core.Config;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
@@ -23,7 +22,8 @@ namespace ApplicationInventaire.Core.GlobalPages
     public static class GlobalPages
     {
         public static Uri CurrentPage { get; set; }
-        public static List<Uri> LastPages { get; set; } = new List<Uri>();
+        public static List<Uri> LastPages { get; set; } = new List<Uri>(); //is used to store the "historics" of the pages and being able to know where to whan back button is pressed
+        //URI for each page
         public static Uri MAINWINDOW = new Uri("MainWindow.xaml", UriKind.Relative);
         public static Uri PAGE_1 = new Uri("MVVM/View/PAGE_1.xaml", UriKind.Relative);
         public static Uri PAGE_1_1 = new Uri("MVVM/View/PAGE_1_1.xaml", UriKind.Relative);
@@ -38,6 +38,7 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static Uri PAGE_5_1 = new Uri("MVVM/View/PAGE_5_1.xaml", UriKind.Relative);
         public static Uri PAGE_5_2 = new Uri("MVVM/View/PAGE_5_2.xaml", UriKind.Relative);
 
+        //used to store reference to the instance of pages. Each pages fill its reference when initiating.
         public static MainWindow mainWindow;
         public static PAGE_1 page_1;
         public static PAGE_1_1 page_1_1;
@@ -52,6 +53,10 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static PAGE_5_1 page_5_1;
         public static PAGE_5_2 page_5_2;
 
+        /// <summary>
+        /// Change the Current page to the page given in argument, and update "LastPage" doing so
+        /// </summary>
+        /// <param name="newPage"></param>
         public static void SetCurrentPage(Uri newPage)
         {
             GlobalPages.LastPages.Add(GlobalPages.CurrentPage);
@@ -60,14 +65,20 @@ namespace ApplicationInventaire.Core.GlobalPages
             mainWindow.MainFrame.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Used when going back a page. It doent't add an element at the end of "LastPage". Used when going back a page.
+        /// </summary>
+        /// <param name="newPage"></param>
         public static void SetCurrentPageBack(Uri newPage)
         {
             GlobalPages.CurrentPage = newPage;
             mainWindow.MainFrame.Source = GlobalPages.CurrentPage;
             mainWindow.MainFrame.Visibility = Visibility.Visible;
-            GlobalProjectData.GlobalProjectData.ExcelContinuPath = null;
         }
 
+        /// <summary>
+        /// To go back a page.
+        /// </summary>
         public static void PageGoBack()
         {
 

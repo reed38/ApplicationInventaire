@@ -104,7 +104,7 @@
             
 
         </Border>
-                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="10,10,10,40" VerticalAlignment="Bottom" >
+                <StackPanel  x:Name="StackPanelDescription" Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="10,10,10,40" VerticalAlignment="Bottom" >
 
             <StackPanel Orientation="Horizontal">
                 <Label Foreground="White" Content="NameTag:    " FontSize="13" Margin="5"/>
