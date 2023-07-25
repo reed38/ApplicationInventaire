@@ -125,6 +125,11 @@ namespace ApplicationInventaire.MVVM.View
             if(!string.IsNullOrEmpty(zipPath))
             {
                 string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(zipPath));
+                if(Directory.Exists(dest))
+                {
+                    POPUP.ShowPopup("There is already a template with this name");
+                    return;
+                }
                 ZipFile.ExtractToDirectory(zipPath, dest);
 
                 Items2.Add(System.IO.Path.GetFileNameWithoutExtension(dest)); //we add the name of te new project to the project list

@@ -93,9 +93,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.ImageSectionPath = Path.Combine(this.ImagePath, "ImageSection");
             this.ImageRelevePath = Path.Combine(this.ImagePath, "ImageReleve");
             this.DatabasePath = Path.Combine(this.ProjectPath, "Database.db");
-            this.ExcelPath = Path.Combine(this.ProjectPath, "Excel_" + this.ProjectName + ".xls");
+            this.ExcelPath = Path.Combine(this.ProjectPath, "Excel.xls");
             this.TmpPath = Path.Combine(this.ProjectPath, "Tmp");
-            this.TmpExcelPath = Path.Combine(TmpPath, this.ProjectName + "tmp.xls");
+            this.TmpExcelPath = Path.Combine(TmpPath,  "tmp.xls");
             this.PlansPath = Path.Combine(ProjectPath, "Plans");
             this.InitializeFileTree();
 
@@ -194,7 +194,6 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region constructor
         public ProjectData(ProjectInfos project, List<Section> mySections)
         {
-            File.Copy(project.ExcelPath, project.ExcelPath, true);
 
             this.mySections = mySections;
             this.myExcelFile = new ExcelFile(myProjectInfos.ExcelPath);

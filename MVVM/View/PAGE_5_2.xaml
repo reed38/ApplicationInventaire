@@ -45,27 +45,21 @@
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="5">
 
             <StackPanel Orientation="Horizontal">
-                <Label Foreground="White" Content="NameTag:    " FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="35"  Width="166" RenderTransformOrigin="0.5,0.5">
-                    <Border.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleX="-1.19"/>
-                            <RotateTransform/>
-                            <TranslateTransform X="-0.779"/>
-                        </TransformGroup>
-                    </Border.RenderTransform>
+                <Label Foreground="White" Content="NameTag:   " FontSize="15" Margin="5"/>
+                <Border CornerRadius="5" Background="#353340" Height="35"  Width="160" >
 
-                    <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" 
-                                Foreground="#cfcfcf"/>
+
+                    <TextBlock Background="Transparent" x:Name="TextBlockName" 
+                                Foreground="#cfcfcf"
+                                Margin="3"/>
                 </Border>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
+               
                 <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"/>
                 <Border CornerRadius="5" Background="#353340" Height="80"  Width="160">
                     <TextBlock   Margin="3" VerticalAlignment="Center" Background="Transparent" 
-                               HorizontalAlignment="Left"
                            Height="80" Width="150"
                            x:Name="TextBlockDesciption"
                            TextWrapping="WrapWithOverflow"
