@@ -49,8 +49,12 @@ namespace ApplicationInventaire.MVVM.View
             HideTextBoxSerialNumberConstructor(); //Hide it by default since we don't know if upcomming piece require it or not
             RedFrameImage.Visibility = Visibility.Visible; //hide red frame
             IndiceSection = 0;
-            IndicePiece = 0; 
+            IndicePiece = 0;
+            ClearNameTagAndDescription();
+
             FindNextNoPresent(); //this will update the Indice Section and IndicePiece with the ones corresponding to the first Piece with the field "IsPresent=0"
+            InitializeNameTagAndDesciption();
+
             IndiceSection = CurrentPiece.SectionId - 1; //The library used to store data in a sqlite database have an Indice starting at 1
 
             foreach (ImageInfos im in this.projectData.ImageSectionList) //initializing the current Section Image on the path
@@ -62,7 +66,6 @@ namespace ApplicationInventaire.MVVM.View
 
                 }
             }
-
             SetBorderPosition(); //initializing the position of the red frame  and the label containing NameTag
 
         }
@@ -183,7 +186,6 @@ namespace ApplicationInventaire.MVVM.View
         private void SetBorderPosition()
         {
             ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
-            ChangeLabelcoordinates(CurrentPiece.X, CurrentPiece.Y);
 
 
         }
@@ -194,33 +196,21 @@ namespace ApplicationInventaire.MVVM.View
             Canvas.SetTop(this.RedFrameImage, y);
         }
 
-        /// <summary>
-        /// Change the coodinate of the NameTag Label.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        private void ChangeLabelcoordinates(double x, double y)
-        {
-            this.LabelNameTag.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.LabelNameTag, x - 80);
-            Canvas.SetTop(this.LabelNameTag, y - 80);
-
-        }
+      
 
         private void HideTextBoxSerialNumberConstructor()
         {
-            TextBoxSerialNumber.Visibility = Visibility.Hidden;
-            TextBoxConstructor.Visibility = Visibility.Hidden;
-            labelConstructor.Visibility = Visibility.Hidden;
-            labelSerialNumber.Visibility = Visibility.Hidden;
+            StackPanelSerialDescription.Visibility=Visibility.Hidden;
+            //TextBoxSerialNumber.Visibility = Visibility.Hidden;
+            //TextBoxConstructor.Visibility = Visibility.Hidden;
+            //labelConstructor.Visibility = Visibility.Hidden;
+            //labelSerialNumber.Visibility = Visibility.Hidden;
         }
 
         private void ShowTextBoxSerialNumberConstructor()
         {
-            TextBoxSerialNumber.Visibility = Visibility.Visible;
-            labelConstructor.Visibility = Visibility.Visible;
-            labelSerialNumber.Visibility = Visibility.Visible;
-            TextBoxConstructor.Visibility = Visibility.Visible;
+            StackPanelSerialDescription.Visibility = Visibility.Visible;
+
         }
 
         private void ResetTextBox()
@@ -231,16 +221,28 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        private void HideFrameAndLabel()
+        private void HideFrame()
         
         {
-            this.LabelNameTag.Visibility = Visibility.Hidden;
             this.RedFrameImage.Visibility=Visibility.Hidden;
         }
-       
+
         #endregion
 
         #region PrivateMethods
+
+
+        private void InitializeNameTagAndDesciption()
+        {
+            this.TextBlockDesciption.Text = CurrentPiece.Description;
+            this.TextBlockName.Text = CurrentPiece.PieceName;
+        }
+        private void ClearNameTagAndDescription()
+        {
+            this.TextBlockDesciption.Text=string.Empty;
+            this.TextBlockName.Text = string.Empty;
+
+        }
 
         /// <summary>
         /// Update the value of currentPiece in function on the value of IndiceSection and IndicePiece
@@ -259,7 +261,10 @@ namespace ApplicationInventaire.MVVM.View
         private void GotoNextPiece(string answ)
         {
             projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, answ, currentPiece.ExcelColumn, currentPiece.ExcelRow);
+
             FindNextNoPresent(); //Find the next Piece with the field "IsPresent" set to 0, and Update Section image, IndiceSection , IndicePiece accordingly
+            InitializeNameTagAndDesciption();
+
             SetBorderPosition();
 
         }
@@ -400,7 +405,6 @@ namespace ApplicationInventaire.MVVM.View
                 CellInfo tmp = projectData.myTmpExcelFile.FindValue("N° SERIE");
                 projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxSerialNumber.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxSerialNumber.Clear();
-                TextBoxSerialNumber.Visibility = Visibility.Hidden;
             }
 
 
@@ -451,7 +455,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
-            HideFrameAndLabel();
+            HideFrame();
             GotoNextPiece("0");
 
         }
@@ -473,7 +477,7 @@ namespace ApplicationInventaire.MVVM.View
             UpdateConstructor();
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
-            HideFrameAndLabel();
+            HideFrame();
             GotoNextPiece("1");
 
 

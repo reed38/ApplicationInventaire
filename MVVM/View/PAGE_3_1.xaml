@@ -10,7 +10,7 @@
 Background="#116396 ">
 
     <Grid>
-
+        <StackPanel Orientation="Horizontal"> 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="280" Background="#2a2933">
 
             <Button Style="{StaticResource ButtonTheme1}"  Content="Plan" Height="60"   x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
@@ -33,18 +33,19 @@ Background="#116396 ">
                         >
 
             <StackPanel Orientation="Horizontal">
-                <Label FontSize="15" Content="Author: " FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                <Label FontSize="15" Content="         Author:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
                 <Border CornerRadius="5" Background="#353340"  Height="30" Width="400">
                     <TextBlock   x:Name ="TextBlocklAuthorName"  FontSize="15"  Background="Transparent"
-                      Foreground="#CFCFCF"/>
+                      Foreground="#CFCFCF" Margin="3,2,3,2"/>
                 </Border>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="0,30,0,0">
-                <Label FontSize="15" Content="Description: " Foreground="#CFCFCF" FontWeight="SemiBold" Margin="5,10,0,10"/>
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,0" Height="150">
+                <Label FontSize="15" Content="Description: " Foreground="#CFCFCF" FontWeight="SemiBold"
+                       />
                 <Border CornerRadius="5" Background="#353340"  Height="150" Width="400">
-                    <TextBlock  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,0,0,0"
-                            Height="150" 
+                    <TextBlock VerticalAlignment="Center" Margin="5,0,5,0"
+                            Height="140" 
                             Foreground="#CFCFCF"                            
                              TextWrapping="WrapWithOverflow"
                             x:Name="TextBlockDesciption" FontSize="15"  Background="Transparent"  />
@@ -53,6 +54,7 @@ Background="#116396 ">
 
             </StackPanel>
 
+        </StackPanel>
         </StackPanel>
 
 

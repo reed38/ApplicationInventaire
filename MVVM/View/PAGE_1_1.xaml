@@ -21,7 +21,8 @@ Background="#116396 "
 
 
 
-            <StackPanel Orientation="Vertical" Margin="20" Background="Transparent"  >
+            <StackPanel Orientation="Vertical" Margin="20" Background="Transparent"   Width="350"
+                        HorizontalAlignment="Left">
                 <Label Content="Template List: "  Foreground="White" FontSize="15"/>
                 <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Stretch"
@@ -49,7 +50,7 @@ Background="#116396 "
             <Button Style="{StaticResource ButtonTheme2}"
                 Content="Export Selected Template" Height="30" Width="350" 
                     VerticalAlignment="Top"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     Margin="0,10,0,0"
                     Click="ButtonClickExportTemplate"
                     />

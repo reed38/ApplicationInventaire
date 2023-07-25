@@ -10,7 +10,7 @@
       mc:Ignorable="d" 
       Title="PAGE_3_2"
 Background="#116396 "
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
       
        
       >
@@ -18,8 +18,8 @@ Background="#116396 "
 
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="119*" />
-            <ColumnDefinition Width="41*" />
+            <ColumnDefinition Width="37*" />
+            <ColumnDefinition Width="13*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -31,7 +31,8 @@ Background="#116396 "
 
         <Canvas 
                 x:Name="myCanva"
-                Margin="10,10,10,10"
+                 Grid.Column="0"
+            Grid.Row="0"
            
                 >
             <Canvas.Background  >
@@ -46,43 +47,65 @@ Background="#116396 "
                    Height="50"
                    Width="50"/>
 
-            <Label Foreground="Red" 
-               x:Name="LabelNameTag" 
-               Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-               FontSize="22"
-               FontWeight="Normal"
-                   ></Label>
+
 
         </Canvas>
 
 
-        <Grid Grid.Row="1" Grid.Column="0">
+        <Grid Grid.Column="0" Grid.Row="1" >
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                     
+                        VerticalAlignment="Center">
 
 
-            <StackPanel Orientation="Horizontal"
-                        Width="300"
-                        Height="45"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Left">
+                    <Label Foreground="White" Content="Comment: " FontSize="15" Height="30"
+                          />
+                    <Border CornerRadius="5" Background="#353340" Height="35"  Width="150">
 
-
-                <Label Foreground="White" Content="Comment: " FontSize="15" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-
-                <Border CornerRadius="5" Background="#353340" Height="44"  Width="261">
-
-                    <TextBox x:Name="TextBoxComment" 
+                        <TextBox x:Name="TextBoxComment" 
                              TextWrapping="WrapWithOverflow"
-                             Background="Transparent" Margin="0,-4,-42,-7"
-                             Foreground="#cfcfcf"/>
+                             Background="Transparent" 
+                             Foreground="#cfcfcf" Margin="2,2,3,2"/>
 
 
-                </Border>
+                    </Border>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Foreground="White" Content="NameTag:   " FontSize="15" 
+                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Border CornerRadius="5" Background="#353340" Height="35"  Width="202" RenderTransformOrigin="0.5,0.5">
+
+
+                        <TextBlock Background="Transparent" x:Name="TextBlockName" 
+                                Foreground="#cfcfcf" Margin="4,4,3,3"/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"
+                           Height="30"/>
+                    <Border CornerRadius="5" Background="#353340" Height="46"  Width="146">
+                        <TextBlock VerticalAlignment="Center" Background="Transparent" 
+                               HorizontalAlignment="Center"
+                           Height="37" Width="138"
+                           x:Name="TextBlockDesciption"
+                           TextWrapping="WrapWithOverflow"
+                            Foreground="#cfcfcf"/>
+                    </Border>
+                </StackPanel>
+
+
             </StackPanel>
+
 
 
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column ="1">
+        <Grid Grid.Column ="1" Margin="0,533,0,0" Grid.RowSpan="2">
 
 
             <Button
@@ -111,58 +134,56 @@ Background="#116396 "
 
 
 
-            <StackPanel  Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,20">
-                <Image
-                       Height="200"
-                       Width="200"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Stretch"
+            <StackPanel   Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <StackPanel Orientation="Vertical" x:Name="StackPanelSerialDescription" Height="400" >
+
+                    <Image
+                       Height="260"
+                       Width="260"
                     Stretch="Uniform"
-                    Margin="0,10,0,20"
                     x:Name="ImageReleveName"
                    
                     Source="{Binding ImageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     
                  />
 
-                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                    <Label x:Name="labelSerialNumber" FontSize="15" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
-                    ></Label>
-                    <Border CornerRadius="5" Background="#353340" Height="30"  Width="100">
-                        <TextBox  x:Name="TextBoxSerialNumber"
-                              Width="100"
-                                  Background="Transparent" Height="27"
-                                   Foreground="#cfcfcf"
+                    <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                        <Label x:Name="labelSerialNumber" FontSize="15" Content="Serial Number: " Foreground="White" VerticalAlignment="Center"                               Margin="10,0,0,10"
+                    />
+                        <Border CornerRadius="5" Background="#353340" Height="30"  Width="100">
+                            <TextBox  x:Name="TextBoxSerialNumber"
+                                  Background="Transparent"
+                                   Foreground="#cfcfcf" Margin="3,3,5,3"
                               />
 
-                    </Border>
+                        </Border>
 
 
 
 
 
 
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                    <Label                             
+                    </StackPanel>
+                    <StackPanel  HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                        <Label                             
                     Margin="10,0,0,10"
                     Content="Constructor:     " 
                         FontSize="15"
                         x:Name="labelConstructor"
-                        Foreground="White"></Label>
+                        Foreground="White" Height="30"/>
 
-                    <Border CornerRadius="5" Background="#353340" Height="30" Width="100">
-                        <TextBox  x:Name="TextBoxConstructor"
+                        <Border CornerRadius="5" Background="#353340" Height="30" Width="100" VerticalAlignment="Center">
+                            <TextBox  x:Name="TextBoxConstructor"
                                   Background="Transparent"
                                    Foreground="#cfcfcf"
-
-                              Width="100"
-                              Margin="3,0,-3,0"
+                                      VerticalAlignment="Center" Height="24" Margin="3,0,4,0"
 
                               />
-                    </Border>
+                        </Border>
 
+                    </StackPanel>
                 </StackPanel>
+
 
                 <Button
                     Style="{StaticResource ButtonTheme2}"

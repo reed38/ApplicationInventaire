@@ -19,7 +19,7 @@ Background="#116396 "
         <Grid Grid.Column="0" Background="#2E2E3A">
 
 
-            <ListBox ItemsSource="{Binding Items2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" RenderTransformOrigin="4.66,0.5">
+            <ListBox ItemsSource="{Binding Items2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" >
                 <ListBox.Template>
                     <ControlTemplate TargetType="{x:Type ListBox}">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -29,7 +29,7 @@ Background="#116396 "
                 </ListBox.Template>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Button Style="{StaticResource ButtonTheme1}" Content="{Binding}" VerticalAlignment="Stretch" Height="60" Margin="5" Click="ButtonMainMenuSelectTypeClick" />
+                        <Button Style="{StaticResource ButtonTheme1}" Content="{Binding}" VerticalAlignment="Stretch" Width="300" Height="60" Margin="5" Click="ButtonMainMenuSelectTypeClick" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

@@ -165,9 +165,7 @@ namespace ApplicationInventaire.MVVM.View
             (Image, Piece) res = GetClickedPieceImage(clickPosition);
             if (res != (null, null))
             {
-                ChangeLabelcoordinates(res.Item2.X, res.Item2.Y);
                 CurrentPiece = res.Item2;
-                this.LabelNameTag.Content = CurrentPiece.PieceName;
                 InitializeNameTagAndDesciption();
             }
         }
@@ -235,7 +233,6 @@ namespace ApplicationInventaire.MVVM.View
                 myCanva.Children.Remove(i.Item1);
             }
             OverlayImageList.Clear();
-            this.LabelNameTag.Content = string.Empty;
             this.TextBlockDesciption.Text = "";
             this.TextBlockName.Text = "";
 
@@ -259,17 +256,8 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-        /// <summary>
-        /// Change the coordinates of the label.
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        private void ChangeLabelcoordinates(double x, double y)
-        {
-            Canvas.SetLeft(this.LabelNameTag, x - 60);
-            Canvas.SetTop(this.LabelNameTag, y - 60);
-
-        }
+        
+        
         #endregion
         
     }

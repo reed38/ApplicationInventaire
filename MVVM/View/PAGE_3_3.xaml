@@ -21,7 +21,7 @@ Background="#116396 "
 
 
 
-        <StackPanel Orientation="Vertical" Margin="20" >
+        <StackPanel Orientation="Vertical" Margin="20" Width="350" HorizontalAlignment="Left">
             <Label Content="Plans list: " FontSize="15" Foreground="White"/>
             <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="350" HorizontalAlignment="Left">
 
@@ -29,13 +29,14 @@ Background="#116396 "
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Left"
                       Height="250"
-                      Width="200"
+                      Width="350"
                     Background="Transparent"
                     Foreground="#cfcfcf">
                     <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                         Width="345"
+                         Width="350"
                           SelectionChanged="ListBoxSectionFileSelectionChanged"
                              Background="Transparent"
+                             Foreground="#cfcfcf"
 >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -45,14 +46,17 @@ Background="#116396 "
                     </ListBox>
                 </ScrollViewer>
             </Border>
-            
-
-        </StackPanel>
-        <Button  Style="{StaticResource ResourceKey=ButtonTheme2}" Content="Open Selected file" Height="34" Width="150"
-                    Click="ButtonClickOpenFile" Margin="125,310,525,106"
+            <Button  Style="{StaticResource ResourceKey=ButtonTheme2}" Content="Open Selected file"
+                     HorizontalAlignment="Center"
+                 Width="200" Height="40"
+                    Click="ButtonClickOpenFile" 
+                     Margin="10"
                     />
 
 
+
+        </StackPanel>
+      
 
 
 

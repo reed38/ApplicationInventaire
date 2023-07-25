@@ -45,10 +45,7 @@ Background="#116396 "
 
             </Canvas.Background>
 
-            <Label Foreground="Red" 
-               x:Name="LabelNameTag" 
-               FontSize="20"
-                   />
+           
 
             <Image x:Name="RedCircleImage" 
                    Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
@@ -63,14 +60,7 @@ Background="#116396 "
             <StackPanel Orientation="Horizontal">
                 <Label Foreground="White" Content="NameTag:    " FontSize="15" Margin="5"/>
                 <Border CornerRadius="5" Background="#353340" Height="30"  Width="156" RenderTransformOrigin="0.5,0.5">
-                    <Border.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleX="-1.19"/>
-                            <RotateTransform/>
-                            <TranslateTransform X="-0.779"/>
-                        </TransformGroup>
-                    </Border.RenderTransform>
+                   
 
                     <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" 
                                 Foreground="#cfcfcf"/>
