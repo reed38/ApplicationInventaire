@@ -72,7 +72,8 @@ Background="#116396 "
                         </TransformGroup>
                     </Border.RenderTransform>
 
-                    <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" />
+                    <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" 
+                                Foreground="#cfcfcf"/>
                 </Border>
             </StackPanel>
 
@@ -80,10 +81,11 @@ Background="#116396 "
                 <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"/>
                 <Border CornerRadius="5" Background="#353340" Height="75"  Width="156">
                     <TextBlock VerticalAlignment="Center" Background="Transparent" 
-                           Height="80" Width="150"
+                               HorizontalAlignment="Center"
+                           Height="65" Width="148"
                            x:Name="TextBlockDesciption"
-                           Margin="0,0,-50,0"
-                           TextWrapping="WrapWithOverflow"/>
+                           TextWrapping="WrapWithOverflow"
+                            Foreground="#cfcfcf"/>
                 </Border>
             </StackPanel>
         </StackPanel>

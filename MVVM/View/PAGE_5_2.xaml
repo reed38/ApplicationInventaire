@@ -46,7 +46,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <Label Foreground="White" Content="NameTag:    " FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="30"  Width="156" RenderTransformOrigin="0.5,0.5">
+                <Border CornerRadius="5" Background="#353340" Height="35"  Width="166" RenderTransformOrigin="0.5,0.5">
                     <Border.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -56,18 +56,21 @@
                         </TransformGroup>
                     </Border.RenderTransform>
 
-                    <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" />
+                    <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" 
+                                Foreground="#cfcfcf"/>
                 </Border>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="75"  Width="156">
-                    <TextBlock VerticalAlignment="Center" Background="Transparent" 
+                <Border CornerRadius="5" Background="#353340" Height="80"  Width="160">
+                    <TextBlock   Margin="3" VerticalAlignment="Center" Background="Transparent" 
+                               HorizontalAlignment="Left"
                            Height="80" Width="150"
                            x:Name="TextBlockDesciption"
-                           Margin="0,0,-50,0"
-                           TextWrapping="WrapWithOverflow"/>
+                           TextWrapping="WrapWithOverflow"
+                            Foreground="#cfcfcf"
+                             />
                 </Border>
             </StackPanel>
 
@@ -77,6 +80,6 @@
 
 
 
-        </Grid>
+    </Grid>
 
 </Page>
