@@ -5,21 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ApplicationInventaire.MVVM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1200"
+      d:DesignHeight="450" d:DesignWidth="850"
       Title="PAGE_3_1"
-      Background="#116396"
-      >
+Background="#116396 ">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="350" Margin="50,70,510,10">
 
-            <Button Content="Plan" Height="50" Margin="0,5"  x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
-            <Button Content="Continue Inventory" Height="50" Margin="0,5"  x:Name="ButtonContinueInventory" Click="ButtonContinueInventoryClick"/>
-            <Button Content="New inventory" Height="50" Margin="0,5" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
-            <Button Content="Search with tag" Height="50" Margin="0,5" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
-            <Button Content="Search with Image" Height="50" Margin="0,5" x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
-            <Button Content="Edit Template" Height="50" Margin="0,5" x:Name="ButtonEditProject" Click="ButtonEditProjectClick"/>
-            <Button Content="DeleteTemplate" Height="50" Margin="0,5" x:Name="ButtonDeleteProject" Click="ButtonDeleteProjectClick"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="280" Background="#2a2933">
+
+            <Button Style="{StaticResource ButtonTheme1}"  Content="Plan" Height="60"   x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
+            <Button Style="{StaticResource ButtonTheme1}" Content="Continue Inventory" Height="60"  x:Name="ButtonContinueInventory" Click="ButtonContinueInventoryClick"/>
+            <Button Style="{StaticResource ButtonTheme1}" Content="New inventory" Height="60" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
+            <Button Style="{StaticResource ButtonTheme1}" Content="Search with tag" Height="60" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
+            <Button Style="{StaticResource ButtonTheme1}"  Content="Search with Image" Height="60"  x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
+            <Button Style="{StaticResource ButtonTheme1}" Content="Edit Template" Height="60"  x:Name="ButtonEditProject" Click="ButtonEditProjectClick"/>
+            <Button Style="{StaticResource ButtonTheme1}" Content="DeleteTemplate" Height="60" x:Name="ButtonDeleteProject" Click="ButtonDeleteProjectClick"/>
 
             <!--<Button Content="Modify" Height="50" Margin="0,5"  x:Name="ButtonModify" Click="ButtonModifyClick"/>-->
 
@@ -27,20 +27,29 @@
 
 
 
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="590" Background="White" Margin="0,70,50,75">
 
-            <StackPanel Orientation="Vertical">
-                <Label FontSize="15" Content="Author: " FontWeight="SemiBold" Margin="5,10,0,0"/>
-                <TextBlock Margin="10,5,0,10"  x:Name ="TextBlocklAuthorName"  FontSize="15"  Background="White"  />
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
+                        Width="500" Background="Transparent" Margin="0,70,50,75"
+                        >
 
+            <StackPanel Orientation="Horizontal">
+                <Label FontSize="15" Content="Author: " FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                <Border CornerRadius="5" Background="#353340"  Height="30" Width="400">
+                    <TextBlock   x:Name ="TextBlocklAuthorName"  FontSize="15"  Background="Transparent"
+                      Foreground="#CFCFCF"/>
+                </Border>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical">
-                <Label FontSize="15" Content="Description: " FontWeight="SemiBold" Margin="5,10,0,10"/>
-                <TextBlock  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,0,0,0"
-                            Height="100" 
-                            TextWrapping="WrapWithOverflow"
-                            x:Name="TextBlockDesciption" FontSize="15"  Background="White"  />
+            <StackPanel Orientation="Vertical" Margin="0,30,0,0">
+                <Label FontSize="15" Content="Description: " Foreground="#CFCFCF" FontWeight="SemiBold" Margin="5,10,0,10"/>
+                <Border CornerRadius="5" Background="#353340"  Height="150" Width="400">
+                    <TextBlock  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,0,0,0"
+                            Height="150" 
+                            Foreground="#CFCFCF"                            
+                             TextWrapping="WrapWithOverflow"
+                            x:Name="TextBlockDesciption" FontSize="15"  Background="Transparent"  />
+                </Border>
+
 
             </StackPanel>
 

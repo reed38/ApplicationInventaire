@@ -70,7 +70,6 @@
 
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="Theme\" />
   </ItemGroup>
 
 </Project>

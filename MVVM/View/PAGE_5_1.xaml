@@ -17,45 +17,82 @@
                     HorizontalAlignment="Center">
 
             <!-- Text Box -->
-           
 
-                <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="autoTextBox"    
-                             Background="White"
-                             Width="220"     
-                             Height="30"    
-                             FontSize="15"      
-                             HorizontalAlignment="Center"     
-                             VerticalAlignment="Center"     
-                             BorderThickness="0"    
-                             VerticalContentAlignment="Center"    
-                             HorizontalContentAlignment="Center"    
-                             Padding="0,0,0,0"    
-                             Foreground="Black"    
-                             TextChanged="AutoTextBox_TextChanged"/>
-                    <Button Content="Enter" 
+
+            <StackPanel Orientation="Horizontal">
+                <Border CornerRadius="10"
+                            Background="#353340"
+                            Width="250" Height="40">
+
+                    <Grid>
+                        <Rectangle StrokeThickness="1"/>
+                        <TextBox
+                            
+                            Width="200"
+                            x:Name="autoTextBox"
+                                         Margin="1"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalContentAlignment="Center"
+                                         Padding="5"
+                                         FontSize="14"
+                                         Foreground="#CFCFCF"
+                                         TextChanged="AutoTextBox_TextChanged"/>
+                        <TextBlock IsHitTestVisible="False"
+                                       Text="Search"
+                                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       FontSize="13"
+                                       Foreground="DarkGray"
+                                       Grid.Column="1">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+                <Button Content="Enter" 
+                            Style="{StaticResource ButtonTheme2}"
                             VerticalAlignment="Center"
-                            Width="55" Height="32"
+                            Width="70" Height="30"
                             x:Name="ButtonSearchEnter"
                             Click="ButtonClickSeachEnter" 
                             Visibility="Visible"/>
 
-                </StackPanel>
-                
+            </StackPanel>
+
+
 
             <!-- Auto Suggestion box -->
+
             <Popup x:Name="autoListPopup"    
                    Visibility="Collapsed"                    
                    Height="100"    
                    StaysOpen="False"    
-                   Placement="Bottom">
+                   Placement="Bottom"
+                   
+                   >
+
 
                 <ListBox x:Name="autoList"    
                          Visibility="Collapsed"    
-                         Width="220"    
+                         Width="250"    
                          Height="100"    
-                         SelectionChanged="AutoList_SelectionChanged" />
+                         SelectionChanged="AutoList_SelectionChanged"
+                         Background="#353340"
+                         Foreground="#CFCFCF"
+                         />
+
             </Popup>
+
         </StackPanel>
     </Grid>
 

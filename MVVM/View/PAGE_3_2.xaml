@@ -9,7 +9,7 @@
       
       mc:Ignorable="d" 
       Title="PAGE_3_2"
-      Background="#116396"
+Background="#116396 "
       d:DesignHeight="450" d:DesignWidth="800"
       
        
@@ -46,7 +46,7 @@
                    Height="50"
                    Width="50"/>
 
-        <Label Foreground="Red" 
+            <Label Foreground="Red" 
                x:Name="LabelNameTag" 
                Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                FontSize="22"
@@ -66,8 +66,17 @@
                         HorizontalAlignment="Left">
 
 
-                <Label Foreground="White" Content="Comment: " Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                <TextBox x:Name="TextBoxComment"  Width="300" Height="50" TextWrapping="WrapWithOverflow"/>
+                <Label Foreground="White" Content="Comment: " FontSize="15" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+                <Border CornerRadius="5" Background="#353340" Height="44"  Width="261">
+
+                    <TextBox x:Name="TextBoxComment" 
+                             TextWrapping="WrapWithOverflow"
+                             Background="Transparent" Margin="0,-4,-42,-7"
+                             Foreground="#cfcfcf"/>
+
+
+                </Border>
             </StackPanel>
 
 
@@ -77,14 +86,14 @@
 
 
             <Button
+                Style="{StaticResource ButtonTheme2}"
                 x:Name="SaveAndQuitButton"
                   Click="ButtonClickSaveAndQuit"
                 Content="Save and quit"
-                Width="100"
-                Height="40"
+                Width="164"
+                Height="50"
                  VerticalAlignment="Center"
-                 HorizontalAlignment="Center" 
-                Margin="10,10,10,10"
+                 HorizontalAlignment="Center"
                 
                 />
 
@@ -99,10 +108,10 @@
                     <TextBlock Text="PLease enter a serial Number!" />
                 </Border>
             </Popup>
-           
 
-              
-            <StackPanel  Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,20">
+
+
+            <StackPanel  Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,20">
                 <Image
                        Height="200"
                        Width="200"
@@ -114,15 +123,20 @@
                    
                     Source="{Binding ImageReleve, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     
-                 /> 
+                 />
 
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                    <Label x:Name="labelSerialNumber" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
+                    <Label x:Name="labelSerialNumber" FontSize="15" Content="Serial Number: " Foreground="White" VerticalAlignment="Top"                               Margin="10,0,0,10"
                     ></Label>
-                    <TextBox  x:Name="TextBoxSerialNumber"
+                    <Border CornerRadius="5" Background="#353340" Height="30"  Width="100">
+                        <TextBox  x:Name="TextBoxSerialNumber"
                               Width="100"
-                              Margin="0,0,0,10"
+                                  Background="Transparent" Height="27"
+                                   Foreground="#cfcfcf"
                               />
+
+                    </Border>
+
 
 
 
@@ -132,32 +146,44 @@
                 <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
                     <Label                             
                     Margin="10,0,0,10"
-                    Content="Constructor:  " 
+                    Content="Constructor:     " 
+                        FontSize="15"
                         x:Name="labelConstructor"
                         Foreground="White"></Label>
-                    <TextBox  x:Name="TextBoxConstructor"
+
+                    <Border CornerRadius="5" Background="#353340" Height="30" Width="100">
+                        <TextBox  x:Name="TextBoxConstructor"
+                                  Background="Transparent"
+                                   Foreground="#cfcfcf"
+
                               Width="100"
-                              Margin="10,0,0,10"
+                              Margin="3,0,-3,0"
 
                               />
+                    </Border>
 
                 </StackPanel>
 
                 <Button
+                    Style="{StaticResource ButtonTheme2}"
                 x:Name="YesButton"
                   Click="ButtonClickYes"
                 Content="yes"
                 Width="66"
                 Height="30"
+                Margin="10"
                 HorizontalAlignment="Center"
                  
                 />
 
                 <Button
+                    Style="{StaticResource ButtonTheme2}"
                 x:Name="NoButton"
                   Click="ButtonClickNo"
                 Content="no"
                 Width="66"
+                 Margin="10"
+
                 Height="30"
                  HorizontalAlignment="Center"
                 
