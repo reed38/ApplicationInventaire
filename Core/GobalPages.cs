@@ -19,6 +19,9 @@ using System.Runtime.CompilerServices;
 
 namespace ApplicationInventaire.Core.GlobalPages
 {
+    /// <summary>
+    /// This static class is used to manage navigation through pages. It holds references to pages and methods to change pages
+    /// </summary>
     public static class GlobalPages
     {
         public static Uri CurrentPage { get; set; }

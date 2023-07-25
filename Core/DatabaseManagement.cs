@@ -28,7 +28,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
     /// the sqlite-net-pcl library let you directly create Table in the database to stock objects. You can then get those objects using a system of pimarykey.
     ///  But it DOESN'T ALLOW complex types such as bol or nested objects.
     /// There is the possibility to create a relation between tables using secondary key.
-    /// DO NOT write a Section with Id=0, it will not work. I don't know why it must be a maraboutage. Took me 6 hours to figure it out.
+    /// DO NOT write a Section with Id=0 , it will not work. I don't know why it must be a maraboutage. Took me 6 hours to figure it out.
     /// </summary>
     public class Database
     {

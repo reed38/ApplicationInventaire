@@ -86,7 +86,11 @@ namespace ApplicationInventaire.MVVM.View
         #endregion       
 
         #region UImethods
-
+        /// <summary>
+        /// The user cliked on the button corresponding to a given project
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonMainMenuSelectTypeClick(object sender, RoutedEventArgs e) //when the user click on a given project
         {
             Button clickedButton = (Button)sender;
@@ -102,6 +106,12 @@ namespace ApplicationInventaire.MVVM.View
 
             }
 
+        /// <summary>
+        /// The user clicked on the button "New".
+        /// It changes the page to PAGE_4_1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClickNew(object sender, RoutedEventArgs e) //creating a new template/project
         {
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_1);

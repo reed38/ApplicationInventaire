@@ -33,18 +33,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
 
-    /// <summary>
-    /// used to contain image path and image name
-    /// </summary>
-
-
-
-
-
-
-
-
-
+ /// <summary>
+ /// This static class is used to pass Data through pages and store constant variables such as image path.
+ /// This is probably one of the worst way to do it, but it works.
+ /// </summary>
     public static class GlobalProjectData
     {
         
@@ -181,7 +173,9 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
     }
-
+    /// <summary>
+    /// This static class is  to store function used by the user to interact with files (load, save..).
+    /// </summary>
     public static class FileManager
     {
 
@@ -343,7 +337,9 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
 
     }
-
+    /// <summary>
+    /// This static class is used to store functions Showing a pop up in case of error.
+    /// </summary>
     public static class POPUP
     {
         /// <summary>
@@ -352,7 +348,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         /// <param name="message"></param>
         public static  void ShowPopup(string message)
         {
-            MessageBox.Show(message, "Field Missing", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(message, "Problem", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
