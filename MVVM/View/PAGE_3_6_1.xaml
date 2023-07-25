@@ -9,222 +9,214 @@
       Background="#116396"
 
       Title="PAGE_3_6_1"
-       d:DesignWidth="1920"     
+       d:DesignWidth="1200"     
 
        d:DesignHeight="450"    >
 
-
-
     <Grid>
-        <StackPanel Orientation="Horizontal" >
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" 
+    <StackPanel Orientation="Horizontal" >
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" 
                     Margin="20,20,20,20">
 
-                <StackPanel Orientation="Horizontal">
-                    <Label FontSize="15" Content="Name:          " Foreground="White"/>
-                    <Border CornerRadius="5" Background="#353340" Height="25"  Width="200">
+            <StackPanel Orientation="Horizontal">
+                <Label FontSize="15" Content="Name:          " Foreground="White"/>
+                <Border CornerRadius="5" Background="#353340" Height="25"  Width="200">
 
-                        <TextBox  x:Name="TextBoxName" Foreground="#cfcfcf" Background="Transparent" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
-                    </Border>
-                </StackPanel>
+                    <TextBox  x:Name="TextBoxName" Foreground="#cfcfcf" Background="Transparent" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
+                </Border>
+            </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                    <Label FontSize="15" Content="Description: " Foreground="White"/>
-                    <Border CornerRadius="5" Background="#353340" Height="105"  Width="200">
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                <Label FontSize="15" Content="Description: " Foreground="White"/>
+                <Border CornerRadius="5" Background="#353340" Height="105"  Width="200">
 
-                        <TextBox Foreground="#cfcfcf" Height="100" x:Name="TextBoxDescription" Background="Transparent" Width="200" TextWrapping="WrapWithOverflow" />
-                    </Border>
-                </StackPanel>
+                    <TextBox Foreground="#cfcfcf" Height="100" x:Name="TextBoxDescription" Background="Transparent" Width="200" TextWrapping="WrapWithOverflow" />
+                </Border>
+            </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                    <Label FontSize="15" Content="Author:        " Foreground="White"/>
-                    <Border CornerRadius="5" Background="#353340" Height="25"  Width="200">
+            <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                <Label FontSize="15" Content="Author:        " Foreground="White"/>
+                <Border CornerRadius="5" Background="#353340" Height="25"  Width="200">
 
-                        <TextBox Foreground="#cfcfcf" Height="25" x:Name="TextBoxAuthor" Background="Transparent" Width="200" />
-                    </Border>
-                </StackPanel>
+                    <TextBox Foreground="#cfcfcf" Height="25" x:Name="TextBoxAuthor" Background="Transparent" Width="200" />
+                </Border>
+            </StackPanel>
 
 
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
-                    <Button Height="30" Width="150"
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                <Button Height="30" Width="200"
                             Style="{StaticResource ButtonTheme2}"
                    HorizontalAlignment="Center"
                     Margin="5"
-                    Content="Add Sections Images"
+                    Content="Select Sections Images"
                     Click="ButtonClickSelectImageSection"/>
 
-                    <Button Height="30" Width="150"
+                <Button Height="30" Width="200"
                       Style="{StaticResource ButtonTheme2}"
 
                    HorizontalAlignment="Center"
                     Margin="5"
-                    Content="Add Releve Image"
+                    Content="Select Releve Image"
                     Click="ButtonClickSelectImageReleve"/>
 
 
 
 
-                    <Button Height="30" Width="150"
+                <Button Height="30" Width="200"
            Style="{StaticResource ButtonTheme2}"
 
                    HorizontalAlignment="Center"
                     Margin="5"
-                    Content="Add Plans"
+                    Content="Select Plans"
                     Click="ButtonClickSelectPlans"/>
 
-                    <Button Height="30" Width="150" Content="Select Excel File"
+                <Button Height="30" Width="200" Content="Select Excel File"
                      Style="{StaticResource ButtonTheme2}"
 
                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                         Margin="5"
                     Click="ButtonClickSelectExcel" />
 
-                </StackPanel>
-
-
-
-
-
-
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="350" Width="800"  VerticalAlignment="Top"
-                    HorizontalAlignment="Center" >
 
 
 
 
 
-                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="   Selected Section images: "  Foreground="White" FontSize="15"/>
-                    <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Height="350" Width="900"  VerticalAlignment="Top" >
+
+
+
+
+
+            <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                <Label Content="   Selected Section images: "  Foreground="White" FontSize="15"/>
+                <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
                       Width="150">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="150">
+                    <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="150">
 
-                            <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                              Width="150" Height="200"
                           SelectionChanged="ListBoxSectionSelectionChanged"
                             Background="Transparent"
                                 Foreground="#cfcfcf">
 
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="5"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
-                    </ScrollViewer>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+                </ScrollViewer>
 
-                    <Button Height="30" Width="150"
+                <Button Height="30" Width="150"
                    Style="{StaticResource ButtonTheme2}"
 
                 x:Name="ButtonDeleteImage"
                 Content="Delete selected"
                 Click="ButtonClickDeleteSectionSelected"/>
 
-                </StackPanel>
+            </StackPanel>
 
 
 
-                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="   Selected Releve images: "  Foreground="White" FontSize="15"/>
-                    <ScrollViewer x:Name="ListBoxReleveFile"   VerticalScrollBarVisibility="Auto"
+            <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                <Label Content="   Selected Releve images: "  Foreground="White" FontSize="15"/>
+                <ScrollViewer x:Name="ListBoxReleveFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
                       Width="150">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="150">
+                    <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="150">
 
-                            <ListBox ItemsSource="{Binding ImageReleveName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        <ListBox ItemsSource="{Binding ImageReleveName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                              Width="150" Height="200"
                           SelectionChanged="ListBoxReleveSelectionChanged"
                                  Background="Transparent"
                                 Foreground="#cfcfcf"
 >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="5"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
-                    </ScrollViewer>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
+                </ScrollViewer>
 
-                    <Button Height="30" Width="150"
+                <Button Height="30" Width="150"
                     Style="{StaticResource ButtonTheme2}"
 
                 x:Name="ButtonDeleteImageReleve"
                 Content="Delete selected"
                 Click="ButtonClickDeleteReleveSelected"/>
 
-                </StackPanel>
+            </StackPanel>
 
 
 
 
 
-                <StackPanel Orientation="Vertical" Margin="10" Height="300" >
-                    <Label Content="    Selected Plans: "  Foreground="White" FontSize="15" />
-                    <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
-                      VerticalAlignment="Center"
+            <StackPanel Orientation="Vertical" Margin="10" Height="300" Width="247" >
+                <Label Content="    Selected Plans: "  Foreground="White" FontSize="15" />
+                <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
                       Height="200"
-                      Width="200">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="200">
+                      Width="217">
+                    <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="217" Height="195">
 
-                            <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="200"
+                        <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionChanged="ListBoxPlanFileSelectionChanged"
                         Background="Transparent"
-                                Foreground="#cfcfcf">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="5"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
+                                Foreground="#cfcfcf" Margin="7,6,7,4">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Margin="5"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Border>
 
 
 
-                    </ScrollViewer>
+                </ScrollViewer>
 
-                    <Button Height="30" Width="200"
+                <Button Height="30" Width="200"
                    Style="{StaticResource ButtonTheme2}"
                  x:Name="ButtonDeletePlan"
                 Content="Delete selected"
                 Click="ButtonClickDeletePlanSelected"/>
 
-                </StackPanel>
+            </StackPanel>
 
-                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="Selected Excel File: " 
+            <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                <Label Content="Selected Excel File: " 
                        Foreground="White"
                        FontSize="15"
 
                    />
-                    <Border CornerRadius="5" Background="#353340" Height="25"  Width="180">
+                <Border CornerRadius="5" Background="#353340" Height="25"  Width="180">
 
-                        <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
+                    <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
                        Height="25" Width="180"
                       Background="Transparent" HorizontalAlignment="Center"
                                Foreground="#cfcfcf"
                            
                           />
-                    </Border>
-                </StackPanel>
-
-
-
-
-
-
-
-
-
-
+                </Border>
             </StackPanel>
+
+
+
+
+
+
+
 
 
 
@@ -232,7 +224,11 @@
 
 
 
-        <Button Height="30" Width="145" Content="save and continue"
+    </StackPanel>
+
+
+
+    <Button Height="30" Width="145" Content="save and continue"
                 Style="{StaticResource ButtonTheme2}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
                 Margin="0,0,10,10"
@@ -241,20 +237,15 @@
 
 
 
-
-
-
-
-
-
-
-
-
     </Grid>
 
-
-
-
-
-
 </Page>
+
+
+
+
+
+
+
+
+

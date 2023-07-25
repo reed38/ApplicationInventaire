@@ -9,7 +9,7 @@
       Background="#116396"
 
       Title="PAGE_4_1"
-       d:DesignWidth="1920"     
+       d:DesignWidth="1200"     
 
        d:DesignHeight="450"    >
 
@@ -89,8 +89,7 @@
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Height="350" Width="800"  VerticalAlignment="Top"
-                    HorizontalAlignment="Center" >
+            <StackPanel Orientation="Horizontal" Height="350" Width="900"  VerticalAlignment="Top" >
 
 
 
@@ -166,18 +165,17 @@
 
 
 
-                <StackPanel Orientation="Vertical" Margin="10" Height="300" >
+                <StackPanel Orientation="Vertical" Margin="10" Height="300" Width="247" >
                     <Label Content="    Selected Plans: "  Foreground="White" FontSize="15" />
                     <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
-                      VerticalAlignment="Center"
                       Height="200"
-                      Width="200">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="200">
+                      Width="217">
+                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="217" Height="195">
 
-                            <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="200"
+                            <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionChanged="ListBoxPlanFileSelectionChanged"
                         Background="Transparent"
-                                Foreground="#cfcfcf">
+                                Foreground="#cfcfcf" Margin="7,6,7,4">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}" Margin="5"/>

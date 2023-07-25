@@ -475,9 +475,9 @@ namespace ApplicationInventaire.MVVM.View
         #region privateMethods
         private void SavePiece()
         {
-            if (string.IsNullOrEmpty(autoTextBox.Text))
+            if (string.IsNullOrEmpty(autoTextBox.Text) || CurrentPiece == null)
             {
-                POPUP.ShowPopup("Please enter Name Tag");
+                POPUP.ShowPopup("Please enter Name Tag and click on the image");
                 return;
             }
             CurrentPiece.PieceName = autoTextBox.Text;
@@ -487,6 +487,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;
             ResetFields();
+            CurrentPiece = null;
         }
 
 

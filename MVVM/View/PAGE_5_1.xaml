@@ -84,7 +84,7 @@
 
                 <ListBox x:Name="autoList"    
                          Visibility="Collapsed"    
-                         Width="250"    
+                         Width="200"    
                          Height="100"    
                          SelectionChanged="AutoList_SelectionChanged"
                          Background="#353340"

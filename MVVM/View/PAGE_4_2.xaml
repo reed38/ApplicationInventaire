@@ -65,8 +65,8 @@
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                             <Label Content="NameTag: " Foreground="#cfcfcf"/>
                             <TextBox x:Name="autoTextBox"  
-                                     Background="#353340"
-                                     Foreground="#cfcfcf"
+                             Background="#353340"
+                             Foreground="#cfcfcf"
                              KeyDown="TextBoxNameTagKeyDown"
                              Width="110" Height="25"    
                              FontSize="14"      
@@ -76,17 +76,24 @@
                              VerticalContentAlignment="Center"    
                              HorizontalContentAlignment="Center"    
                              TextChanged="AutoTextBox_TextChanged"/>
-
                             <Popup x:Name="autoListPopup"    
                            Visibility="Collapsed"                    
                            Height="100"    
                            StaysOpen="False"    
-                           Placement="Bottom">
-                                <ListBox x:Name="autoList"    
+                           Placement="Bottom"
+                   
+                   >
+
+
+                        <ListBox x:Name="autoList"    
                          Visibility="Collapsed"    
-                         Width="200"    
+                         Width="180"    
                          Height="100"    
-                         SelectionChanged="AutoList_SelectionChanged" />
+                         SelectionChanged="AutoList_SelectionChanged"
+                         Background="#353340"
+                         Foreground="#CFCFCF"
+                         />
+
                             </Popup>
 
                         </StackPanel>

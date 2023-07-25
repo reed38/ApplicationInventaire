@@ -45,7 +45,7 @@ Background="#116396 "
 
             </Canvas.Background>
 
-           
+
 
             <Image x:Name="RedCircleImage" 
                    Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\redCircle.png"
@@ -58,21 +58,21 @@ Background="#116396 "
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="5">
 
             <StackPanel Orientation="Horizontal">
-                <Label Foreground="White" Content="NameTag:    " FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="30"  Width="156" RenderTransformOrigin="0.5,0.5">
-                   
+                <Label Foreground="White" Content="NameTag:   " FontSize="15" Margin="5"/>
+                <Border CornerRadius="5" Background="#353340" Height="30"  Width="150" RenderTransformOrigin="0.5,0.5">
+
 
                     <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" 
-                                Foreground="#cfcfcf"/>
+                                Foreground="#cfcfcf" Margin="3"/>
                 </Border>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="75"  Width="156">
+                <Border CornerRadius="5" Background="#353340" Height="75"  Width="150">
                     <TextBlock VerticalAlignment="Center" Background="Transparent" 
                                HorizontalAlignment="Center"
-                           Height="65" Width="148"
+                           Height="65" Width="142"
                            x:Name="TextBlockDesciption"
                            TextWrapping="WrapWithOverflow"
                             Foreground="#cfcfcf"/>
@@ -89,23 +89,30 @@ Background="#116396 "
 
 
             <Button x:Name="ButtonPreviousSection"
+                    Grid.Row="1"
+                    Grid.Column="0"
                         Style="{StaticResource ButtonTheme2}"
                         Content="previous"
                         Height="38"
                         Width="75"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
-                        Click="ButtonClickPrevious" Margin="10,0,0,0"
-/>
+                        Click="ButtonClickPrevious"
+                        Margin="10,0,10,0"
+            />
             <Button x:Name="ButtonNextSection"
+                     Grid.Row="1"
+                    Grid.Column="0"
                           Style="{StaticResource ButtonTheme2}"
                         Content="next"
                         Height="38"
                         Width="75"
                         Click="ButtonClickNext"
                         VerticalAlignment="Center"
-                        HorizontalAlignment="Left"
-                        Margin="495,0,0,0"/>
+                        HorizontalAlignment="Right"
+                        Margin="10,0,10,0" />
+
+
 
 
 

@@ -83,12 +83,20 @@
                            Visibility="Collapsed"                    
                            Height="100"    
                            StaysOpen="False"    
-                           Placement="Bottom">
-                                <ListBox x:Name="autoList"    
-                         Visibility="Collapsed"    
-                         Width="200"    
-                         Height="100"    
-                         SelectionChanged="AutoList_SelectionChanged" />
+                           Placement="Bottom"
+                   
+                   >
+
+
+                            <ListBox x:Name="autoList"    
+                             Visibility="Collapsed"    
+                             Width="180"    
+                             Height="100"    
+                             SelectionChanged="AutoList_SelectionChanged"
+                             Background="#353340"
+                             Foreground="#CFCFCF"
+                         />
+
                             </Popup>
 
                         </StackPanel>
