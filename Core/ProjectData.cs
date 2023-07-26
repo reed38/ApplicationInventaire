@@ -67,18 +67,21 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #endregion
 
         #region set_get
-        public string DatabasePath { set; get; }
+        public string DatabasePath { set; get; }//Path to the Database used by the project
         public string ExcelPath { set; get; }
         public string AppPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
         public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
         public string ProjectPath { set; get; }
         public string ImagePath { set; get; }
-        public string ImageSectionPath { set; get; }
-        public string ImageRelevePath { set; get; }
-        public string PlansPath { set; get; }
-        public string ProjectName { set; get; }
-        public string Author { set; get; }
+        public string ImageSectionPath { set; get; }//path to the folder where Section image are stored
+        public string ImageRelevePath { set; get; } //path to the folder where Releve images are stored
+        public string PlansPath { set; get; } //path to the folder where plans pdf are stored
+        public string ProjectName { set; get; } 
+        public string Author { set; get; } //person who created the project
+        DateTime CreationDate { set; get; }
+        public string LastEditor { set;get; }
+        DateTime LastEditionDate { set;get; }
         public string Description { set; get; }
 
 
@@ -494,7 +497,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         }
 
-       
+       /// <summary>
+       /// This function copy the base excel file to the tmp excel file. It is usefull when starting again an inventory
+       /// </summary>
         public void ResetTmpExcel()
         {
             File.Copy(myProjectInfos.ExcelPath,myProjectInfos.TmpExcelPath,true);

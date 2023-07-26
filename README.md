@@ -1,12 +1,9 @@
 ##  Introduction 
-This application was made by Edgar.Regnault.
-It aims to make consulting blueprint and realising inventory easier.
-This was made in two weeks, there is probably bugs and exceptions which are not supported.
+This application was made by Edgar Regnault.
+It aims to make inventory and  consulting blueprint easier.
 All the data are stored locally on the application.
 
-A doxygen documentation can be found next to this file.
-
-A word file containing the plan of the application can be found next 
+A doxygen documentation and a word file containing the plan of the application can be found in the folder "Documentation".
 
 ## Requirement to creating a functional template
 -  the excel file used must contains 8 colums
