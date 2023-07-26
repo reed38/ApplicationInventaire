@@ -346,6 +346,7 @@ namespace ApplicationInventaire.MVVM.View
             projectData.GetRelevesNames();
             projectData.InitializePieceFromExcel();
             projectData.Save();
+            projectData.UpdateSection();
             GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;
             GlobalProjectData.CurrentProjectData =projectData;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_6_2);

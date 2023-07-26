@@ -50,6 +50,8 @@ namespace ApplicationInventaire.MVVM.View
             }
             InitializeAutoSuggestionList();
             ResetFields();
+            HideNameAndDescription();
+
             this.RedFrameImage.Visibility = Visibility.Hidden;
 
         }
@@ -312,13 +314,7 @@ namespace ApplicationInventaire.MVVM.View
             Canvas.SetTop(this.RedFrameImage, y - RedFrameImage.Height / 2);
         }
 
-        private void ChangeLabelcoordinates(double x, double y)
-        {
-            this.LabelNameTag.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.LabelNameTag, x - 80);
-            Canvas.SetTop(this.LabelNameTag, y - 80);
-
-        }
+       
 
         private void ChangeButtonDeleteSelectedlcoordinates(double x, double y)
         {
@@ -330,7 +326,6 @@ namespace ApplicationInventaire.MVVM.View
 
         private void HideEditPieceOverlay()
         {
-            LabelNameTag.Visibility = Visibility.Hidden;
             ButtonDeleteSelected.Visibility = Visibility.Collapsed;
 
         }
@@ -374,7 +369,31 @@ namespace ApplicationInventaire.MVVM.View
         {
             autoTextBox.Clear();
         }
-       
+      
+        private void ClearNameAndDescription()
+        {
+            this.TextBlockDesciption.Text = "";
+            this.TextBlockName.Text = "";
+
+        }
+        private void HideNameAndDescription()
+        {
+            this.StackPanelDescription.Visibility = Visibility.Collapsed;
+
+        }
+        private void ShowNameAndDescription()
+        {
+            this.StackPanelDescription.Visibility = Visibility.Visible;
+
+        }
+        private void InitializeNameAndDesciption()
+        {
+            ShowNameAndDescription();
+            this.TextBlockDesciption.Text = CurrentPiece.Description;
+            this.TextBlockName.Text = CurrentPiece.PieceName;
+        }
+
+
         #endregion
 
         #region UImethods
@@ -398,6 +417,8 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetFields();
             HideEditPieceOverlay();
+            ClearNameAndDescription();
+            HideNameAndDescription();
 
             Point clickPosition = e.GetPosition(myCanva);
             double x = clickPosition.X;
@@ -406,10 +427,10 @@ namespace ApplicationInventaire.MVVM.View
          
             if(res!=(null,null))
             {
-                LabelNameTag.Content = res.Item2.PieceName;
-               ChangeLabelcoordinates(x,y);
-               ChangeButtonDeleteSelectedlcoordinates(x,y);
-                tmp=res;
+                CurrentPiece = res.Item2;
+                ChangeButtonDeleteSelectedlcoordinates(x, y);
+                InitializeNameAndDesciption();
+                tmp = res;
 
 
             }
@@ -425,6 +446,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonClickSaveGoToNext(object sender, RoutedEventArgs e)
         {
+
             IndiceSection++;
             if (IndiceSection == projectData.mySections.Count - 1)
             {
@@ -447,7 +469,9 @@ namespace ApplicationInventaire.MVVM.View
                 }
             }
             InitializeOverlay();
-
+            HideNameAndDescription();
+            HideEditPieceOverlay();
+            RedFrameImage.Visibility = Visibility.Hidden;
 
         }
       
@@ -455,6 +479,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonClickDeleteSelected(object sender, RoutedEventArgs e)
         {
+
             for  (int  i=0;i< OverlayImageList.Count;i++)
             {
                 if (OverlayImageList[i].Item2==tmp.Item2)
@@ -465,6 +490,7 @@ namespace ApplicationInventaire.MVVM.View
                 }
             }
             HideEditPieceOverlay();
+            HideNameAndDescription();
             this.RedFrameImage.Visibility = Visibility.Hidden;
             InitializeOverlay();
 

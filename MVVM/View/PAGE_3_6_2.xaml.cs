@@ -270,13 +270,7 @@ namespace ApplicationInventaire.MVVM.View
             Canvas.SetTop(this.RedFrameImage, y - RedFrameImage.Height / 2);
         }
 
-        private void ChangeLabelcoordinates(double x, double y)
-        {
-            this.LabelNameTag.Visibility = Visibility.Visible;
-            Canvas.SetLeft(this.LabelNameTag, x - 80);
-            Canvas.SetTop(this.LabelNameTag, y - 80);
-
-        }
+       
 
         /// <summary>
         /// Used to change the coordinate of the Delete Selected button
@@ -285,6 +279,12 @@ namespace ApplicationInventaire.MVVM.View
         /// <param name="y"></param>
         private void ChangeButtonDeleteSelectedlcoordinates(double x, double y)
         {
+
+
+
+
+
+
             this.ButtonDeleteSelected.Visibility = Visibility.Visible;
             Canvas.SetLeft(this.ButtonDeleteSelected, x);
             Canvas.SetTop(this.ButtonDeleteSelected, y + 50);
@@ -296,7 +296,6 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void HideEditPieceOverlay()
         {
-            LabelNameTag.Visibility = Visibility.Hidden;
             ButtonDeleteSelected.Visibility = Visibility.Collapsed;
 
         }
@@ -395,8 +394,6 @@ namespace ApplicationInventaire.MVVM.View
             {
                 BorderAddPiece.Visibility = Visibility.Collapsed;
                 CurrentPiece = res.Item2;
-                LabelNameTag.Content = res.Item2.PieceName;
-                ChangeLabelcoordinates(x, y);
                 ChangeButtonDeleteSelectedlcoordinates(x, y);
                 InitializeNameAndDesciption();
                 tmp = res;
@@ -468,6 +465,7 @@ namespace ApplicationInventaire.MVVM.View
                 }
             }
             HideEditPieceOverlay();
+            HideNameAndDescription();
             this.RedFrameImage.Visibility = Visibility.Hidden;
             InitializeOverlay();
 

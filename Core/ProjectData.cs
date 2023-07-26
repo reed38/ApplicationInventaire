@@ -449,7 +449,33 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 }
             }
         }
+        /// <summary>
+        /// This functions will go through sections and delete Section from mySection List iftheir name is not present in ImageSectionList.
+        /// It is useful in edit mode when the user delete a section
 
+        /// </summary>
+        public void UpdateSection()
+        {
+           
+                for(int i=0;i<this.mySections.Count;i++)
+                {
+                    bool found = false;
+                for (int j= 0;j<this.ImageSectionList.Length;j++)
+                    {
+                        if (mySections[i].SectionName.Equals(ImageSectionList[i].Name))
+                        {
+                            found = true;
+                            break;
+                        }
+                        if (found == false &&  j== ImageSectionList.Length-1)
+                        {
+                            this.mySections.Remove(mySections[i]);
+                        }
+                    }
+                
+            }
+
+        }
 
 
         #endregion

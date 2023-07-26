@@ -10,7 +10,7 @@
       Background="#116396"
       >
 
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="119*" />
             <ColumnDefinition Width="41*" />
@@ -35,12 +35,7 @@
             </Canvas.Background>
 
 
-            <Label Foreground="Red" 
-               x:Name="LabelNameTag" 
-               Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-               FontSize="22"
-                   Visibility="Hidden"
-               FontWeight="Normal"/>
+        
 
 
             <Image x:Name="RedFrameImage" 
@@ -51,13 +46,14 @@
             <Button x:Name="ButtonDeleteSelected" Content="Delete Selected" Click="ButtonClickDeleteSelected" Visibility="Collapsed"/>
 
         </Canvas>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
         <Border Height="200" Width="200" Grid.Column="1" 
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 Margin="0,20,20,0">
 
 
-
-            <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15"
+            
+                <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15"
                     Background="#00406F" Width="200">
                 <Grid>
 
@@ -110,10 +106,44 @@
 
                 </Grid>
             </Border>
+                
+                
+   
 
 
 
         </Border>
+            <StackPanel  x:Name="StackPanelDescription" Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="10,10,10,40"
+                         VerticalAlignment="Bottom" 
+                         HorizontalAlignment="Center">
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Foreground="White" Content="NameTag:   " FontSize="15" Margin="5"/>
+                    <Border CornerRadius="5" Background="#353340" Height="40"  Width="150">
+
+                        <TextBlock Background="Transparent" Height="30" Width="150" x:Name="TextBlockName"
+                     Foreground="#cfcfcf"
+                               Margin="3"
+/>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                    <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"/>
+                    <Border CornerRadius="5" Background="#353340" Height="60"  Width="150">
+
+                        <TextBlock VerticalAlignment="Center" Background="Transparent" 
+                           Height="50"
+                           x:Name="TextBlockDesciption"
+                           Foreground="#cfcfcf"                           
+                               TextWrapping="WrapWithOverflow" Margin="4,0,4,0"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            </StackPanel>
+            
+            
         <Button x:Name="ButtonsaveGoNext" Content="Next Section" Height="40" Width="144" 
                 Style="{StaticResource ButtonTheme2}"
                Grid.Column="1" Grid.Row="1" 

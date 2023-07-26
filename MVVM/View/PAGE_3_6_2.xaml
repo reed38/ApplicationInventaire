@@ -35,12 +35,6 @@
             </Canvas.Background>
 
 
-            <Label Foreground="Red" 
-               x:Name="LabelNameTag" 
-               Content="{Binding CurrentPiece.PieceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-               FontSize="22"
-                   Visibility="Hidden"
-               FontWeight="Normal"/>
 
 
             <Image x:Name="RedFrameImage" 
