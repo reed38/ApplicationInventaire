@@ -292,6 +292,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
             return null;
         }
 
+
+
+
+
         /// <summary>
         /// Open a pop up menu to select under which name and where to create a zip archive.
         /// </summary>
@@ -334,6 +338,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
             }
         }
+
 
 
     }

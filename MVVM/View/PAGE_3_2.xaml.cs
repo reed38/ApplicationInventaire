@@ -358,7 +358,8 @@ namespace ApplicationInventaire.MVVM.View
 
             // Set the file filters
             saveFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
-
+           
+            saveFileDialog.FileName = projectData.myProjectInfos.ProjectName; // Set the default filename here
             // Show the save file dialog
             bool? result = saveFileDialog.ShowDialog();
 
