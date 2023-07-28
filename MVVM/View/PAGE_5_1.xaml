@@ -59,7 +59,7 @@
                         </TextBlock>
                     </Grid>
                 </Border>
-                <Button Content="Enter" 
+                <Button Content="valider" 
                             Style="{StaticResource ButtonTheme2}"
                             VerticalAlignment="Center"
                             Width="70" Height="30"

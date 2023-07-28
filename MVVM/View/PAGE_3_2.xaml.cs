@@ -373,7 +373,7 @@ namespace ApplicationInventaire.MVVM.View
                 }
                 catch(Exception e )
                 {
-                    POPUP.ShowPopup("error this file is already open by another process");
+                    POPUP.ShowPopup("erreur, ce fichier est éjà ouvert par un autre processus");
                     SaveAndQuit();
                 }
 
@@ -469,7 +469,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
             {
-                POPUP.ShowPopup("Please enter Serial Number and constructor");
+                POPUP.ShowPopup("Veuillez saisir un numéro de série et un constructeur");
                 return;
 
             }

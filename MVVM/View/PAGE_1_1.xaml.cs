@@ -91,7 +91,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if(string.IsNullOrEmpty(selectedValue)) //nothing is selected => problem
             {
-                POPUP.ShowPopup("Please select a template to export");
+                POPUP.ShowPopup("Veuillez sélectionner un template à exporter");
                 return;
             };
             string TemplateFolderPath = ProjectPathList[ProjectNameList.IndexOf(selectedValue)];

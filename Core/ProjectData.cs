@@ -77,11 +77,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public string ImageSectionPath { set; get; }//path to the folder where Section image are stored
         public string ImageRelevePath { set; get; } //path to the folder where Releve images are stored
         public string PlansPath { set; get; } //path to the folder where plans pdf are stored
-        public string ProjectName { set; get; } 
+        public string ProjectName { set; get; }
         public string Author { set; get; } //person who created the project
-        DateTime CreationDate { set; get; }
-        public string LastEditor { set;get; }
-        DateTime LastEditionDate { set;get; }
+        public DateTime CreationDate { set; get; }
+        public string LastEditor { set; get; }
+        public DateTime LastEditionDate { set; get; }
         public string Description { set; get; }
 
 
@@ -98,7 +98,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             this.DatabasePath = Path.Combine(this.ProjectPath, "Database.db");
             this.ExcelPath = Path.Combine(this.ProjectPath, "Excel.xls");
             this.TmpPath = Path.Combine(this.ProjectPath, "Tmp");
-            this.TmpExcelPath = Path.Combine(TmpPath,  "tmp.xls");
+            this.TmpExcelPath = Path.Combine(TmpPath, "tmp.xls");
             this.PlansPath = Path.Combine(ProjectPath, "Plans");
             this.InitializeFileTree();
 
@@ -195,24 +195,14 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #endregion
 
         #region constructor
-        public ProjectData(ProjectInfos project, List<Section> mySections)
-        {
-
-            this.mySections = mySections;
-            this.myExcelFile = new ExcelFile(myProjectInfos.ExcelPath);
-            this.myTmpExcelFile = new ExcelFile(myProjectInfos.TmpExcelPath);
-            this.myDatabase = new Database(myProjectInfos.DatabasePath);
-
-
-        }
 
         public ProjectData(ProjectInfos project)
         {
-        
 
 
-                File.Copy(project.ExcelPath, project.TmpExcelPath, true);
-         
+
+            File.Copy(project.ExcelPath, project.TmpExcelPath, true);
+
 
 
             Database database = new Database(project.DatabasePath);
@@ -226,10 +216,13 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             else
             {
                 this.myProjectInfos = project;
-
-                myDatabase = new Database(myProjectInfos.DatabasePath);
+                this.myDatabase = new Database(myProjectInfos.DatabasePath);
                 mySections = new List<Section>();
                 this.myProjectInfos = project;
+                this.myProjectInfos.CreationDate = DateTime.Now;
+                this.myProjectInfos.Author= Environment.UserName;
+                this.myProjectInfos.LastEditor = Environment.UserName;
+                this.myProjectInfos.LastEditionDate = DateTime.Now;
 
             }
             myExcelFile = new ExcelFile(project.ExcelPath);
@@ -324,7 +317,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         }
 
 
- 
+
         /// <summary>
         /// Used to return the nameTag presents in the given excel file
         /// </summary>
@@ -376,10 +369,10 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
             CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation");
 
-            List<(CellInfo, CellInfo, int, string)> CellData = new List<(CellInfo, CellInfo, int,string)>();
+            List<(CellInfo, CellInfo, int, string)> CellData = new List<(CellInfo, CellInfo, int, string)>();
 
 
-            if (PresentCell == null || PIDtCell == null || AmountCell == null ||ConstructorCell==null)
+            if (PresentCell == null || PIDtCell == null || AmountCell == null || ConstructorCell == null)
             {
 
                 return;
@@ -392,15 +385,15 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
 
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
-                
+
                 CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
 
-                string description =  myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, DescriptionCell.Column);
+                string description = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, DescriptionCell.Column);
 
                 ////IsReleveRequire, we check if the cell color is yellow
                 int isYellow;
                 byte[] color = myTmpExcelFile.GetCellColor(ConstructorCell.Sheet, n, ConstructorCell.Column);
-      
+
                 if (color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
                 {
                     isYellow = 1;
@@ -409,7 +402,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 {
                     isYellow = 0;
                 }
-                CellData.Add((TagCellTmp, ContentCellTmp,isYellow,description));
+                CellData.Add((TagCellTmp, ContentCellTmp, isYellow, description));
                 n++;
 
 
@@ -433,7 +426,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                             {
                                 this.mySections[i].PiecesList[j].IsPresent = 0;
                             }
-                            this.mySections[i].PiecesList[j].IsReleveRequired = k.Item3; 
+                            this.mySections[i].PiecesList[j].IsReleveRequired = k.Item3;
 
 
                             this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
@@ -459,23 +452,23 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// </summary>
         public void UpdateSection()
         {
-           
-                for(int i=0;i<this.mySections.Count;i++)
+
+            for (int i = 0; i < this.mySections.Count; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < this.ImageSectionList.Length; j++)
                 {
-                    bool found = false;
-                for (int j= 0;j<this.ImageSectionList.Length;j++)
+                    if (mySections[i].SectionName.Equals(ImageSectionList[i].Name))
                     {
-                        if (mySections[i].SectionName.Equals(ImageSectionList[i].Name))
-                        {
-                            found = true;
-                            break;
-                        }
-                        if (found == false &&  j== ImageSectionList.Length-1)
-                        {
-                            this.mySections.Remove(mySections[i]);
-                        }
+                        found = true;
+                        break;
                     }
-                
+                    if (found == false && j == ImageSectionList.Length - 1)
+                    {
+                        this.mySections.Remove(mySections[i]);
+                    }
+                }
+
             }
 
         }
@@ -497,12 +490,12 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         }
 
-       /// <summary>
-       /// This function copy the base excel file to the tmp excel file. It is usefull when starting again an inventory
-       /// </summary>
+        /// <summary>
+        /// This function copy the base excel file to the tmp excel file. It is usefull when starting again an inventory
+        /// </summary>
         public void ResetTmpExcel()
         {
-            File.Copy(myProjectInfos.ExcelPath,myProjectInfos.TmpExcelPath,true);
+            File.Copy(myProjectInfos.ExcelPath, myProjectInfos.TmpExcelPath, true);
         }
     }
     #endregion

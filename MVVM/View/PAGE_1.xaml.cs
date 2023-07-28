@@ -127,7 +127,7 @@ namespace ApplicationInventaire.MVVM.View
                 string dest = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/UserData", System.IO.Path.GetFileNameWithoutExtension(zipPath));
                 if(Directory.Exists(dest))
                 {
-                    POPUP.ShowPopup("There is already a template with this name");
+                    POPUP.ShowPopup("Un template avec ce nom existe déjà, veuillez saisir un autre nom");
                     return;
                 }
                 ZipFile.ExtractToDirectory(zipPath, dest);

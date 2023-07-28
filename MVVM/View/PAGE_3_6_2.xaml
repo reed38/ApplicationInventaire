@@ -100,7 +100,7 @@
 
 
 
-                        <Button Content="Save" Width="80" Height="30" Margin="10,100" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                        <Button Content="Enregistrer" Width="95" Height="29" Margin="10,100" HorizontalAlignment="Center" 
                             Click="ButtonSave_Click"
                                 Style="{StaticResource ButtonTheme2}"/>
                     </StackPanel>
@@ -149,7 +149,7 @@
 
                 Click="ButtonClickSaveGoToNext"/>
 
-        <Button x:Name="ButtonsaveGoPrevious" Content="Previous" Height="30" Width="100" 
+        <Button x:Name="ButtonsaveGoPrevious" Content="suivant" Height="30" Width="100" 
                 Style="{StaticResource ButtonTheme2}"
                 Grid.Row="1" 
                 VerticalAlignment="Center" HorizontalAlignment="Left"
@@ -157,7 +157,7 @@
                 Click="ButtonClickSaveGoPrevious"/>
 
 
-        <Button x:Name="ButtonsaveAndQuit" Content="Save and quit" Height="30" Width="134" 
+        <Button x:Name="ButtonsaveAndQuit" Content="enregistrer et quitter" Height="30" Width="156" 
                Style="{StaticResource ButtonTheme2}"
 
                 Grid.Row="1" 

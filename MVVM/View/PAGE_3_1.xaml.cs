@@ -43,6 +43,7 @@ namespace ApplicationInventaire.MVVM.View
         ProjectData projectData = GlobalProjectData.CurrentProjectData;  //loading project info using the static class
 
         #endregion
+      
         #region methodsUI
         
         /// <summary>
@@ -130,7 +131,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             catch (Exception ex)
             {
-                POPUP.ShowPopup("error this project contains a file  being used");
+                POPUP.ShowPopup("Erreur ce template contient un ficher en cours d'utilisation. Veuillez fermet l'application et recommencer");
             }
             GlobalPages.PageGoBack();
         }
@@ -145,7 +146,16 @@ namespace ApplicationInventaire.MVVM.View
         private void InitializeAuthor_Description()
         {
             this.TextBlocklAuthorName.Text = projectData.myProjectInfos.Author;
+            this.TextBlocklLastEditorName.Text = projectData.myProjectInfos.LastEditor;
             this.TextBlockDesciption.Text = projectData.myProjectInfos.Description;
+            DateTime EditionDate = this.projectData.myProjectInfos.LastEditionDate;
+            string EditionDateStr= EditionDate.Day.ToString() + "/" + EditionDate.Month.ToString() + "/" + EditionDate.Year.ToString() + " heure: " + EditionDate.Hour;
+
+            DateTime CreationDate = this.projectData.myProjectInfos.CreationDate;
+            string CreationDateStr = CreationDate.Day.ToString() +"/"+ CreationDate.Month.ToString()+"/"+ CreationDate.Year.ToString() +" heure: "+CreationDate.Hour;
+
+            this.TextBlockCreationDate.Text = CreationDateStr;
+            this.TextBlocklLastEditonDate.Text = EditionDateStr;
         }
 
 
@@ -154,6 +164,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-       
+        
+
     }
 }

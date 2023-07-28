@@ -87,7 +87,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (string.IsNullOrEmpty(selectedValue))
             {
-                POPUP.ShowPopup("Please select a template to export");
+                POPUP.ShowPopup("Veuillez sélectionner un template à exporter");
                 return;
             };
             string PdfPath = PlansPathList[PlansNameList.IndexOf(selectedValue)];

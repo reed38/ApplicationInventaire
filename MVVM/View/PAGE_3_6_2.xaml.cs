@@ -511,7 +511,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (string.IsNullOrEmpty(autoTextBox.Text) || CurrentPiece == null)
             {
-                POPUP.ShowPopup("Please enter Name Tag and click on the image");
+                POPUP.ShowPopup("Vous devez d'abord cliquer sur une pièce et saisir un nameTag pour effectuer cette action");
                 return;
             }
             CurrentPiece.PieceName = autoTextBox.Text;

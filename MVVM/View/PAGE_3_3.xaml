@@ -22,7 +22,7 @@ Background="#116396 "
 
 
         <StackPanel Orientation="Vertical" Margin="20" Width="350" HorizontalAlignment="Left">
-            <Label Content="Plans list: " FontSize="15" Foreground="White"/>
+            <Label Content="Liste des Plans: " FontSize="15" Foreground="White"/>
             <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="350" HorizontalAlignment="Left">
 
                 <ScrollViewer x:Name="ListBoxPlansFiles"   VerticalScrollBarVisibility="Auto"
@@ -46,7 +46,7 @@ Background="#116396 "
                     </ListBox>
                 </ScrollViewer>
             </Border>
-            <Button  Style="{StaticResource ResourceKey=ButtonTheme2}" Content="Open Selected file"
+            <Button  Style="{StaticResource ResourceKey=ButtonTheme2}" Content="Ouvrir le fichier sélectionné"
                      HorizontalAlignment="Center"
                  Width="200" Height="40"
                     Click="ButtonClickOpenFile" 

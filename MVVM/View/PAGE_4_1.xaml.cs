@@ -156,36 +156,34 @@ namespace ApplicationInventaire.MVVM.View
         private bool CheckAllIsHere()
         {
             bool res = true;
-            if (string.IsNullOrEmpty(TextBoxAuthor.Text))
-            {
-                res = false;
-                POPUP.ShowPopup("please enter author");
-            }
+
             if (string.IsNullOrEmpty(TextBoxDescription.Text))
             {
                 res = false;
-                POPUP.ShowPopup("please enter description");
+                POPUP.ShowPopup("Veillez saisir une descirption");
             }
             if (string.IsNullOrEmpty(TextBoxName.Text))
             {
                 res = false;
-                POPUP.ShowPopup("please enter name");
+                POPUP.ShowPopup("Veuillez saisir le nom du template");
             }
             if (string.IsNullOrEmpty(excelPath))
             {
                 res = false;
-                POPUP.ShowPopup("please select an excel file");
+                POPUP.ShowPopup("Veuillez sélectionner un fichier excel");
             }
             if (imageSectionsInfos.Count == 0)
             {
                 res = false;
-                POPUP.ShowPopup("please select at least 1 image");
+                POPUP.ShowPopup("Veuillez sélectionner au moins une image de section");
             }
             if (PlansNameList.Count == 0)
             {
                 res = false;
-                POPUP.ShowPopup("please select at least 1 Plan");
+                POPUP.ShowPopup("veuillez sélectionner au moins 1 plan");
             }
+
+
 
 
             string[] projectList = GlobalProjectData.GetProjectNames();
@@ -245,7 +243,6 @@ namespace ApplicationInventaire.MVVM.View
             }
             ProjectInfos projectInfos = new ProjectInfos(TextBoxName.Text);
             projectInfos.Description = TextBoxDescription.Text;
-            projectInfos.Author = TextBoxAuthor.Text;
             File.Copy(excelPath, projectInfos.ExcelPath, true);
             File.Copy(excelPath, projectInfos.TmpExcelPath, true);
             ProjectData projectData = new ProjectData(projectInfos);
@@ -254,7 +251,7 @@ namespace ApplicationInventaire.MVVM.View
             File.Copy(excelPath, projectInfos.TmpExcelPath, true);
 
 
-            foreach (ImageInfos i in imageSectionsInfos) //saving selected image section to memory
+            foreach (ImageInfos i in imageSectionsInfos) //saving selected image section to directory
             {
                 string destinationPath = Path.Combine(projectData.myProjectInfos.ImageSectionPath, i.Name);
                 File.Copy(i.Path, destinationPath, true);
@@ -262,17 +259,21 @@ namespace ApplicationInventaire.MVVM.View
 
             }
 
-            foreach(ImageInfos i in imageReleveInfos)
+            foreach(ImageInfos i in imageReleveInfos) //saving releve image to directory
             {
                 string destinationPath=Path.Combine(projectData.myProjectInfos.ImageRelevePath, i.Name);
                 File.Copy(i.Path, destinationPath);
             }
-            for (int i = 0; i < PlansNameList.Count; i++)
+            for (int i = 0; i < PlansNameList.Count; i++) //saving plans
             {
                 string destinationPath = Path.Combine(projectData.myProjectInfos.PlansPath, PlansNameList[i]);
                 File.Copy(PlansPathList[i], destinationPath, true);
 
             }
+            projectData.myProjectInfos.Author = Environment.UserName;
+            projectData.myProjectInfos.CreationDate= DateTime.Now;
+            projectData.myProjectInfos.LastEditor = Environment.UserName;
+            projectData.myProjectInfos.LastEditionDate = DateTime.Now;
             projectData.Save();
             GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;
             GlobalProjectData.CurrentProjectData = new ProjectData(new ProjectInfos(new(projectInfos.ProjectName)));

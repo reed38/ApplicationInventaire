@@ -35,7 +35,7 @@
             </Canvas.Background>
 
 
-        
+
 
 
             <Image x:Name="RedFrameImage" 
@@ -47,20 +47,20 @@
 
         </Canvas>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
-        <Border Height="200" Width="200" Grid.Column="1" 
+            <Border Height="200" Width="200" Grid.Column="1" 
                 HorizontalAlignment="Center" VerticalAlignment="Top"
                 Margin="0,20,20,0">
 
 
-            
+
                 <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15"
                     Background="#00406F" Width="200">
-                <Grid>
+                    <Grid>
 
-                    <StackPanel Orientation="Vertical" Margin="10,0,10,0">
-                        <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                            <Label Content="NameTag: " Foreground="#cfcfcf"/>
-                            <TextBox x:Name="autoTextBox"  
+                        <StackPanel Orientation="Vertical" Margin="10,0,10,0">
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                                <Label Content="NameTag: " Foreground="#cfcfcf"/>
+                                <TextBox x:Name="autoTextBox"  
                              Background="#353340"
                              Foreground="#cfcfcf"
                              KeyDown="TextBoxNameTagKeyDown"
@@ -72,7 +72,7 @@
                              VerticalContentAlignment="Center"    
                              HorizontalContentAlignment="Center"    
                              TextChanged="AutoTextBox_TextChanged"/>
-                            <Popup x:Name="autoListPopup"    
+                                <Popup x:Name="autoListPopup"    
                            Visibility="Collapsed"                    
                            Height="100"    
                            StaysOpen="False"    
@@ -81,7 +81,7 @@
                    >
 
 
-                        <ListBox x:Name="autoList"    
+                                    <ListBox x:Name="autoList"    
                          Visibility="Collapsed"    
                          Width="180"    
                          Height="100"    
@@ -90,29 +90,29 @@
                          Foreground="#CFCFCF"
                          />
 
-                            </Popup>
+                                </Popup>
 
-                        </StackPanel>
-
-
+                            </StackPanel>
 
 
 
 
-                        <Button Content="Save" Width="80" Height="30" Margin="10,100" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+
+
+                            <Button Content="Enregistrer" Width="95" Height="29" Margin="10,100" HorizontalAlignment="Center" 
                             Click="ButtonSave_Click"
                                 Style="{StaticResource ButtonTheme2}"/>
-                    </StackPanel>
+                        </StackPanel>
 
-                </Grid>
+                    </Grid>
+                </Border>
+
+
+
+
+
+
             </Border>
-                
-                
-   
-
-
-
-        </Border>
             <StackPanel  x:Name="StackPanelDescription" Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="10,10,10,40"
                          VerticalAlignment="Bottom" 
                          HorizontalAlignment="Center">
@@ -141,10 +141,10 @@
                 </StackPanel>
             </StackPanel>
 
-            </StackPanel>
-            
-            
-        <Button x:Name="ButtonsaveGoNext" Content="Next Section" Height="40" Width="144" 
+        </StackPanel>
+
+
+        <Button x:Name="ButtonsaveGoNext" Content="Section suivante" Height="40" Width="144" 
                 Style="{StaticResource ButtonTheme2}"
                Grid.Column="1" Grid.Row="1" 
                 VerticalAlignment="Center" HorizontalAlignment="Center"
