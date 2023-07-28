@@ -42,7 +42,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             DataContext = this;
             InitializeComponent();
-
+            InitializeUI();
             Items2 = new((GlobalProjectData.GetProjectNames()).ToList()); //list of the project present in the UserData  folder
             GlobalPages.page_1 = this;
 
@@ -169,6 +169,25 @@ namespace ApplicationInventaire.MVVM.View
                 CopyDirectory(directory, destinationPath);
             }
         }
+        /// <summary>
+        /// this function is used to initialize the UI in function of the parameters (language, User right)
+        /// </summary>
+        private void InitializeUI()
+        {
+            if(GlobalProjectData.UserRigth==0)
+            {
+                this.ButtonNew.Visibility = Visibility.Collapsed;
+                this.ButtonExport.Visibility = Visibility.Collapsed;
+                
+            }
+            else
+            {
+                this.ButtonNew.Visibility = Visibility.Visible;
+                this.ButtonExport.Visibility = Visibility.Visible;
+
+            }
+        }
+
 
         private void ButtonClickExport(object sender, RoutedEventArgs e)
         {

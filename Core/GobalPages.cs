@@ -28,6 +28,7 @@ namespace ApplicationInventaire.Core.GlobalPages
         public static List<Uri> LastPages { get; set; } = new List<Uri>(); //is used to store the "historics" of the pages and being able to know where to whan back button is pressed
         //URI for each page
         public static Uri MAINWINDOW = new Uri("MainWindow.xaml", UriKind.Relative);
+        public static Uri PAGE_0 = new Uri("MVVM/View/PAGE_0.xaml", UriKind.Relative);
         public static Uri PAGE_1 = new Uri("MVVM/View/PAGE_1.xaml", UriKind.Relative);
         public static Uri PAGE_1_1 = new Uri("MVVM/View/PAGE_1_1.xaml", UriKind.Relative);
         public static Uri PAGE_3_1 = new Uri("MVVM/View/PAGE_3_1.xaml", UriKind.Relative);
@@ -44,6 +45,7 @@ namespace ApplicationInventaire.Core.GlobalPages
         //used to store reference to the instance of pages. Each pages fill its reference when initiating.
         public static MainWindow mainWindow;
         public static PAGE_1 page_1;
+        public static PAGE_0 page_0;
         public static PAGE_1_1 page_1_1;
         public static PAGE_3_1 page_3_1;
         public static PAGE_3_2 page_3_2;

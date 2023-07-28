@@ -44,9 +44,9 @@ Background="#116396 "
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.ColumnSpan="2"  HorizontalAlignment="Left" Margin="61,0,0,0">
-                <Button Style="{StaticResource ButtonTheme2}" Content="Importer" x:Name="page_1" Width="350" Height="60" Margin="5,50,15,10" Click="ButtonClickLoad"/>
-                <Button  Style="{StaticResource ButtonTheme2}" Content="Exporter" x:Name="page_2"  Width="350" Height="60" Margin="5,10,15,10" Click="ButtonClickExport"/>
-                <Button  Style="{StaticResource ButtonTheme2}" Content="Nouveau" x:Name="page_3" Width="350" Height="60" Margin="5,10 ,15,10"  Click="ButtonClickNew" />
+                <Button Style="{StaticResource ButtonTheme2}" Content="Importer" x:Name="ButtonImport" Width="350" Height="60" Margin="5,50,15,10" Click="ButtonClickLoad"/>
+                <Button  Style="{StaticResource ButtonTheme2}" Content="Exporter" x:Name="ButtonExport"  Width="350" Height="60" Margin="5,10,15,10" Click="ButtonClickExport"/>
+                <Button  Style="{StaticResource ButtonTheme2}" Content="Nouveau" x:Name="ButtonNew" Width="350" Height="60" Margin="5,10 ,15,10"  Click="ButtonClickNew" />
 
             </StackPanel>
 

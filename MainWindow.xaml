@@ -28,8 +28,8 @@
                        Foreground="White"
                        />
 
-            <StackPanel x:Name="StackPanelCurrentTemplate" Orientation="Vertical" VerticalAlignment="Stretch"
-                       HorizontalAlignment="Right"  Margin="0,10,20,0" Visibility="Collapsed">
+            <StackPanel x:Name="StackPanelCurrentTemplate" Orientation="Vertical"
+                       HorizontalAlignment="Right"  Margin="0,38,265,22" Visibility="Visible">
                 <StackPanel Orientation="Horizontal">
                     <Label Foreground="White" FontSize="20"
                            Content="Current Template:"/>
@@ -45,12 +45,23 @@
                 Style="{StaticResource ButtonTheme2}"
                 x:Name="goBackButton"
                   Click="ButtonGoBackClick"
-                Content="go back"
+                Content="Retour"
                 Width="80"
                 Height="35"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Left"
                  Margin="30,0,0,0"
+                />
+            <Button
+                Style="{StaticResource ButtonTheme2}"
+                x:Name="SettingsButton"
+                  Click="ButtonSettingsClick"
+                Content="paramètres"
+                Width="90"
+                Height="35"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Left"
+                 Margin="1795,0,0,0"
                 />
 
 

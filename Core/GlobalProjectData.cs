@@ -46,10 +46,13 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         public static string CurrentPieceName;
         public static string AppRootDirectoryPath=GlobalProjectData.InitializeRootDirectory();
         public static ProjectData CurrentProjectData;
+        public static int UserRigth; //1 admin, 0 default
+        public static string password = "userir";
+        
 
         #endregion
-       
-        
+
+
         #region ImagePathVariable
         /// <summary>
         /// Contain the path to image asset used in application

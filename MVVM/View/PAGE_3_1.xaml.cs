@@ -35,6 +35,7 @@ namespace ApplicationInventaire.MVVM.View
         public PAGE_3_1()
         {
             InitializeComponent();
+             InitializeUI();
             InitializeAuthor_Description();
             GlobalPages.page_3_1 = this;
         }
@@ -164,7 +165,24 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-        
+        #region privateMethods
+        private void InitializeUI()
+        {
+            if (GlobalProjectData.UserRigth == 0)
+            {
+                this.ButtonEditProject.Visibility = Visibility.Collapsed;
+
+            }
+            else
+            {
+                this.ButtonEditProject.Visibility = Visibility.Visible;
+
+
+            }
+        }
+        #endregion
+
+
 
     }
 }

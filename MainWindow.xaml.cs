@@ -37,6 +37,7 @@ namespace ApplicationInventaire
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_1);
             GlobalPages.CurrentPage = GlobalPages.PAGE_1;
             DataContext = this;
+            GlobalProjectData.UserRigth = 0;
         }
 
 
@@ -50,6 +51,9 @@ namespace ApplicationInventaire
             Instance.MainFrame.Visibility = Visibility.Collapsed;
         }
 
-
+        private void ButtonSettingsClick(object sender, RoutedEventArgs e)
+        {
+            GlobalPages.SetCurrentPage(GlobalPages.PAGE_0);
+        }
     }
 }
