@@ -98,103 +98,104 @@ namespace ApplicationInventaire.MVVM.View
         }
 
 
-        #region DescriptionStringSettings
+        //if changing the valuie of the strings used to define colums is required. To finish.
+        //#region DescriptionStringSettings
 
-        private void TextBoxDescriptionKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
+        //private void TextBoxDescriptionKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void DescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        //private void DescriptionTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
 
-        }
-
-
-        #endregion
-
-        #region NameTagStringSettings
-        private void TextBoxNameTagKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-
-        }
-
-        private void NameTagTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        #region RequireStringSettings
-        private void TextBoxRequiredTagKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-
-        }
-
-        private void RequiredTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+        //}
 
 
-        #endregion
+        //#endregion
 
-        #region PresentStringSettings
-        private void TextBoxPresentKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
+        //#region NameTagStringSettings
+        //private void TextBoxNameTagKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void PresentTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        //private void NameTagTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
 
-        }
+        //}
 
+        //#endregion
 
-        #endregion
+        //#region RequireStringSettings
+        //private void TextBoxRequiredTagKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
 
-        #region ManufacturerStringSettings
-        private void TextBoxManufacturerKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
+        //}
 
-        }
+        //private void RequiredTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
 
-        private void ManufacturerTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-
-        #endregion
-
-        #region SerialNumberStringSettings
-        private void TextBoxSerialNumberKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-
-        }
-
-        private void SerialNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        #endregion
+        //}
 
 
-        #region CommentStringSettings
+        //#endregion
 
-        private void TextBoxCommenttKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
+        //#region PresentStringSettings
+        //private void TextBoxPresentKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
 
-        }
+        //}
 
-        private void CommentTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
+        //private void PresentTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
 
-        }
+        //}
 
-        #endregion
+
+        //#endregion
+
+        //#region ManufacturerStringSettings
+        //private void TextBoxManufacturerKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
+
+        //}
+
+        //private void ManufacturerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+
+        //}
+
+
+        //#endregion
+
+        //#region SerialNumberStringSettings
+        //private void TextBoxSerialNumberKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
+
+        //}
+
+        //private void SerialNumberTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+
+        //}
+
+        //#endregion
+
+
+        //#region CommentStringSettings
+
+        //private void TextBoxCommenttKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
+
+        //}
+
+        //private void CommentTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+
+        //}
+
+        //#endregion
 
         #endregion
 

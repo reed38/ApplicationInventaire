@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationInventaire.Core
+namespace ApplicationInventaire.Core.SettingsManagement
 {
     /// <summary>
     /// This class is used to store application settings and methods used to aply it
     /// </summary>
-    internal class Settings
+    public class Settings
     {
         public string Language { set; get; }
         public string NameTagString { set; get; }

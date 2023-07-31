@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
+using ApplicationInventaire.Core.SettingsManagement;
 using ApplicationInventaire.Core.DatabaseManagement;
 using ApplicationInventaire.Core.ExcelManagement;
 using ApplicationInventaire.Core.GlobalPages;
@@ -26,7 +26,7 @@ using System.Windows.Forms;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using MessageBox = System.Windows.MessageBox;
-
+using ComctlLib;
 
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
@@ -48,6 +48,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         public static ProjectData CurrentProjectData;
         public static int UserRigth; //1 admin, 0 default
         public static string password = "userir";
+        public static Settings toto;
         
 
         #endregion
@@ -101,7 +102,6 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         /// Go through the directory User Data to return the paths of the directories of the differents templates
         /// </summary>
         /// <returns> string [] containing the paths</returns>
-        /// //test clone
         public static string[] GetProjecPaths()
         {
             string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");

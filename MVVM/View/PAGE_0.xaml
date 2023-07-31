@@ -52,7 +52,8 @@
 
             </Border>
             </Popup>
-            <ScrollViewer  >
+             <!--starting to implement a way to change the string used to recognize colums-->
+            <!--<ScrollViewer  >
                 <StackPanel Orientation="Vertical" Margin="0,45,0,0">
                 <Label Content="champs utilisés dans le tableau excel: " FontSize="15" Foreground="#cfcfcf"></Label>
                 
@@ -202,7 +203,7 @@
                     </StackPanel>
 
                 </StackPanel>
-            </ScrollViewer>
+            </ScrollViewer>-->
 
         </StackPanel>
 
