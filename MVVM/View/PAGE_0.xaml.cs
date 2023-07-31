@@ -19,6 +19,7 @@ using System.Windows.Forms;
 namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
+    /// toto
     /// Logique d'interaction pour PAGE_0.xaml
     /// </summary>
     public partial class PAGE_0 : Page
