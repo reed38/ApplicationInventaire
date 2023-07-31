@@ -101,6 +101,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         /// Go through the directory User Data to return the paths of the directories of the differents templates
         /// </summary>
         /// <returns> string [] containing the paths</returns>
+        /// //test clone
         public static string[] GetProjecPaths()
         {
             string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
