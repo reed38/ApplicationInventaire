@@ -43,7 +43,7 @@
                    Height="50"
                    Width="50"/>
 
-            <Button x:Name="ButtonDeleteSelected" Content="Delete Selected" Click="ButtonClickDeleteSelected" Visibility="Collapsed"/>
+            <Button  Style="{StaticResource ButtonTheme2}" x:Name="ButtonDeleteSelected" Content="Delete Selected" Click="ButtonClickDeleteSelected" Visibility="Collapsed"/>
 
         </Canvas>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
