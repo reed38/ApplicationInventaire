@@ -51,7 +51,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
     }
 
     /// <summary>
-    /// Class to operate on an excel file
+    /// Class to operate on an excel file.
     /// INDEXES START AT ZERO
     /// </summary>
     public class ExcelFile
