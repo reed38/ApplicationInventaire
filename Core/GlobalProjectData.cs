@@ -28,6 +28,9 @@ using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using MessageBox = System.Windows.MessageBox;
 using ComctlLib;
 
+/// <summary>
+/// This file is used to store global variables 
+/// </summary>
 namespace ApplicationInventaire.Core.GlobalProjectData
 {
 
@@ -35,7 +38,6 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
  /// <summary>
  /// This static class is used to pass Data through pages and store constant variables such as image path.
- /// This is probably one of the worst way to do it, but it works.
  /// </summary>
     public static class GlobalProjectData
     {
@@ -178,7 +180,7 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
     }
     /// <summary>
-    /// This static class is  to store function used by the user to interact with files (load, save..).
+    /// This static class contains function to invoke popup window for the user to interact with files (load, save..).
     /// </summary>
     public static class FileManager
     {

@@ -15,11 +15,13 @@ using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 
-
+/// <summary>
+/// This file contains Piece and Section classes.
+/// </summary>
 namespace ApplicationInventaire.Core.PieceSections
 {
     /// <summary>
-    /// Used to store data relative to a piece
+    /// Class used to contain the infos about a given piece.
     /// </summary>
     public class Piece
     {
@@ -87,7 +89,9 @@ namespace ApplicationInventaire.Core.PieceSections
         }
         #endregion
     }
-
+    /// <summary>
+    /// Classed used To contains the infos about a section. A Section is a set of pieces
+    /// </summary>
     public class Section
     {
         #region set_get

@@ -17,11 +17,15 @@ using NPOI.HSSF.Util;
 using static SQLite.TableMapping;
 using System.Reflection.Metadata;
 
+
+/// <summary>
+/// This file contains function used to read and write infos in a given excel file.
+/// </summary>
 namespace ApplicationInventaire.Core.ExcelManagement
 {
 
     /// <summary>
-    /// used later in method FindCell to return multiple variables
+    /// Used to store information about an excel cell.
     /// </summary>
     public class CellInfo
     {
@@ -47,7 +51,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
     }
 
     /// <summary>
-    /// used to operate on excel sheet
+    /// Class to operate on an excel file
     /// INDEXES START AT ZERO
     /// </summary>
     public class ExcelFile

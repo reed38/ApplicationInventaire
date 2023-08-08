@@ -17,6 +17,9 @@ using NPOI.OpenXmlFormats.Dml.Diagram;
 using NPOI.SS.UserModel;
 using static SQLite.SQLite3;
 
+/// <summary>
+/// This file contains Class ImageInfos, ProjectInfos, and ProjectData.
+/// </summary>
 namespace ApplicationInventaire.Core.ProjectDataSet
 {
 
@@ -53,7 +56,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
     /// <summary>
-    /// Used to store Path of the application data as well as other infomations such as name, description author.
+    /// Used to store Path of a template data as well as other infomations such as name, description, author, creation Date,last edit Date.
     /// </summary>
 
     public class ProjectInfos
@@ -174,7 +177,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
     }
 
-
+    /// <summary>
+    /// Class xhich contains al the methods and data used to manage a given template.
+    /// </summary>
     public class ProjectData
     {
 

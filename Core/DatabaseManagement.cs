@@ -12,23 +12,17 @@ using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 
 /// <summary>
-/// used to manage database
+/// This file contains function used to read and write infos in the local sqlite Database.
 /// </summary>
 namespace ApplicationInventaire.Core.DatabaseManagement
 {
+    
     /// <summary>
     /// To create Database object. A database Object has the methods to read and write Objects in a .db sqlite database file. These objects are Section, Piece, and ProjectInfos
     /// the sqlite-net-pcl library let you directly create Table in the database to stock objects. You can then get those objects using a system of pimarykey.
     ///  But it DOESN'T ALLOW complex types such as bol or nested objects.
     /// There is the possibility to create a relation between tables using secondary key.
-    /// DO NOT write a Section with Id=, it will not work. I don't know why it must be a maraboutage
-    /// </summary>
-    /// <summary>
-    /// To create Database object. A database Object has the methods to read and write Objects in a .db sqlite database file. These objects are Section, Piece, and ProjectInfos
-    /// the sqlite-net-pcl library let you directly create Table in the database to stock objects. You can then get those objects using a system of pimarykey.
-    ///  But it DOESN'T ALLOW complex types such as bol or nested objects.
-    /// There is the possibility to create a relation between tables using secondary key.
-    /// DO NOT write a Section with Id=0 , it will not work. I don't know why it must be a maraboutage. Took me 6 hours to figure it out.
+    /// DO NOT write a Section with Id=0 , it will not work.
     /// </summary>
     public class Database
     {
