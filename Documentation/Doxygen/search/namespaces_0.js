@@ -9,5 +9,6 @@ var searchData=
   ['mvvm_6',['MVVM',['../namespace_application_inventaire_1_1_m_v_v_m.html',1,'ApplicationInventaire']]],
   ['piecesections_7',['PieceSections',['../namespace_application_inventaire_1_1_core_1_1_piece_sections.html',1,'ApplicationInventaire::Core']]],
   ['projectdataset_8',['ProjectDataSet',['../namespace_application_inventaire_1_1_core_1_1_project_data_set.html',1,'ApplicationInventaire::Core']]],
-  ['view_9',['View',['../namespace_application_inventaire_1_1_m_v_v_m_1_1_view.html',1,'ApplicationInventaire::MVVM']]]
+  ['settingsmanagement_9',['SettingsManagement',['../namespace_application_inventaire_1_1_core_1_1_settings_management.html',1,'ApplicationInventaire::Core']]],
+  ['view_10',['View',['../namespace_application_inventaire_1_1_m_v_v_m_1_1_view.html',1,'ApplicationInventaire::MVVM']]]
 ];

@@ -8,5 +8,6 @@ var searchData=
   ['setcellvalue_5',['SetCellValue',['../class_application_inventaire_1_1_core_1_1_excel_management_1_1_excel_file.html#a35362ac6effb32a3e6f2038325945464',1,'ApplicationInventaire::Core::ExcelManagement::ExcelFile']]],
   ['setcurrentpage_6',['SetCurrentPage',['../class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html#a5364b1a74b07f63f0fc0d043894ca9ee',1,'ApplicationInventaire::Core::GlobalPages::GlobalPages']]],
   ['setcurrentpageback_7',['SetCurrentPageBack',['../class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html#a07c305994079c50302eda223eb24c9ed',1,'ApplicationInventaire::Core::GlobalPages::GlobalPages']]],
-  ['showpopup_8',['ShowPopup',['../class_application_inventaire_1_1_core_1_1_global_project_data_1_1_p_o_p_u_p.html#a4c1c62318dba84f660d465cf905409f4',1,'ApplicationInventaire::Core::GlobalProjectData::POPUP']]]
+  ['settings_8',['Settings',['../class_application_inventaire_1_1_core_1_1_settings_management_1_1_settings.html',1,'ApplicationInventaire::Core::SettingsManagement']]],
+  ['showpopup_9',['ShowPopup',['../class_application_inventaire_1_1_core_1_1_global_project_data_1_1_p_o_p_u_p.html#a4c1c62318dba84f660d465cf905409f4',1,'ApplicationInventaire::Core::GlobalProjectData::POPUP']]]
 ];
