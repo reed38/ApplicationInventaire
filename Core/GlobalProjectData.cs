@@ -60,8 +60,8 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         /// <summary>
         /// Contain the path to image asset used in application
         /// </summary>
-        public static string RedFramePath = Path.Combine(AppRootDirectoryPath, "Image\\RedFrame.png");
-        public static string RedCirclePath = Path.Combine(AppRootDirectoryPath, "Image\\RedCircle.png");
+        public static string RedFramePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources"), "Image\\RedFrame.png");
+        public static string RedCirclePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources"), "Image\\RedCircle.png");
 
         #endregion
 

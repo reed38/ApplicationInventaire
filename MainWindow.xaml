@@ -23,23 +23,17 @@
 
 
         <Grid Grid.Row="0" Background="#003563" Margin="0,0,0,0">
-            <TextBlock Text="Aventech Inventaire" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Height="48"
-                       Width="277"
-                       Foreground="White"
-                       />
 
-            <StackPanel x:Name="StackPanelCurrentTemplate" Orientation="Vertical"
-                       HorizontalAlignment="Right"  Margin="0,38,265,22" Visibility="Visible">
-                <StackPanel Orientation="Horizontal">
-                    <Label Foreground="White" FontSize="20"
-                           Content="Template actuel:"
-                           Visibility="Hidden"/>
-                    <Label x:Name="labelTemplateName" Foreground="White" FontSize="20"
+
+
+            <Label x:Name="labelTemplateName" Foreground="White" FontSize="25"  HorizontalAlignment="Left"
+                           Margin="1632,0,0,0"
+                           VerticalAlignment="Center"
                            />
-                </StackPanel>
 
+            <Image Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\Logo_AVENTECH_Couleurs_by_Reyes.png"
+                 VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="350"/>
 
-            </StackPanel>
 
 
             <Button

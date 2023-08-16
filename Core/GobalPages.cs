@@ -103,9 +103,9 @@ namespace ApplicationInventaire.Core.GlobalPages
             }
             if(GlobalPages.CurrentPage==PAGE_1)
             {
-                mainWindow.StackPanelCurrentTemplate.Visibility= Visibility.Collapsed;
+                GlobalPages.mainWindow.labelTemplateName.Visibility = Visibility.Hidden;
             }
-            
+
         }
     }
 }

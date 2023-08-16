@@ -40,10 +40,9 @@ namespace ApplicationInventaire.MVVM.View
             DataContext = this;
             projectData = GlobalProjectData.CurrentProjectData; //Loading project Data from classic class
             this.RedFramePath = GlobalProjectData.RedFramePath; //the image used in multiples pages have their path stored in the static class
+
+
           
-          
-            projectData.InitializePieceFromExcel(); //We re initialize the data using the excel file. This is useful if a new inventory is made without reloading the project, or if
-            //the user clicked on "continu inventory"
 
             ResetTextBox(); //reset Comment, Serial Number, and Constructot textBox
             HideTextBoxSerialNumberConstructor(); //Hide it by default since we don't know if upcomming piece require it or not
@@ -258,9 +257,8 @@ namespace ApplicationInventaire.MVVM.View
         /// this function is used when the targeted Piece change
         /// </summary>
         /// <param name="answ"> the value written in the cell of the excel file. "1" or "0" </param>
-        private void GotoNextPiece(string answ)
+        private void GotoNextPiece()
         {
-            projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, answ, currentPiece.ExcelColumn, currentPiece.ExcelRow);
 
             FindNextNoPresent(); //Find the next Piece with the field "IsPresent" set to 0, and Update Section image, IndiceSection , IndicePiece accordingly
             InitializeNameTagAndDesciption();
@@ -348,7 +346,7 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void SaveAndQuit()
         {
-            projectData.myTmpExcelFile.UpdateExcelFormula();
+            projectData.myTmpExcelFile.UpdateExcelFormula(); 
 
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -444,6 +442,7 @@ namespace ApplicationInventaire.MVVM.View
             UpdateSerialNumber();
             UpdateConstructor();
             UpdateComment();
+            projectData.myTmpExcelFile.UpdateSignature();
             SaveAndQuit();
         }
 
@@ -457,7 +456,11 @@ namespace ApplicationInventaire.MVVM.View
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
             HideFrame();
-            GotoNextPiece("0");
+            projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+            CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
+            projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "0", currentPiece.ExcelColumn, tmpMarquage.Row); 
+
+            GotoNextPiece();
 
         }
         /// <summary>
@@ -479,7 +482,11 @@ namespace ApplicationInventaire.MVVM.View
             ResetTextBox();
             HideTextBoxSerialNumberConstructor();
             HideFrame();
-            GotoNextPiece("1");
+            projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+            CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
+            projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "1", currentPiece.ExcelColumn, tmpMarquage.Row);
+
+            GotoNextPiece();
 
 
         }

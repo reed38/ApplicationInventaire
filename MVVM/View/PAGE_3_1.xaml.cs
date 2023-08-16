@@ -80,10 +80,12 @@ namespace ApplicationInventaire.MVVM.View
             string tmp = FileManager.OpenExcelFilePopup();
             if (!string.IsNullOrEmpty(tmp))
             {
-                File.Copy(tmp, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath, true); ;
+                File.Copy(tmp, GlobalProjectData.CurrentProjectData.myProjectInfos.TmpExcelPath, true);
+                GlobalProjectData.CurrentProjectData.InitializePieceFromExcel(); //We re initialize the data using the excel file. This is useful if a new inventory is made without reloading the project
                 GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
             }
-        }
+         
+                        }
         /// <summary>
         /// The user clicked on the button New Inventory ",   this function change the page to "PAGE_3_2" .
         /// This file is then copied in memory
@@ -94,7 +96,6 @@ namespace ApplicationInventaire.MVVM.View
         {
 
             GlobalProjectData.CurrentProjectData.ResetTmpExcel();
-
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
 

@@ -223,6 +223,10 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         XSSFWorkbook workbook = new XSSFWorkbook(file);
                         ISheet sheet = workbook.GetSheet(sheetName);
                         IRow excelRow = sheet.GetRow(row);
+                        if(excelRow==null)
+                        {
+                            excelRow = sheet.CreateRow(row);
+                        }
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
                         if(content.Equals("1"))
                         {
@@ -236,7 +240,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         }
                         else 
                         {
-                            cell.SetCellValue(content);
+                            cell.SetCellValue(content); //there is no recurence, fonction from NPOI library
 
 
                         }
@@ -266,6 +270,10 @@ namespace ApplicationInventaire.Core.ExcelManagement
                             return ; 
                         }
                         IRow excelRow = sheet.GetRow(row);
+                        if (excelRow == null)
+                        {
+                            excelRow = sheet.CreateRow(row);
+                        }
                         ICell cell = excelRow.GetCell(column) ?? excelRow.CreateCell(column);
                         if (content.Equals("1"))
                         {
@@ -310,6 +318,37 @@ namespace ApplicationInventaire.Core.ExcelManagement
 
         }
 
+
+        /// <summary>
+        /// This function is called when the user click "enregistrer et quitter" in the inventory update.
+        /// It will add the current date end the user name (name of the session) at the end of the document in the two colums "DATE de MISE A JOUR" and "NOM + SIGNATURE"
+        /// </summary>
+        public void UpdateSignature()
+        {
+            string user = Environment.UserName;
+            System.DateTime date = DateTime.Now;
+            string dateStr=date.Day.ToString()+"/"+date.Month.ToString()+"/"+date.Year.ToString();
+            CellInfo SignatureCell = FindValue("NOM + SIGNATURE");
+            CellInfo DateCell = FindValue("DATE de MISE A JOUR");
+
+            int i = SignatureCell.Row;
+            while(!GetCellValue(SignatureCell.Sheet,i,SignatureCell.Column).Equals(""))
+            {
+                i++;
+
+            }
+            this.SetCellValue(SignatureCell.Sheet, user, SignatureCell.Column,i) ;
+
+            i = SignatureCell.Row;
+            while (!GetCellValue(DateCell.Sheet, i, DateCell.Column).Equals(""))
+            {
+                i++;
+
+            }
+            this.SetCellValue(DateCell.Sheet, dateStr, DateCell.Column, i);
+
+
+        }
         /// <summary>
         /// Go through all excel file and update the  cell according to their value. This is used because just changing the value with the function SetCellValue doesn't do anything.
         /// </summary>

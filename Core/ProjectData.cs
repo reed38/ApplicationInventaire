@@ -73,6 +73,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public string DatabasePath { set; get; }//Path to the Database used by the project
         public string ExcelPath { set; get; }
         public string AppPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
+        public string RessourcesPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
         public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
         public string ProjectPath { set; get; }
@@ -345,12 +346,16 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
             int n = AmountCell.Row + 1;
             string res;
+           
             do
             {
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
 
                 CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
-                pieceNames.Add((TagCellTmp.Content));
+                if (!string.IsNullOrEmpty(TagCellTmp.Content) && TagCellTmp.Content.IndexOf(".M")==-1)
+                {
+                    pieceNames.Add((TagCellTmp.Content));
+                }
                 n++;
 
 
@@ -407,7 +412,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 {
                     isYellow = 0;
                 }
-                CellData.Add((TagCellTmp, ContentCellTmp, isYellow, description));
+                if(!string.IsNullOrEmpty(TagCellTmp.Content) && TagCellTmp.Content.IndexOf(".M") == -1)
+                {
+                    CellData.Add((TagCellTmp, ContentCellTmp, isYellow, description));
+
+                }
                 n++;
 
 
