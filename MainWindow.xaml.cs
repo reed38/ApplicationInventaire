@@ -43,7 +43,44 @@ namespace ApplicationInventaire
 
         public void ButtonGoBackClick(object sender, RoutedEventArgs e)
         {
-            GlobalPages.PageGoBack();
+            if (GlobalPages.CurrentPage == GlobalPages.PAGE_3_6_1 || GlobalPages.CurrentPage == GlobalPages.PAGE_3_2 || GlobalPages.CurrentPage == GlobalPages.PAGE_4_1)  //if user is currently editing a template
+            {
+                MessageBoxResult result = MessageBox.Show("Êtes-vous vraiment sûr de vouloir quitter? Les modifications seront perdus.", "Confirmer", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    GlobalPages.PageGoBack();
+
+                }
+
+
+            }
+
+            else if (GlobalPages.CurrentPage == GlobalPages.PAGE_3_6_2 || GlobalPages.CurrentPage == GlobalPages.PAGE_4_2)
+            {
+             
+                    MessageBoxResult result = MessageBox.Show("Êtes-vous vraiment sûr de vouloir quitter? Les modifications seront perdus.", "Confirmer", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        GlobalPages.PageGoBack();
+                        GlobalPages.PageGoBack();
+
+
+                    }
+
+
+                
+
+
+            }
+            else
+            {
+                GlobalPages.PageGoBack();
+
+            }
+
+
         }
 
         public static void HidePage()
