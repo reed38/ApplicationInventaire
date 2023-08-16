@@ -366,7 +366,12 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         var formulaEvaluator = workbook.GetCreationHelper().CreateFormulaEvaluator();
 
                         // Evaluate the formulas
-                        formulaEvaluator.EvaluateAll();
+                        try
+                        {
+                            formulaEvaluator.EvaluateAll();
+
+                        }
+                        catch(Exception ex) { }
 
                         file.Close();
 
@@ -389,7 +394,12 @@ namespace ApplicationInventaire.Core.ExcelManagement
                         var formulaEvaluator = workbook.GetCreationHelper().CreateFormulaEvaluator();
 
                         // Evaluate the formulas
-                        formulaEvaluator.EvaluateAll();
+                        try 
+                        {
+                            formulaEvaluator.EvaluateAll();
+
+                        }
+                        catch (Exception ex) { }
 
                         file.Close();
 

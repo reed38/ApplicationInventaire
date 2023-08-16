@@ -20,14 +20,13 @@ using ApplicationInventaire.Core.PieceSections;
 using ApplicationInventaire.Core.ProjectDataSet;
 using ApplicationInventaire.Core.GlobalProjectData;
 using System.IO;
-
+using System.ComponentModel;
 
 namespace ApplicationInventaire
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public List<string> Items { get; set; }
-
         public static MainWindow Instance { get; set; }
 
         public MainWindow()
@@ -36,10 +35,31 @@ namespace ApplicationInventaire
             GlobalPages.mainWindow = this;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_1);
             GlobalPages.CurrentPage = GlobalPages.PAGE_1;
+            ImageLogo = GlobalProjectData.AventechLogoPath;
             DataContext = this;
             GlobalProjectData.UserRigth = 0;
         }
 
+
+        private string imageLogo;
+
+        public string ImageLogo
+        {
+            get { return imageLogo; }
+            set
+            {
+                imageLogo = value;
+                OnPropertyChanged(nameof(ImageLogo));
+            }
+        }
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void ButtonGoBackClick(object sender, RoutedEventArgs e)
         {

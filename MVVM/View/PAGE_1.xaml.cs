@@ -93,12 +93,9 @@ namespace ApplicationInventaire.MVVM.View
         /// <param name="e"></param>
         private void ButtonMainMenuSelectTypeClick(object sender, RoutedEventArgs e) //when the user click on a given project
         {
-            this.LoadingBarPopup.IsOpen = true;
             Button clickedButton = (Button)sender;
-            GlobalProjectData.CurrentProjectName = clickedButton.Content.ToString(); //to pass variables through page a static class "GlobalProjectData" is used. It's probably not the bes
-            //way to do it but  it works
+            GlobalProjectData.CurrentProjectName = clickedButton.Content.ToString(); //to pass variables through page a static class "GlobalProjectData" is used. It's probably not the best way to do it but  it works
             GlobalProjectData.CurrentProjectData = new(new(GlobalProjectData.CurrentProjectName)); //initializing the corresponding GlobalProjectData in the static class
-            this.LoadingBarPopup.IsOpen = false;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
             GlobalPages.mainWindow.labelTemplateName.Content = GlobalProjectData.CurrentProjectName;// we update the banner to display the current projectName
             GlobalPages.mainWindow.labelTemplateName.Visibility = Visibility.Visible;

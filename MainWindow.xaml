@@ -31,7 +31,8 @@
                            VerticalAlignment="Center"
                            />
 
-            <Image Source="C:\Users\regnaulte\Documents\VSPROJECTS\VisualStudio\ApplicationInventaire\Image\Logo_AVENTECH_Couleurs_by_Reyes.png"
+            <Image 
+                Source="{Binding ImageLogo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Center" HorizontalAlignment="Center" Height="100" Width="350"/>
 
 

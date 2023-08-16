@@ -15,11 +15,10 @@ Background="#116396 "
        
       >
 
-
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="37*" />
-            <ColumnDefinition Width="13*" />
+            <ColumnDefinition Width="119*" />
+            <ColumnDefinition Width="41*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -33,6 +32,8 @@ Background="#116396 "
                 x:Name="myCanva"
                  Grid.Column="0"
             Grid.Row="0"
+                            Margin="10,10,10,10"
+
            
                 >
             <Canvas.Background  >

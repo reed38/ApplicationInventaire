@@ -62,15 +62,17 @@ namespace ApplicationInventaire.Core.GlobalProjectData
         /// </summary>
         public static string RedFramePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources"), "Image\\RedFrame.png");
         public static string RedCirclePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources"), "Image\\RedCircle.png");
+        public static string AventechLogoPath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources"), "Image\\Logo_AVENTECH_Couleurs_by_Reyes.png");
+
 
         #endregion
 
         #region BindingMethods
 
         #endregion
-        
+
         #region PAGE_3_1Variables
-       //is used to store the excel Path if the user choose to continu the inventory. This can now be implemented diferently by directly changing the value in CurrentProjectData
+        //is used to store the excel Path if the user choose to continu the inventory. This can now be implemented diferently by directly changing the value in CurrentProjectData
 
         #endregion
 
