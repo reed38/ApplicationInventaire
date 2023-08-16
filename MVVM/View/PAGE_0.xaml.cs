@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ApplicationInventaire.Core.GlobalPages;
 using ApplicationInventaire.Core.GlobalProjectData;
 using System.Windows.Forms;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace ApplicationInventaire.MVVM.View
 {
@@ -50,7 +51,9 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonRadioAdminClick(object sender, RoutedEventArgs e)
         {
             PopUpPassword.IsOpen = true;
-           
+            Keyboard.Focus(PasswordBoxUserRight);
+
+
         }
 
         private void ButtonRadioDefaultClick(object sender, RoutedEventArgs e)
@@ -68,6 +71,35 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        private void TextBoxNameTagKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (!string.IsNullOrEmpty(passwd))
+                {
+                    if (passwd.Equals(GlobalProjectData.password))
+                    {
+                        GlobalProjectData.UserRigth = 1;
+                        passwd = null;
+                        PopUpPassword.IsOpen = false;
+
+                    }
+                    else
+                    {
+                        POPUP.ShowPopup("le mot de passe saisi est incorrect");
+                        passwd = null;
+
+                    }
+                    PasswordBoxUserRight.Password = string.Empty;
+
+
+
+
+                }
+
+            }
+
+        }
         private void ButtonValidateClick(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(passwd))

@@ -212,6 +212,7 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+
         private void ResetTextBox()
         {
             TextBoxComment.Clear();

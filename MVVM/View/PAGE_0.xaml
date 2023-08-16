@@ -20,9 +20,8 @@
             <RadioButton FontSize="15" Content="Admin" Foreground="#cfcfcf" x:Name="RadioButtonAdmin" Click="ButtonRadioAdminClick"/>
             <RadioButton FontSize="15"  Content="Droits par Defaut" Foreground="#cfcfcf"  x:Name="RadioButtonDefault" Click="ButtonRadioDefaultClick"/>
 
-            <Popup x:Name="PopUpPassword" Placement="Mouse">
-
-            <Border  Background="#00406F" Height="127" Width="260">
+            <Popup x:Name="PopUpPassword" Placement="Center">
+                <Border  Background="#00406F" Height="127" Width="260">
                 <StackPanel Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" Height="40" Width="250" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Label FontSize="13" Content="Mot de passe: " Foreground="#cfcfcf" VerticalAlignment="Center"/>
@@ -30,6 +29,8 @@
 
                             <PasswordBox  Background="Transparent"
                                           x:Name="PasswordBoxUserRight"
+                                           KeyDown="TextBoxNameTagKeyDown"
+
                                           PasswordChanged="PasswordChanged"
                              Foreground="#cfcfcf" Margin="3">
 
