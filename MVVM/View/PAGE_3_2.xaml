@@ -57,17 +57,17 @@ Background="#116396 "
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal"
-                     
+                     Height="45"
                         VerticalAlignment="Center">
 
 
-                    <Label Foreground="White" Content="Comment: " FontSize="15" Height="30"
-                          />
+                    <Label Foreground="White" Content="Comment: " FontSize="20"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <Border CornerRadius="5" Background="#353340" Height="35"  Width="150">
 
                         <TextBox x:Name="TextBoxComment" 
                              TextWrapping="WrapWithOverflow"
                              Background="Transparent" 
+                                 FontSize="15"
                              Foreground="#cfcfcf" Margin="2,2,3,2"/>
 
 
@@ -76,26 +76,28 @@ Background="#116396 "
 
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Label Foreground="White" Content="NameTag:   " FontSize="15" 
+                    <Label Foreground="White" Content="NameTag:   " FontSize="20" 
                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <Border CornerRadius="5" Background="#353340" Height="35"  Width="202" RenderTransformOrigin="0.5,0.5">
+                    <Border CornerRadius="5" Background="#353340" Height="40"  Width="202" RenderTransformOrigin="0.5,0.5">
 
 
                         <TextBlock Background="Transparent" x:Name="TextBlockName" 
-                                Foreground="#cfcfcf" Margin="4,4,3,3"/>
+                                Foreground="#cfcfcf" Margin="4,4,3,3"
+                                FontSize="15"/>
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"
-                           Height="30"/>
-                    <Border CornerRadius="5" Background="#353340" Height="46"  Width="146">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Foreground="White" Content="Description:" FontSize="20"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"
+                          />
+                    <Border CornerRadius="5" Background="#353340" Height="46"  Width="320">
                         <TextBlock VerticalAlignment="Center" Background="Transparent" 
                                HorizontalAlignment="Center"
-                           Height="37" Width="138"
-                           x:Name="TextBlockDesciption"
-                           TextWrapping="WrapWithOverflow"
-                            Foreground="#cfcfcf"/>
+                                FontSize="15"
+                               Height="45" Width="300"
+                               x:Name="TextBlockDesciption"
+                               TextWrapping="WrapWithOverflow"
+                                Foreground="#cfcfcf"/>
                     </Border>
                 </StackPanel>
 
@@ -114,8 +116,9 @@ Background="#116396 "
                 x:Name="SaveAndQuitButton"
                   Click="ButtonClickSaveAndQuit"
                 Content="Enregistrer et quitter"
-                Width="164"
-                Height="50"
+                FontSize="20"
+                Width="220"
+                Height="60"
                  VerticalAlignment="Center"
                  HorizontalAlignment="Center"
                 
@@ -190,8 +193,9 @@ Background="#116396 "
                 x:Name="YesButton"
                   Click="ButtonClickYes"
                 Content="Present"
-                Width="100"
-                Height="30"
+                Width="150"
+                FontSize="20"
+                Height="45"
                 Margin="10"
                 HorizontalAlignment="Center"
                  
@@ -202,10 +206,11 @@ Background="#116396 "
                 x:Name="NoButton"
                   Click="ButtonClickNo"
                 Content="Non Présent"
-                Width="100"
+                Width="150"
                  Margin="10"
 
-                Height="30"
+                 FontSize="20"
+                Height="45"
                  HorizontalAlignment="Center"
                 
                 />

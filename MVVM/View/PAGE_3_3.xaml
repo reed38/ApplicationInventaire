@@ -21,19 +21,20 @@ Background="#116396 "
 
 
 
-        <StackPanel Orientation="Vertical" Margin="20" Width="350" HorizontalAlignment="Left">
-            <Label Content="Liste des Plans: " FontSize="15" Foreground="White"/>
-            <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="350" HorizontalAlignment="Left">
+        <StackPanel Orientation="Vertical" Margin="20" Width="800" HorizontalAlignment="Left">
+            <Label Content="Liste des Plans: " FontSize="25" Foreground="White"/>
+            <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="800" HorizontalAlignment="Left">
 
                 <ScrollViewer x:Name="ListBoxPlansFiles"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Stretch"
+                              FontSize="15"
                       HorizontalAlignment="Left"
                       Height="250"
-                      Width="350"
+                      Width="800"
                     Background="Transparent"
                     Foreground="#cfcfcf">
                     <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                         Width="350"
+                         Width="800"
                           SelectionChanged="ListBoxSectionFileSelectionChanged"
                              Background="Transparent"
                              Foreground="#cfcfcf"
@@ -46,9 +47,10 @@ Background="#116396 "
                     </ListBox>
                 </ScrollViewer>
             </Border>
-            <Button  Style="{StaticResource ResourceKey=ButtonTheme2}" Content="Ouvrir le fichier sélectionné"
+            <Button  Style="{StaticResource ResourceKey=ButtonTheme2}" Content="Ouvrir"
                      HorizontalAlignment="Center"
-                 Width="200" Height="40"
+                     FontSize="20"
+                 Width="200" Height="45"
                     Click="ButtonClickOpenFile" 
                      Margin="10"
                     />

@@ -14,203 +14,220 @@
        d:DesignHeight="450"    >
 
     <Grid>
-        <StackPanel Orientation="Horizontal" >
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" 
+   
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" 
                     Margin="20,20,20,20">
 
-                <StackPanel Orientation="Horizontal">
-                    <Label FontSize="15" Content="Nom:          " Foreground="White"/>
-                    <Border CornerRadius="5" Background="#353340" Height="25"  Width="200">
+                    <StackPanel Orientation="Horizontal">
+                        <Label FontSize="20" Content="Nom:          " Foreground="White"/>
+                        <Border CornerRadius="5" Background="#353340" Height="35"  Width="200">
 
-                        <TextBox  x:Name="TextBoxName" Foreground="#cfcfcf" Background="Transparent" Width="200" Height="25" TextWrapping="WrapWithOverflow"/>
-                    </Border>
-                </StackPanel>
+                            <TextBox  x:Name="TextBoxName" Foreground="#cfcfcf" Background="Transparent" Width="200" Height="35" TextWrapping="WrapWithOverflow" FontSize="15"/>
+                        </Border>
+                    </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
-                    <Label FontSize="15" Content="Description: " Foreground="White"/>
-                    <Border CornerRadius="5" Background="#353340" Height="105"  Width="200">
+                    <StackPanel Orientation="Horizontal" Margin="0,30,0,0">
+                        <Label FontSize="20" Content="Description: " Foreground="White"/>
+                        <Border CornerRadius="5" Background="#353340" Height="150"  Width="200">
 
-                        <TextBox Foreground="#cfcfcf" Height="100" x:Name="TextBoxDescription" Background="Transparent" Width="200" TextWrapping="WrapWithOverflow" />
-                    </Border>
-                </StackPanel>
-
-
+                            <TextBox Foreground="#cfcfcf" Height="150" x:Name="TextBoxDescription" Background="Transparent" Width="200" TextWrapping="WrapWithOverflow" FontSize="15" />
+                        </Border>
+                    </StackPanel>
 
 
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
-                    <Button Height="30" Width="200"
+
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+                        <Button Height="45" Width="300"
                             Style="{StaticResource ButtonTheme2}"
                    HorizontalAlignment="Center"
-                    Margin="5"
-                    Content="Ajout d'images Section"
+                    Margin="10"
+                    Content="Sélection des Images Section"
+                        FontSize="20"
                     Click="ButtonClickSelectImageSection"/>
 
-                    <Button Height="30" Width="200"
-                      Style="{StaticResource ButtonTheme2}"
-
-                   HorizontalAlignment="Center"
+                        <Button  
+                         FontSize="20"
+                  Height="45" Width="300"
+                         Style="{StaticResource ButtonTheme2}"
+                         HorizontalAlignment="Center"
+                      
                     Margin="5"
-                    Content="Ajout d'images Releve"
+                    Content="Sélection des Images Releve"
                     Click="ButtonClickSelectImageReleve"/>
 
 
 
 
-                    <Button Height="30" Width="200"
-           Style="{StaticResource ButtonTheme2}"
-
+                        <Button 
+                  Style="{StaticResource ButtonTheme2}"
+                    FontSize="20"
+                  Height="45" Width="300"
                    HorizontalAlignment="Center"
-                    Margin="5"
-                    Content="Ajout de Plans"
+                    Margin="10"
+                    Content="Sélection des Plans"
                     Click="ButtonClickSelectPlans"/>
 
-                    <Button Height="30" Width="200" Content="Sélection fichier excel"
+                        <Button
+                         FontSize="20"
+                  Height="45" Width="300"
+                        Content="Sélection fichier excel"
                      Style="{StaticResource ButtonTheme2}"
 
                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                        Margin="5"
+                        Margin="10"
                     Click="ButtonClickSelectExcel" />
+
+                    </StackPanel>
+
+
+
+
+
 
                 </StackPanel>
 
+                <StackPanel Orientation="Horizontal" Height="350" Width="1100"  VerticalAlignment="Top" >
 
 
 
 
 
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Height="350" Width="900"  VerticalAlignment="Top" >
-
-
-
-
-
-                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="  Images de Section: "  Foreground="White" FontSize="15"/>
-                    <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
+                    <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                        <Label Content="  Images de Section: "  Foreground="White" FontSize="20"/>
+                        <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
-                      Width="150">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="150">
+                      Width="200">
+                            <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="200">
 
-                            <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Width="150" Height="200"
+                                <ListBox ItemsSource="{Binding ImageSectionsName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="200" Height="200"
                           SelectionChanged="ListBoxSectionSelectionChanged"
                             Background="Transparent"
                                 Foreground="#cfcfcf">
 
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="5"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
-                    </ScrollViewer>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" Margin="5"
+                                               FontSize="15"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Border>
+                        </ScrollViewer>
 
-                    <Button Height="30" Width="150"
+                        <Button Height="45" Width="200"
+                        FontSize="20"
                    Style="{StaticResource ButtonTheme2}"
 
                 x:Name="ButtonDeleteImage"
                 Content="Supprimer sélection"
                 Click="ButtonClickDeleteSectionSelected"/>
 
-                </StackPanel>
+                    </StackPanel>
 
 
 
-                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content=" Images de Relevé: "  Foreground="White" FontSize="15"/>
-                    <ScrollViewer x:Name="ListBoxReleveFile"   VerticalScrollBarVisibility="Auto"
+                    <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                        <Label Content=" Images de Relevé: "  Foreground="White" FontSize="20"/>
+                        <ScrollViewer x:Name="ListBoxReleveFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Center"
                       Height="200"
-                      Width="150">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="150">
+                      Width="200">
+                            <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="200">
 
-                            <ListBox ItemsSource="{Binding ImageReleveName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Width="150" Height="200"
+                                <ListBox ItemsSource="{Binding ImageReleveName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             Width="200" Height="200"
                           SelectionChanged="ListBoxReleveSelectionChanged"
                                  Background="Transparent"
                                 Foreground="#cfcfcf"
 >
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="5"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
-                    </ScrollViewer>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" Margin="5" FontSize="15"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Border>
+                        </ScrollViewer>
 
-                    <Button Height="30" Width="150"
+                        <Button  Height="45" Width="200"
+                        FontSize="20"
                     Style="{StaticResource ButtonTheme2}"
 
                 x:Name="ButtonDeleteImageReleve"
                 Content="Supprimer sélection"
                 Click="ButtonClickDeleteReleveSelected"/>
 
-                </StackPanel>
+                    </StackPanel>
 
 
 
 
 
-                <StackPanel Orientation="Vertical" Margin="10" Height="300" Width="247" >
-                    <Label Content="                        Plans: "  Foreground="White" FontSize="15" />
-                    <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
+                    <StackPanel Orientation="Vertical" Margin="10" Height="300" Width="400" >
+                        <Label Content="                        Plans: "  Foreground="White" FontSize="20" />
+                        <ScrollViewer x:Name="ListBoxPlansFile"   VerticalScrollBarVisibility="Auto"
                       Height="200"
-                      Width="217">
-                        <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="217" Height="195">
+                      Width="400">
+                            <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="400" Height="195">
 
-                            <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                <ListBox ItemsSource="{Binding PlansNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionChanged="ListBoxPlanFileSelectionChanged"
                         Background="Transparent"
                                 Foreground="#cfcfcf" Margin="7,6,7,4">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="5"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Border>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" Margin="5" FontSize="15"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Border>
 
 
 
-                    </ScrollViewer>
+                        </ScrollViewer>
 
-                    <Button Height="30" Width="200"
+                        <Button Height="45" Width="200"
+                        FontSize="20"
                    Style="{StaticResource ButtonTheme2}"
                  x:Name="ButtonDeletePlan"
                 Content="Supprimer sélection"
                 Click="ButtonClickDeletePlanSelected"/>
 
-                </StackPanel>
+                    </StackPanel>
 
-                <StackPanel  Orientation="Vertical" Margin="10" Height="300">
-                    <Label Content="Fichier excel: " 
+                    <StackPanel  Orientation="Vertical" Margin="10" Height="300">
+                        <Label Content="Fichier excel: " 
                        Foreground="White"
-                       FontSize="15"
+                       FontSize="20"
 
                    />
-                    <Border CornerRadius="5" Background="#353340" Height="25"  Width="180">
+                        <Border CornerRadius="5" Background="#353340" Height="45"  Width="180">
 
-                        <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
-                       Height="25" Width="180"
+                            <Label Content="{Binding ExcelName, UpdateSourceTrigger=PropertyChanged}" 
+                       Height="45" Width="180"
                       Background="Transparent" HorizontalAlignment="Center"
                                Foreground="#cfcfcf"
+                           FontSize="15"
                            
                           />
-                    </Border>
+                        </Border>
+                    </StackPanel>
+
+
+
+
+
+
+
+
+
+
                 </StackPanel>
-
-
-
-
-
-
-
 
 
 
@@ -218,20 +235,17 @@
 
 
 
-        </StackPanel>
-
-
-
-        <Button Height="30" Width="165" Content="Enregistrer et continuer"
+            <Button Height="45" Width="240" Content="Enregistrer et continuer"
                 Style="{StaticResource ButtonTheme2}"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
                 Margin="0,0,10,10"
+            FontSize="20"
                 Click="ButtonClickSaveContinu"
          />
 
 
 
-    </Grid>
+        </Grid>
 
 </Page>
 

@@ -23,7 +23,7 @@ Background="#116396 "
 
             <StackPanel Orientation="Vertical" Margin="20" Background="Transparent"   Width="350"
                         HorizontalAlignment="Left">
-                <Label Content="Liste des Template: "  Foreground="White" FontSize="15"/>
+                <Label Content="Liste des Template: "  Foreground="White" FontSize="25"/>
                 <ScrollViewer x:Name="ListBoxSectionFile"   VerticalScrollBarVisibility="Auto"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Left"
@@ -34,7 +34,7 @@ Background="#116396 "
 
                     <ListBox ItemsSource="{Binding ProjectNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="350"
                           SelectionChanged="ListBoxSectionFileSelectionChanged"
-                         FontSize="12"
+                         FontSize="15"
                           Background="Transparent"
                          Foreground="#CFCFCF"
 >
@@ -48,8 +48,9 @@ Background="#116396 "
 
             </ScrollViewer>
             <Button Style="{StaticResource ButtonTheme2}"
-                Content="Exporter le Template sélectionné" Height="30" Width="350" 
+                Content="Exporter" Height="45" Width="350" 
                     VerticalAlignment="Top"
+                    FontSize="20"
                     HorizontalAlignment="Center"
                     Margin="0,10,0,0"
                     Click="ButtonClickExportTemplate"

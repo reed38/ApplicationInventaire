@@ -58,21 +58,22 @@ Background="#116396 "
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="5">
 
             <StackPanel Orientation="Horizontal">
-                <Label Foreground="White" Content="NameTag:   " FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="30"  Width="150" RenderTransformOrigin="0.5,0.5">
+                <Label Foreground="White" Content="NameTag:   " FontSize="20" Margin="5"/>
+                <Border CornerRadius="5" Background="#353340" Height="30"  Width="250" RenderTransformOrigin="0.5,0.5">
 
 
-                    <TextBlock  Height="25" Background="Transparent" Width="150" x:Name="TextBlockName" 
+                    <TextBlock  Height="25" Background="Transparent" Width="250" x:Name="TextBlockName"  FontSize="15"
                                 Foreground="#cfcfcf" Margin="3"/>
                 </Border>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Label Foreground="White" Content="Description:" FontSize="15" Margin="5"/>
-                <Border CornerRadius="5" Background="#353340" Height="75"  Width="150">
+                <Label Foreground="White" Content="Description:" FontSize="20" Margin="5"/>
+                <Border CornerRadius="5" Background="#353340" Height="100"  Width="250">
                     <TextBlock VerticalAlignment="Center" Background="Transparent" 
                                HorizontalAlignment="Center"
-                           Height="65" Width="142"
+                               FontSize="15"
+                           Height="95" Width="250"
                            x:Name="TextBlockDesciption"
                            TextWrapping="WrapWithOverflow"
                             Foreground="#cfcfcf"/>
@@ -92,8 +93,9 @@ Background="#116396 "
                     Grid.Column="0"
                         Style="{StaticResource ButtonTheme2}"
                         Content="précédent"
-                        Height="38"
-                        Width="90"
+                        Height="45"
+                    FontSize="20"
+                        Width="110"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         Click="ButtonClickPrevious"
@@ -104,8 +106,9 @@ Background="#116396 "
                     Grid.Column="0"
                           Style="{StaticResource ButtonTheme2}"
                         Content="suivant"
-                        Height="38"
-                        Width="90"
+                      Height="45"
+                    FontSize="20"
+                        Width="110"
                         Click="ButtonClickNext"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"

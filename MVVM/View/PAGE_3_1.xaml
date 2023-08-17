@@ -13,13 +13,13 @@ Background="#116396 ">
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="280" Background="#2a2933">
 
-                <Button Style="{StaticResource ButtonTheme1}"  Content="Plans" Height="60"   x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
-                <Button Style="{StaticResource ButtonTheme1}" Content="Continuer l'inventaire" Height="60"  x:Name="ButtonContinueInventory" Click="ButtonContinueInventoryClick"/>
-                <Button Style="{StaticResource ButtonTheme1}" Content="Nouvel inventaire" Height="60" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
-                <Button Style="{StaticResource ButtonTheme1}" Content="Recherche par PID" Height="60" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
-                <Button Style="{StaticResource ButtonTheme1}"  Content="Recherche par image" Height="60"  x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
-                <Button Style="{StaticResource ButtonTheme1}" Content="Modifier le Template" Height="60"  x:Name="ButtonEditProject" Click="ButtonEditProjectClick"/>
-                <Button Style="{StaticResource ButtonTheme1}" Content="Supprimer le Template" Height="60" x:Name="ButtonDeleteProject" Click="ButtonDeleteProjectClick"/>
+                <Button Style="{StaticResource ButtonTheme1}"  Content="Plans" Height="70" FontSize="20"  x:Name="ButtonPlan" Click="ButtonPlanClick" VerticalAlignment="Center"/>
+                <Button Style="{StaticResource ButtonTheme1}" Content="Continuer l'inventaire" Height="70" FontSize="20"  x:Name="ButtonContinueInventory" Click="ButtonContinueInventoryClick"/>
+                <Button Style="{StaticResource ButtonTheme1}" Content="Nouvel inventaire" Height="70" FontSize="20" x:Name="ButtonNewInventory" Click="ButtonNewInventoryClick"/>
+                <Button Style="{StaticResource ButtonTheme1}" Content="Recherche par PID" Height="70" FontSize="20" x:Name="ButtonsearchTag" Click="ButtonsearchTagClick"/>
+                <Button Style="{StaticResource ButtonTheme1}"  Content="Recherche par image" Height="70" FontSize="20" x:Name="ButtonsearchImage" Click="ButtonsearchImageClick"/>
+                <Button Style="{StaticResource ButtonTheme1}" Content="Modifier le Template" Height="70" FontSize="20" x:Name="ButtonEditProject" Click="ButtonEditProjectClick"/>
+                <Button Style="{StaticResource ButtonTheme1}" Content="Supprimer le Template" Height="70" FontSize="20" x:Name="ButtonDeleteProject" Click="ButtonDeleteProjectClick"/>
 
                 <!--<Button Content="Modify" Height="50" Margin="0,5"  x:Name="ButtonModify" Click="ButtonModifyClick"/>-->
 
@@ -29,53 +29,53 @@ Background="#116396 ">
 
 
             <StackPanel Orientation="Vertical"
-                        Width="500" Background="Transparent" Margin="0,70,50,75" Height="360"
+                        Width="700" Background="Transparent" Margin="0,20,50,0" Height="900"
                         >
 
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                    <Label FontSize="15" Content="Autheur:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
-                    <Border CornerRadius="5" Background="#353340"  Height="30" Width="300">
-                        <TextBlock   x:Name ="TextBlocklAuthorName"  FontSize="15"  Background="Transparent"
+                <StackPanel Orientation="Horizontal" Margin="0,30,0,5">
+                    <Label FontSize="25" Content="Autheur:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                    <Border CornerRadius="5" Background="#353340"  Height="35" Width="395">
+                        <TextBlock   x:Name ="TextBlocklAuthorName"  FontSize="20"  Background="Transparent"
                       Foreground="#CFCFCF" Margin="3,2,3,2"/>
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                    <Label FontSize="15" Content="Date de creation:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
-                    <Border CornerRadius="5" Background="#353340"  Height="30" Width="300">
-                        <TextBlock   x:Name ="TextBlockCreationDate"  FontSize="15"  Background="Transparent"
+                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5">
+                    <Label FontSize="25" Content="Date de creation:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                    <Border CornerRadius="5" Background="#353340"  Height="35" Width="300">
+                        <TextBlock   x:Name ="TextBlockCreationDate"  FontSize="20"  Background="Transparent"
                       Foreground="#CFCFCF" Margin="3,2,3,2"/>
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                    <Label FontSize="15" Content="Dernier editeur:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
-                    <Border CornerRadius="5" Background="#353340"  Height="30" Width="300">
-                        <TextBlock   x:Name ="TextBlocklLastEditorName"  FontSize="15"  Background="Transparent"
+                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5">
+                    <Label FontSize="25" Content="Dernier editeur:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                    <Border CornerRadius="5" Background="#353340"  Height="35" Width="310">
+                        <TextBlock   x:Name ="TextBlocklLastEditorName"  FontSize="20"  Background="Transparent"
                       Foreground="#CFCFCF" Margin="3,2,3,2"/>
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                    <Label FontSize="15" Content="Date de dernière modification:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
-                    <Border CornerRadius="5" Background="#353340"  Height="30" Width="250">
-                        <TextBlock   x:Name ="TextBlocklLastEditonDate"  FontSize="15"  Background="Transparent"
+                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5">
+                    <Label FontSize="25" Content="Date de dernière modification:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
+                    <Border CornerRadius="5" Background="#353340"  Height="35" Width="250">
+                        <TextBlock   x:Name ="TextBlocklLastEditonDate"  FontSize="20"  Background="Transparent"
                       Foreground="#CFCFCF" Margin="3"/>
                     </Border>
                 </StackPanel>
 
 
 
-                <StackPanel Orientation="Horizontal" Margin="0,30,0,0" Height="120" Width="475">
-                    <Label FontSize="15" Content="Description: " Foreground="#CFCFCF" FontWeight="SemiBold"
+                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5" Height="200" Width="6000">
+                    <Label FontSize="25" Content="Description: " Foreground="#CFCFCF" FontWeight="SemiBold" HorizontalAlignment="Left"
                        />
-                    <Border CornerRadius="5" Background="#353340"  Height="110" Width="364">
+                    <Border CornerRadius="5" Background="#353340"  Height="200" Width="450">
                         <TextBlock VerticalAlignment="Top"
                             Height="97" 
                             Foreground="#CFCFCF"                            
                              TextWrapping="WrapWithOverflow"
                                Margin="3,3,3,3"
-                            x:Name="TextBlockDesciption" FontSize="15"  Background="Transparent"  />
+                            x:Name="TextBlockDesciption" FontSize="20"  Background="Transparent"  />
                     </Border>
 
 

@@ -13,25 +13,24 @@
     <Grid>
         <StackPanel Margin="10">
 
-            <Label Content="paramètres" Foreground="#cfcfcf" Background="Transparent" FontSize="15"/>
+            <Label Content="paramètres" Foreground="#cfcfcf" Background="Transparent" FontSize="25"/>
             <Label Content="Doits de l'utilisateur: " 
                    Foreground="#cfcfcf" Background="Transparent" Margin="10,30,0,10"
-                   FontSize="15"/>
-            <RadioButton FontSize="15" Content="Admin" Foreground="#cfcfcf" x:Name="RadioButtonAdmin" Click="ButtonRadioAdminClick"/>
-            <RadioButton FontSize="15"  Content="Droits par Defaut" Foreground="#cfcfcf"  x:Name="RadioButtonDefault" Click="ButtonRadioDefaultClick"/>
+                   FontSize="23"/>
+            <RadioButton FontSize="20" Content="Admin" Foreground="#cfcfcf" x:Name="RadioButtonAdmin" Click="ButtonRadioAdminClick"/>
+            <RadioButton FontSize="20"  Content="Droits par Defaut" Foreground="#cfcfcf"  x:Name="RadioButtonDefault" Click="ButtonRadioDefaultClick"/>
 
             <Popup x:Name="PopUpPassword" Placement="Center">
-                <Border  Background="#00406F" Height="127" Width="260">
+                <Border  Background="#00406F" Height="150" Width="270">
                 <StackPanel Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" Height="40" Width="250" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Label FontSize="13" Content="Mot de passe: " Foreground="#cfcfcf" VerticalAlignment="Center"/>
+                        <Label FontSize="20" Content="Mot de passe: " Foreground="#cfcfcf" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         <Border CornerRadius="5" Background="#353340" Height="30" Width="150" >
 
                             <PasswordBox  Background="Transparent"
                                           x:Name="PasswordBoxUserRight"
                                            KeyDown="TextBoxNameTagKeyDown"
-
-                                          PasswordChanged="PasswordChanged"
+                                           PasswordChanged="PasswordChanged"
                              Foreground="#cfcfcf" Margin="3">
 
                             </PasswordBox>
@@ -40,10 +39,10 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                         <Button Content="valider" x:Name="ButtonOk" 
-                            Style="{StaticResource ButtonTheme2}" Height="32" Width="64" FontSize="13"
+                            Style="{StaticResource ButtonTheme2}" Height="32" Width="70" FontSize="15"
                             Margin="10" HorizontalAlignment="Left" Click="ButtonValidateClick"/>
                         <Button Content="annuler" x:Name="ButtonCancel" 
-                            Style="{StaticResource ButtonTheme2}" Height="32" Width="64" FontSize="13"
+                            Style="{StaticResource ButtonTheme2}" Height="32" Width="70" FontSize="15"
                                 HorizontalAlignment="Right"
                                 Margin="100,0,0,0"
                                 Click="ButtonCancelClick"
