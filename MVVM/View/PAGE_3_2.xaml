@@ -156,6 +156,7 @@ Background="#116396 "
                     />
                         <Border CornerRadius="5" Background="#353340" Height="30"  Width="100">
                             <TextBox  x:Name="TextBoxSerialNumber"
+                                      KeyDown="TextBoxNameTagKeyDown"
                                   Background="Transparent"
                                    Foreground="#cfcfcf" Margin="3"
                               />

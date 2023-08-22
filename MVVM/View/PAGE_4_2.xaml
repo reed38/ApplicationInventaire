@@ -143,7 +143,8 @@
         </StackPanel>
 
 
-        <Button x:Name="ButtonsaveGoNext" Content="Section suivante" Height="40" Width="144" 
+        <Button x:Name="ButtonsaveGoNext" Content="Section suivante" Height="45" Width="170" 
+                FontSize="20"
                 Style="{StaticResource ButtonTheme2}"
                Grid.Column="1" Grid.Row="1" 
                 VerticalAlignment="Center" HorizontalAlignment="Center"

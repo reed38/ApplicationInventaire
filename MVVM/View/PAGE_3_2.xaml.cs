@@ -279,8 +279,9 @@ namespace ApplicationInventaire.MVVM.View
             FindNextNoPresent(); //Find the next Piece with the field "IsPresent" set to 0, and Update Section image, IndiceSection , IndicePiece accordingly
             InitializeNameTagAndDesciption();
             InitializeMarquageButton();
-
             SetBorderPosition();
+            Keyboard.Focus(this.TextBoxSerialNumber);
+
 
         }
 
@@ -464,16 +465,35 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
-            #endregion
+        #endregion
 
-            #region UIMethods
+        #region UIMethods
 
-            /// <summary>
-            /// The user clicked on the button Save and Quit. 
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-             private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Used to automatically focus the Constructor text box and make the task quicked to so.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBoxNameTagKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (!string.IsNullOrEmpty(this.TextBoxSerialNumber.Text))
+                {
+                    Keyboard.Focus(this.TextBoxConstructor);
+
+                }
+
+            }
+
+        }
+
+                        /// <summary>
+                        /// The user clicked on the button Save and Quit. 
+                        /// </summary>
+                        /// <param name="sender"></param>
+                        /// <param name="e"></param>
+                        private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
             {
                 UpdateSerialNumber();
                 UpdateConstructor();
@@ -525,19 +545,6 @@ namespace ApplicationInventaire.MVVM.View
 
             }
 
-            /// <summary>
-            /// This method is called when the user click on the radio button with label "marquage present". It set the Piece as  having its marquage. No all the pieces require a marquage. Only when there is another piece whose tag is "PieceName.M".
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-
-
-
-            /// <summary>
-            /// This method is called when the user click on the radio button with label "marquage non  present". It set the Piece as not having its marquage. Only when there is another piece whose tag is "PieceName.M".
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
 
 
 

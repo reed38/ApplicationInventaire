@@ -80,13 +80,19 @@ namespace ApplicationInventaire.MVVM.View
                     if (passwd.Equals(GlobalProjectData.password))
                     {
                         GlobalProjectData.UserRigth = 1;
-                        passwd = null;
                         PopUpPassword.IsOpen = false;
+
+                        passwd = null;
 
                     }
                     else
                     {
+                        this.PopUpPassword.IsOpen = false;
+                        PopUpPassword.IsOpen = false;
                         POPUP.ShowPopup("le mot de passe saisi est incorrect");
+                        this.RadioButtonDefault.IsChecked = true;
+                        this.RadioButtonAdmin.IsChecked = false;
+
                         passwd = null;
 
                     }
@@ -107,13 +113,19 @@ namespace ApplicationInventaire.MVVM.View
                 if (passwd.Equals(GlobalProjectData.password))
                 {
                     GlobalProjectData.UserRigth = 1;
-                    passwd = null;
                     PopUpPassword.IsOpen = false;
+
+                    passwd = null;
 
                 }
                 else
                 {
+                    this.PopUpPassword.IsOpen = false;
+                    PopUpPassword.IsOpen = false;
                     POPUP.ShowPopup("le mot de passe saisi est incorrect");
+                    this.RadioButtonDefault.IsChecked = true;
+                    this.RadioButtonAdmin.IsChecked = false;
+
                     passwd = null;
 
                 }
