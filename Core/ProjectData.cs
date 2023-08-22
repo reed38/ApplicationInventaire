@@ -473,7 +473,6 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
 
-
         /// <summary>
         /// Go through the excelfile and initialize the data structure using it. It is used to know which piece is already present and which one require its serial number to be be written down
         /// </summary>
@@ -485,7 +484,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
             CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation");
 
-            List<Piece> ExcelPieces= new List<Piece>();
+            List<Piece> Pieces= new List<Piece>();
+
+
 
 
             if (PresentCell == null || PIDtCell == null || AmountCell == null || ConstructorCell == null)
@@ -496,7 +497,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
             int n = PresentCell.Row + 1;
             string res;
-            do
+            do //getting all the pieces
             {
                 Piece tmpPiece;
                 res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
@@ -513,44 +514,48 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
                 if (color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
                 {
-                    isYellow=1;
+                    isYellow = 1;
                 }
                 else
                 {
                     isYellow = 0;
                 }
-                
-                if (!string.IsNullOrEmpty(PID.Content) )
+
+                if (!string.IsNullOrEmpty(PID.Content))
                 {
-                    if(PID.Content.IndexOf(".M") == -1)
-                     {
-                     int presentInt = (Present.Content.Equals("1")) ? 1 : 0;
-                     tmpPiece = new Piece(PresentCell.Column,n,PID.Content,description,presentInt,isYellow,0);
-                      ExcelPieces.Add(tmpPiece);
 
-                    }
-                    else
-                    {
-                        if(ExcelPieces.Count>1)
-                        {
-                            ExcelPieces[ExcelPieces.Count - 2].HasMarking = 1;
-                        }
+                    int presentInt = (Present.Content.Equals("1")) ? 1 : 0;
+                    tmpPiece = new Piece(PresentCell.Column, n, PID.Content, description, presentInt, isYellow);                            
+                    Pieces.Add(tmpPiece);
 
-                    }
-                  
+                    
 
                 }
+
+
                 n++;
 
 
             } while (!res.Equals(""));
 
+            foreach (Piece p1 in Pieces) //going through all Piece with a tag ending with ".M", and updating the piece with the same name
+            {
+                foreach (Piece p2 in Pieces)
+                {
+                    if (p2.PieceName.Equals(p1.PieceName + ".M"))
+                    {
+                        p1.HasMarking = 1;
+                        break;
+                    }
+                }
+
+            }
 
             for (int i = 0; i < this.mySections.Count; i++)
             {
                 for (int j = 0; j < this.mySections[i].PiecesList.Count; j++)
                 {
-                    foreach (var k in ExcelPieces)
+                    foreach (var k in Pieces)
                     {
                         Piece tmp = this.mySections[i].PiecesList[j];
                         if (k.PieceName.Equals(this.mySections[i].PiecesList[j].PieceName))
@@ -575,6 +580,10 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 }
             }
         }
+
+
+
+
 
 
 

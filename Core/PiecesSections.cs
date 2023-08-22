@@ -57,13 +57,14 @@ namespace ApplicationInventaire.Core.PieceSections
             this.SectionId = SectionId;
         }
 
-        public Piece( int excelColumn, int excelRow,string PieceName, string Description, int IsPresent, int isReleveRequired, int HasMarking)
+        public Piece( int excelColumn, int excelRow,string PieceName, string Description, int IsPresent, int isReleveRequired)
         {
-
+            this.ExcelRow = excelRow;
+            this.ExcelColumn = excelColumn;
             this.PieceName = PieceName;
             this.IsPresent = IsPresent;
+            this.Description = Description;
             this.IsReleveRequired = isReleveRequired;
-            this.HasMarking=HasMarking;
 
         }
         public Piece()

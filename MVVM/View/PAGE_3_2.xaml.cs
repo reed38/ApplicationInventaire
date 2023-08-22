@@ -50,7 +50,6 @@ namespace ApplicationInventaire.MVVM.View
             IndiceSection = 0;
             IndicePiece = 0;
             ClearNameTagAndDescription();
-
             FindNextNoPresent(); //this will update the Indice Section and IndicePiece with the ones corresponding to the first Piece with the field "IsPresent=0"
             InitializeNameTagAndDesciption();
             InitializeMarquageButton();
@@ -85,7 +84,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         private Section currentSection;
-
+        
         #endregion
 
 
@@ -237,6 +236,7 @@ namespace ApplicationInventaire.MVVM.View
             if (currentPiece.HasMarking == 1)
             {
                 this.ButtonsMarquageStack.Visibility = Visibility.Visible;
+                this.RadioButtonMarquageNonPresent.IsChecked = true;
             }
 
             else
@@ -447,8 +447,14 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (CurrentPiece.HasMarking == 1)
             {
-                string val = (this.RadioButtonMarquageNonPresent.IsChecked == true) ? "0" : "1";
-                this.projectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, val, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow + 1); //if the Excel document is classed by alphabetical order, the marquage pid ir right under the corresponding piece.            }
+               
+                if((this.RadioButtonMarquagePresent.IsChecked==true))
+                {
+                    CellInfo tmp = this.projectData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M");
+                    this.projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1",CurrentPiece.ExcelColumn,tmp.Row);
+
+
+                }
 
             }
         }
@@ -472,6 +478,7 @@ namespace ApplicationInventaire.MVVM.View
                 UpdateSerialNumber();
                 UpdateConstructor();
                 UpdateComment();
+
                 projectData.myTmpExcelFile.UpdateSignature();
                 SaveAndQuit();
             }
@@ -487,8 +494,6 @@ namespace ApplicationInventaire.MVVM.View
                 HideTextBoxSerialNumberConstructor();
                 HideFrame();
                 projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
-                CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
-                projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "0", currentPiece.ExcelColumn, tmpMarquage.Row);
 
                 GotoNextPiece();
 
@@ -507,14 +512,13 @@ namespace ApplicationInventaire.MVVM.View
 
                 }
                 UpdateComment();
+                 UpdateMarquage();
                 UpdateSerialNumber();
                 UpdateConstructor();
                 ResetTextBox();
                 HideTextBoxSerialNumberConstructor();
                 HideFrame();
                 projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
-                CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
-                projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "1", currentPiece.ExcelColumn, tmpMarquage.Row);
 
                 GotoNextPiece();
 
