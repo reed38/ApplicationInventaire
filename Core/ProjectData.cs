@@ -371,7 +371,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// <summary>
         /// Go through the excelfile and initialize the data structure using it. It is used to know which piece is already present and which one require its serial number to be be written down
         /// </summary>
-        public void InitializePieceFromExcel()
+        public void InitializePieceFromExcel2()
         {
             CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
             CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
@@ -459,6 +459,134 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// Go through the excelfile and initialize the data structure using it. It is used to know which piece is already present and which one require its serial number to be be written down
+        /// </summary>
+        public void InitializePieceFromExcel()
+        {
+            CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
+            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
+            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
+            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
+            CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation");
+
+            List<Piece> ExcelPieces= new List<Piece>();
+
+
+            if (PresentCell == null || PIDtCell == null || AmountCell == null || ConstructorCell == null)
+            {
+
+                return;
+            }
+
+            int n = PresentCell.Row + 1;
+            string res;
+            do
+            {
+                Piece tmpPiece;
+                res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
+
+                CellInfo PID = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
+
+                CellInfo Present = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
+
+                string description = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, DescriptionCell.Column);
+
+                ////IsReleveRequire, we check if the cell color is yellow
+                int isYellow;
+                byte[] color = myTmpExcelFile.GetCellColor(ConstructorCell.Sheet, n, ConstructorCell.Column);
+
+                if (color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
+                {
+                    isYellow=1;
+                }
+                else
+                {
+                    isYellow = 0;
+                }
+                
+                if (!string.IsNullOrEmpty(PID.Content) )
+                {
+                    if(PID.Content.IndexOf(".M") == -1)
+                     {
+                     int presentInt = (Present.Content.Equals("1")) ? 1 : 0;
+                     tmpPiece = new Piece(PresentCell.Column,n,PID.Content,description,presentInt,isYellow,0);
+                      ExcelPieces.Add(tmpPiece);
+
+                    }
+                    else
+                    {
+                        if(ExcelPieces.Count>1)
+                        {
+                            ExcelPieces[ExcelPieces.Count - 2].HasMarking = 1;
+                        }
+
+                    }
+                  
+
+                }
+                n++;
+
+
+            } while (!res.Equals(""));
+
+
+            for (int i = 0; i < this.mySections.Count; i++)
+            {
+                for (int j = 0; j < this.mySections[i].PiecesList.Count; j++)
+                {
+                    foreach (var k in ExcelPieces)
+                    {
+                        Piece tmp = this.mySections[i].PiecesList[j];
+                        if (k.PieceName.Equals(this.mySections[i].PiecesList[j].PieceName))
+                        {
+                            Piece MyPiece = this.mySections[i].PiecesList[j];
+                            MyPiece.IsReleveRequired = k.IsReleveRequired;
+                            MyPiece.HasMarking = k.HasMarking;
+                            MyPiece.SheetName = PresentCell.Sheet;
+                            MyPiece.ExcelColumn = PresentCell.Column;
+                            MyPiece.ExcelRow = k.ExcelRow;
+                            MyPiece.Description = k.Description;
+                            MyPiece.IsPresent = k.IsPresent;
+
+
+                            //we use the color of the cell to determine if Serial number is required
+
+
+
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// This functions will go through sections and delete Section from mySection List iftheir name is not present in ImageSectionList.
         /// It is useful in edit mode when the user delete a section

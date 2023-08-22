@@ -141,7 +141,7 @@
 
 
 
-        <Button x:Name="ButtonsaveGoNext" Content="Next" Height="45" Width="150" 
+        <Button x:Name="ButtonsaveGoNext" Content="suivant" Height="45" Width="150" 
                 FontSize="20"
               Style="{StaticResource ButtonTheme2}"
                 Grid.Row="1" 
@@ -150,7 +150,7 @@
 
                 Click="ButtonClickSaveGoToNext"/>
 
-        <Button x:Name="ButtonsaveGoPrevious" Content="suivant" Height="45" Width="150" 
+        <Button x:Name="ButtonsaveGoPrevious" Content="précédent" Height="45" Width="150" 
                 FontSize="20"
                 Style="{StaticResource ButtonTheme2}"
                 Grid.Row="1" 

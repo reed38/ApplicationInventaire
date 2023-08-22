@@ -42,7 +42,7 @@ namespace ApplicationInventaire.MVVM.View
             this.RedFramePath = GlobalProjectData.RedFramePath; //the image used in multiples pages have their path stored in the static class
 
 
-          
+
 
             ResetTextBox(); //reset Comment, Serial Number, and Constructot textBox
             HideTextBoxSerialNumberConstructor(); //Hide it by default since we don't know if upcomming piece require it or not
@@ -53,6 +53,7 @@ namespace ApplicationInventaire.MVVM.View
 
             FindNextNoPresent(); //this will update the Indice Section and IndicePiece with the ones corresponding to the first Piece with the field "IsPresent=0"
             InitializeNameTagAndDesciption();
+            InitializeMarquageButton();
 
             IndiceSection = CurrentPiece.SectionId - 1; //The library used to store data in a sqlite database have an Indice starting at 1
 
@@ -87,8 +88,8 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-        
-       
+
+
 
 
         #region bindingMethods
@@ -195,11 +196,11 @@ namespace ApplicationInventaire.MVVM.View
             Canvas.SetTop(this.RedFrameImage, y);
         }
 
-      
+
 
         private void HideTextBoxSerialNumberConstructor()
         {
-            StackPanelSerialDescription.Visibility=Visibility.Hidden;
+            StackPanelSerialDescription.Visibility = Visibility.Hidden;
             //TextBoxSerialNumber.Visibility = Visibility.Hidden;
             //TextBoxConstructor.Visibility = Visibility.Hidden;
             //labelConstructor.Visibility = Visibility.Hidden;
@@ -222,15 +223,29 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         private void HideFrame()
-        
+
         {
-            this.RedFrameImage.Visibility=Visibility.Hidden;
+            this.RedFrameImage.Visibility = Visibility.Hidden;
         }
 
         #endregion
 
         #region PrivateMethods
 
+        private void InitializeMarquageButton()
+        {
+            if (currentPiece.HasMarking == 1)
+            {
+                this.ButtonsMarquageStack.Visibility = Visibility.Visible;
+            }
+
+            else
+            {
+                this.ButtonsMarquageStack.Visibility = Visibility.Collapsed;
+
+            }
+
+        }
 
         private void InitializeNameTagAndDesciption()
         {
@@ -239,7 +254,7 @@ namespace ApplicationInventaire.MVVM.View
         }
         private void ClearNameTagAndDescription()
         {
-            this.TextBlockDesciption.Text=string.Empty;
+            this.TextBlockDesciption.Text = string.Empty;
             this.TextBlockName.Text = string.Empty;
 
         }
@@ -263,6 +278,7 @@ namespace ApplicationInventaire.MVVM.View
 
             FindNextNoPresent(); //Find the next Piece with the field "IsPresent" set to 0, and Update Section image, IndiceSection , IndicePiece accordingly
             InitializeNameTagAndDesciption();
+            InitializeMarquageButton();
 
             SetBorderPosition();
 
@@ -312,12 +328,12 @@ namespace ApplicationInventaire.MVVM.View
                         this.IndicePiece = piece;
                         this.IndiceSection = section;
                         UpdateCurrent();
-                        if (this.CurrentPiece.IsReleveRequired == 1) 
+                        if (this.CurrentPiece.IsReleveRequired == 1)
                         {
                             ShowTextBoxSerialNumberConstructor();
                             foreach (ImageInfos i in projectData.ImageReleveList)
                             {
-                                if (i.Name.IndexOf(this.CurrentPiece.PieceName)>=0)
+                                if (i.Name.IndexOf(this.CurrentPiece.PieceName) >= 0)
                                 {
                                     ImageReleve = i.Path;
                                     break;
@@ -336,8 +352,8 @@ namespace ApplicationInventaire.MVVM.View
 
             }
         }
-       
- 
+
+
 
 
 
@@ -347,7 +363,7 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void SaveAndQuit()
         {
-            projectData.myTmpExcelFile.UpdateExcelFormula(); 
+            projectData.myTmpExcelFile.UpdateExcelFormula();
 
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -357,7 +373,7 @@ namespace ApplicationInventaire.MVVM.View
 
             // Set the file filters
             saveFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
-           
+
             saveFileDialog.FileName = projectData.myProjectInfos.ProjectName; // Set the default filename here
             // Show the save file dialog
             bool? result = saveFileDialog.ShowDialog();
@@ -370,7 +386,7 @@ namespace ApplicationInventaire.MVVM.View
                 {
                     File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
                 }
-                catch(Exception e )
+                catch (Exception e)
                 {
                     POPUP.ShowPopup("erreur, ce fichier est éjà ouvert par un autre processus");
                     SaveAndQuit();
@@ -424,79 +440,106 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-
-
-
-
-
-        #endregion
-
-        #region UIMethods
-
         /// <summary>
-        /// The user clicked on the button Save and Quit. 
+        /// This function check if the Current Piece have a  marquage. If it does, the fonction will then check the value of the marquage radio button and update the excel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
+        private void UpdateMarquage()
         {
-            UpdateSerialNumber();
-            UpdateConstructor();
-            UpdateComment();
-            projectData.myTmpExcelFile.UpdateSignature();
-            SaveAndQuit();
-        }
-
-        /// <summary>
-        /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 0 int the excel file in the colum Present
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonClickNo(object sender, RoutedEventArgs e)
-        {
-            ResetTextBox();
-            HideTextBoxSerialNumberConstructor();
-            HideFrame();
-            projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
-            CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
-            projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "0", currentPiece.ExcelColumn, tmpMarquage.Row); 
-
-            GotoNextPiece();
-
-        }
-        /// <summary>
-        /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 1 in the excel file in the colum Present
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonClickYes(object sender, RoutedEventArgs e)
-        {
-            if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
+            if (CurrentPiece.HasMarking == 1)
             {
-                POPUP.ShowPopup("Veuillez saisir un numéro de série et un constructeur");
-                return;
+                string val = (this.RadioButtonMarquageNonPresent.IsChecked == true) ? "0" : "1";
+                this.projectData.myTmpExcelFile.SetCellValue(CurrentPiece.SheetName, val, CurrentPiece.ExcelColumn, CurrentPiece.ExcelRow + 1); //if the Excel document is classed by alphabetical order, the marquage pid ir right under the corresponding piece.            }
 
             }
-            UpdateComment();
-            UpdateSerialNumber();
-            UpdateConstructor();
-            ResetTextBox();
-            HideTextBoxSerialNumberConstructor();
-            HideFrame();
-            projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
-            CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
-            projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "1", currentPiece.ExcelColumn, tmpMarquage.Row);
+        }
 
-            GotoNextPiece();
 
+
+
+
+
+            #endregion
+
+            #region UIMethods
+
+            /// <summary>
+            /// The user clicked on the button Save and Quit. 
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+             private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
+            {
+                UpdateSerialNumber();
+                UpdateConstructor();
+                UpdateComment();
+                projectData.myTmpExcelFile.UpdateSignature();
+                SaveAndQuit();
+            }
+
+            /// <summary>
+            /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 0 int the excel file in the colum Present
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private  void ButtonClickNo(object sender, RoutedEventArgs e)
+            {
+                ResetTextBox();
+                HideTextBoxSerialNumberConstructor();
+                HideFrame();
+                projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+                CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
+                projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "0", currentPiece.ExcelColumn, tmpMarquage.Row);
+
+                GotoNextPiece();
+
+            }
+            /// <summary>
+            /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 1 in the excel file in the colum Present
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void ButtonClickYes(object sender, RoutedEventArgs e)
+            {
+                if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
+                {
+                    POPUP.ShowPopup("Veuillez saisir un numéro de série et un constructeur");
+                    return;
+
+                }
+                UpdateComment();
+                UpdateSerialNumber();
+                UpdateConstructor();
+                ResetTextBox();
+                HideTextBoxSerialNumberConstructor();
+                HideFrame();
+                projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+                CellInfo tmpMarquage = projectData.myTmpExcelFile.FindValue(currentPiece.PieceName + ".M");
+                projectData.myTmpExcelFile.SetCellValue(tmpMarquage.Sheet, "1", currentPiece.ExcelColumn, tmpMarquage.Row);
+
+                GotoNextPiece();
+
+
+            }
+
+            /// <summary>
+            /// This method is called when the user click on the radio button with label "marquage present". It set the Piece as  having its marquage. No all the pieces require a marquage. Only when there is another piece whose tag is "PieceName.M".
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+
+
+
+            /// <summary>
+            /// This method is called when the user click on the radio button with label "marquage non  present". It set the Piece as not having its marquage. Only when there is another piece whose tag is "PieceName.M".
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+
+
+
+            #endregion
 
         }
-  
-     
-        #endregion
-
-       
-
     }
-}
+
 

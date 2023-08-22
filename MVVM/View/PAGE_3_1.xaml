@@ -32,7 +32,7 @@ Background="#116396 ">
                         Width="700" Background="Transparent" Margin="0,20,50,0" Height="900"
                         >
 
-                <StackPanel Orientation="Horizontal" Margin="0,30,0,5">
+                <StackPanel Orientation="Horizontal" Margin="10,30,0,5">
                     <Label FontSize="25" Content="Autheur:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
                     <Border CornerRadius="5" Background="#353340"  Height="35" Width="395">
                         <TextBlock   x:Name ="TextBlocklAuthorName"  FontSize="20"  Background="Transparent"
@@ -40,7 +40,7 @@ Background="#116396 ">
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5">
+                <StackPanel Orientation="Horizontal"  Margin="10,30,0,5">
                     <Label FontSize="25" Content="Date de creation:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
                     <Border CornerRadius="5" Background="#353340"  Height="35" Width="300">
                         <TextBlock   x:Name ="TextBlockCreationDate"  FontSize="20"  Background="Transparent"
@@ -48,7 +48,7 @@ Background="#116396 ">
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5">
+                <StackPanel Orientation="Horizontal" Margin="10,30,0,5">
                     <Label FontSize="25" Content="Dernier editeur:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
                     <Border CornerRadius="5" Background="#353340"  Height="35" Width="310">
                         <TextBlock   x:Name ="TextBlocklLastEditorName"  FontSize="20"  Background="Transparent"
@@ -56,7 +56,7 @@ Background="#116396 ">
                     </Border>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5">
+                <StackPanel Orientation="Horizontal"  Margin="10,30,0,5">
                     <Label FontSize="25" Content="Date de dernière modification:" FontWeight="SemiBold" Foreground="#CFCFCF"/>
                     <Border CornerRadius="5" Background="#353340"  Height="35" Width="250">
                         <TextBlock   x:Name ="TextBlocklLastEditonDate"  FontSize="20"  Background="Transparent"
@@ -66,7 +66,7 @@ Background="#116396 ">
 
 
 
-                <StackPanel Orientation="Horizontal"  Margin="0,30,0,5" Height="200" Width="6000">
+                <StackPanel Orientation="Horizontal" Margin="10,30,0,5" Height="200" Width="6000">
                     <Label FontSize="25" Content="Description: " Foreground="#CFCFCF" FontWeight="SemiBold" HorizontalAlignment="Left"
                        />
                     <Border CornerRadius="5" Background="#353340"  Height="200" Width="450">

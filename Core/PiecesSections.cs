@@ -35,10 +35,10 @@ namespace ApplicationInventaire.Core.PieceSections
         public int ExcelRow { get; set; }
         public string PieceName { get; set; }
         public string SheetName { get; set; }
-        public int IsPresent { get; set; }
-        public int IsReleveRequired { get; set; }
+        public int IsPresent { get; set; } //if the piece is present in the montage. 1 for yes 0 for no.
+        public int IsReleveRequired { get; set; } //if a serial number and constructeur name muste be taken on the piece. 0 if no 1 if yes.
+        public int HasMarking { get;set; } //if there is a marking on the piece. Some Pieces have a marking. For a piece named "toto", the corresponding Excel file line corresponding to its marking will be labelled "toto.M"
         public string Description { get;set; }
-        public int Amount { get; set; }
 
         public int SectionId { get; set; } // Foreign key to Section, used in the database to know in which Section the Piece is stored
 
@@ -57,6 +57,15 @@ namespace ApplicationInventaire.Core.PieceSections
             this.SectionId = SectionId;
         }
 
+        public Piece( int excelColumn, int excelRow,string PieceName, string Description, int IsPresent, int isReleveRequired, int HasMarking)
+        {
+
+            this.PieceName = PieceName;
+            this.IsPresent = IsPresent;
+            this.IsReleveRequired = isReleveRequired;
+            this.HasMarking=HasMarking;
+
+        }
         public Piece()
         {
 
@@ -79,8 +88,7 @@ namespace ApplicationInventaire.Core.PieceSections
         {
             Console.WriteLine("Tag: " + PieceName);
             Console.WriteLine("Dans la section: " + SectionId);
-            Console.WriteLine("x: " + X);
-            Console.WriteLine("y: " + Y);
+            Console.WriteLine("Marquage: " + HasMarking);
             Console.WriteLine("excel column: " + ExcelColumn);
             Console.WriteLine("excel row: " + ExcelRow);
             Console.WriteLine("Present: " + IsPresent);

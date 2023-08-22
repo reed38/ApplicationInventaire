@@ -183,7 +183,11 @@ Background="#116396 "
 
                               />
                         </Border>
-
+            
+                    </StackPanel>
+                    <StackPanel x:Name="ButtonsMarquageStack" Orientation="Vertical">
+                    <RadioButton x:Name="RadioButtonMarquagePresent" Content="Marquage présent "  Foreground="White" Margin="10,10,5,0" FontSize="15"  />
+                    <RadioButton  x:Name="RadioButtonMarquageNonPresent" Content="Marquaque non présent" Foreground="White" FontSize="15" Margin="10,5,10,10"  />
                     </StackPanel>
                 </StackPanel>
 

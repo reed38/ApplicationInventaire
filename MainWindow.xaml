@@ -61,10 +61,10 @@
                 Content="paramètres"
                                     FontSize="20"
 
-                Width="120"
+                Width="150"
                 Height="45"
                     HorizontalAlignment="Right"
-                    Margin="100,0,0,0"
+                    Margin="20,0,0,0"
               
                 />
                 
