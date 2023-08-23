@@ -35,7 +35,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_6_1 = this;
             DataContext = this;
-            projectData = GlobalTemplateData.CurrentTemplateData;
+            templateData = GlobalTemplateData.CurrentTemplateData;
             InitializeFields();
             
 
@@ -43,7 +43,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         #region PrivateVariables
-        private TemplateData projectData;
+        private TemplateData templateData;
         private ObservableCollection<ImageInfos> imageSectionsInfos = new ObservableCollection<ImageInfos>();
         private ObservableCollection<ImageInfos> imageReleveInfos = new ObservableCollection<ImageInfos>();
         private List<string> PlansPathList = new List<string>();
@@ -148,13 +148,13 @@ namespace ApplicationInventaire.MVVM.View
         private void InitializeFields()
         {
             ///textBox
-            this.TextBoxDescription.Text = projectData.myTemplateInfos.Description;
-            this.TextBoxName.Text = projectData.myTemplateInfos.TemplateName;
-            ExcelName = Path.GetFileNameWithoutExtension(projectData.myTemplateInfos.ExcelPath);
-            excelPath = projectData.myTemplateInfos.ExcelPath;
+            this.TextBoxDescription.Text = templateData.myTemplateInfos.Description;
+            this.TextBoxName.Text = templateData.myTemplateInfos.TemplateName;
+            ExcelName = Path.GetFileNameWithoutExtension(templateData.myTemplateInfos.ExcelPath);
+            excelPath = templateData.myTemplateInfos.ExcelPath;
             //Files
-            imageReleveInfos = new ObservableCollection<ImageInfos>(projectData.ImageReleveList);
-            imageSectionsInfos = new ObservableCollection<ImageInfos>(projectData.ImageSectionList);
+            imageReleveInfos = new ObservableCollection<ImageInfos>(templateData.ImageReleveList);
+            imageSectionsInfos = new ObservableCollection<ImageInfos>(templateData.ImageSectionList);
 
             foreach (var i in imageSectionsInfos)
             {
@@ -164,7 +164,7 @@ namespace ApplicationInventaire.MVVM.View
             {
                 ImageReleveName.Add(i.Name);
             }
-            PlansPathList =  ( Directory.GetFiles(projectData.myTemplateInfos.PlansPath)).ToList();
+            PlansPathList =  ( Directory.GetFiles(templateData.myTemplateInfos.PlansPath)).ToList();
             foreach(var i in  PlansPathList)
             {
                 PlansNameList.Add(Path.GetFileNameWithoutExtension(i));
@@ -280,8 +280,8 @@ namespace ApplicationInventaire.MVVM.View
             {
                 return;
             }
+
             TemplateInfos TemplateInfos = new TemplateInfos(TextBoxName.Text);
-            
             TemplateInfos.Description = TextBoxDescription.Text;
             TemplateInfos.Author = GlobalTemplateData.CurrentTemplateData.myTemplateInfos.Author;
             TemplateInfos.CreationDate = GlobalTemplateData.CurrentTemplateData.myTemplateInfos.CreationDate;
@@ -291,9 +291,9 @@ namespace ApplicationInventaire.MVVM.View
             File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
             File.Copy(GlobalTemplateData.CurrentTemplateData.myTemplateInfos.DatabasePath, TemplateInfos.DatabasePath,true);
            
-            TemplateData projectData = new TemplateData(TemplateInfos);
+            TemplateData templateData = new TemplateData(TemplateInfos);
            
-            projectData.myTemplateInfos = TemplateInfos;
+            templateData.myTemplateInfos = TemplateInfos;
 
             File.Copy(excelPath, TemplateInfos.ExcelPath, true);
             File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
@@ -301,19 +301,19 @@ namespace ApplicationInventaire.MVVM.View
 
             foreach (ImageInfos i in imageSectionsInfos) //saving selected image section to memory
             {
-                string destinationPath = Path.Combine(projectData.myTemplateInfos.ImageSectionPath, i.Name);
+                string destinationPath = Path.Combine(templateData.myTemplateInfos.ImageSectionPath, i.Name);
                 File.Copy(i.Path, destinationPath,true);
 
                 
-                foreach(Core.PieceSections.Section j in projectData.mySections)
+                foreach(var j in templateData.mySections)
                 {
                     if(j.SectionName.Equals( i.Name))
                     {
                         break;
                     }
-                    if(projectData.mySections.IndexOf(j)==projectData.mySections.Count-1)
+                    if(templateData.mySections.IndexOf(j)==templateData.mySections.Count-1)
                     {
-                        projectData.mySections.Add(new Core.PieceSections.Section(i.Name));
+                        templateData.mySections.Add(new (i.Name));
                         break;
 
                     }
@@ -326,7 +326,7 @@ namespace ApplicationInventaire.MVVM.View
 
             foreach (ImageInfos i in imageReleveInfos)
             {
-                string destinationPath = Path.Combine(projectData.myTemplateInfos.ImageRelevePath, i.Name);
+                string destinationPath = Path.Combine(templateData.myTemplateInfos.ImageRelevePath, i.Name);
                
                     File.Copy(i.Path, destinationPath,true);
 
@@ -335,7 +335,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             for (int i = 0; i < PlansNameList.Count; i++)
             {
-                string destinationPath = Path.Combine(projectData.myTemplateInfos.PlansPath, PlansNameList[i]);
+                string destinationPath = Path.Combine(templateData.myTemplateInfos.PlansPath, PlansNameList[i]);
             
                     File.Copy(PlansPathList[i], destinationPath,true);
 
@@ -344,15 +344,15 @@ namespace ApplicationInventaire.MVVM.View
             }
        
             
-            projectData.GetSectionsNames();
-            projectData.GetRelevesNames();
-            projectData.InitializePieceFromExcel();
-            projectData.myTemplateInfos.LastEditor = Environment.UserName;
-            projectData.myTemplateInfos.LastEditionDate = DateTime.Now;
-            projectData.Save();
-            projectData.UpdateSection();
-            GlobalTemplateData.CurrentTemplateName = projectData.myTemplateInfos.TemplateName;
-            GlobalTemplateData.CurrentTemplateData =projectData;
+            templateData.GetSectionsNames(); //get the info on the images of sections
+            templateData.GetRelevesNames(); //same for releve
+            templateData.InitializePieceFromExcel(); //We initialize the Piece fom excel (Present, marking, serial number required).
+            templateData.myTemplateInfos.LastEditor = Environment.UserName; //getting the name of the current user to update last editor.
+            templateData.myTemplateInfos.LastEditionDate = DateTime.Now;
+            templateData.Save();// saving these info in the sqlite database so te next user can access it.
+            templateData.UpdateSection();
+            GlobalTemplateData.CurrentTemplateName = templateData.myTemplateInfos.TemplateName;
+            GlobalTemplateData.CurrentTemplateData =templateData;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_6_2);
 
 

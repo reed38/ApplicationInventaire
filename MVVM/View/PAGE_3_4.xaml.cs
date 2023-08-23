@@ -33,16 +33,16 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             DataContext = this;
             GlobalPages.page_3_4 = this;
-            this.projectData = GlobalTemplateData.CurrentTemplateData;
+            this.templateData = GlobalTemplateData.CurrentTemplateData;
             this.IndiceSection = 0;
-            foreach(var i in projectData.ImageSectionList) //Initializig Section Name
+            foreach(var i in templateData.ImageSectionList) //Initializig Section Name
             {
-                if (i.Name.Equals(projectData.mySections[IndiceSection].SectionName))
+                if (i.Name.Equals(templateData.mySections[IndiceSection].SectionName))
                 {
                     this.ImageSection3 = i.Path;
                 }
             }
-            InitializeOverlay(); //initlizing Overlay. It is the little red circles put in sur impression over each referenced piece
+            InitializeOverlay(); //initlizing Overlay. Put little red circles  over each referenced piece
 
 
 
@@ -50,7 +50,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateVariables
         
-        private TemplateData projectData;
+        private TemplateData templateData;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
         private int ImageMarkerWidth = 20; //used to define the size of he little red circles
@@ -118,11 +118,11 @@ namespace ApplicationInventaire.MVVM.View
             IndiceSection = (IndiceSection - 1);
             if (IndiceSection < 0)
             {
-                IndiceSection = this.projectData.ImageSectionList.Length - 1;
+                IndiceSection = this.templateData.ImageSectionList.Length - 1;
             }
-            foreach(ImageInfos imageInfo in projectData.ImageSectionList) 
+            foreach(ImageInfos imageInfo in templateData.ImageSectionList) 
             {
-                if(imageInfo.Name.Equals(projectData.mySections[IndiceSection].SectionName))
+                if(imageInfo.Name.Equals(templateData.mySections[IndiceSection].SectionName))
                 {
                     this.ImageSection3 = imageInfo.Path;
                 }
@@ -139,10 +139,10 @@ namespace ApplicationInventaire.MVVM.View
         /// <param name="e"></param>
         private void ButtonClickNext(object sender, RoutedEventArgs e)
         {
-            IndiceSection = (IndiceSection + 1) % (this.projectData.ImageSectionList.Length);
-            foreach (ImageInfos imageInfo in projectData.ImageSectionList)
+            IndiceSection = (IndiceSection + 1) % (this.templateData.ImageSectionList.Length);
+            foreach (ImageInfos imageInfo in templateData.ImageSectionList)
             {
-                if (imageInfo.Name.Equals(projectData.mySections[IndiceSection].SectionName))
+                if (imageInfo.Name.Equals(templateData.mySections[IndiceSection].SectionName))
                 {
                     this.ImageSection3 = imageInfo.Path;
                 }
@@ -174,7 +174,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateMethods
         /// <summary>
-        /// This function updates the content of textBlock name and description with CurrentPiece
+        /// This function updates the content of textBlock name and description with CurrentPiece infos.
         /// </summary>
         private void InitializeNameTagAndDesciption()
         {
@@ -215,7 +215,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetOverlay();
 
-            foreach (Piece i in projectData.mySections[IndiceSection].PiecesList)
+            foreach (Piece i in templateData.mySections[IndiceSection].PiecesList)
             {
                 CreateImageInstance(i);
 

@@ -35,7 +35,7 @@ namespace ApplicationInventaire.MVVM.View
             DataContext = this;
             PlansNameList = new ObservableCollection<string>(GlobalData.GetPlansNames(GlobalTemplateData.CurrentTemplateName));// we get the list of tha plans
             PlansPathList = GlobalData.GetPlansPath(GlobalTemplateData.CurrentTemplateName); //we het th path to the plan pdf
-            InitilizePdfReaderExe();
+            InitilizePdfReaderExe(); //We search on the computer the path to the executable of the pc's default pdf reader
         }
 
         #region Privatevariables
@@ -136,7 +136,7 @@ namespace ApplicationInventaire.MVVM.View
         private void OpenPdf(string pdfFilePath)
 
         {
-            string modifiedPdfFilePath = $"\"{pdfFilePath}\""; //if pdfFilePath isn't wrapped like that the pdf app will try to open multiple files, which make error file not found
+            string modifiedPdfFilePath = $"\"{pdfFilePath}\""; //if pdf FilePath isn't wrapped like that the pdf app will try to open multiple files, which will generate error file not found
 
             Process.Start(PdfReaderExecutablePath, modifiedPdfFilePath);
 

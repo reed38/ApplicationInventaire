@@ -42,13 +42,13 @@ namespace ApplicationInventaire.MVVM.View
             {
                 if (im.Name == projectData.mySections[IndiceSection].SectionName)
                 {
-                    ImageSection3 = im.Path;
+                    ImageSection = im.Path;
                     break;
 
                 }
             }
+            
             this.RedFrameImage.Visibility = Visibility.Hidden;
-
             HideNameAndDescription();
             InitializeAutoSuggestionList();
             ResetFields();
@@ -238,13 +238,13 @@ namespace ApplicationInventaire.MVVM.View
             }
         }
 
-        public string ImageSection3
+        public string ImageSection
         {
             get { return imageSection3; }
             set
             {
                 imageSection3 = value;
-                OnPropertyChanged(nameof(ImageSection3));
+                OnPropertyChanged(nameof(ImageSection));
             }
         }
 
@@ -493,7 +493,7 @@ namespace ApplicationInventaire.MVVM.View
             {
                 if (i.Name.Equals( projectData.mySections[IndiceSection].SectionName))
                 {
-                    ImageSection3 = i.Path;
+                    ImageSection = i.Path;
                     break;
            
                 }

@@ -45,20 +45,20 @@ namespace ApplicationInventaire.MVVM.View
 
 
             ResetTextBox(); //reset Comment, Serial Number, and Constructot textBox
-           
+
             HideTextBoxSerialNumberConstructor(); //Hide it by default since we don't know if upcomming piece require it or not
-            
+
             RedFrameImage.Visibility = Visibility.Visible; //hide red frame
             IndiceSection = 0;
             IndicePiece = 0;
-          
+
             ClearNameTagAndDescription();
-           
+
             FindNextNoPresent(); //this will update the Indice Section and IndicePiece with the ones corresponding to the first Piece with the field "IsPresent=0"
-           
+
             InitializeNameTagAndDesciption();
-          
-            InitializeMarquageButton(); 
+
+            InitializeMarquageButton();
 
             IndiceSection = CurrentPiece.SectionId - 1; //The library used to store data in a sqlite database have an Indice starting at 1
 
@@ -86,9 +86,9 @@ namespace ApplicationInventaire.MVVM.View
         private string imageReleve; //path to the current image used to show where Serial number is supposed to be read on the piece.
         private double xCoordinatevar; //coordinates of the current Piece on the Image Section
         private double yCoordinatevar;
-        private Piece currentPiece; 
+        private Piece currentPiece;
         private Section currentSection;
-        
+
         #endregion
 
 
@@ -182,7 +182,7 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-       
+
         private void ChangeFrameCoordinates(double x, double y)
         {
             this.RedFrameImage.Visibility = Visibility.Visible;
@@ -375,7 +375,7 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void SaveAndQuit()
         {
-            templateData.myTmpExcelFile.UpdateExcelFormula(); 
+            templateData.myTmpExcelFile.UpdateExcelFormula();
 
 
             SaveFileDialog saveFileDialog = new SaveFileDialog(); //opening windows popup to ask the user where he wants to save the resulting excel file.
@@ -459,11 +459,11 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (CurrentPiece.HasMarking == 1)
             {
-               
-                if((this.RadioButtonMarquagePresent.IsChecked==true))
+
+                if ((this.RadioButtonMarquagePresent.IsChecked == true))
                 {
                     CellInfo tmp = this.templateData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M");
-                    this.templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1",CurrentPiece.ExcelColumn,tmp.Row);
+                    this.templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1", CurrentPiece.ExcelColumn, tmp.Row);
 
 
                 }
@@ -499,69 +499,70 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
-                        /// <summary>
-                        /// The user clicked on the button Save and Quit. 
-                        /// </summary>
-                        /// <param name="sender"></param>
-                        /// <param name="e"></param>
-                        private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
-            {
-                UpdateSerialNumber();
-                UpdateConstructor();
-                UpdateComment();
+        /// <summary>
+        /// The user clicked on the button Save and Quit. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonClickSaveAndQuit(object sender, RoutedEventArgs e)
+        {
+            UpdateSerialNumber();
+            UpdateConstructor();
+            UpdateComment();
 
-                templateData.myTmpExcelFile.UpdateSignature();
-                SaveAndQuit();
-            }
+            templateData.myTmpExcelFile.UpdateSignature();
+            SaveAndQuit();
+        }
 
-            /// <summary>
-            /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 0 int the excel file in the colum Present
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private  void ButtonClickNo(object sender, RoutedEventArgs e)
-            {
-                ResetTextBox();
-                HideTextBoxSerialNumberConstructor();
-                HideFrame();
-                templateData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+        /// <summary>
+        /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 0 int the excel file in the colum Present
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonClickNo(object sender, RoutedEventArgs e)
+        {
+            ResetTextBox();
+            HideTextBoxSerialNumberConstructor();
+            HideFrame();
+            templateData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
 
-                GotoNextPiece();
-
-            }
-            /// <summary>
-            /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 1 in the excel file in the colum Present
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void ButtonClickYes(object sender, RoutedEventArgs e)
-            {
-                if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
-                {
-                    POPUP.ShowPopup("Veuillez saisir un numéro de série et un constructeur");
-                    return;
-
-                }
-                UpdateComment();
-                 UpdateMarquage();
-                UpdateSerialNumber();
-                UpdateConstructor();
-                ResetTextBox();
-                HideTextBoxSerialNumberConstructor();
-                HideFrame();
-                templateData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
-
-                GotoNextPiece();
-
-
-            }
-
-
-
-
-            #endregion
+            GotoNextPiece();
 
         }
+
+        /// <summary>
+        /// The used clicked on the button No. It resets the textBox, Hide seral number/constructor textboxes, hide frame and label, and write 1 in the excel file in the colum Present
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonClickYes(object sender, RoutedEventArgs e)
+        {
+            if (CurrentPiece.IsReleveRequired == 1 && ((TextBoxSerialNumber.Text.Equals(string.Empty)) || TextBoxConstructor.Text.Equals(string.Empty)))
+            {
+                POPUP.ShowPopup("Veuillez saisir un numéro de série et un constructeur");
+                return;
+
+            }
+            UpdateComment();
+            UpdateMarquage();
+            UpdateSerialNumber();
+            UpdateConstructor();
+            ResetTextBox();
+            HideTextBoxSerialNumberConstructor();
+            HideFrame();
+            templateData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+
+            GotoNextPiece();
+
+
+        }
+
+
+
+
+        #endregion
+
     }
+}
 
 
