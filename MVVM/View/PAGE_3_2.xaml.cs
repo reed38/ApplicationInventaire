@@ -28,7 +28,7 @@ using ApplicationInventaire.Core.ProjectDataSet;
 namespace ApplicationInventaire.MVVM.View
 {
     /// <summary>
-    /// Logique d'interaction pour PAGE_3_2.xaml
+    /// Interaction logique for the page_3_2. The user clicked on the "Inventaire" Buton and is now doing an inventory.
     /// </summary>
     public partial class PAGE_3_2 : Page, INotifyPropertyChanged
     {
@@ -38,61 +38,62 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_2 = this;
             DataContext = this;
-            projectData = GlobalTemplateData.CurrentProjectData; //Loading project Data from classic class
+            templateData = GlobalTemplateData.CurrentTemplateData; //Loading project Data from static class
             this.RedFramePath = GlobalTemplateData.RedFramePath; //the image used in multiples pages have their path stored in the static class
 
 
 
 
             ResetTextBox(); //reset Comment, Serial Number, and Constructot textBox
+           
             HideTextBoxSerialNumberConstructor(); //Hide it by default since we don't know if upcomming piece require it or not
+            
             RedFrameImage.Visibility = Visibility.Visible; //hide red frame
             IndiceSection = 0;
             IndicePiece = 0;
+          
             ClearNameTagAndDescription();
+           
             FindNextNoPresent(); //this will update the Indice Section and IndicePiece with the ones corresponding to the first Piece with the field "IsPresent=0"
+           
             InitializeNameTagAndDesciption();
-            InitializeMarquageButton();
+          
+            InitializeMarquageButton(); 
 
             IndiceSection = CurrentPiece.SectionId - 1; //The library used to store data in a sqlite database have an Indice starting at 1
 
-            foreach (ImageInfos im in this.projectData.ImageSectionList) //initializing the current Section Image on the path
+            foreach (ImageInfos im in this.templateData.ImageSectionList) //finding the image path of the current section.
             {
-                if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                if (im.Name == templateData.mySections[IndiceSection].SectionName)
                 {
                     ImageSection = im.Path;
                     break;
 
                 }
             }
-            SetBorderPosition(); //initializing the position of the red frame  and the label containing NameTag
+            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2); //initializing the position of the red frame  and the label containing NameTag
 
         }
         #region Variables
         private int IndiceSection { set; get; }
         private int IndicePiece { set; get; }
-        private TemplateData projectData { set; get; }
+        private TemplateData templateData { set; get; }
         #endregion
 
         #region bindingVariablesSources 
-        private string imageSection;
-        private string redFramePath;
-        private string imageReleve;
-        private double xCoordinatevar;
+        private string imageSection; //path to the image of the current section
+        private string redFramePath; //path to the image used to display the red frame
+        private string imageReleve; //path to the current image used to show where Serial number is supposed to be read on the piece.
+        private double xCoordinatevar; //coordinates of the current Piece on the Image Section
         private double yCoordinatevar;
-        private Piece currentPiece;
-
-
+        private Piece currentPiece; 
         private Section currentSection;
         
         #endregion
 
 
-
-
-
         #region bindingMethods
-
+        //there are used in binding in the xaml file. 
         public Section CurrentSection
         {
             get { return currentSection; }
@@ -177,17 +178,11 @@ namespace ApplicationInventaire.MVVM.View
         #region GIMethods 
 
         /// <summary>
-        /// This function changes the postion of the frame and the label  in function of CurrentPiece.
+        /// This function changes the postion of the frame  in function of CurrentPiece's Coordinates.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// 
-        private void SetBorderPosition()
-        {
-            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
-
-
-        }
+       
         private void ChangeFrameCoordinates(double x, double y)
         {
             this.RedFrameImage.Visibility = Visibility.Visible;
@@ -196,23 +191,27 @@ namespace ApplicationInventaire.MVVM.View
         }
 
 
-
+        /// <summary>
+        /// Hide the stack panel containing Serial number and Constructer textbox/label.
+        /// </summary>
         private void HideTextBoxSerialNumberConstructor()
         {
             StackPanelSerialDescription.Visibility = Visibility.Hidden;
-            //TextBoxSerialNumber.Visibility = Visibility.Hidden;
-            //TextBoxConstructor.Visibility = Visibility.Hidden;
-            //labelConstructor.Visibility = Visibility.Hidden;
-            //labelSerialNumber.Visibility = Visibility.Hidden;
+
         }
 
+        /// <summary>
+        /// Show the stack panel containing Serial number and Constructer textbox/label.
+        /// </summary>
         private void ShowTextBoxSerialNumberConstructor()
         {
             StackPanelSerialDescription.Visibility = Visibility.Visible;
 
         }
 
-
+        /// <summary>
+        /// Clear the content of Comment, Serial Number, and Constructor textboxes.
+        /// </summary>
         private void ResetTextBox()
         {
             TextBoxComment.Clear();
@@ -221,6 +220,9 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// Hide the red frame.
+        /// </summary>
         private void HideFrame()
 
         {
@@ -231,6 +233,9 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateMethods
 
+        /// <summary>
+        /// Show or hide the button used to select if the Piece markage is present. Not all Piece have one. Only those with the field "HasMarking" set to int 1.
+        /// </summary>
         private void InitializeMarquageButton()
         {
             if (currentPiece.HasMarking == 1)
@@ -247,11 +252,17 @@ namespace ApplicationInventaire.MVVM.View
 
         }
 
+        /// <summary>
+        /// Initialize the content of name and Description Textbox in function of the current Piece?
+        /// </summary>
         private void InitializeNameTagAndDesciption()
         {
             this.TextBlockDesciption.Text = CurrentPiece.Description;
             this.TextBlockName.Text = CurrentPiece.PieceName;
         }
+        /// <summary>
+        /// Clear the content of name and description textboxes.
+        /// </summary>
         private void ClearNameTagAndDescription()
         {
             this.TextBlockDesciption.Text = string.Empty;
@@ -260,12 +271,12 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         /// <summary>
-        /// Update the value of currentPiece in function on the value of IndiceSection and IndicePiece
+        /// Update the value of currentPiece in function on the value of IndiceSection and IndicePiece.
         /// </summary>
-        private void UpdateCurrent()
+        private void UpdateCurrentPiece()
         {
-            this.CurrentSection = projectData.mySections[IndiceSection];
-            this.CurrentPiece = projectData.mySections[IndiceSection].PiecesList[IndicePiece];
+            this.CurrentSection = templateData.mySections[IndiceSection];
+            this.CurrentPiece = templateData.mySections[IndiceSection].PiecesList[IndicePiece];
 
         }
 
@@ -279,34 +290,34 @@ namespace ApplicationInventaire.MVVM.View
             FindNextNoPresent(); //Find the next Piece with the field "IsPresent" set to 0, and Update Section image, IndiceSection , IndicePiece accordingly
             InitializeNameTagAndDesciption();
             InitializeMarquageButton();
-            SetBorderPosition();
+            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
             Keyboard.Focus(this.TextBoxSerialNumber);
 
 
         }
 
         /// <summary>
-        /// Thuis function is used to find the next Piece with the fiels "IsPresent" set to . It Updates IndiceSection, IndicePiece, Image section and ImageReleve by doing so.
+        /// Thuis function is used to find the next Piece with the fiels "IsPresent" set to "0" or "". It Updates IndiceSection, IndicePiece, Image section and ImageReleve by doing so.
         /// </summary>
         private void FindNextNoPresent()
         {
             ImageReleve = null;
             ImageReleveName.Source = null;
 
-            if (IndiceSection == projectData.mySections.Count - 1 && IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count)//if the user wen through everything
+            if (IndiceSection == templateData.mySections.Count - 1 && IndicePiece == templateData.mySections[IndiceSection].PiecesList.Count)//if the user wen through everything
             {
                 SaveAndQuit();
                 return;
 
             }
 
-            else if (IndicePiece == projectData.mySections[IndiceSection].PiecesList.Count) //if the user went throuht all the Pieces in the current Section
+            else if (IndicePiece == templateData.mySections[IndiceSection].PiecesList.Count) //if the user went throuht all the Pieces in the current Section
             {
                 IndiceSection++;
                 IndicePiece = 0;
-                foreach (ImageInfos im in this.projectData.ImageSectionList)
+                foreach (ImageInfos im in this.templateData.ImageSectionList)
                 {
-                    if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                    if (im.Name == templateData.mySections[IndiceSection].SectionName)
                     {
                         ImageSection = im.Path; //updating Section image on te page
                         break;
@@ -318,21 +329,21 @@ namespace ApplicationInventaire.MVVM.View
             }
 
 
-            for (int section = IndiceSection; section < projectData.mySections.Count; section++)
+            for (int section = IndiceSection; section < templateData.mySections.Count; section++)
             {
 
-                for (int piece = IndicePiece; piece < projectData.mySections[section].PiecesList.Count; piece++)
+                for (int piece = IndicePiece; piece < templateData.mySections[section].PiecesList.Count; piece++)
                 {
 
-                    if (projectData.mySections[section].PiecesList[piece].IsPresent == 0)
+                    if (templateData.mySections[section].PiecesList[piece].IsPresent == 0) //if a piece which has not yet being marked as "Present" is found
                     {
                         this.IndicePiece = piece;
                         this.IndiceSection = section;
-                        UpdateCurrent();
+                        UpdateCurrentPiece();
                         if (this.CurrentPiece.IsReleveRequired == 1)
                         {
                             ShowTextBoxSerialNumberConstructor();
-                            foreach (ImageInfos i in projectData.ImageReleveList)
+                            foreach (ImageInfos i in templateData.ImageReleveList)
                             {
                                 if (i.Name.IndexOf(this.CurrentPiece.PieceName) >= 0)
                                 {
@@ -364,10 +375,10 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void SaveAndQuit()
         {
-            projectData.myTmpExcelFile.UpdateExcelFormula();
+            templateData.myTmpExcelFile.UpdateExcelFormula(); 
 
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            SaveFileDialog saveFileDialog = new SaveFileDialog(); //opening windows popup to ask the user where he wants to save the resulting excel file.
 
             // Set the default file name and extension
             saveFileDialog.DefaultExt = ".xls";
@@ -375,7 +386,7 @@ namespace ApplicationInventaire.MVVM.View
             // Set the file filters
             saveFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
 
-            saveFileDialog.FileName = projectData.myTemplateInfos.TemplateName; // Set the default filename here
+            saveFileDialog.FileName = templateData.myTemplateInfos.TemplateName; // Set the default filename here
             // Show the save file dialog
             bool? result = saveFileDialog.ShowDialog();
 
@@ -385,7 +396,7 @@ namespace ApplicationInventaire.MVVM.View
                 string filePath = saveFileDialog.FileName;
                 try
                 {
-                    File.Copy(projectData.myTemplateInfos.TmpExcelPath, filePath, true);
+                    File.Copy(templateData.myTemplateInfos.TmpExcelPath, filePath, true);
                 }
                 catch (Exception e)
                 {
@@ -404,8 +415,8 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!TextBoxComment.Text.Equals(string.Empty))
             {
-                CellInfo tmp = projectData.myTmpExcelFile.FindValue("Commentaire");
-                projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxComment.Text, tmp.Column, CurrentPiece.ExcelRow);
+                CellInfo tmp = templateData.myTmpExcelFile.FindValue("Commentaire");
+                templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxComment.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxComment.Clear();
             }
 
@@ -419,8 +430,8 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!TextBoxSerialNumber.Text.Equals(string.Empty))
             {
-                CellInfo tmp = projectData.myTmpExcelFile.FindValue("N° SERIE");
-                projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxSerialNumber.Text, tmp.Column, CurrentPiece.ExcelRow);
+                CellInfo tmp = templateData.myTmpExcelFile.FindValue("N° SERIE");
+                templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxSerialNumber.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxSerialNumber.Clear();
             }
 
@@ -433,8 +444,8 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!TextBoxConstructor.Text.Equals(string.Empty))
             {
-                CellInfo tmp = projectData.myTmpExcelFile.FindValue("FABRICANT");
-                projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxConstructor.Text, tmp.Column, CurrentPiece.ExcelRow);
+                CellInfo tmp = templateData.myTmpExcelFile.FindValue("FABRICANT");
+                templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxConstructor.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxConstructor.Clear();
             }
 
@@ -451,8 +462,8 @@ namespace ApplicationInventaire.MVVM.View
                
                 if((this.RadioButtonMarquagePresent.IsChecked==true))
                 {
-                    CellInfo tmp = this.projectData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M");
-                    this.projectData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1",CurrentPiece.ExcelColumn,tmp.Row);
+                    CellInfo tmp = this.templateData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M");
+                    this.templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1",CurrentPiece.ExcelColumn,tmp.Row);
 
 
                 }
@@ -474,7 +485,7 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxNameTagKeyDown(object sender, KeyEventArgs e)
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -499,7 +510,7 @@ namespace ApplicationInventaire.MVVM.View
                 UpdateConstructor();
                 UpdateComment();
 
-                projectData.myTmpExcelFile.UpdateSignature();
+                templateData.myTmpExcelFile.UpdateSignature();
                 SaveAndQuit();
             }
 
@@ -513,7 +524,7 @@ namespace ApplicationInventaire.MVVM.View
                 ResetTextBox();
                 HideTextBoxSerialNumberConstructor();
                 HideFrame();
-                projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+                templateData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "0", currentPiece.ExcelColumn, currentPiece.ExcelRow);
 
                 GotoNextPiece();
 
@@ -538,7 +549,7 @@ namespace ApplicationInventaire.MVVM.View
                 ResetTextBox();
                 HideTextBoxSerialNumberConstructor();
                 HideFrame();
-                projectData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
+                templateData.myTmpExcelFile.SetCellValue(currentPiece.SheetName, "1", currentPiece.ExcelColumn, currentPiece.ExcelRow);
 
                 GotoNextPiece();
 

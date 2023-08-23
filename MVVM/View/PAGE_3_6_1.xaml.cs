@@ -35,7 +35,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_6_1 = this;
             DataContext = this;
-            projectData = GlobalTemplateData.CurrentProjectData;
+            projectData = GlobalTemplateData.CurrentTemplateData;
             InitializeFields();
             
 
@@ -283,13 +283,13 @@ namespace ApplicationInventaire.MVVM.View
             TemplateInfos TemplateInfos = new TemplateInfos(TextBoxName.Text);
             
             TemplateInfos.Description = TextBoxDescription.Text;
-            TemplateInfos.Author = GlobalTemplateData.CurrentProjectData.myTemplateInfos.Author;
-            TemplateInfos.CreationDate = GlobalTemplateData.CurrentProjectData.myTemplateInfos.CreationDate;
+            TemplateInfos.Author = GlobalTemplateData.CurrentTemplateData.myTemplateInfos.Author;
+            TemplateInfos.CreationDate = GlobalTemplateData.CurrentTemplateData.myTemplateInfos.CreationDate;
            
             
             File.Copy(excelPath, TemplateInfos.ExcelPath, true);
             File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
-            File.Copy(GlobalTemplateData.CurrentProjectData.myTemplateInfos.DatabasePath, TemplateInfos.DatabasePath,true);
+            File.Copy(GlobalTemplateData.CurrentTemplateData.myTemplateInfos.DatabasePath, TemplateInfos.DatabasePath,true);
            
             TemplateData projectData = new TemplateData(TemplateInfos);
            
@@ -351,8 +351,8 @@ namespace ApplicationInventaire.MVVM.View
             projectData.myTemplateInfos.LastEditionDate = DateTime.Now;
             projectData.Save();
             projectData.UpdateSection();
-            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.TemplateName;
-            GlobalTemplateData.CurrentProjectData =projectData;
+            GlobalTemplateData.CurrentTemplateName = projectData.myTemplateInfos.TemplateName;
+            GlobalTemplateData.CurrentTemplateData =projectData;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_6_2);
 
 

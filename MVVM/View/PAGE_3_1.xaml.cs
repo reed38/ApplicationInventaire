@@ -41,7 +41,7 @@ namespace ApplicationInventaire.MVVM.View
         }
 
         #region variable
-        TemplateData projectData = GlobalTemplateData.CurrentProjectData;  //loading project info using the static class
+        TemplateData templateData = GlobalTemplateData.CurrentTemplateData;  //loading project info using the static class
 
         #endregion
       
@@ -80,8 +80,8 @@ namespace ApplicationInventaire.MVVM.View
             string tmp = FileManager.OpenExcelFilePopup();
             if (!string.IsNullOrEmpty(tmp))
             {
-                File.Copy(tmp, GlobalTemplateData.CurrentProjectData.myTemplateInfos.TmpExcelPath, true);
-                GlobalTemplateData.CurrentProjectData.InitializePieceFromExcel(); //We re initialize the data using the excel file. This is useful if a new inventory is made without reloading the project
+                File.Copy(tmp, GlobalTemplateData.CurrentTemplateData.myTemplateInfos.TmpExcelPath, true);
+                GlobalTemplateData.CurrentTemplateData.InitializePieceFromExcel(); //We re initialize the data using the excel file. This is useful if a new inventory is made without reloading the project
                 GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
             }
          
@@ -95,7 +95,7 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonNewInventoryClick(object sender, RoutedEventArgs e)
         {
 
-            GlobalTemplateData.CurrentProjectData.ResetTmpExcel();
+            GlobalTemplateData.CurrentTemplateData.ResetTmpExcel();
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_2);
         }
 
@@ -128,7 +128,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             try
             {
-                Directory.Delete(projectData.myTemplateInfos.ProjectPath, true);
+                Directory.Delete(templateData.myTemplateInfos.ProjectPath, true);
 
             }
             catch (Exception ex)
@@ -147,13 +147,13 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void InitializeAuthor_Description()
         {
-            this.TextBlocklAuthorName.Text = projectData.myTemplateInfos.Author;
-            this.TextBlocklLastEditorName.Text = projectData.myTemplateInfos.LastEditor;
-            this.TextBlockDesciption.Text = projectData.myTemplateInfos.Description;
-            DateTime EditionDate = this.projectData.myTemplateInfos.LastEditionDate;
+            this.TextBlocklAuthorName.Text = templateData.myTemplateInfos.Author;
+            this.TextBlocklLastEditorName.Text = templateData.myTemplateInfos.LastEditor;
+            this.TextBlockDesciption.Text = templateData.myTemplateInfos.Description;
+            DateTime EditionDate = this.templateData.myTemplateInfos.LastEditionDate;
             string EditionDateStr= EditionDate.Day.ToString() + "/" + EditionDate.Month.ToString() + "/" + EditionDate.Year.ToString() + " heure: " + EditionDate.Hour;
 
-            DateTime CreationDate = this.projectData.myTemplateInfos.CreationDate;
+            DateTime CreationDate = this.templateData.myTemplateInfos.CreationDate;
             string CreationDateStr = CreationDate.Day.ToString() +"/"+ CreationDate.Month.ToString()+"/"+ CreationDate.Year.ToString() +" heure: "+CreationDate.Hour;
 
             this.TextBlockCreationDate.Text = CreationDateStr;
@@ -167,6 +167,9 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region privateMethods
+        /// <summary>
+        /// This method hide some elements in fonction of the user rights.
+        /// </summary>
         private void InitializeUI()
         {
             if (GlobalTemplateData.UserRigth == 0)

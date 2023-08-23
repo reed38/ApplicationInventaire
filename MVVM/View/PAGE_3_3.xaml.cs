@@ -33,8 +33,8 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_3 = this;
             DataContext = this;
-            PlansNameList = new ObservableCollection<string>(GlobalData.GetPlansNames(GlobalTemplateData.CurrentProjectName));// we get the list of tha plans
-            PlansPathList = GlobalData.GetPlansPath(GlobalTemplateData.CurrentProjectName); //we het th path to the plan pdf
+            PlansNameList = new ObservableCollection<string>(GlobalData.GetPlansNames(GlobalTemplateData.CurrentTemplateName));// we get the list of tha plans
+            PlansPathList = GlobalData.GetPlansPath(GlobalTemplateData.CurrentTemplateName); //we het th path to the plan pdf
             InitilizePdfReaderExe();
         }
 

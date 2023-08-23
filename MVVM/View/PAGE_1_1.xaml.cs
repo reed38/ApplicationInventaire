@@ -31,13 +31,13 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_1_1 = this;
             DataContext = this;
-            ProjectNameList = new ObservableCollection<string>(GlobalData.GetProjectNames()); //we get the list of the project available in the UserData folder
-            ProjectPathList = GlobalData.GetTemplatePaths(); //going through the UserData folder and initializing ProjectPathList
+            TemplateNameList = new ObservableCollection<string>(GlobalData.GetProjectNames()); //we get the list of the project available in the UserData folder
+            TemplatePathList = GlobalData.GetTemplatePaths(); //going through the UserData folder and initializing TemplatePathList
 
 
         }
         #region Privatevariables
-        private string [] ProjectPathList;
+        private string [] TemplatePathList;
         #endregion
 
         #region BindingVariables
@@ -47,13 +47,13 @@ namespace ApplicationInventaire.MVVM.View
 
         #region BindingMethods
 
-        public ObservableCollection<string> ProjectNameList
+        public ObservableCollection<string> TemplateNameList
         {
             get { return projectNameList; }
             set
             {
                 projectNameList = value;
-                OnPropertyChanged(nameof(ProjectNameList));
+                OnPropertyChanged(nameof(TemplateNameList));
             }
         }
 
@@ -94,7 +94,7 @@ namespace ApplicationInventaire.MVVM.View
                 POPUP.ShowPopup("Veuillez sélectionner un template à exporter");
                 return;
             };
-            string TemplateFolderPath = ProjectPathList[ProjectNameList.IndexOf(selectedValue)];
+            string TemplateFolderPath = TemplatePathList[TemplateNameList.IndexOf(selectedValue)];
             string destPath = FileManager.OpenSelectZipSavePopup(selectedValue);
             FileManager.CreateZipArchive(TemplateFolderPath, destPath); //a zip archive is created at the selected location
             GlobalPages.PageGoBack(); //going back to main menu

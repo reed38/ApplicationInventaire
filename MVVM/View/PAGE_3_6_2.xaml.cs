@@ -36,7 +36,7 @@ namespace ApplicationInventaire.MVVM.View
 
             IndiceSection = 0;
             this.RedFramePath = GlobalTemplateData.RedFramePath;
-            projectData = GlobalTemplateData.CurrentProjectData;
+            projectData = GlobalTemplateData.CurrentTemplateData;
 
             foreach (ImageInfos im in this.projectData.ImageSectionList)
             {

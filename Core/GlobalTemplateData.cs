@@ -43,10 +43,10 @@ namespace ApplicationInventaire.Core.GlobalProjectData
     {
         
         #region variables
-        public static string CurrentProjectName;
+        public static string CurrentTemplateName;
         public static string CurrentSectionName;
         public static string CurrentPieceName;
-        public static TemplateData CurrentProjectData;
+        public static TemplateData CurrentTemplateData;
         public static int UserRigth; //1 admin, 0 default
         public static string password = "userir";
         public static Settings toto;

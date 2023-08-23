@@ -38,7 +38,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_5_1 = this;
             DataContext = this;
-            projectData = GlobalTemplateData.CurrentProjectData;
+            projectData = GlobalTemplateData.CurrentTemplateData;
             InitializeListPieceName();
             AutoSuggestionList = listPieceName;
         }

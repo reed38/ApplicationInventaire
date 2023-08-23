@@ -33,7 +33,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             DataContext = this;
             GlobalPages.page_3_4 = this;
-            this.projectData = GlobalTemplateData.CurrentProjectData;
+            this.projectData = GlobalTemplateData.CurrentTemplateData;
             this.IndiceSection = 0;
             foreach(var i in projectData.ImageSectionList) //Initializig Section Name
             {
