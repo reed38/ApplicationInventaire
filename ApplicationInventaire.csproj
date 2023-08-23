@@ -98,4 +98,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Demo\" />
+  </ItemGroup>
+
 </Project>
