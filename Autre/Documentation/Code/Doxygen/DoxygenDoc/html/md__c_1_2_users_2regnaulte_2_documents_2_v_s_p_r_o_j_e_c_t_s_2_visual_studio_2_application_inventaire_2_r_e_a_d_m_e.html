@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Introduction</title>
+<title>My Project: Auteur: Regnault Edgar</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,39 +69,56 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">Introduction</div></div>
+  <div class="headertitle"><div class="title">Auteur: Regnault Edgar</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md2"></a>This application was made by Edgar Regnault. It aims to make inventory and consulting blueprint easier. All the data are stored locally on the application.</p>
-<p>A doxygen documentation and a word file containing the plan of the application can be found in the folder "Documentation".</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2"></a></p>
 <h1><a class="anchor" id="autotoc_md3"></a>
-Requirement to creating a functional template</h1>
-<ul>
-<li>the excel file used must contains 8 colums</li>
-<li>The image used for releve (to illustrate where to read the serial number and constructor on a piece) MUST contain the name of the piece it corresponds to.</li>
-<li>if multiple piece are identical but have a different name tag (a serial number is required for each), it is possible to only have one image whose name contains the piece name. Example: Piece1_Piece2_Piece3.</li>
-<li>at the same row, theses colums must contains separatly the following strings:<ul>
-<li>"PID" for NameTag</li>
-<li>"Désignation" for Description</li>
-<li>"Besoin Qté Totale" used to know at which point stop when going throught the excel file</li>
-<li>"Présent" for signaling whether a piece is present "1" or absent "0"</li>
-<li>"FABRICANT" for constructor</li>
-<li>"N° SERIE" for serial number</li>
-<li>"Commentaire" for comment These fiels must be present or nothing is working. A good addition in the future would be to add a setting page which lets you choose which string you want for these parameters.</li>
-</ul>
-</li>
-</ul>
+Introduction</h1>
+<p>Cette application a pour but de faciliter l'accès aux plan et le suivi des manquants d'un montage. Un aperçu de son apparence et de son fonctionnement sont présents dans le manuel utilisateur</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
-Organization of the code:</h1>
-<p>All the functions and class relative to the gestion of excel file, database, and the Datastructure are in the folder Core. It is relatively clean. The files present are:</p><ul>
-<li><a class="el" href="_database_management_8cs_source.html">DatabaseManagement.cs</a>: it contains the class required to write and read data to a sqlite database. It uses sqlite-pcl-net libray which lets you directly store and retrieve Table of objects in the database. Though these objest must not be nested, must not contain complex types such as boolean.</li>
-<li><a class="el" href="_excel_management_8cs_source.html">ExcelManagement.cs</a>: it contains the classes required to read and write an excel file</li>
-<li>GlobalProjectData.cs: it is used to pass variables from pages to pages, store constant variables such as image path. It also some methods used to retrieve list of informations relative to file presents in the application.</li>
-<li>GlobalPages.cs it contains a static class used to manage navigaton throuh the pages. It also stores reference to page instances, and the URI for each page's xaml file. Each page initializes its reference when loaded.</li>
-<li><a class="el" href="_pieces_sections_8cs_source.html">PiecesSections.cs</a>: it contains two classes "Piece" and "Section". Piece contains the methods and Variable and methods to manage a Piece. Section contains // to manage a Section (which is composed of multiples Piece Objects plus other informations)</li>
-<li>ProjectData.cs: it mostly contains two class TemplateInfos and ProjectData. The first one contains path variables and informations relative to the project. The second one contains the first one plus a list of sections, excel file bject, database objects, and a list of the image used for sections and releve. A ProjectData oject is made for containing all the data relative to a project.</li>
+Autre</h1>
+<p>Ce dossier contient les éléments n'étant pas directement en lien avec le code/du projet. </p>
+<h2><a class="anchor" id="autotoc_md5"></a>
+ReleaseApp</h2>
+<p>Contient la release de l'application. Cette version est indépendante du Framework .NET et peut donc simplement être copiée sur un ordinateur, elle fonctionnera immédiatement.</p>
+<h2><a class="anchor" id="autotoc_md6"></a>
+DemoRessources</h2>
+<p>Contient des ressources pour effectuer une démo de l'application. Des infos supplémentaires sur ces ressources peuvent être trouvé dans le .md situé dans ce dossier. </p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Documentation</h2>
+<p>Contient la documentation utilisateur et la documentation programmeur. </p>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Code</h2>
+<p>Documentation programmeur. Une documentation doxygen et le doxyfile utilisé pour la générer y sont présents. </p>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Utilisateur</h2>
+<p>Contient le PDF du manuel d'utilisateur. </p>
+<h1><a class="anchor" id="autotoc_md10"></a>
+Core</h1>
+<p>Contient les classes utilisées pour gérer la structure de données de l'application et des Templates.</p>
+<ul>
+<li><a class="el" href="_database_management_8cs_source.html">DatabaseManagement.cs</a>: Classes et méthodes utilisées pour lire et écrire dans une base de données SQLite les structures de données utilisés par l'application. La Library utilisée pour cela est sqlite-pcl-net.</li>
+<li><a class="el" href="_excel_management_8cs_source.html">ExcelManagement.cs</a>: Classes et méthodes utilisées pour lire et écrire un Document Excel. La library utilisée pour cela est NPOI.</li>
+<li>GlobalProjectData.cs: Contient les variables/ méthodes globales, classe statique.</li>
+<li>GlobalPages.cs: Contient la classe utilisée pour gérer la navigation entre les pages de l'application.</li>
+<li><a class="el" href="_pieces_sections_8cs_source.html">PiecesSections.cs</a>: Contient les classes "Piece" et "Section".</li>
+<li>ProjectData.cs: Contient principalement la classe utilisée instancier un Template. Cette classe est un agrégat des classes contenues dans les fichiers précédents.</li>
 </ul>
-<p>The code relative to the code behind of the pages is in MVVM&gt;View. It musts be cleaned. Informations can be found in the doxygen. </p>
+<h1><a class="anchor" id="autotoc_md11"></a>
+MVVM</h1>
+<p>Interface graphique de l'application. </p>
+<h2><a class="anchor" id="autotoc_md12"></a>
+Model</h2>
+<h2><a class="anchor" id="autotoc_md13"></a>
+View</h2>
+<p>Contient le code xaml et le code behind des pages de l'application. </p>
+<h1><a class="anchor" id="autotoc_md14"></a>
+Ressources</h1>
+<p>Ressources utilisées par l'application. Contient seulement des images pour le moment. </p>
+<h1><a class="anchor" id="autotoc_md15"></a>
+Theme</h1>
+<p>Contient les thèmes d'éléments utilisés dans le code xaml (ex apparence bouton). </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
