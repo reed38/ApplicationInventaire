@@ -683,7 +683,7 @@ public static class GlobalData
     /// Go through the directory User Data to return the paths of the directories of the differents templates
     /// </summary>
     /// <returns> string [] containing the paths</returns>
-    public static string[] GetProjecPaths()
+    public static string[] GetTemplatePaths()
     {
         string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
         string[] result = Directory.GetDirectories(UserDataPath);
