@@ -331,9 +331,9 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// <returns>List<string> containing the nameTags</string></returns>
         public List<string> GetPieceNames()
         {
-            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
-            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
-            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
+            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ",-1);
+            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale",-1);
+            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT",-1);
 
 
 
@@ -386,11 +386,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// </summary>
         public void InitializePieceFromExcel()
         {
-            CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
-            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
-            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
-            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
-            CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation");
+            CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent",-1);
+            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID " ,- 1);
+            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale" ,- 1);
+            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT" ,- 1);
+            CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation", - 1);
 
             List<Piece> Pieces= new List<Piece>();
 

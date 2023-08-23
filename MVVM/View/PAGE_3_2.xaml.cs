@@ -71,13 +71,16 @@ namespace ApplicationInventaire.MVVM.View
 
                 }
             }
+            PIDCell = templateData.myTmpExcelFile.FindValue("PID", -1); //When a piece have a marquage, knowing in which colum to search is faster
             ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2); //initializing the position of the red frame  and the label containing NameTag
 
         }
-        #region Variables
+        #region PrivateVariables
         private int IndiceSection { set; get; }
         private int IndicePiece { set; get; }
         private TemplateData templateData { set; get; }
+        CellInfo PIDCell;
+
         #endregion
 
         #region bindingVariablesSources 
@@ -415,7 +418,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!TextBoxComment.Text.Equals(string.Empty))
             {
-                CellInfo tmp = templateData.myTmpExcelFile.FindValue("Commentaire");
+                CellInfo tmp = templateData.myTmpExcelFile.FindValue("Commentaire",-1);
                 templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxComment.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxComment.Clear();
             }
@@ -430,7 +433,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!TextBoxSerialNumber.Text.Equals(string.Empty))
             {
-                CellInfo tmp = templateData.myTmpExcelFile.FindValue("N° SERIE");
+                CellInfo tmp = templateData.myTmpExcelFile.FindValue("N° SERIE", -1);
                 templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxSerialNumber.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxSerialNumber.Clear();
             }
@@ -444,7 +447,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!TextBoxConstructor.Text.Equals(string.Empty))
             {
-                CellInfo tmp = templateData.myTmpExcelFile.FindValue("FABRICANT");
+                CellInfo tmp = templateData.myTmpExcelFile.FindValue("FABRICANT", -1);
                 templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, TextBoxConstructor.Text, tmp.Column, CurrentPiece.ExcelRow);
                 TextBoxConstructor.Clear();
             }
@@ -462,7 +465,7 @@ namespace ApplicationInventaire.MVVM.View
 
                 if ((this.RadioButtonMarquagePresent.IsChecked == true))
                 {
-                    CellInfo tmp = this.templateData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M");
+                    CellInfo tmp = this.templateData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M", PIDCell.Column);
                     this.templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1", CurrentPiece.ExcelColumn, tmp.Row);
 
 

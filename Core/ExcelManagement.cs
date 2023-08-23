@@ -328,8 +328,8 @@ namespace ApplicationInventaire.Core.ExcelManagement
             string user = Environment.UserName;
             System.DateTime date = DateTime.Now;
             string dateStr=date.Day.ToString()+"/"+date.Month.ToString()+"/"+date.Year.ToString();
-            CellInfo SignatureCell = FindValue("NOM + SIGNATURE");
-            CellInfo DateCell = FindValue("DATE de MISE A JOUR");
+            CellInfo SignatureCell = FindValue("NOM + SIGNATURE",-1);
+            CellInfo DateCell = FindValue("DATE de MISE A JOUR",-1);
 
             int i = SignatureCell.Row;
             while(!GetCellValue(SignatureCell.Sheet,i,SignatureCell.Column).Equals(""))
@@ -431,7 +431,230 @@ namespace ApplicationInventaire.Core.ExcelManagement
         /// <param name="content">the string that must be found </param>
         /// <returns> the method return a CellInfo struct {int row, int colums, int sheetNumber} .
         /// if nothing is found the struct returned has the sheet field set to -1</returns>  
-        public CellInfo FindValue(string content)
+        public CellInfo FindValue(string content, int columnIndex)
+        {
+            if (columnIndex < 0) //if we don't know in which colum search
+            { 
+            CellInfo cellInfo = new CellInfo();
+            if (FilePath.IndexOf(".xlsx") > 0)
+            {
+                using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                {
+                    XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+                    // Loop through each sheet in the workbook
+                    for (int sheetIndex = 0; sheetIndex < workbook.NumberOfSheets; sheetIndex++)
+                    {
+                        ISheet sheet = workbook.GetSheetAt(sheetIndex);
+
+                        // Loop through each row in the sheet
+                        for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
+                        {
+                            IRow row = sheet.GetRow(rowIndex);
+
+                            // Loop through each cell in the row
+                            if (row != null)
+                            {
+                                for (int columnIndexIndice = 0; columnIndexIndice < row.LastCellNum; columnIndexIndice++)
+                                {
+                                    ICell cell = row.GetCell(columnIndexIndice);
+
+                                    if (cell != null && cell.CellType == CellType.String && cell.StringCellValue.Equals(content))
+                                    {
+                                        // Cell with matching content found, populate the CellInfo struct
+                                        cellInfo.Row = rowIndex;
+                                        cellInfo.Column = columnIndexIndice;
+
+                                        cellInfo.Sheet = sheet.SheetName;
+                                 
+                                        return cellInfo;
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                    file.Close();
+                }
+            }
+
+            else if (FilePath.IndexOf(".xls") > 0)
+            {
+
+
+                using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                {
+                    HSSFWorkbook workbook;
+                    try
+                    {
+                        workbook = new HSSFWorkbook(file);
+                    }
+                    catch(Exception e) //problem with file format, abort da mission
+                    {
+                        return null;
+                    } 
+
+
+                    // Loop through each sheet in the workbook
+                    for (int sheetIndex = 0; sheetIndex < workbook.NumberOfSheets; sheetIndex++)
+                    {
+                        ISheet sheet = workbook.GetSheetAt(sheetIndex);
+
+                        // Loop through each row in the sheet
+                        for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
+                        {
+                            IRow row = sheet.GetRow(rowIndex);
+
+                            // Loop through each cell in the row
+                            if (row != null)
+                            {
+                                for (int columnIndexIndice = 0; columnIndexIndice < row.LastCellNum; columnIndexIndice++)
+                                {
+                                    ICell cell = row.GetCell(columnIndexIndice);
+
+                                    if (cell != null && cell.CellType == CellType.String && cell.StringCellValue == content)
+                                    {
+                                        // Cell with matching content found, populate the CellInfo struct
+                                        cellInfo.Row = rowIndex;
+                                        cellInfo.Column = columnIndexIndice;
+                                        cellInfo.Sheet = sheet.SheetName;
+
+                                    
+                                        return cellInfo;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    file.Close();
+                }
+
+            }
+
+
+
+            // Cell with matching content not found
+            cellInfo.Sheet = null; // return -1 for sheet by default if nothing is found
+            return cellInfo;
+            }
+
+            else //we know in which colmn to search
+            {
+                CellInfo cellInfo = new CellInfo();
+                if (FilePath.IndexOf(".xlsx") > 0)
+                {
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        XSSFWorkbook workbook = new XSSFWorkbook(file);
+
+                        // Loop through each sheet in the workbook
+                        for (int sheetIndex = 0; sheetIndex < workbook.NumberOfSheets; sheetIndex++)
+                        {
+                            ISheet sheet = workbook.GetSheetAt(sheetIndex);
+                            
+                            // Loop through each row in the sheet
+                            for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
+                            {
+                                IRow row = sheet.GetRow(rowIndex);
+
+                                // Loop through each cell in the row
+                                if (row != null)
+                                {
+                                  
+                                        ICell cell = row.GetCell(columnIndex);
+
+                                        if (cell != null && cell.CellType == CellType.String && cell.StringCellValue.Equals(content))
+                                        {
+                                            // Cell with matching content found, populate the CellInfo struct
+                                            cellInfo.Row = rowIndex;
+                                            cellInfo.Column = columnIndex;
+
+                                            cellInfo.Sheet = sheet.SheetName;
+
+                                            return cellInfo;
+                                        }
+                                    }
+                                }
+                            }
+                            file.Close();
+                        }
+                        
+                    }
+                
+
+
+
+                else if (FilePath.IndexOf(".xls") > 0)
+                {
+
+
+                    using (var file = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                    {
+                        HSSFWorkbook workbook;
+                        try
+                        {
+                            workbook = new HSSFWorkbook(file);
+                        }
+                        catch (Exception e) //problem with file format, abort da mission
+                        {
+                            return null;
+                        }
+
+
+                        // Loop through each sheet in the workbook
+                        for (int sheetIndex = 0; sheetIndex < workbook.NumberOfSheets; sheetIndex++)
+                        {
+                            ISheet sheet = workbook.GetSheetAt(sheetIndex);
+
+                            // Loop through each row in the sheet
+                            for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
+                            {
+                                IRow row = sheet.GetRow(rowIndex);
+
+                                // Loop through each cell in the row
+                                if (row != null)
+                                {
+
+                                    ICell cell = row.GetCell(columnIndex);
+
+                                    if (cell != null && cell.CellType == CellType.String && cell.StringCellValue.Equals(content))
+                                    {
+                                        // Cell with matching content found, populate the CellInfo struct
+                                        cellInfo.Row = rowIndex;
+                                        cellInfo.Column = columnIndex;
+
+                                        cellInfo.Sheet = sheet.SheetName;
+
+                                        return cellInfo;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        file.Close();
+                    }
+
+                }
+
+
+
+                // Cell with matching content not found
+                cellInfo.Sheet = null; // return -1 for sheet by default if nothing is found
+                return cellInfo;
+
+            }
+        }
+
+
+
+        /// <summary>
+        /// find the first cell in a given file (.xls or .xlsx) containing a given string
+        /// 
+        /// </summary>
+        /// <param name="content">the string that must be found </param>
+        /// <returns> the method return a CellInfo struct {int row, int colums, int sheetNumber} .
+        /// if nothing is found the struct returned has the sheet field set to -1</returns>  
+        public CellInfo FindValue2(string content)
         {
             CellInfo cellInfo = new CellInfo();
             if (FilePath.IndexOf(".xlsx") > 0)
@@ -464,13 +687,13 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                         cellInfo.Column = columnIndex;
 
                                         cellInfo.Sheet = sheet.SheetName;
-                                 
+
                                         return cellInfo;
                                     }
                                 }
                             }
                         }
-                        
+
                     }
                     file.Close();
                 }
@@ -489,10 +712,10 @@ namespace ApplicationInventaire.Core.ExcelManagement
                     {
                         workbook = new HSSFWorkbook(file);
                     }
-                    catch(Exception e) //problem with file format, abort da mission
+                    catch (Exception e) //problem with file format, abort da mission
                     {
                         return null;
-                    } 
+                    }
 
 
                     // Loop through each sheet in the workbook
@@ -519,7 +742,7 @@ namespace ApplicationInventaire.Core.ExcelManagement
                                         cellInfo.Column = columnIndex;
                                         cellInfo.Sheet = sheet.SheetName;
 
-                                    
+
                                         return cellInfo;
                                     }
                                 }
