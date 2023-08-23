@@ -104,6 +104,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="MVVM\Model\" />
     <Folder Include="UserData\" />
   </ItemGroup>
 

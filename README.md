@@ -1,33 +1,42 @@
+## autheur: 
+Regnault Edgar
+
 ##  Introduction 
-Cette application a pour but de faciliter la consulatation de plan et le suivi de manquants.
-Son fonctionnement
+Cette application a pour but de faciliter l'accès aux plan et le suivi des manquants d'un montage.
 
-A doxygen documentation and a word file containing the plan of the application can be found in the folder "Documentation".
+## Autre
+Ce dossier contient les éléments n'étant pas directement en lien avec le code/du projet
+### ReleaseApp
+Contient la release de l'application. Cette version est indépendante du framework .NET et peut donc simplement
+être copiée sur un oridinateur, elle fonctionnera immédiatement.
 
-## Requirement to creating a functional template
--  the excel file used must contains 8 colums
--  The image used for releve (to illustrate where to read the serial number and constructor on a piece) MUST contain the name of the piece it corresponds to.
--  if multiple piece are identical but have a different name tag (a serial number is required for each), it is possible to only have one image whose name contains the piece name. Example: Piece1_Piece2_Piece3.
-- at  the same row, theses colums must contains separatly the following strings:
-  - "PID" for NameTag
-  - "Désignation" for Description
-  - "Besoin Qté Totale" used to know at which point   stop when going throught the excel file
-  - "Présent" for signaling whether a piece is present "1" or absent "0"
-  - "FABRICANT" for constructor
-  - "N° SERIE" for serial number
-  - "Commentaire" for comment
-These fiels must be present or nothing is working.
-A good addition in the future would be to add a setting page which lets you choose which string you want for these parameters.
+### DemoRessources
+Contient des ressources pour effectuer une démo de l'application. Des infos supplémentaires sur ces ressources peuvent être trouvé 
+dans le .md
+### Documentation 
+Contient la documentation utilisateur et la documentation programmeur.
+### Code
+Documentation programeur. Une documentation doxygen et le doxyfile utilisé pour la générer y sont présents.
+### Utilisateur
+Contient le PDF du manuel d'utilisateur.
+## Core
+Contient les classes utilisée pour gérer la structure de données de l'application et des Templates.
 
-## Organization of the code:
+- DatabaseManagement.cs: Classes et méthodes utilisées pour lire et écrire dans une base de données sqlite les structures de données utilisés par l'application. La library utilisée pour cela est 
+- ExcelManagement.cs: Classes et méthodes utilisées pour lire et écrire un Document Excel. La library utilisée pour cela est NPOI.
+- GlobalProjectData.cs: Contient les variables/ méthodes globales, classe statique.
+- GlobalPages.cs: Contient la classe utilisée pour gérer la navigation entre les pages de l'application.
+- PiecesSections.cs: Contient les classes "Piece" et "Section".
+- ProjectData.cs: Contient principalement la classe utilisée instancier un template. Cette classe est un agrégat des classes contenues dans les fichiers précédents.
 
-All the functions and class relative to the gestion of excel file, database, and the Datastructure are in the folder Core. It is relatively clean.
-The files present are:
-- DatabaseManagement.cs: it contains the class required to write and read data to a sqlite database. It uses sqlite-pcl-net libray which lets you directly store and retrieve Table of objects in the database. Though these objest must not be nested, must not contain complex types such as boolean.
-- ExcelManagement.cs: it contains the classes required to read and write an excel file
-- GlobalProjectData.cs: it is used to pass variables from pages to pages, store constant variables such as image path. It also some methods used to retrieve list of informations relative to file presents in the application.
-- GlobalPages.cs it contains a static class used to manage navigaton throuh the pages. It also stores reference to page instances, and the URI for each page's xaml file. Each page initializes its reference when loaded.
-- PiecesSections.cs: it contains two classes "Piece" and "Section". Piece contains the methods and Variable and methods to manage a Piece. Section contains // to manage a Section (which is composed of multiples Piece Objects plus other informations)
-- ProjectData.cs: it mostly contains two class TemplateInfos and ProjectData. The first one contains path variables and informations relative to the project. The second one contains the first one plus a list of sections, excel file bject, database objects, and a list of the image used for sections and releve. A ProjectData oject is made for containing all the data relative to a project.
 
-The code relative to the code behind of the pages is in MVVM>View. It musts be cleaned. Informations can be found in the doxygen.
+
+## MVVM
+Interface graphique de l'application
+### Model
+### View
+Contient le code xaml et le code behind des pages de l'application.
+## Ressources
+Ressources utilisées par l'application. Contient seulement des images pour le moment.
+## Theme
+Contient les thèmes d'éléments utilisés dans le code xaml (ex apparence boutton).
