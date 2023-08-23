@@ -1,3 +1,4 @@
+###Autheur: Regnault Edgar
 ##  Introduction 
 Cette application a pour but de faciliter l'accès aux plan et le suivi des manquants d'un montage.
 
