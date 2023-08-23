@@ -38,13 +38,13 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_5_1 = this;
             DataContext = this;
-            projectData = GlobalProjectData.CurrentProjectData;
+            projectData = GlobalTemplateData.CurrentProjectData;
             InitializeListPieceName();
             AutoSuggestionList = listPieceName;
         }
 
         #region PrivateVariables
-        private ProjectData projectData;
+        private TemplateData projectData;
         private List<string> listPieceName = new List<string>();
         #endregion
      
@@ -221,7 +221,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             if(!String.IsNullOrEmpty(autoTextBox.Text))
             {
-             GlobalProjectData.CurrentPieceName = autoTextBox.Text;
+             GlobalTemplateData.CurrentPieceName = autoTextBox.Text;
              autoTextBox.Clear();
               GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
             }

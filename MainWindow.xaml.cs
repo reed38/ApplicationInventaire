@@ -35,9 +35,9 @@ namespace ApplicationInventaire
             GlobalPages.mainWindow = this;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_1);
             GlobalPages.CurrentPage = GlobalPages.PAGE_1;
-            ImageLogo = GlobalProjectData.AventechLogoPath;
+            ImageLogo = GlobalTemplateData.AventechLogoPath;
             DataContext = this;
-            GlobalProjectData.UserRigth = 0;
+            GlobalTemplateData.UserRigth = 0;
         }
 
 

@@ -35,8 +35,8 @@ namespace ApplicationInventaire.MVVM.View
 
 
             IndiceSection = 0;
-            this.RedFramePath = GlobalProjectData.RedFramePath;
-            projectData = GlobalProjectData.CurrentProjectData;
+            this.RedFramePath = GlobalTemplateData.RedFramePath;
+            projectData = GlobalTemplateData.CurrentProjectData;
 
             foreach (ImageInfos im in this.projectData.ImageSectionList)
             {
@@ -209,7 +209,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateVariables
 
-        private ProjectData projectData;
+        private TemplateData projectData;
         private Piece CurrentPiece;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();//list containing infos about the instances of little red circles on the Image
         private (Image, Piece) tmp; //used to pass argument
@@ -325,7 +325,7 @@ namespace ApplicationInventaire.MVVM.View
         private void CreateImageInstance(Piece piece)
         {
             Image image = new Image();
-            image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
+            image.Source = new BitmapImage(new Uri(GlobalTemplateData.RedCirclePath, UriKind.Absolute));
             image.Width = ImageMarkerWidth;
             image.Height = ImageMarkerWidth;
             Canvas.SetLeft(image, piece.X - ImageMarkerWidth / 2);

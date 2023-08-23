@@ -36,8 +36,8 @@ namespace ApplicationInventaire.MVVM.View
             GlobalPages.page_4_2 = this;
 
             IndiceSection = 0;
-            this.RedFramePath = GlobalProjectData.RedFramePath;
-            projectData = GlobalProjectData.CurrentProjectData;
+            this.RedFramePath = GlobalTemplateData.RedFramePath;
+            projectData = GlobalTemplateData.CurrentProjectData;
 
             foreach (ImageInfos im in this.projectData.ImageSectionList)
             {
@@ -206,7 +206,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateVariables
 
-        private ProjectData projectData;
+        private TemplateData projectData;
         private Piece CurrentPiece; 
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private (Image, Piece) tmp; //used to pass argument
@@ -253,7 +253,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonClickSeachEnter(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.CurrentPieceName = autoTextBox.Text;
+            GlobalTemplateData.CurrentPieceName = autoTextBox.Text;
             autoTextBox.Clear();
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
 
@@ -355,7 +355,7 @@ namespace ApplicationInventaire.MVVM.View
         private void CreateImageInstance(Piece piece)
         {
             Image image = new Image();
-            image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
+            image.Source = new BitmapImage(new Uri(GlobalTemplateData.RedCirclePath, UriKind.Absolute));
             image.Width = ImageMarkerWidth;
             image.Height = ImageMarkerWidth;
             Canvas.SetLeft(image, piece.X - ImageMarkerWidth / 2);

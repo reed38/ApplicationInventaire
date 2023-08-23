@@ -440,28 +440,28 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  280</span>            {</div>
 <div class="line"><span class="lineno">  281</span>                <span class="keywordflow">return</span>;</div>
 <div class="line"><span class="lineno">  282</span>            }</div>
-<div class="line"><span class="lineno">  283</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ProjectInfos</a> projectInfos = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ProjectInfos</a>(TextBoxName.Text);</div>
+<div class="line"><span class="lineno">  283</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">TemplateInfos</a> TemplateInfos = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">TemplateInfos</a>(TextBoxName.Text);</div>
 <div class="line"><span class="lineno">  284</span>            </div>
-<div class="line"><span class="lineno">  285</span>            projectInfos.Description = TextBoxDescription.Text;</div>
-<div class="line"><span class="lineno">  286</span>            projectInfos.Author = <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_project_data_1_1_global_project_data.html">GlobalProjectData</a>.CurrentProjectData.myProjectInfos.Author;</div>
-<div class="line"><span class="lineno">  287</span>            projectInfos.CreationDate = <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_project_data_1_1_global_project_data.html">GlobalProjectData</a>.CurrentProjectData.myProjectInfos.CreationDate;</div>
+<div class="line"><span class="lineno">  285</span>            TemplateInfos.Description = TextBoxDescription.Text;</div>
+<div class="line"><span class="lineno">  286</span>            TemplateInfos.Author = <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_project_data_1_1_global_project_data.html">GlobalProjectData</a>.CurrentProjectData.myTemplateInfos.Author;</div>
+<div class="line"><span class="lineno">  287</span>            TemplateInfos.CreationDate = <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_project_data_1_1_global_project_data.html">GlobalProjectData</a>.CurrentProjectData.myTemplateInfos.CreationDate;</div>
 <div class="line"><span class="lineno">  288</span>           </div>
 <div class="line"><span class="lineno">  289</span>            </div>
-<div class="line"><span class="lineno">  290</span>            File.Copy(excelPath, projectInfos.ExcelPath, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  291</span>            File.Copy(excelPath, projectInfos.TmpExcelPath, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  292</span>            File.Copy(<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_project_data_1_1_global_project_data.html">GlobalProjectData</a>.CurrentProjectData.myProjectInfos.DatabasePath, projectInfos.DatabasePath,<span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  290</span>            File.Copy(excelPath, TemplateInfos.ExcelPath, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  291</span>            File.Copy(excelPath, TemplateInfos.TmpExcelPath, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  292</span>            File.Copy(<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_project_data_1_1_global_project_data.html">GlobalProjectData</a>.CurrentProjectData.myTemplateInfos.DatabasePath, TemplateInfos.DatabasePath,<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  293</span>           </div>
-<div class="line"><span class="lineno">  294</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html">ProjectData</a> projectData = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html">ProjectData</a>(projectInfos);</div>
+<div class="line"><span class="lineno">  294</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html">ProjectData</a> projectData = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html">ProjectData</a>(TemplateInfos);</div>
 <div class="line"><span class="lineno">  295</span>           </div>
-<div class="line"><span class="lineno">  296</span>            projectData.myProjectInfos = projectInfos;</div>
+<div class="line"><span class="lineno">  296</span>            projectData.myTemplateInfos = TemplateInfos;</div>
 <div class="line"><span class="lineno">  297</span> </div>
-<div class="line"><span class="lineno">  298</span>            File.Copy(excelPath, projectInfos.ExcelPath, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  299</span>            File.Copy(excelPath, projectInfos.TmpExcelPath, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  298</span>            File.Copy(excelPath, TemplateInfos.ExcelPath, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  299</span>            File.Copy(excelPath, TemplateInfos.TmpExcelPath, <span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  300</span>            </div>
 <div class="line"><span class="lineno">  301</span> </div>
 <div class="line"><span class="lineno">  302</span>            <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_image_infos.html">ImageInfos</a> i <span class="keywordflow">in</span> imageSectionsInfos) <span class="comment">//saving selected image section to memory</span></div>
 <div class="line"><span class="lineno">  303</span>            {</div>
-<div class="line"><span class="lineno">  304</span>                <span class="keywordtype">string</span> destinationPath = Path.Combine(projectData.myProjectInfos.ImageSectionPath, i.Name);</div>
+<div class="line"><span class="lineno">  304</span>                <span class="keywordtype">string</span> destinationPath = Path.Combine(projectData.myTemplateInfos.ImageSectionPath, i.Name);</div>
 <div class="line"><span class="lineno">  305</span>                File.Copy(i.Path, destinationPath,<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  306</span> </div>
 <div class="line"><span class="lineno">  307</span>                </div>
@@ -486,7 +486,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  326</span> </div>
 <div class="line"><span class="lineno">  327</span>            <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_image_infos.html">ImageInfos</a> i <span class="keywordflow">in</span> imageReleveInfos)</div>
 <div class="line"><span class="lineno">  328</span>            {</div>
-<div class="line"><span class="lineno">  329</span>                <span class="keywordtype">string</span> destinationPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, i.Name);</div>
+<div class="line"><span class="lineno">  329</span>                <span class="keywordtype">string</span> destinationPath = Path.Combine(projectData.myTemplateInfos.ImageRelevePath, i.Name);</div>
 <div class="line"><span class="lineno">  330</span>               </div>
 <div class="line"><span class="lineno">  331</span>                    File.Copy(i.Path, destinationPath,<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  332</span> </div>
@@ -495,7 +495,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  335</span>            }</div>
 <div class="line"><span class="lineno">  336</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; PlansNameList.Count; i++)</div>
 <div class="line"><span class="lineno">  337</span>            {</div>
-<div class="line"><span class="lineno">  338</span>                <span class="keywordtype">string</span> destinationPath = Path.Combine(projectData.myProjectInfos.PlansPath, PlansNameList[i]);</div>
+<div class="line"><span class="lineno">  338</span>                <span class="keywordtype">string</span> destinationPath = Path.Combine(projectData.myTemplateInfos.PlansPath, PlansNameList[i]);</div>
 <div class="line"><span class="lineno">  339</span>            </div>
 <div class="line"><span class="lineno">  340</span>                    File.Copy(PlansPathList[i], destinationPath,<span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  341</span> </div>
@@ -507,11 +507,11 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  347</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a85ec7eebe96f961981d7e6ce6385f150">GetSectionsNames</a>();</div>
 <div class="line"><span class="lineno">  348</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a5aa4bb37a2a4a8c4aecd747a4d7a59af">GetRelevesNames</a>();</div>
 <div class="line"><span class="lineno">  349</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a511fa2e43bd5e7283032f1131a9b7d06">InitializePieceFromExcel</a>();</div>
-<div class="line"><span class="lineno">  350</span>            projectData.myProjectInfos.LastEditor = Environment.UserName;</div>
-<div class="line"><span class="lineno">  351</span>            projectData.myProjectInfos.LastEditionDate = DateTime.Now;</div>
+<div class="line"><span class="lineno">  350</span>            projectData.myTemplateInfos.LastEditor = Environment.UserName;</div>
+<div class="line"><span class="lineno">  351</span>            projectData.myTemplateInfos.LastEditionDate = DateTime.Now;</div>
 <div class="line"><span class="lineno">  352</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a81c11d8631ec7ad3d6aef37e96c2c6b2">Save</a>();</div>
 <div class="line"><span class="lineno">  353</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a9cd8c157b18825f0ab5db23c2b939493">UpdateSection</a>();</div>
-<div class="line"><span class="lineno">  354</span>            GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;</div>
+<div class="line"><span class="lineno">  354</span>            GlobalProjectData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;</div>
 <div class="line"><span class="lineno">  355</span>            GlobalProjectData.CurrentProjectData =projectData;</div>
 <div class="line"><span class="lineno">  356</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html">GlobalPages</a>.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html#a5364b1a74b07f63f0fc0d043894ca9ee">SetCurrentPage</a>(<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html">GlobalPages</a>.PAGE_3_6_2);</div>
 <div class="line"><span class="lineno">  357</span> </div>
@@ -526,7 +526,7 @@ Private Attributes</h2></td></tr>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data_html_a81c11d8631ec7ad3d6aef37e96c2c6b2"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a81c11d8631ec7ad3d6aef37e96c2c6b2">ApplicationInventaire.Core.ProjectDataSet.ProjectData.Save</a></div><div class="ttdeci">void Save()</div><div class="ttdoc">Used to save to database the ProjecData object.</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00294">ProjectData.cs:294</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data_html_a85ec7eebe96f961981d7e6ce6385f150"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a85ec7eebe96f961981d7e6ce6385f150">ApplicationInventaire.Core.ProjectDataSet.ProjectData.GetSectionsNames</a></div><div class="ttdeci">void GetSectionsNames()</div><div class="ttdoc">used to get an array of ImageInfos object (containing file name ithout extension and file path) corre...</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00254">ProjectData.cs:254</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data_html_a9cd8c157b18825f0ab5db23c2b939493"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a9cd8c157b18825f0ab5db23c2b939493">ApplicationInventaire.Core.ProjectDataSet.ProjectData.UpdateSection</a></div><div class="ttdeci">void UpdateSection()</div><div class="ttdoc">This functions will go through sections and delete Section from mySection List iftheir name is not pr...</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00458">ProjectData.cs:458</a></div></div>
-<div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos_html"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ApplicationInventaire.Core.ProjectDataSet.ProjectInfos</a></div><div class="ttdoc">Used to store Path of a template data as well as other infomations such as name, description,...</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00062">ProjectData.cs:63</a></div></div>
+<div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos_html"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ApplicationInventaire.Core.ProjectDataSet.TemplateInfos</a></div><div class="ttdoc">Used to store Path of a template data as well as other infomations such as name, description,...</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00062">ProjectData.cs:63</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -862,10 +862,10 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_p_a_g_e__3__6__1_8xaml_8cs_source.html#l00148">148</a> of file <a class="el" href="_p_a_g_e__3__6__1_8xaml_8cs_source.html">PAGE_3_6_1.xaml.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  149</span>        {</div>
-<div class="line"><span class="lineno">  151</span>            this.TextBoxDescription.Text = projectData.myProjectInfos.Description;</div>
-<div class="line"><span class="lineno">  152</span>            this.TextBoxName.Text = projectData.myProjectInfos.ProjectName;</div>
-<div class="line"><span class="lineno">  153</span>            ExcelName = Path.GetFileNameWithoutExtension(projectData.myProjectInfos.ExcelPath);</div>
-<div class="line"><span class="lineno">  154</span>            excelPath = projectData.myProjectInfos.ExcelPath;</div>
+<div class="line"><span class="lineno">  151</span>            this.TextBoxDescription.Text = projectData.myTemplateInfos.Description;</div>
+<div class="line"><span class="lineno">  152</span>            this.TextBoxName.Text = projectData.myTemplateInfos.ProjectName;</div>
+<div class="line"><span class="lineno">  153</span>            ExcelName = Path.GetFileNameWithoutExtension(projectData.myTemplateInfos.ExcelPath);</div>
+<div class="line"><span class="lineno">  154</span>            excelPath = projectData.myTemplateInfos.ExcelPath;</div>
 <div class="line"><span class="lineno">  155</span>            <span class="comment">//Files</span></div>
 <div class="line"><span class="lineno">  156</span>            imageReleveInfos = <span class="keyword">new</span> ObservableCollection&lt;ImageInfos&gt;(projectData.ImageReleveList);</div>
 <div class="line"><span class="lineno">  157</span>            imageSectionsInfos = <span class="keyword">new</span> ObservableCollection&lt;ImageInfos&gt;(projectData.ImageSectionList);</div>
@@ -878,7 +878,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  164</span>            {</div>
 <div class="line"><span class="lineno">  165</span>                ImageReleveName.Add(i.Name);</div>
 <div class="line"><span class="lineno">  166</span>            }</div>
-<div class="line"><span class="lineno">  167</span>            PlansPathList =  ( Directory.GetFiles(projectData.myProjectInfos.PlansPath)).ToList();</div>
+<div class="line"><span class="lineno">  167</span>            PlansPathList =  ( Directory.GetFiles(projectData.myTemplateInfos.PlansPath)).ToList();</div>
 <div class="line"><span class="lineno">  168</span>            <span class="keywordflow">foreach</span>(var i <span class="keywordflow">in</span>  PlansPathList)</div>
 <div class="line"><span class="lineno">  169</span>            {</div>
 <div class="line"><span class="lineno">  170</span>                PlansNameList.Add(Path.GetFileNameWithoutExtension(i));</div>

@@ -86,7 +86,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acdc7b271954426ce32fcc9ae7da04012"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#acdc7b271954426ce32fcc9ae7da04012">ProjectData</a> (<a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ProjectInfos</a> project)</td></tr>
+<tr class="memitem:acdc7b271954426ce32fcc9ae7da04012"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#acdc7b271954426ce32fcc9ae7da04012">ProjectData</a> (<a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">TemplateInfos</a> project)</td></tr>
 <tr class="separator:acdc7b271954426ce32fcc9ae7da04012"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85ec7eebe96f961981d7e6ce6385f150"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a85ec7eebe96f961981d7e6ce6385f150">GetSectionsNames</a> ()</td></tr>
 <tr class="memdesc:a85ec7eebe96f961981d7e6ce6385f150"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to get an array of ImageInfos object (containing file name ithout extension and file path) corresponding to a given oject  <br /></td></tr>
@@ -121,7 +121,7 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa9a460c4c4b0aaed0c6d2f45631dba11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ProjectInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#aa9a460c4c4b0aaed0c6d2f45631dba11">myProjectInfos</a></td></tr>
+<tr class="memitem:aa9a460c4c4b0aaed0c6d2f45631dba11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">TemplateInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#aa9a460c4c4b0aaed0c6d2f45631dba11">myTemplateInfos</a></td></tr>
 <tr class="separator:aa9a460c4c4b0aaed0c6d2f45631dba11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9dd320ebbd2245a7a2ae8f79dcbdc14"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_application_inventaire_1_1_core_1_1_piece_sections_1_1_section.html">Section</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#ac9dd320ebbd2245a7a2ae8f79dcbdc14">mySections</a></td></tr>
 <tr class="separator:ac9dd320ebbd2245a7a2ae8f79dcbdc14"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,7 +150,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">ApplicationInventaire.Core.ProjectDataSet.ProjectData.ProjectData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ProjectInfos</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">TemplateInfos</a>&#160;</td>
           <td class="paramname"><em>project</em></td><td>)</td>
           <td></td>
         </tr>
@@ -170,20 +170,20 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  214</span>            <span class="keywordflow">if</span> (database.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#a02e066ae502883995068a949e46b9c63">IsDatabaseInitialized</a>())</div>
 <div class="line"><span class="lineno">  215</span>            {</div>
 <div class="line"><span class="lineno">  216</span> </div>
-<div class="line"><span class="lineno">  217</span>                this.myProjectInfos = database.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#abb5148b545e81d225169faded568026e">ReadProjectInfos</a>();</div>
+<div class="line"><span class="lineno">  217</span>                this.myTemplateInfos = database.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#abb5148b545e81d225169faded568026e">ReadTemplateInfos</a>();</div>
 <div class="line"><span class="lineno">  218</span>                this.mySections = database.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#acb55fed0c3c4c890de675da92382f690">GetAllSections</a>();</div>
 <div class="line"><span class="lineno">  219</span>                this.myDatabase = database;</div>
 <div class="line"><span class="lineno">  220</span>            }</div>
 <div class="line"><span class="lineno">  221</span>            <span class="keywordflow">else</span></div>
 <div class="line"><span class="lineno">  222</span>            {</div>
-<div class="line"><span class="lineno">  223</span>                this.myProjectInfos = project;</div>
-<div class="line"><span class="lineno">  224</span>                this.myDatabase = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html">Database</a>(myProjectInfos.DatabasePath);</div>
+<div class="line"><span class="lineno">  223</span>                this.myTemplateInfos = project;</div>
+<div class="line"><span class="lineno">  224</span>                this.myDatabase = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html">Database</a>(myTemplateInfos.DatabasePath);</div>
 <div class="line"><span class="lineno">  225</span>                mySections = <span class="keyword">new</span> List&lt;Section&gt;();</div>
-<div class="line"><span class="lineno">  226</span>                this.myProjectInfos = project;</div>
-<div class="line"><span class="lineno">  227</span>                this.myProjectInfos.CreationDate = DateTime.Now;</div>
-<div class="line"><span class="lineno">  228</span>                this.myProjectInfos.Author= Environment.UserName;</div>
-<div class="line"><span class="lineno">  229</span>                this.myProjectInfos.LastEditor = Environment.UserName;</div>
-<div class="line"><span class="lineno">  230</span>                this.myProjectInfos.LastEditionDate = DateTime.Now;</div>
+<div class="line"><span class="lineno">  226</span>                this.myTemplateInfos = project;</div>
+<div class="line"><span class="lineno">  227</span>                this.myTemplateInfos.CreationDate = DateTime.Now;</div>
+<div class="line"><span class="lineno">  228</span>                this.myTemplateInfos.Author= Environment.UserName;</div>
+<div class="line"><span class="lineno">  229</span>                this.myTemplateInfos.LastEditor = Environment.UserName;</div>
+<div class="line"><span class="lineno">  230</span>                this.myTemplateInfos.LastEditionDate = DateTime.Now;</div>
 <div class="line"><span class="lineno">  231</span> </div>
 <div class="line"><span class="lineno">  232</span>            }</div>
 <div class="line"><span class="lineno">  233</span>            myExcelFile = <span class="keyword">new</span> <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_excel_management_1_1_excel_file.html">ExcelFile</a>(project.ExcelPath);</div>
@@ -196,7 +196,7 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  240</span>        }</div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html">ApplicationInventaire.Core.DatabaseManagement.Database</a></div><div class="ttdoc">To create Database object. A database Object has the methods to read and write Objects in a ....</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00027">DatabaseManagement.cs:28</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_a02e066ae502883995068a949e46b9c63"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#a02e066ae502883995068a949e46b9c63">ApplicationInventaire.Core.DatabaseManagement.Database.IsDatabaseInitialized</a></div><div class="ttdeci">bool IsDatabaseInitialized()</div><div class="ttdoc">Check id the database already contains fields. To do so the function just count how much Sections are...</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00184">DatabaseManagement.cs:184</a></div></div>
-<div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_abb5148b545e81d225169faded568026e"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#abb5148b545e81d225169faded568026e">ApplicationInventaire.Core.DatabaseManagement.Database.ReadProjectInfos</a></div><div class="ttdeci">ProjectInfos ReadProjectInfos()</div><div class="ttdoc">Return the ProjectInfos object contained in the Database.</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00148">DatabaseManagement.cs:148</a></div></div>
+<div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_abb5148b545e81d225169faded568026e"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#abb5148b545e81d225169faded568026e">ApplicationInventaire.Core.DatabaseManagement.Database.ReadTemplateInfos</a></div><div class="ttdeci">TemplateInfos ReadTemplateInfos()</div><div class="ttdoc">Return the TemplateInfos object contained in the Database.</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00148">DatabaseManagement.cs:148</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_acb55fed0c3c4c890de675da92382f690"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#acb55fed0c3c4c890de675da92382f690">ApplicationInventaire.Core.DatabaseManagement.Database.GetAllSections</a></div><div class="ttdeci">List&lt; Section &gt; GetAllSections()</div><div class="ttdoc">Return a List containing all the Section present in the database.</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00104">DatabaseManagement.cs:104</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_excel_management_1_1_excel_file_html"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_excel_management_1_1_excel_file.html">ApplicationInventaire.Core.ExcelManagement.ExcelFile</a></div><div class="ttdoc">Class to operate on an excel file. INDEXES START AT ZERO.</div><div class="ttdef"><b>Definition</b> <a href="_excel_management_8cs_source.html#l00057">ExcelManagement.cs:58</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data_html_a511fa2e43bd5e7283032f1131a9b7d06"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a511fa2e43bd5e7283032f1131a9b7d06">ApplicationInventaire.Core.ProjectDataSet.ProjectData.InitializePieceFromExcel</a></div><div class="ttdeci">void InitializePieceFromExcel()</div><div class="ttdoc">Go through the excelfile and initialize the data structure using it. It is used to know which piece i...</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00369">ProjectData.cs:369</a></div></div>
@@ -225,7 +225,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_project_data_8cs_source.html#l00488">488</a> of file <a class="el" href="_project_data_8cs_source.html">ProjectData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  489</span>        {</div>
-<div class="line"><span class="lineno">  490</span>            myProjectInfos.DispDataProjectInfos();</div>
+<div class="line"><span class="lineno">  490</span>            myTemplateInfos.DispDataTemplateInfos();</div>
 <div class="line"><span class="lineno">  491</span>            <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_piece_sections_1_1_section.html">Section</a> tmp <span class="keywordflow">in</span> mySections)</div>
 <div class="line"><span class="lineno">  492</span>            {</div>
 <div class="line"><span class="lineno">  493</span>                tmp.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_piece_sections_1_1_section.html#abd60c87f0ab84247030e26336e4ac19c">DispDataSection</a>();</div>
@@ -316,7 +316,7 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_project_data_8cs_source.html#l00274">274</a> of file <a class="el" href="_project_data_8cs_source.html">ProjectData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  275</span>        {</div>
 <div class="line"><span class="lineno">  276</span> </div>
-<div class="line"><span class="lineno">  277</span>            <span class="keywordtype">string</span> ImageRelevePath = this.myProjectInfos.ImageRelevePath;</div>
+<div class="line"><span class="lineno">  277</span>            <span class="keywordtype">string</span> ImageRelevePath = this.myTemplateInfos.ImageRelevePath;</div>
 <div class="line"><span class="lineno">  278</span>            <span class="keywordtype">string</span>[] path = Directory.GetFiles(ImageRelevePath);</div>
 <div class="line"><span class="lineno">  279</span>            ImageInfos[] result = <span class="keyword">new</span> ImageInfos[path.Length];</div>
 <div class="line"><span class="lineno">  280</span> </div>
@@ -356,7 +356,7 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_project_data_8cs_source.html#l00254">254</a> of file <a class="el" href="_project_data_8cs_source.html">ProjectData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  255</span>        {</div>
 <div class="line"><span class="lineno">  256</span> </div>
-<div class="line"><span class="lineno">  257</span>            <span class="keywordtype">string</span> ImageSectionPath = this.myProjectInfos.ImageSectionPath;</div>
+<div class="line"><span class="lineno">  257</span>            <span class="keywordtype">string</span> ImageSectionPath = this.myTemplateInfos.ImageSectionPath;</div>
 <div class="line"><span class="lineno">  258</span>            <span class="keywordtype">string</span>[] path = Directory.GetFiles(ImageSectionPath);</div>
 <div class="line"><span class="lineno">  259</span>            ImageInfos[] result = <span class="keyword">new</span> ImageInfos[path.Length];</div>
 <div class="line"><span class="lineno">  260</span> </div>
@@ -497,7 +497,7 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_project_data_8cs_source.html#l00304">304</a> of file <a class="el" href="_project_data_8cs_source.html">ProjectData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  305</span>        {</div>
 <div class="line"><span class="lineno">  306</span>            mySections = myDatabase.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#acb55fed0c3c4c890de675da92382f690">GetAllSections</a>();</div>
-<div class="line"><span class="lineno">  307</span>            myProjectInfos = myDatabase.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#abb5148b545e81d225169faded568026e">ReadProjectInfos</a>();</div>
+<div class="line"><span class="lineno">  307</span>            myTemplateInfos = myDatabase.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#abb5148b545e81d225169faded568026e">ReadTemplateInfos</a>();</div>
 <div class="line"><span class="lineno">  308</span>        }</div>
 </div><!-- fragment -->
 </div>
@@ -551,7 +551,7 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_project_data_8cs_source.html#l00501">501</a> of file <a class="el" href="_project_data_8cs_source.html">ProjectData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  502</span>        {</div>
-<div class="line"><span class="lineno">  503</span>            File.Copy(myProjectInfos.ExcelPath, myProjectInfos.TmpExcelPath, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  503</span>            File.Copy(myTemplateInfos.ExcelPath, myTemplateInfos.TmpExcelPath, <span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  504</span>        }</div>
 </div><!-- fragment -->
 </div>
@@ -576,10 +576,10 @@ Public Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_project_data_8cs_source.html#l00294">294</a> of file <a class="el" href="_project_data_8cs_source.html">ProjectData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  295</span>        {</div>
 <div class="line"><span class="lineno">  296</span>            myDatabase.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#adadc3a60a8094ab9e0d5707fa7f5748a">InsertAllSections</a>(mySections);</div>
-<div class="line"><span class="lineno">  297</span>            myDatabase.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#a42dc79b049575a6bdd36610df5e7d739">WriteProjectInfos</a>(myProjectInfos);</div>
+<div class="line"><span class="lineno">  297</span>            myDatabase.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#a42dc79b049575a6bdd36610df5e7d739">WriteTemplateInfos</a>(myTemplateInfos);</div>
 <div class="line"><span class="lineno">  298</span> </div>
 <div class="line"><span class="lineno">  299</span>        }</div>
-<div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_a42dc79b049575a6bdd36610df5e7d739"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#a42dc79b049575a6bdd36610df5e7d739">ApplicationInventaire.Core.DatabaseManagement.Database.WriteProjectInfos</a></div><div class="ttdeci">void WriteProjectInfos(ProjectInfos project)</div><div class="ttdoc">Take a given ProjectInfos object and write it in the the database. By doing do it overwrtite the last...</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00167">DatabaseManagement.cs:167</a></div></div>
+<div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_a42dc79b049575a6bdd36610df5e7d739"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#a42dc79b049575a6bdd36610df5e7d739">ApplicationInventaire.Core.DatabaseManagement.Database.WriteTemplateInfos</a></div><div class="ttdeci">void WriteTemplateInfos(TemplateInfos project)</div><div class="ttdoc">Take a given TemplateInfos object and write it in the the database. By doing do it overwrtite the last...</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00167">DatabaseManagement.cs:167</a></div></div>
 <div class="ttc" id="aclass_application_inventaire_1_1_core_1_1_database_management_1_1_database_html_adadc3a60a8094ab9e0d5707fa7f5748a"><div class="ttname"><a href="class_application_inventaire_1_1_core_1_1_database_management_1_1_database.html#adadc3a60a8094ab9e0d5707fa7f5748a">ApplicationInventaire.Core.DatabaseManagement.Database.InsertAllSections</a></div><div class="ttdeci">void InsertAllSections(List&lt; Section &gt; sections)</div><div class="ttdoc">To insert al the given Section in the Databse. This functions will reset the Piece table and the Sect...</div><div class="ttdef"><b>Definition</b> <a href="_database_management_8cs_source.html#l00121">DatabaseManagement.cs:121</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -692,13 +692,13 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="aa9a460c4c4b0aaed0c6d2f45631dba11" name="aa9a460c4c4b0aaed0c6d2f45631dba11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9a460c4c4b0aaed0c6d2f45631dba11">&#9670;&#160;</a></span>myProjectInfos</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a460c4c4b0aaed0c6d2f45631dba11">&#9670;&#160;</a></span>myTemplateInfos</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">ProjectInfos</a> ApplicationInventaire.Core.ProjectDataSet.ProjectData.myProjectInfos</td>
+          <td class="memname"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html">TemplateInfos</a> ApplicationInventaire.Core.ProjectDataSet.ProjectData.myTemplateInfos</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -43,7 +43,7 @@ namespace ApplicationInventaire.MVVM.View
             DataContext = this;
             InitializeComponent();
             InitializeUI();
-            Items2 = new((GlobalProjectData.GetProjectNames()).ToList()); //list of the project present in the UserData  folder
+            Items2 = new((GlobalData.GetProjectNames()).ToList()); //list of the project present in the UserData  folder
             GlobalPages.page_1 = this;
 
         }
@@ -94,10 +94,10 @@ namespace ApplicationInventaire.MVVM.View
         private void ButtonMainMenuSelectTypeClick(object sender, RoutedEventArgs e) //when the user click on a given project
         {
             Button clickedButton = (Button)sender;
-            GlobalProjectData.CurrentProjectName = clickedButton.Content.ToString(); //to pass variables through page a static class "GlobalProjectData" is used. It's probably not the best way to do it but  it works
-            GlobalProjectData.CurrentProjectData = new(new(GlobalProjectData.CurrentProjectName)); //initializing the corresponding GlobalProjectData in the static class
+            GlobalTemplateData.CurrentProjectName = clickedButton.Content.ToString(); //to pass variables through page a static class "GlobalProjectData" is used. It's probably not the best way to do it but  it works
+            GlobalTemplateData.CurrentProjectData = new(new(GlobalTemplateData.CurrentProjectName)); //initializing the corresponding GlobalProjectData in the static class
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_1);
-            GlobalPages.mainWindow.labelTemplateName.Content = GlobalProjectData.CurrentProjectName;// we update the banner to display the current projectName
+            GlobalPages.mainWindow.labelTemplateName.Content = GlobalTemplateData.CurrentProjectName;// we update the banner to display the current projectName
             GlobalPages.mainWindow.labelTemplateName.Visibility = Visibility.Visible;
             
 
@@ -172,7 +172,7 @@ namespace ApplicationInventaire.MVVM.View
         /// </summary>
         private void InitializeUI()
         {
-            if(GlobalProjectData.UserRigth==0)
+            if(GlobalTemplateData.UserRigth==0)
             {
                 this.ButtonNew.Visibility = Visibility.Collapsed;
                 this.ButtonExport.Visibility = Visibility.Collapsed;

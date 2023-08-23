@@ -16,9 +16,10 @@ using System.Linq;
 using NPOI.OpenXmlFormats.Dml.Diagram;
 using NPOI.SS.UserModel;
 using static SQLite.SQLite3;
+using ApplicationInventaire.Core.ProjectDataSet;
 
 /// <summary>
-/// This file contains Class ImageInfos, ProjectInfos, and ProjectData.
+/// This file contains Class ImageInfos, TemplateInfos, and ProjectData.
 /// </summary>
 namespace ApplicationInventaire.Core.ProjectDataSet
 {
@@ -59,7 +60,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
     /// Used to store Path of a template data as well as other infomations such as name, description, author, creation Date,last edit Date.
     /// </summary>
 
-    public class ProjectInfos
+    public class TemplateInfos
     {
 
         #region variables
@@ -92,7 +93,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #endregion
 
         #region constructor
-        public ProjectInfos(string ProjectName)
+        public TemplateInfos(string ProjectName)
         {
             this.ProjectName = ProjectName;
             this.ProjectPath = Path.Combine(AppPath, ProjectName);
@@ -110,7 +111,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         }
 
-        public ProjectInfos() { }
+        public TemplateInfos() { }
 
         #endregion
 
@@ -152,7 +153,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
 
         #region debugging
-        public void DispDataProjectInfos()
+        public void DispDataTemplateInfos()
         {
             Console.WriteLine("ProjectName: " + this.ProjectName);
             Console.WriteLine("Description: " + this.Description);
@@ -181,12 +182,12 @@ namespace ApplicationInventaire.Core.ProjectDataSet
     /// <summary>
     /// Class xhich contains al the methods and data used to manage a given template.
     /// </summary>
-    public class ProjectData
+    public class TemplateData
     {
 
 
         #region variables
-        public ProjectInfos myProjectInfos;
+        public TemplateInfos myTemplateInfos;
         public List<Section> mySections;
         public ExcelFile myExcelFile;
         public ExcelFile myTmpExcelFile;
@@ -202,7 +203,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         #region constructor
 
-        public ProjectData(ProjectInfos project)
+        public TemplateData(TemplateInfos project)
         {
 
 
@@ -215,20 +216,20 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             if (database.IsDatabaseInitialized())
             {
 
-                this.myProjectInfos = database.ReadProjectInfos();
+                this.myTemplateInfos = database.ReadTemplateInfos();
                 this.mySections = database.GetAllSections();
                 this.myDatabase = database;
             }
             else
             {
-                this.myProjectInfos = project;
-                this.myDatabase = new Database(myProjectInfos.DatabasePath);
+                this.myTemplateInfos = project;
+                this.myDatabase = new Database(myTemplateInfos.DatabasePath);
                 mySections = new List<Section>();
-                this.myProjectInfos = project;
-                this.myProjectInfos.CreationDate = DateTime.Now;
-                this.myProjectInfos.Author= Environment.UserName;
-                this.myProjectInfos.LastEditor = Environment.UserName;
-                this.myProjectInfos.LastEditionDate = DateTime.Now;
+                this.myTemplateInfos = project;
+                this.myTemplateInfos.CreationDate = DateTime.Now;
+                this.myTemplateInfos.Author= Environment.UserName;
+                this.myTemplateInfos.LastEditor = Environment.UserName;
+                this.myTemplateInfos.LastEditionDate = DateTime.Now;
 
             }
             myExcelFile = new ExcelFile(project.ExcelPath);
@@ -255,7 +256,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public void GetSectionsNames()
         {
 
-            string ImageSectionPath = this.myProjectInfos.ImageSectionPath;
+            string ImageSectionPath = this.myTemplateInfos.ImageSectionPath;
             string[] path = Directory.GetFiles(ImageSectionPath);
             ImageInfos[] result = new ImageInfos[path.Length];
 
@@ -275,7 +276,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public void GetRelevesNames()
         {
 
-            string ImageRelevePath = this.myProjectInfos.ImageRelevePath;
+            string ImageRelevePath = this.myTemplateInfos.ImageRelevePath;
             string[] path = Directory.GetFiles(ImageRelevePath);
             ImageInfos[] result = new ImageInfos[path.Length];
 
@@ -295,7 +296,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public void Save()
         {
             myDatabase.InsertAllSections(mySections);
-            myDatabase.WriteProjectInfos(myProjectInfos);
+            myDatabase.WriteTemplateInfos(myTemplateInfos);
 
         }
 
@@ -305,7 +306,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public void Load()
         {
             mySections = myDatabase.GetAllSections();
-            myProjectInfos = myDatabase.ReadProjectInfos();
+            myTemplateInfos = myDatabase.ReadTemplateInfos();
         }
 
         /// <summary>
@@ -633,7 +634,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// </summary>
         public void DispDataProjectData()
         {
-            myProjectInfos.DispDataProjectInfos();
+            myTemplateInfos.DispDataTemplateInfos();
             foreach (Section tmp in mySections)
             {
                 tmp.DispDataSection();
@@ -646,11 +647,80 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         /// </summary>
         public void ResetTmpExcel()
         {
-            File.Copy(myProjectInfos.ExcelPath, myProjectInfos.TmpExcelPath, true);
+            File.Copy(myTemplateInfos.ExcelPath, myTemplateInfos.TmpExcelPath, true);
         }
     }
     #endregion
 
+
+}
+
+public static class GlobalData
+{
+
+
+    /// <summary>
+    /// Used to get an array of string containing the list of the name of the projects present in the UserData folder
+    /// </summary>
+    /// <returns> an array of string</returns>
+    public static string[] GetProjectNames()
+    {
+        string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
+        string[] result = Directory.GetDirectories(UserDataPath);
+        for (int i = 0; i < result.Length; i++)
+        {
+            result[i] = Path.GetFileNameWithoutExtension(result[i]);
+
+        }
+
+        return (result);
+
+
+
+    }
+
+    /// <summary>
+    /// Go through the directory User Data to return the paths of the directories of the differents templates
+    /// </summary>
+    /// <returns> string [] containing the paths</returns>
+    public static string[] GetProjecPaths()
+    {
+        string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
+        string[] result = Directory.GetDirectories(UserDataPath);
+        return result;
+
+    }
+    /// <summary>
+    /// Go through the directory User Data to returs the names of the directories of the differents templates
+    /// </summary>
+    /// <returns> string [] containing the names</returns>
+    public static string[] GetPlansNames(string templateName)
+    {
+        TemplateInfos tmp = new(templateName);
+        string PlansPath = tmp.PlansPath;
+        string[] result = Directory.GetFiles(PlansPath);
+        for (int i = 0; i < result.Length; i++)
+        {
+            result[i] = Path.GetFileNameWithoutExtension(result[i]);
+
+        }
+
+        return (result);
+
+    }
+    /// <summary>
+    /// Go through the directory Plans to returs the paths of the plans presents in the given template
+    /// </summary>
+    /// <returns> string [] containing the names</returns>
+    public static string[] GetPlansPath(string templateName)
+    {
+        TemplateInfos tmp = new(templateName);
+        string PlansPath = tmp.PlansPath;
+        string[] result = Directory.GetFiles(PlansPath);
+
+        return (result);
+
+    }
 
 }
 

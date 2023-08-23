@@ -414,7 +414,7 @@ $(function() {
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>            <span class="comment">// Set the file filters</span></div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            saveFileDialog.Filter = <span class="stringliteral">&quot;excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx&quot;</span>;  <span class="comment">// Set allowed file extensions</span></div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>           </div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            saveFileDialog.FileName = projectData.myProjectInfos.ProjectName; <span class="comment">// Set the default filename here</span></div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            saveFileDialog.FileName = projectData.myTemplateInfos.ProjectName; <span class="comment">// Set the default filename here</span></div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            <span class="comment">// Show the save file dialog</span></div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            <span class="keywordtype">bool</span>? result = saveFileDialog.ShowDialog();</div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span> </div>
@@ -424,7 +424,7 @@ $(function() {
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>                <span class="keywordtype">string</span> filePath = saveFileDialog.FileName;</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>                <span class="keywordflow">try</span></div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>                {</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                    File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                    File.Copy(projectData.myTemplateInfos.TmpExcelPath, filePath, <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                }</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                <span class="keywordflow">catch</span>(Exception e )</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>                {</div>
@@ -555,7 +555,7 @@ $(function() {
 <div class="ttc" id="anamespace_application_inventaire_1_1_core_1_1_global_pages_html"><div class="ttname"><a href="namespace_application_inventaire_1_1_core_1_1_global_pages.html">ApplicationInventaire.Core.GlobalPages</a></div><div class="ttdef"><b>Definition</b> <a href="_gobal_pages_8cs_source.html#l00020">GobalPages.cs:21</a></div></div>
 <div class="ttc" id="anamespace_application_inventaire_1_1_core_1_1_global_project_data_html"><div class="ttname"><a href="namespace_application_inventaire_1_1_core_1_1_global_project_data.html">ApplicationInventaire.Core.GlobalProjectData</a></div><div class="ttdoc">This file is used to store global variables.</div><div class="ttdef"><b>Definition</b> <a href="_global_project_data_8cs_source.html#l00034">GlobalProjectData.cs:35</a></div></div>
 <div class="ttc" id="anamespace_application_inventaire_1_1_core_1_1_piece_sections_html"><div class="ttname"><a href="namespace_application_inventaire_1_1_core_1_1_piece_sections.html">ApplicationInventaire.Core.PieceSections</a></div><div class="ttdoc">This file contains Piece and Section classes.</div><div class="ttdef"><b>Definition</b> <a href="_pieces_sections_8cs_source.html#l00021">PiecesSections.cs:22</a></div></div>
-<div class="ttc" id="anamespace_application_inventaire_1_1_core_1_1_project_data_set_html"><div class="ttname"><a href="namespace_application_inventaire_1_1_core_1_1_project_data_set.html">ApplicationInventaire.Core.ProjectDataSet</a></div><div class="ttdoc">This file contains Class ImageInfos, ProjectInfos, and ProjectData.</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00023">ProjectData.cs:24</a></div></div>
+<div class="ttc" id="anamespace_application_inventaire_1_1_core_1_1_project_data_set_html"><div class="ttname"><a href="namespace_application_inventaire_1_1_core_1_1_project_data_set.html">ApplicationInventaire.Core.ProjectDataSet</a></div><div class="ttdoc">This file contains Class ImageInfos, TemplateInfos, and ProjectData.</div><div class="ttdef"><b>Definition</b> <a href="_project_data_8cs_source.html#l00023">ProjectData.cs:24</a></div></div>
 <div class="ttc" id="anamespace_application_inventaire_1_1_m_v_v_m_1_1_view_html"><div class="ttname"><a href="namespace_application_inventaire_1_1_m_v_v_m_1_1_view.html">ApplicationInventaire.MVVM.View</a></div><div class="ttdef"><b>Definition</b> <a href="_p_a_g_e__0_8xaml_8cs_source.html#l00019">PAGE_0.xaml.cs:20</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

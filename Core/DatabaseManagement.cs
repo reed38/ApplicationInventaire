@@ -18,7 +18,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
 {
     
     /// <summary>
-    /// To create Database object. A database Object has the methods to read and write Objects in a .db sqlite database file. These objects are Section, Piece, and ProjectInfos
+    /// To create Database object. A database Object has the methods to read and write Objects in a .db sqlite database file. These objects are Section, Piece, and TemplateInfos
     /// the sqlite-net-pcl library let you directly create Table in the database to stock objects. You can then get those objects using a system of pimarykey.
     ///  But it DOESN'T ALLOW complex types such as bol or nested objects.
     /// There is the possibility to create a relation between tables using secondary key.
@@ -43,7 +43,7 @@ namespace ApplicationInventaire.Core.DatabaseManagement
             this.DatabasePath = databasePath;
             connection.CreateTable<Piece>();
             connection.CreateTable<Section>();
-            connection.CreateTable<ProjectInfos>();
+            connection.CreateTable<TemplateInfos>();
             connection.Close();
         }
         #endregion
@@ -139,17 +139,17 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         //Project Info
         #endregion
 
-        #region ProjectInfos
+        #region TemplateInfos
 
         /// <summary>
-        /// Return the ProjectInfos object contained in the Database
+        /// Return the TemplateInfos object contained in the Database
         /// </summary>
-        /// <returns>ProjectInfos corresponding to the given project</returns>
-        public ProjectInfos ReadProjectInfos()
+        /// <returns>TemplateInfos corresponding to the given project</returns>
+        public TemplateInfos ReadTemplateInfos()
         {
             SQLiteConnection connection = new SQLiteConnection(DatabasePath);
-            List<ProjectInfos> tmp = connection.Table<ProjectInfos>().ToList();
-            ProjectInfos result;
+            List<TemplateInfos> tmp = connection.Table<TemplateInfos>().ToList();
+            TemplateInfos result;
             if (tmp.Count > 0)
                 result=tmp[0];
 
@@ -161,14 +161,14 @@ namespace ApplicationInventaire.Core.DatabaseManagement
         }
         /// <summary>
         /// 
-        /// Take a given ProjectInfos object and write it in the the database. By doing do it overwrtite the last ProjectInfo Object present in it
+        /// Take a given TemplateInfos object and write it in the the database. By doing do it overwrtite the last ProjectInfo Object present in it
         /// </summary>
         /// <param name="project"></param>
-        public void WriteProjectInfos(ProjectInfos project)
+        public void WriteTemplateInfos(TemplateInfos project)
         {
             SQLiteConnection connection = new SQLiteConnection(DatabasePath);
-            connection.DropTable<ProjectInfos>();
-            connection.CreateTable<ProjectInfos>();
+            connection.DropTable<TemplateInfos>();
+            connection.CreateTable<TemplateInfos>();
             connection.Insert(project);
             connection.Close();
 
@@ -205,8 +205,8 @@ namespace ApplicationInventaire.Core.DatabaseManagement
             {
                 i.DispDataSection();
             }
-            ProjectInfos tmp = ReadProjectInfos();
-            tmp.DispDataProjectInfos();
+            TemplateInfos tmp = ReadTemplateInfos();
+            tmp.DispDataTemplateInfos();
         }
 
     }

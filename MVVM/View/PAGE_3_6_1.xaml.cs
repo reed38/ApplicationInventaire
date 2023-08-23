@@ -35,7 +35,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_6_1 = this;
             DataContext = this;
-            projectData = GlobalProjectData.CurrentProjectData;
+            projectData = GlobalTemplateData.CurrentProjectData;
             InitializeFields();
             
 
@@ -43,7 +43,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         #region PrivateVariables
-        private ProjectData projectData;
+        private TemplateData projectData;
         private ObservableCollection<ImageInfos> imageSectionsInfos = new ObservableCollection<ImageInfos>();
         private ObservableCollection<ImageInfos> imageReleveInfos = new ObservableCollection<ImageInfos>();
         private List<string> PlansPathList = new List<string>();
@@ -148,10 +148,10 @@ namespace ApplicationInventaire.MVVM.View
         private void InitializeFields()
         {
             ///textBox
-            this.TextBoxDescription.Text = projectData.myProjectInfos.Description;
-            this.TextBoxName.Text = projectData.myProjectInfos.ProjectName;
-            ExcelName = Path.GetFileNameWithoutExtension(projectData.myProjectInfos.ExcelPath);
-            excelPath = projectData.myProjectInfos.ExcelPath;
+            this.TextBoxDescription.Text = projectData.myTemplateInfos.Description;
+            this.TextBoxName.Text = projectData.myTemplateInfos.ProjectName;
+            ExcelName = Path.GetFileNameWithoutExtension(projectData.myTemplateInfos.ExcelPath);
+            excelPath = projectData.myTemplateInfos.ExcelPath;
             //Files
             imageReleveInfos = new ObservableCollection<ImageInfos>(projectData.ImageReleveList);
             imageSectionsInfos = new ObservableCollection<ImageInfos>(projectData.ImageSectionList);
@@ -164,7 +164,7 @@ namespace ApplicationInventaire.MVVM.View
             {
                 ImageReleveName.Add(i.Name);
             }
-            PlansPathList =  ( Directory.GetFiles(projectData.myProjectInfos.PlansPath)).ToList();
+            PlansPathList =  ( Directory.GetFiles(projectData.myTemplateInfos.PlansPath)).ToList();
             foreach(var i in  PlansPathList)
             {
                 PlansNameList.Add(Path.GetFileNameWithoutExtension(i));
@@ -203,7 +203,7 @@ namespace ApplicationInventaire.MVVM.View
             }
 
 
-            string[] projectList = GlobalProjectData.GetProjectNames();
+            string[] projectList = GlobalData.GetProjectNames();
             foreach (string project in projectList)
             {
                 if (project.Equals(TextBoxName.Text))
@@ -280,28 +280,28 @@ namespace ApplicationInventaire.MVVM.View
             {
                 return;
             }
-            ProjectInfos projectInfos = new ProjectInfos(TextBoxName.Text);
+            TemplateInfos TemplateInfos = new TemplateInfos(TextBoxName.Text);
             
-            projectInfos.Description = TextBoxDescription.Text;
-            projectInfos.Author = GlobalProjectData.CurrentProjectData.myProjectInfos.Author;
-            projectInfos.CreationDate = GlobalProjectData.CurrentProjectData.myProjectInfos.CreationDate;
+            TemplateInfos.Description = TextBoxDescription.Text;
+            TemplateInfos.Author = GlobalTemplateData.CurrentProjectData.myTemplateInfos.Author;
+            TemplateInfos.CreationDate = GlobalTemplateData.CurrentProjectData.myTemplateInfos.CreationDate;
            
             
-            File.Copy(excelPath, projectInfos.ExcelPath, true);
-            File.Copy(excelPath, projectInfos.TmpExcelPath, true);
-            File.Copy(GlobalProjectData.CurrentProjectData.myProjectInfos.DatabasePath, projectInfos.DatabasePath,true);
+            File.Copy(excelPath, TemplateInfos.ExcelPath, true);
+            File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
+            File.Copy(GlobalTemplateData.CurrentProjectData.myTemplateInfos.DatabasePath, TemplateInfos.DatabasePath,true);
            
-            ProjectData projectData = new ProjectData(projectInfos);
+            TemplateData projectData = new TemplateData(TemplateInfos);
            
-            projectData.myProjectInfos = projectInfos;
+            projectData.myTemplateInfos = TemplateInfos;
 
-            File.Copy(excelPath, projectInfos.ExcelPath, true);
-            File.Copy(excelPath, projectInfos.TmpExcelPath, true);
+            File.Copy(excelPath, TemplateInfos.ExcelPath, true);
+            File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
             
 
             foreach (ImageInfos i in imageSectionsInfos) //saving selected image section to memory
             {
-                string destinationPath = Path.Combine(projectData.myProjectInfos.ImageSectionPath, i.Name);
+                string destinationPath = Path.Combine(projectData.myTemplateInfos.ImageSectionPath, i.Name);
                 File.Copy(i.Path, destinationPath,true);
 
                 
@@ -326,7 +326,7 @@ namespace ApplicationInventaire.MVVM.View
 
             foreach (ImageInfos i in imageReleveInfos)
             {
-                string destinationPath = Path.Combine(projectData.myProjectInfos.ImageRelevePath, i.Name);
+                string destinationPath = Path.Combine(projectData.myTemplateInfos.ImageRelevePath, i.Name);
                
                     File.Copy(i.Path, destinationPath,true);
 
@@ -335,7 +335,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             for (int i = 0; i < PlansNameList.Count; i++)
             {
-                string destinationPath = Path.Combine(projectData.myProjectInfos.PlansPath, PlansNameList[i]);
+                string destinationPath = Path.Combine(projectData.myTemplateInfos.PlansPath, PlansNameList[i]);
             
                     File.Copy(PlansPathList[i], destinationPath,true);
 
@@ -347,12 +347,12 @@ namespace ApplicationInventaire.MVVM.View
             projectData.GetSectionsNames();
             projectData.GetRelevesNames();
             projectData.InitializePieceFromExcel();
-            projectData.myProjectInfos.LastEditor = Environment.UserName;
-            projectData.myProjectInfos.LastEditionDate = DateTime.Now;
+            projectData.myTemplateInfos.LastEditor = Environment.UserName;
+            projectData.myTemplateInfos.LastEditionDate = DateTime.Now;
             projectData.Save();
             projectData.UpdateSection();
-            GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;
-            GlobalProjectData.CurrentProjectData =projectData;
+            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;
+            GlobalTemplateData.CurrentProjectData =projectData;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_6_2);
 
 

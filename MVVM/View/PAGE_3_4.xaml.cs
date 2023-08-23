@@ -33,7 +33,7 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             DataContext = this;
             GlobalPages.page_3_4 = this;
-            this.projectData = GlobalProjectData.CurrentProjectData;
+            this.projectData = GlobalTemplateData.CurrentProjectData;
             this.IndiceSection = 0;
             foreach(var i in projectData.ImageSectionList) //Initializig Section Name
             {
@@ -50,7 +50,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region privateVariables
         
-        private ProjectData projectData;
+        private TemplateData projectData;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private int IndiceSection;
         private int ImageMarkerWidth = 20; //used to define the size of he little red circles
@@ -246,7 +246,7 @@ namespace ApplicationInventaire.MVVM.View
         private void CreateImageInstance(Piece piece)
         {
             Image image = new Image();
-            image.Source = new BitmapImage(new Uri(GlobalProjectData.RedCirclePath, UriKind.Absolute));
+            image.Source = new BitmapImage(new Uri(GlobalTemplateData.RedCirclePath, UriKind.Absolute));
             image.Width = ImageMarkerWidth;
             image.Height = ImageMarkerWidth;
             Canvas.SetLeft(image, piece.X- ImageMarkerWidth/2);

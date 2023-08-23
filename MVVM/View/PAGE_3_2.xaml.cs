@@ -38,8 +38,8 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_3_2 = this;
             DataContext = this;
-            projectData = GlobalProjectData.CurrentProjectData; //Loading project Data from classic class
-            this.RedFramePath = GlobalProjectData.RedFramePath; //the image used in multiples pages have their path stored in the static class
+            projectData = GlobalTemplateData.CurrentProjectData; //Loading project Data from classic class
+            this.RedFramePath = GlobalTemplateData.RedFramePath; //the image used in multiples pages have their path stored in the static class
 
 
 
@@ -71,7 +71,7 @@ namespace ApplicationInventaire.MVVM.View
         #region Variables
         private int IndiceSection { set; get; }
         private int IndicePiece { set; get; }
-        private ProjectData projectData { set; get; }
+        private TemplateData projectData { set; get; }
         #endregion
 
         #region bindingVariablesSources 
@@ -375,7 +375,7 @@ namespace ApplicationInventaire.MVVM.View
             // Set the file filters
             saveFileDialog.Filter = "excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx";  // Set allowed file extensions
 
-            saveFileDialog.FileName = projectData.myProjectInfos.ProjectName; // Set the default filename here
+            saveFileDialog.FileName = projectData.myTemplateInfos.ProjectName; // Set the default filename here
             // Show the save file dialog
             bool? result = saveFileDialog.ShowDialog();
 
@@ -385,7 +385,7 @@ namespace ApplicationInventaire.MVVM.View
                 string filePath = saveFileDialog.FileName;
                 try
                 {
-                    File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, true);
+                    File.Copy(projectData.myTemplateInfos.TmpExcelPath, filePath, true);
                 }
                 catch (Exception e)
                 {

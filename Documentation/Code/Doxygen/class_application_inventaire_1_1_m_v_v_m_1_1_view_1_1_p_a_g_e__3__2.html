@@ -843,7 +843,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  359</span>            <span class="comment">// Set the file filters</span></div>
 <div class="line"><span class="lineno">  360</span>            saveFileDialog.Filter = <span class="stringliteral">&quot;excel file (*.xls )|*.xls|excel file (*.xlsx)|*.xlsx&quot;</span>;  <span class="comment">// Set allowed file extensions</span></div>
 <div class="line"><span class="lineno">  361</span>           </div>
-<div class="line"><span class="lineno">  362</span>            saveFileDialog.FileName = projectData.myProjectInfos.ProjectName; <span class="comment">// Set the default filename here</span></div>
+<div class="line"><span class="lineno">  362</span>            saveFileDialog.FileName = projectData.myTemplateInfos.ProjectName; <span class="comment">// Set the default filename here</span></div>
 <div class="line"><span class="lineno">  363</span>            <span class="comment">// Show the save file dialog</span></div>
 <div class="line"><span class="lineno">  364</span>            <span class="keywordtype">bool</span>? result = saveFileDialog.ShowDialog();</div>
 <div class="line"><span class="lineno">  365</span> </div>
@@ -853,7 +853,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  369</span>                <span class="keywordtype">string</span> filePath = saveFileDialog.FileName;</div>
 <div class="line"><span class="lineno">  370</span>                <span class="keywordflow">try</span></div>
 <div class="line"><span class="lineno">  371</span>                {</div>
-<div class="line"><span class="lineno">  372</span>                    File.Copy(projectData.myProjectInfos.TmpExcelPath, filePath, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  372</span>                    File.Copy(projectData.myTemplateInfos.TmpExcelPath, filePath, <span class="keyword">true</span>);</div>
 <div class="line"><span class="lineno">  373</span>                }</div>
 <div class="line"><span class="lineno">  374</span>                <span class="keywordflow">catch</span>(Exception e )</div>
 <div class="line"><span class="lineno">  375</span>                {</div>

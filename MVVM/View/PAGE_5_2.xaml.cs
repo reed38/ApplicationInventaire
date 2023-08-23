@@ -33,10 +33,10 @@ namespace ApplicationInventaire.MVVM.View
 
             InitializeComponent();
             GlobalPages.page_5_2 = this;
-            this.RedFramePath = GlobalProjectData.RedFramePath;
+            this.RedFramePath = GlobalTemplateData.RedFramePath;
             DataContext = this;
 
-            this.projectData = GlobalProjectData.CurrentProjectData;
+            this.projectData = GlobalTemplateData.CurrentProjectData;
             this.InitializeCurrentPiece();
             SetBorderPosition();
 
@@ -45,7 +45,7 @@ namespace ApplicationInventaire.MVVM.View
        
         #region Variables
     
-        private ProjectData projectData;
+        private TemplateData projectData;
         private Piece CurrentPiece;
         #endregion
   
@@ -97,7 +97,7 @@ namespace ApplicationInventaire.MVVM.View
             {
                 foreach (Piece j in i.PiecesList)
                 {
-                    if (GlobalProjectData.CurrentPieceName.Equals(j.PieceName))
+                    if (GlobalTemplateData.CurrentPieceName.Equals(j.PieceName))
                     {
                         foreach (ImageInfos k in this.projectData.ImageSectionList)
                         {

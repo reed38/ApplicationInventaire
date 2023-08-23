@@ -16,5 +16,5 @@ var searchData=
   ['piece_13',['Piece',['../class_application_inventaire_1_1_core_1_1_piece_sections_1_1_piece.html',1,'ApplicationInventaire::Core::PieceSections']]],
   ['popup_14',['POPUP',['../class_application_inventaire_1_1_core_1_1_global_project_data_1_1_p_o_p_u_p.html',1,'ApplicationInventaire::Core::GlobalProjectData']]],
   ['projectdata_15',['ProjectData',['../class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html',1,'ApplicationInventaire::Core::ProjectDataSet']]],
-  ['projectinfos_16',['ProjectInfos',['../class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html',1,'ApplicationInventaire::Core::ProjectDataSet']]]
+  ['TemplateInfos_16',['TemplateInfos',['../class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_infos.html',1,'ApplicationInventaire::Core::ProjectDataSet']]]
 ];

@@ -186,7 +186,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
 
-            string[] projectList = GlobalProjectData.GetProjectNames();
+            string[] projectList = GlobalData.GetProjectNames();
             foreach (string project in projectList)
             {
                 if (project.Equals(TextBoxName.Text))
@@ -241,19 +241,19 @@ namespace ApplicationInventaire.MVVM.View
             {
                 return;
             }
-            ProjectInfos projectInfos = new ProjectInfos(TextBoxName.Text);
-            projectInfos.Description = TextBoxDescription.Text;
-            File.Copy(excelPath, projectInfos.ExcelPath, true);
-            File.Copy(excelPath, projectInfos.TmpExcelPath, true);
-            ProjectData projectData = new ProjectData(projectInfos);
+            TemplateInfos TemplateInfos = new TemplateInfos(TextBoxName.Text);
+            TemplateInfos.Description = TextBoxDescription.Text;
+            File.Copy(excelPath, TemplateInfos.ExcelPath, true);
+            File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
+            TemplateData projectData = new TemplateData(TemplateInfos);
 
-            File.Copy(excelPath, projectInfos.ExcelPath, true);
-            File.Copy(excelPath, projectInfos.TmpExcelPath, true);
+            File.Copy(excelPath, TemplateInfos.ExcelPath, true);
+            File.Copy(excelPath, TemplateInfos.TmpExcelPath, true);
 
 
             foreach (ImageInfos i in imageSectionsInfos) //saving selected image section to directory
             {
-                string destinationPath = Path.Combine(projectData.myProjectInfos.ImageSectionPath, i.Name);
+                string destinationPath = Path.Combine(projectData.myTemplateInfos.ImageSectionPath, i.Name);
                 File.Copy(i.Path, destinationPath, true);
                 projectData.mySections.Add(new Core.PieceSections.Section(i.Name));
 
@@ -261,22 +261,22 @@ namespace ApplicationInventaire.MVVM.View
 
             foreach(ImageInfos i in imageReleveInfos) //saving releve image to directory
             {
-                string destinationPath=Path.Combine(projectData.myProjectInfos.ImageRelevePath, i.Name);
+                string destinationPath=Path.Combine(projectData.myTemplateInfos.ImageRelevePath, i.Name);
                 File.Copy(i.Path, destinationPath);
             }
             for (int i = 0; i < PlansNameList.Count; i++) //saving plans
             {
-                string destinationPath = Path.Combine(projectData.myProjectInfos.PlansPath, PlansNameList[i]);
+                string destinationPath = Path.Combine(projectData.myTemplateInfos.PlansPath, PlansNameList[i]);
                 File.Copy(PlansPathList[i], destinationPath, true);
 
             }
-            projectData.myProjectInfos.Author = Environment.UserName;
-            projectData.myProjectInfos.CreationDate= DateTime.Now;
-            projectData.myProjectInfos.LastEditor = Environment.UserName;
-            projectData.myProjectInfos.LastEditionDate = DateTime.Now;
+            projectData.myTemplateInfos.Author = Environment.UserName;
+            projectData.myTemplateInfos.CreationDate= DateTime.Now;
+            projectData.myTemplateInfos.LastEditor = Environment.UserName;
+            projectData.myTemplateInfos.LastEditionDate = DateTime.Now;
             projectData.Save();
-            GlobalProjectData.CurrentProjectName = projectData.myProjectInfos.ProjectName;
-            GlobalProjectData.CurrentProjectData = new ProjectData(new ProjectInfos(new(projectInfos.ProjectName)));
+            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;
+            GlobalTemplateData.CurrentProjectData = new TemplateData(new TemplateInfos(new(TemplateInfos.ProjectName)));
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_2);
 
 

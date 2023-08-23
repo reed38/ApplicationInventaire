@@ -31,8 +31,8 @@ namespace ApplicationInventaire.MVVM.View
             InitializeComponent();
             GlobalPages.page_1_1 = this;
             DataContext = this;
-            ProjectNameList = new ObservableCollection<string>(GlobalProjectData.GetProjectNames()); //we get the list of the project available in the UserData folder
-            ProjectPathList = GlobalProjectData.GetProjecPaths(); //going through the UserData folder and initializing ProjectPathList
+            ProjectNameList = new ObservableCollection<string>(GlobalData.GetProjectNames()); //we get the list of the project available in the UserData folder
+            ProjectPathList = GlobalData.GetProjecPaths(); //going through the UserData folder and initializing ProjectPathList
 
 
         }

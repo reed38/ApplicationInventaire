@@ -39,15 +39,14 @@ namespace ApplicationInventaire.Core.GlobalProjectData
  /// <summary>
  /// This static class is used to pass Data through pages and store constant variables such as image path.
  /// </summary>
-    public static class GlobalProjectData
+    public static class GlobalTemplateData
     {
         
         #region variables
         public static string CurrentProjectName;
         public static string CurrentSectionName;
         public static string CurrentPieceName;
-        public static string AppRootDirectoryPath=GlobalProjectData.InitializeRootDirectory();
-        public static ProjectData CurrentProjectData;
+        public static TemplateData CurrentProjectData;
         public static int UserRigth; //1 admin, 0 default
         public static string password = "userir";
         public static Settings toto;
@@ -67,116 +66,14 @@ namespace ApplicationInventaire.Core.GlobalProjectData
 
         #endregion
 
-        #region BindingMethods
-
-        #endregion
-
-        #region PAGE_3_1Variables
-        //is used to store the excel Path if the user choose to continu the inventory. This can now be implemented diferently by directly changing the value in CurrentProjectData
-
-        #endregion
+     
 
 
 
 
 
 
-
-        /// <summary>
-        /// Used to get an array of string containing the list of the name of the projects present in the UserData folder
-        /// </summary>
-        /// <returns> an array of string</returns>
-        public static string[] GetProjectNames()
-        {
-            string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory , "UserData");
-            string[] result = Directory.GetDirectories(UserDataPath);
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = Path.GetFileNameWithoutExtension(result[i]);
-
-            }
-
-            return (result);
-
-
-
-        }
-
-        /// <summary>
-        /// Go through the directory User Data to return the paths of the directories of the differents templates
-        /// </summary>
-        /// <returns> string [] containing the paths</returns>
-        public static string[] GetProjecPaths()
-        {
-            string UserDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "UserData");
-            string[] result = Directory.GetDirectories(UserDataPath);
-            return result;
-
-        }
-        /// <summary>
-        /// Go through the directory User Data to returs the names of the directories of the differents templates
-        /// </summary>
-        /// <returns> string [] containing the names</returns>
-        public static string[] GetPlansNames()
-        {
-            ProjectInfos tmp = new(CurrentProjectName);
-            string PlansPath = tmp.PlansPath;
-            string[] result = Directory.GetFiles(PlansPath);
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = Path.GetFileNameWithoutExtension(result[i]);
-
-            }
-
-            return (result);
-
-        }
-        /// <summary>
-        /// Go through the directory Plans to returs the paths of the plans presents in the given template
-        /// </summary>
-        /// <returns> string [] containing the names</returns>
-        public static string[] GetPlansPath()
-        {
-            ProjectInfos tmp = new(CurrentProjectName);
-            string PlansPath = tmp.PlansPath;
-            string[] result = Directory.GetFiles(PlansPath);
-          
-            return (result);
-
-        }
-
-
-        #region methodsInitializeData
-/// <summary>
-/// Get the root directory in which the app is currently running
-/// </summary>
-/// <returns> Path of that directory </returns>
-        private static  string InitializeRootDirectory()
-        {
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string projectDirectory = Directory.GetParent(baseDirectory).Parent.FullName;
-            for (int i = 0; i < 2; i++)
-            {
-                baseDirectory = Directory.GetParent(baseDirectory).Parent.FullName;
-            }
-           return baseDirectory;
-
-        }
-
-       
-
-
-
-
-
-
-
-        #endregion
-
-        #region debugging
-
-        #endregion
-
+        
 
 
 

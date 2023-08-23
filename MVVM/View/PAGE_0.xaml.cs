@@ -31,7 +31,7 @@ namespace ApplicationInventaire.MVVM.View
           
             InitializeComponent();
             DataContext = this;
-            if (GlobalProjectData.UserRigth == 1)
+            if (GlobalTemplateData.UserRigth == 1)
             {
                 RadioButtonAdmin.IsChecked = true;
                 RadioButtonDefault.IsChecked = false;
@@ -58,7 +58,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void ButtonRadioDefaultClick(object sender, RoutedEventArgs e)
         {
-            GlobalProjectData.UserRigth = 0;
+            GlobalTemplateData.UserRigth = 0;
           
 
         }
@@ -77,9 +77,9 @@ namespace ApplicationInventaire.MVVM.View
             {
                 if (!string.IsNullOrEmpty(passwd))
                 {
-                    if (passwd.Equals(GlobalProjectData.password))
+                    if (passwd.Equals(GlobalTemplateData.password))
                     {
-                        GlobalProjectData.UserRigth = 1;
+                        GlobalTemplateData.UserRigth = 1;
                         PopUpPassword.IsOpen = false;
 
                         passwd = null;
@@ -110,9 +110,9 @@ namespace ApplicationInventaire.MVVM.View
         {
             if (!string.IsNullOrEmpty(passwd))
             {
-                if (passwd.Equals(GlobalProjectData.password))
+                if (passwd.Equals(GlobalTemplateData.password))
                 {
-                    GlobalProjectData.UserRigth = 1;
+                    GlobalTemplateData.UserRigth = 1;
                     PopUpPassword.IsOpen = false;
 
                     passwd = null;
