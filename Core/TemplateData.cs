@@ -513,7 +513,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
                 int isYellow;
                 byte[] color = myTmpExcelFile.GetCellColor(ConstructorCell.Sheet, n, ConstructorCell.Column);
 
-                if (color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
+                if (color != null && color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
                 {
                     isYellow = 1;
                 }

@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <AnalysisLevel>5.0-recommended</AnalysisLevel>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -58,6 +59,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
     <PackageReference Include="Enums.NET" Version="4.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
@@ -84,15 +89,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Image\Logo_AVENTECH_Couleurs_by_Reyes.png">
+    <None Update="Resources\Image\Logo_AVENTECH_Couleurs_by_Reyes.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Image\RedCircle.png">
+    <None Update="Resources\Image\RedCircle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Image\RedFrame.png">
+    <None Update="Resources\Image\RedFrame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="UserData\toto.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UserData\" />
   </ItemGroup>
 
 </Project>
