@@ -1,18 +1,17 @@
-## autheur: 
-Regnault Edgar
+
 
 ##  Introduction 
 Cette application a pour but de faciliter l'accès aux plan et le suivi des manquants d'un montage.
 
 ## Autre
-Ce dossier contient les éléments n'étant pas directement en lien avec le code/du projet
+Ce dossier contient les éléments n'étant pas directement en lien avec le code/du projet.
 ### ReleaseApp
 Contient la release de l'application. Cette version est indépendante du framework .NET et peut donc simplement
 être copiée sur un oridinateur, elle fonctionnera immédiatement.
 
 ### DemoRessources
 Contient des ressources pour effectuer une démo de l'application. Des infos supplémentaires sur ces ressources peuvent être trouvé 
-dans le .md
+dans le .md situé dans ce dossier.
 ### Documentation 
 Contient la documentation utilisateur et la documentation programmeur.
 ### Code
