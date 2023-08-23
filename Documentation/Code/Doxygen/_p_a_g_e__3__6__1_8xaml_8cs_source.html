@@ -219,7 +219,7 @@ $(function() {
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="class_application_inventaire_1_1_m_v_v_m_1_1_view_1_1_p_a_g_e__3__6__1.html#a5bc4f0db4d4796669cd2fc61da490812">  148</a></span>        <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_application_inventaire_1_1_m_v_v_m_1_1_view_1_1_p_a_g_e__3__6__1.html#a5bc4f0db4d4796669cd2fc61da490812">InitializeFields</a>()</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        {</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            this.TextBoxDescription.Text = projectData.myTemplateInfos.Description;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            this.TextBoxName.Text = projectData.myTemplateInfos.ProjectName;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            this.TextBoxName.Text = projectData.myTemplateInfos.TemplateName;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            ExcelName = Path.GetFileNameWithoutExtension(projectData.myTemplateInfos.ExcelPath);</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            excelPath = projectData.myTemplateInfos.ExcelPath;</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="comment">//Files</span></div>
@@ -399,7 +399,7 @@ $(function() {
 <div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            projectData.myTemplateInfos.LastEditionDate = DateTime.Now;</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a81c11d8631ec7ad3d6aef37e96c2c6b2">Save</a>();</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a9cd8c157b18825f0ab5db23c2b939493">UpdateSection</a>();</div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            GlobalProjectData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            GlobalProjectData.CurrentProjectName = projectData.myTemplateInfos.TemplateName;</div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            GlobalProjectData.CurrentProjectData =projectData;</div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html">GlobalPages</a>.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html#a5364b1a74b07f63f0fc0d043894ca9ee">SetCurrentPage</a>(<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html">GlobalPages</a>.PAGE_3_6_2);</div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span> </div>

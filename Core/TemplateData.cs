@@ -82,7 +82,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public string ImageSectionPath { set; get; }//path to the folder where Section image are stored
         public string ImageRelevePath { set; get; } //path to the folder where Releve images are stored
         public string PlansPath { set; get; } //path to the folder where plans pdf are stored
-        public string ProjectName { set; get; }
+        public string TemplateName { set; get; }
         public string Author { set; get; } //person who created the project
         public DateTime CreationDate { set; get; }
         public string LastEditor { set; get; }
@@ -95,7 +95,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region constructor
         public TemplateInfos(string ProjectName)
         {
-            this.ProjectName = ProjectName;
+            this.TemplateName = ProjectName;
             this.ProjectPath = Path.Combine(AppPath, ProjectName);
             this.ImagePath = Path.Combine(this.ProjectPath, "Image");
             this.ImageSectionPath = Path.Combine(this.ImagePath, "ImageSection");
@@ -155,7 +155,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #region debugging
         public void DispDataTemplateInfos()
         {
-            Console.WriteLine("ProjectName: " + this.ProjectName);
+            Console.WriteLine("ProjectName: " + this.TemplateName);
             Console.WriteLine("Description: " + this.Description);
             Console.WriteLine("Author: " + Author);
 
@@ -652,9 +652,6 @@ namespace ApplicationInventaire.Core.ProjectDataSet
     }
     #endregion
 
-
-}
-
 public static class GlobalData
 {
 
@@ -723,6 +720,9 @@ public static class GlobalData
     }
 
 }
+}
+
+
 
 
 

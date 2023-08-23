@@ -50,7 +50,7 @@ namespace ApplicationInventaire.MVVM.View
 
 
         #region bindingVariable
-        private ObservableCollection<string> items2 = new ObservableCollection<string>(); //list of the projectName contained in the localApplication
+        private ObservableCollection<string> items2 = new ObservableCollection<string>(); //list of the TemplateName contained in the localApplication
 
         #endregion
 

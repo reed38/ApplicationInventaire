@@ -275,8 +275,8 @@ namespace ApplicationInventaire.MVVM.View
             projectData.myTemplateInfos.LastEditor = Environment.UserName;
             projectData.myTemplateInfos.LastEditionDate = DateTime.Now;
             projectData.Save();
-            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;
-            GlobalTemplateData.CurrentProjectData = new TemplateData(new TemplateInfos(new(TemplateInfos.ProjectName)));
+            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.TemplateName;
+            GlobalTemplateData.CurrentProjectData = new TemplateData(new TemplateInfos(new(TemplateInfos.TemplateName)));
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_4_2);
 
 

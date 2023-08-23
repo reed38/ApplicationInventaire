@@ -511,7 +511,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><span class="lineno">  351</span>            projectData.myTemplateInfos.LastEditionDate = DateTime.Now;</div>
 <div class="line"><span class="lineno">  352</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a81c11d8631ec7ad3d6aef37e96c2c6b2">Save</a>();</div>
 <div class="line"><span class="lineno">  353</span>            projectData.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_project_data.html#a9cd8c157b18825f0ab5db23c2b939493">UpdateSection</a>();</div>
-<div class="line"><span class="lineno">  354</span>            GlobalProjectData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;</div>
+<div class="line"><span class="lineno">  354</span>            GlobalProjectData.CurrentProjectName = projectData.myTemplateInfos.TemplateName;</div>
 <div class="line"><span class="lineno">  355</span>            GlobalProjectData.CurrentProjectData =projectData;</div>
 <div class="line"><span class="lineno">  356</span>            <a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html">GlobalPages</a>.<a class="code hl_function" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html#a5364b1a74b07f63f0fc0d043894ca9ee">SetCurrentPage</a>(<a class="code hl_class" href="class_application_inventaire_1_1_core_1_1_global_pages_1_1_global_pages.html">GlobalPages</a>.PAGE_3_6_2);</div>
 <div class="line"><span class="lineno">  357</span> </div>
@@ -863,7 +863,7 @@ Private Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_p_a_g_e__3__6__1_8xaml_8cs_source.html#l00148">148</a> of file <a class="el" href="_p_a_g_e__3__6__1_8xaml_8cs_source.html">PAGE_3_6_1.xaml.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  149</span>        {</div>
 <div class="line"><span class="lineno">  151</span>            this.TextBoxDescription.Text = projectData.myTemplateInfos.Description;</div>
-<div class="line"><span class="lineno">  152</span>            this.TextBoxName.Text = projectData.myTemplateInfos.ProjectName;</div>
+<div class="line"><span class="lineno">  152</span>            this.TextBoxName.Text = projectData.myTemplateInfos.TemplateName;</div>
 <div class="line"><span class="lineno">  153</span>            ExcelName = Path.GetFileNameWithoutExtension(projectData.myTemplateInfos.ExcelPath);</div>
 <div class="line"><span class="lineno">  154</span>            excelPath = projectData.myTemplateInfos.ExcelPath;</div>
 <div class="line"><span class="lineno">  155</span>            <span class="comment">//Files</span></div>

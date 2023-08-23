@@ -149,7 +149,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             ///textBox
             this.TextBoxDescription.Text = projectData.myTemplateInfos.Description;
-            this.TextBoxName.Text = projectData.myTemplateInfos.ProjectName;
+            this.TextBoxName.Text = projectData.myTemplateInfos.TemplateName;
             ExcelName = Path.GetFileNameWithoutExtension(projectData.myTemplateInfos.ExcelPath);
             excelPath = projectData.myTemplateInfos.ExcelPath;
             //Files
@@ -351,7 +351,7 @@ namespace ApplicationInventaire.MVVM.View
             projectData.myTemplateInfos.LastEditionDate = DateTime.Now;
             projectData.Save();
             projectData.UpdateSection();
-            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.ProjectName;
+            GlobalTemplateData.CurrentProjectName = projectData.myTemplateInfos.TemplateName;
             GlobalTemplateData.CurrentProjectData =projectData;
             GlobalPages.SetCurrentPage(GlobalPages.PAGE_3_6_2);
 
