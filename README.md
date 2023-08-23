@@ -1,7 +1,6 @@
 ##  Introduction 
-This application was made by Edgar Regnault.
-It aims to make inventory and  consulting blueprint easier.
-All the data are stored locally on the application.
+Cette application a pour but de faciliter la consulatation de plan et le suivi de manquants.
+Son fonctionnement
 
 A doxygen documentation and a word file containing the plan of the application can be found in the folder "Documentation".
 
