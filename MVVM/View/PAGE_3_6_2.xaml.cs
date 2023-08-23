@@ -36,11 +36,11 @@ namespace ApplicationInventaire.MVVM.View
 
             IndiceSection = 0;
             this.RedFramePath = GlobalTemplateData.RedFramePath;
-            projectData = GlobalTemplateData.CurrentTemplateData;
+            templateData = GlobalTemplateData.CurrentTemplateData;
 
-            foreach (ImageInfos im in this.projectData.ImageSectionList)
+            foreach (ImageInfos im in this.templateData.ImageSectionList)
             {
-                if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                if (im.Name == templateData.mySections[IndiceSection].SectionName)
                 {
                     ImageSection = im.Path;
                     break;
@@ -209,7 +209,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateVariables
 
-        private TemplateData projectData;
+        private TemplateData templateData;
         private Piece CurrentPiece;
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();//list containing infos about the instances of little red circles on the Image
         private (Image, Piece) tmp; //used to pass argument
@@ -304,7 +304,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetOverlay();
 
-            foreach (Piece i in projectData.mySections[IndiceSection].PiecesList)
+            foreach (Piece i in templateData.mySections[IndiceSection].PiecesList)
             {
                 CreateImageInstance(i);
 
@@ -424,7 +424,7 @@ namespace ApplicationInventaire.MVVM.View
         /// <param name="e"></param>
         private void ButtonClickSaveGoToNext(object sender, RoutedEventArgs e)
         {
-            IndiceSection = (IndiceSection + 1) % (projectData.mySections.Count );
+            IndiceSection = (IndiceSection + 1) % (templateData.mySections.Count );
             ChangeSection();
          
 
@@ -440,7 +440,7 @@ namespace ApplicationInventaire.MVVM.View
             IndiceSection--;
             if (IndiceSection<0)
             {
-                IndiceSection = projectData.mySections.Count-1 ;
+                IndiceSection = templateData.mySections.Count-1 ;
             }
             ChangeSection();
         }
@@ -460,7 +460,7 @@ namespace ApplicationInventaire.MVVM.View
                 if (OverlayImageList[i].Item2 == tmp.Item2)
                 {
                     ResetOverlay();
-                    projectData.mySections[IndiceSection].PiecesList.Remove(tmp.Item2);
+                    templateData.mySections[IndiceSection].PiecesList.Remove(tmp.Item2);
                     break;
                 }
             }
@@ -489,9 +489,9 @@ namespace ApplicationInventaire.MVVM.View
            
            
 
-            foreach (ImageInfos i in projectData.ImageSectionList)
+            foreach (ImageInfos i in templateData.ImageSectionList)
             {
-                if (i.Name.Equals( projectData.mySections[IndiceSection].SectionName))
+                if (i.Name.Equals( templateData.mySections[IndiceSection].SectionName))
                 {
                     ImageSection = i.Path;
                     break;
@@ -516,7 +516,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             CurrentPiece.PieceName = autoTextBox.Text;
             CurrentPiece.SectionId = IndiceSection + 1;
-            projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
+            templateData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
 
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;
@@ -554,7 +554,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void InitializeAutoSuggestionList()
         {
-            AutoSuggestionList = projectData.GetPieceNames();
+            AutoSuggestionList = templateData.GetPieceNames();
         }
 
         private (Image, Piece) GetClickedPieceImage(Point clickPosition)
@@ -590,7 +590,8 @@ namespace ApplicationInventaire.MVVM.View
         /// <param name="e"></param>
         private void ButtonSaveAndQuit(object sender, RoutedEventArgs e)
         {
-            projectData.Save();
+            templateData.InitializePieceFromExcel(); //if piece have been haded they need to be initialized
+            templateData.Save();
             GlobalPages.PageGoBack();
             GlobalPages.PageGoBack();
             GlobalPages.PageGoBack();

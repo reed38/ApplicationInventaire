@@ -203,16 +203,16 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         #region constructor
 
-        public TemplateData(TemplateInfos project)
+        public TemplateData(TemplateInfos template)
         {
 
 
 
-            File.Copy(project.ExcelPath, project.TmpExcelPath, true);
+            File.Copy(template.ExcelPath, template.TmpExcelPath, true);
 
 
 
-            Database database = new Database(project.DatabasePath);
+            Database database = new Database(template.DatabasePath);
             if (database.IsDatabaseInitialized())
             {
 
@@ -222,21 +222,21 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             }
             else
             {
-                this.myTemplateInfos = project;
+                this.myTemplateInfos = template;
                 this.myDatabase = new Database(myTemplateInfos.DatabasePath);
                 mySections = new List<Section>();
-                this.myTemplateInfos = project;
+                this.myTemplateInfos = template;
                 this.myTemplateInfos.CreationDate = DateTime.Now;
                 this.myTemplateInfos.Author= Environment.UserName;
                 this.myTemplateInfos.LastEditor = Environment.UserName;
                 this.myTemplateInfos.LastEditionDate = DateTime.Now;
 
             }
-            myExcelFile = new ExcelFile(project.ExcelPath);
-            this.myTmpExcelFile = new ExcelFile(project.TmpExcelPath);
+            myExcelFile = new ExcelFile(template.ExcelPath);
+            this.myTmpExcelFile = new ExcelFile(template.TmpExcelPath);
             GetRelevesNames();
             GetSectionsNames();
-            this.InitializePieceFromExcel();
+           
 
 
         }
@@ -369,100 +369,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
         }
 
-        /// <summary>
-        /// Go through the excelfile and initialize the data structure using it. It is used to know which piece is already present and which one require its serial number to be be written down
-        /// </summary>
-        public void InitializePieceFromExcel2()
-        {
-            CellInfo PresentCell = this.myTmpExcelFile.FindValue("Présent");
-            CellInfo PIDtCell = this.myTmpExcelFile.FindValue("PID ");
-            CellInfo AmountCell = this.myTmpExcelFile.FindValue("Besoin Qté Totale");
-            CellInfo ConstructorCell = this.myTmpExcelFile.FindValue("FABRICANT");
-            CellInfo DescriptionCell = this.myTmpExcelFile.FindValue("Désignation");
-
-            List<(CellInfo, CellInfo, int, string)> CellData = new List<(CellInfo, CellInfo, int, string)>();
-
-
-            if (PresentCell == null || PIDtCell == null || AmountCell == null || ConstructorCell == null)
-            {
-
-                return;
-            }
-
-            int n = PresentCell.Row + 1;
-            string res;
-            do
-            {
-                res = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, AmountCell.Column);
-
-                CellInfo TagCellTmp = new CellInfo(n, PIDtCell.Column, PIDtCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PIDtCell.Column));
-
-                CellInfo ContentCellTmp = new CellInfo(n, PresentCell.Column, PresentCell.Sheet, myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, PresentCell.Column));
-
-                string description = myTmpExcelFile.GetCellValue(PIDtCell.Sheet, n, DescriptionCell.Column);
-
-                ////IsReleveRequire, we check if the cell color is yellow
-                int isYellow;
-                byte[] color = myTmpExcelFile.GetCellColor(ConstructorCell.Sheet, n, ConstructorCell.Column);
-
-                if (color[0] == 255 && color[1] == 255 && color[2] == 0) //we test if the color of the cell is yellow
-                {
-                    isYellow = 1;
-                }
-                else
-                {
-                    isYellow = 0;
-                }
-                if(!string.IsNullOrEmpty(TagCellTmp.Content) && TagCellTmp.Content.IndexOf(".M") == -1)
-                {
-                    CellData.Add((TagCellTmp, ContentCellTmp, isYellow, description));
-
-                }
-                n++;
-
-
-            } while (!res.Equals(""));
-
-
-            for (int i = 0; i < this.mySections.Count; i++)
-            {
-                for (int j = 0; j < this.mySections[i].PiecesList.Count; j++)
-                {
-                    foreach (var k in CellData)
-                    {
-                        Piece tmp = this.mySections[i].PiecesList[j];
-                        if (k.Item1.Content.Equals(this.mySections[i].PiecesList[j].PieceName))
-                        {
-                            if (k.Item2.Content.Equals("1"))
-                            {
-                                this.mySections[i].PiecesList[j].IsPresent = 1;
-                            }
-                            else
-                            {
-                                this.mySections[i].PiecesList[j].IsPresent = 0;
-                            }
-                            this.mySections[i].PiecesList[j].IsReleveRequired = k.Item3;
-
-
-                            this.mySections[i].PiecesList[j].SheetName = PresentCell.Sheet;
-                            this.mySections[i].PiecesList[j].ExcelColumn = PresentCell.Column;
-                            this.mySections[i].PiecesList[j].ExcelRow = k.Item2.Row;
-                            this.mySections[i].PiecesList[j].Description = k.Item4;
-
-
-                            //we use the color of the cell to determine if Serial number is required
-
-
-
-                        }
-
-                    }
-                }
-            }
-        }
-
-
-
+       
 
 
 

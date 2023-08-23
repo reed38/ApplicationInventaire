@@ -37,11 +37,11 @@ namespace ApplicationInventaire.MVVM.View
 
             IndiceSection = 0;
             this.RedFramePath = GlobalTemplateData.RedFramePath;
-            projectData = GlobalTemplateData.CurrentTemplateData;
+            templateData = GlobalTemplateData.CurrentTemplateData;
 
-            foreach (ImageInfos im in this.projectData.ImageSectionList)
+            foreach (ImageInfos im in this.templateData.ImageSectionList)
             {
-                if (im.Name == projectData.mySections[IndiceSection].SectionName)
+                if (im.Name == templateData.mySections[IndiceSection].SectionName)
                 {
                     ImageSection3 = im.Path;
                     break;
@@ -206,7 +206,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateVariables
 
-        private TemplateData projectData;
+        private TemplateData templateData;
         private Piece CurrentPiece; 
         private List<(Image, Piece)> OverlayImageList = new List<(Image, Piece)>();
         private (Image, Piece) tmp; //used to pass argument
@@ -226,7 +226,7 @@ namespace ApplicationInventaire.MVVM.View
 
         private void InitializeAutoSuggestionList()
         {
-            AutoSuggestionList = projectData.GetPieceNames();
+            AutoSuggestionList = templateData.GetPieceNames();
         }
 
         private (Image, Piece) GetClickedPieceImage(Point clickPosition)
@@ -249,19 +249,6 @@ namespace ApplicationInventaire.MVVM.View
 
         #endregion
 
-        #region UIMethods
-
-        private void ButtonClickSeachEnter(object sender, RoutedEventArgs e)
-        {
-            GlobalTemplateData.CurrentPieceName = autoTextBox.Text;
-            autoTextBox.Clear();
-            GlobalPages.SetCurrentPage(GlobalPages.PAGE_5_2);
-
-        }
-       
-        
-        #endregion
-      
         
        
 
@@ -300,13 +287,7 @@ namespace ApplicationInventaire.MVVM.View
 
         #region GIMethods
 
-        private void SetBorderPosition()
-        {
-            ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2);
-
-
-        }
-
+       
         private void ChangeFrameCoordinates(double x, double y)
         {
             this.RedFrameImage.Visibility = Visibility.Visible;
@@ -334,7 +315,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             ResetOverlay();
 
-            foreach (Piece i in projectData.mySections[IndiceSection].PiecesList)
+            foreach (Piece i in templateData.mySections[IndiceSection].PiecesList)
             {
                 CreateImageInstance(i);
 
@@ -448,22 +429,23 @@ namespace ApplicationInventaire.MVVM.View
         {
 
             IndiceSection++;
-            if (IndiceSection == projectData.mySections.Count - 1)
+            if (IndiceSection == templateData.mySections.Count - 1)
             {
                 ButtonsaveGoNext.Content = "Save and exit";
             }
 
-            else if (IndiceSection == projectData.mySections.Count)
+            else if (IndiceSection == templateData.mySections.Count)
             {
-                projectData.Save();
+                templateData.InitializePieceFromExcel();
+                templateData.Save();
                 GlobalPages.PageGoBack();
                 GlobalPages.PageGoBack();
                 return;
             }
 
-            foreach (ImageInfos i in projectData.ImageSectionList)
+            foreach (ImageInfos i in templateData.ImageSectionList)
             {
-                if (i.Name == projectData.mySections[IndiceSection].SectionName)
+                if (i.Name == templateData.mySections[IndiceSection].SectionName)
                 {
                     ImageSection3 = i.Path;
                 }
@@ -485,7 +467,7 @@ namespace ApplicationInventaire.MVVM.View
                 if (OverlayImageList[i].Item2==tmp.Item2)
                 {
                     ResetOverlay();
-                    projectData.mySections[IndiceSection].PiecesList.Remove(tmp.Item2);
+                    templateData.mySections[IndiceSection].PiecesList.Remove(tmp.Item2);
                     break;
                 }
             }
@@ -508,7 +490,7 @@ namespace ApplicationInventaire.MVVM.View
             }
             CurrentPiece.PieceName = autoTextBox.Text;
             CurrentPiece.SectionId = IndiceSection + 1;
-            projectData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
+            templateData.mySections[IndiceSection].PiecesList.Add(CurrentPiece);
            
             InitializeOverlay();
             this.RedFrameImage.Visibility = Visibility.Hidden;

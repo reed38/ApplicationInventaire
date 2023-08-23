@@ -346,7 +346,7 @@ namespace ApplicationInventaire.MVVM.View
             
             templateData.GetSectionsNames(); //get the info on the images of sections
             templateData.GetRelevesNames(); //same for releve
-            templateData.InitializePieceFromExcel(); //We initialize the Piece fom excel (Present, marking, serial number required).
+            //templateData.InitializePieceFromExcel(); //We initialize the Piece fom excel (Present, marking, serial number required).
             templateData.myTemplateInfos.LastEditor = Environment.UserName; //getting the name of the current user to update last editor.
             templateData.myTemplateInfos.LastEditionDate = DateTime.Now;
             templateData.Save();// saving these info in the sqlite database so te next user can access it.
