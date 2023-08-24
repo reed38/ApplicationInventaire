@@ -104,7 +104,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Autre\VisualCodeProject\" />
+    <Folder Include="Other\VisualCodeProject\" />
     <Folder Include="MVVM\Model\" />
     <Folder Include="UserData\" />
   </ItemGroup>

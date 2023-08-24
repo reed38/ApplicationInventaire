@@ -2,7 +2,7 @@
 ## Introduction 
 Cette application a pour but de faciliter l'accès aux plan et le suivi des manquants d'un montage. Un aperçu de son apparence et de son fonctionnement sont présents dans le manuel utilisateur
 
-## Autre
+## Other
 Ce dossier contient les éléments n'étant pas directement en lien avec le code/du projet.
 ### ReleaseApp
 Contient la release de l'application. Cette version est indépendante du Framework .NET et peut donc simplement être copiée sur un ordinateur, elle fonctionnera immédiatement.
