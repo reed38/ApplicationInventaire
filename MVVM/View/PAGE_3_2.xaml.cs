@@ -235,8 +235,8 @@ namespace ApplicationInventaire.MVVM.View
 
         #region PrivateMethods
 
-        /// <summary>
-        /// Show or hide the button used to select if the Piece markage is present. Not all Piece have one. Only those with the field "HasMarking" set to int 1.
+            /// <summary>
+            /// Show or hide the button used to select if the Piece markage is present. Not all Piece have one. Only those with the field "HasMarking" set to int 1.
         /// </summary>
         private void InitializeMarquageButton()
         {
