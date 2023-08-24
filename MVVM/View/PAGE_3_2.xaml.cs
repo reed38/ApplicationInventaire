@@ -71,7 +71,6 @@ namespace ApplicationInventaire.MVVM.View
 
                 }
             }
-            PIDCell = templateData.myTmpExcelFile.FindValue("PID", -1); //When a piece have a marquage, knowing in which colum to search is faster
             ChangeFrameCoordinates(CurrentPiece.X - this.RedFrameImage.Height / 2, CurrentPiece.Y - this.RedFrameImage.Width / 2); //initializing the position of the red frame  and the label containing NameTag
 
         }
@@ -465,7 +464,7 @@ namespace ApplicationInventaire.MVVM.View
 
                 if ((this.RadioButtonMarquagePresent.IsChecked == true))
                 {
-                    CellInfo tmp = this.templateData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M", PIDCell.Column);
+                    CellInfo tmp = this.templateData.myTmpExcelFile.FindValue(CurrentPiece.PieceName + ".M", -1);
                     this.templateData.myTmpExcelFile.SetCellValue(tmp.Sheet, "1", CurrentPiece.ExcelColumn, tmp.Row);
 
 
