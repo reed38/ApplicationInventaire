@@ -41,7 +41,7 @@ namespace ApplicationInventaire.MVVM.View
         #endregion
 
         #region BindingVariables
-        private ObservableCollection<string> projectNameList = new ObservableCollection<string>();  //collection used to in  the listBox
+        private ObservableCollection<string> templateNameList = new ObservableCollection<string>();  //collection used to in  the listBox
         private string selectedValue; //will be automatically updated to contain the string of the case the user is currently selecting
         #endregion
 
@@ -49,10 +49,10 @@ namespace ApplicationInventaire.MVVM.View
 
         public ObservableCollection<string> TemplateNameList
         {
-            get { return projectNameList; }
+            get { return templateNameList; }
             set
             {
-                projectNameList = value;
+                templateNameList = value;
                 OnPropertyChanged(nameof(TemplateNameList));
             }
         }

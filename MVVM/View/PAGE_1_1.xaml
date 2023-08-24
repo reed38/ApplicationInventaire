@@ -32,7 +32,7 @@ Background="#116396 "
                     Background="Transparent">
                 <Border BorderBrush="Transparent" BorderThickness="0 " CornerRadius="15" Background="#2a2933" Width="350" HorizontalAlignment="Left">
 
-                    <ListBox ItemsSource="{Binding ProjectNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="350"
+                    <ListBox ItemsSource="{Binding TemplateNameList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="350"
                           SelectionChanged="ListBoxSectionFileSelectionChanged"
                          FontSize="15"
                           Background="Transparent"
