@@ -71,18 +71,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\net6.0-windows\Resources\Image\Logo_AVENTECH_Couleurs_by_Reyes.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bin\Debug\net6.0-windows\Resources\Image\RedCircle.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="bin\Debug\net6.0-windows\Resources\Image\RedFrame.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Core\GlobalTemplateData.cs">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Compile>

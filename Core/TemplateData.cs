@@ -77,7 +77,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         public string RessourcesPath { set; get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
         public string TmpPath { set; get; }
         public string TmpExcelPath { set; get; }
-        public string ProjectPath { set; get; }
+        public string TemplatePath { set; get; }
         public string ImagePath { set; get; }
         public string ImageSectionPath { set; get; }//path to the folder where Section image are stored
         public string ImageRelevePath { set; get; } //path to the folder where Releve images are stored
@@ -93,18 +93,18 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         #endregion
 
         #region constructor
-        public TemplateInfos(string ProjectName)
+        public TemplateInfos(string templateName)
         {
-            this.TemplateName = ProjectName;
-            this.ProjectPath = Path.Combine(AppPath, ProjectName);
-            this.ImagePath = Path.Combine(this.ProjectPath, "Image");
+            this.TemplateName = templateName;
+            this.TemplatePath = Path.Combine(AppPath, templateName);
+            this.ImagePath = Path.Combine(this.TemplatePath, "Image");
             this.ImageSectionPath = Path.Combine(this.ImagePath, "ImageSection");
             this.ImageRelevePath = Path.Combine(this.ImagePath, "ImageReleve");
-            this.DatabasePath = Path.Combine(this.ProjectPath, "Database.db");
-            this.ExcelPath = Path.Combine(this.ProjectPath, "Excel.xls");
-            this.TmpPath = Path.Combine(this.ProjectPath, "Tmp");
+            this.DatabasePath = Path.Combine(this.TemplatePath, "Database.db");
+            this.ExcelPath = Path.Combine(this.TemplatePath, "Excel.xls");
+            this.TmpPath = Path.Combine(this.TemplatePath, "Tmp");
             this.TmpExcelPath = Path.Combine(TmpPath, "tmp.xls");
-            this.PlansPath = Path.Combine(ProjectPath, "Plans");
+            this.PlansPath = Path.Combine(TemplatePath, "Plans");
             this.InitializeFileTree();
 
 
@@ -119,7 +119,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
         private void InitializeFileTree()
         {
             CreateDirectory(AppPath);
-            CreateDirectory(this.ProjectPath);
+            CreateDirectory(this.TemplatePath);
             CreateDirectory(this.ImagePath);
             CreateDirectory(this.ImageSectionPath);
             CreateDirectory(this.ImageRelevePath);
@@ -130,6 +130,19 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             CreateFile(this.TmpExcelPath);
 
 
+        }
+
+        public void  CopyPaths(TemplateInfos tmp) //when transfering the project from one pc to onother path of the template change, so it needs to be reinitialized
+        {
+            this.TemplatePath = tmp.TemplatePath;
+            this.ImagePath = tmp.ImagePath;
+            this.ImageSectionPath = tmp.ImageSectionPath;
+            this.ImageRelevePath = tmp.ImageRelevePath;
+            this.DatabasePath = tmp.DatabasePath;
+            this.ExcelPath = tmp.ExcelPath;
+            this.TmpPath = tmp.TmpPath;
+            this.TmpExcelPath = tmp.TmpExcelPath;
+            this.PlansPath = Path.Combine(TemplatePath, "Plans");
         }
         private void CreateFile(string FilePath)
         {
@@ -161,7 +174,7 @@ namespace ApplicationInventaire.Core.ProjectDataSet
 
             Console.WriteLine("database path: " + this.DatabasePath);
             Console.WriteLine("ExcelPath: " + this.ExcelPath);
-            Console.WriteLine("ProjectPath: " + this.ProjectPath);
+            Console.WriteLine("TemplatePath: " + this.TemplatePath);
             Console.WriteLine("ImagePath: " + this.ImagePath);
             Console.WriteLine("ImageSectionPath: " + this.ImageSectionPath);
             Console.WriteLine("ImageRelevePath: " + this.ImageRelevePath);
@@ -217,8 +230,11 @@ namespace ApplicationInventaire.Core.ProjectDataSet
             {
 
                 this.myTemplateInfos = database.ReadTemplateInfos();
+                this.myTemplateInfos.CopyPaths(template);
                 this.mySections = database.GetAllSections();
                 this.myDatabase = database;
+               
+
             }
             else
             {

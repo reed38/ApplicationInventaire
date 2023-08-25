@@ -108,7 +108,7 @@ Properties</h2></td></tr>
 <tr class="separator:a5e9a6a4fb81b3c0b79ff05b620249e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61f0a4e55c2c863251bab5f120924841"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_template_infos.html#a61f0a4e55c2c863251bab5f120924841">TmpExcelPath</a><code> [get, set]</code></td></tr>
 <tr class="separator:a61f0a4e55c2c863251bab5f120924841"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd3dd52dc66295f2be40f48723455a65"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_template_infos.html#abd3dd52dc66295f2be40f48723455a65">ProjectPath</a><code> [get, set]</code></td></tr>
+<tr class="memitem:abd3dd52dc66295f2be40f48723455a65"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_template_infos.html#abd3dd52dc66295f2be40f48723455a65">TemplatePath</a><code> [get, set]</code></td></tr>
 <tr class="separator:abd3dd52dc66295f2be40f48723455a65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5f77143daac88a03217e4b64b99bc33"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_application_inventaire_1_1_core_1_1_project_data_set_1_1_template_infos.html#aa5f77143daac88a03217e4b64b99bc33">ImagePath</a><code> [get, set]</code></td></tr>
 <tr class="separator:aa5f77143daac88a03217e4b64b99bc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,15 +164,15 @@ Private Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_template_data_8cs_source.html#l00096">96</a> of file <a class="el" href="_template_data_8cs_source.html">TemplateData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   97</span>        {</div>
 <div class="line"><span class="lineno">   98</span>            this.TemplateName = ProjectName;</div>
-<div class="line"><span class="lineno">   99</span>            this.ProjectPath = Path.Combine(AppPath, ProjectName);</div>
-<div class="line"><span class="lineno">  100</span>            this.ImagePath = Path.Combine(this.ProjectPath, <span class="stringliteral">&quot;Image&quot;</span>);</div>
+<div class="line"><span class="lineno">   99</span>            this.TemplatePath = Path.Combine(AppPath, ProjectName);</div>
+<div class="line"><span class="lineno">  100</span>            this.ImagePath = Path.Combine(this.TemplatePath, <span class="stringliteral">&quot;Image&quot;</span>);</div>
 <div class="line"><span class="lineno">  101</span>            this.ImageSectionPath = Path.Combine(this.ImagePath, <span class="stringliteral">&quot;ImageSection&quot;</span>);</div>
 <div class="line"><span class="lineno">  102</span>            this.ImageRelevePath = Path.Combine(this.ImagePath, <span class="stringliteral">&quot;ImageReleve&quot;</span>);</div>
-<div class="line"><span class="lineno">  103</span>            this.DatabasePath = Path.Combine(this.ProjectPath, <span class="stringliteral">&quot;Database.db&quot;</span>);</div>
-<div class="line"><span class="lineno">  104</span>            this.ExcelPath = Path.Combine(this.ProjectPath, <span class="stringliteral">&quot;Excel.xls&quot;</span>);</div>
-<div class="line"><span class="lineno">  105</span>            this.TmpPath = Path.Combine(this.ProjectPath, <span class="stringliteral">&quot;Tmp&quot;</span>);</div>
+<div class="line"><span class="lineno">  103</span>            this.DatabasePath = Path.Combine(this.TemplatePath, <span class="stringliteral">&quot;Database.db&quot;</span>);</div>
+<div class="line"><span class="lineno">  104</span>            this.ExcelPath = Path.Combine(this.TemplatePath, <span class="stringliteral">&quot;Excel.xls&quot;</span>);</div>
+<div class="line"><span class="lineno">  105</span>            this.TmpPath = Path.Combine(this.TemplatePath, <span class="stringliteral">&quot;Tmp&quot;</span>);</div>
 <div class="line"><span class="lineno">  106</span>            this.TmpExcelPath = Path.Combine(TmpPath, <span class="stringliteral">&quot;tmp.xls&quot;</span>);</div>
-<div class="line"><span class="lineno">  107</span>            this.PlansPath = Path.Combine(ProjectPath, <span class="stringliteral">&quot;Plans&quot;</span>);</div>
+<div class="line"><span class="lineno">  107</span>            this.PlansPath = Path.Combine(TemplatePath, <span class="stringliteral">&quot;Plans&quot;</span>);</div>
 <div class="line"><span class="lineno">  108</span>            this.InitializeFileTree();</div>
 <div class="line"><span class="lineno">  109</span> </div>
 <div class="line"><span class="lineno">  110</span> </div>
@@ -295,7 +295,7 @@ Private Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">  161</span> </div>
 <div class="line"><span class="lineno">  162</span>            Console.WriteLine(<span class="stringliteral">&quot;database path: &quot;</span> + this.DatabasePath);</div>
 <div class="line"><span class="lineno">  163</span>            Console.WriteLine(<span class="stringliteral">&quot;ExcelPath: &quot;</span> + this.ExcelPath);</div>
-<div class="line"><span class="lineno">  164</span>            Console.WriteLine(<span class="stringliteral">&quot;ProjectPath: &quot;</span> + this.ProjectPath);</div>
+<div class="line"><span class="lineno">  164</span>            Console.WriteLine(<span class="stringliteral">&quot;TemplatePath: &quot;</span> + this.TemplatePath);</div>
 <div class="line"><span class="lineno">  165</span>            Console.WriteLine(<span class="stringliteral">&quot;ImagePath: &quot;</span> + this.ImagePath);</div>
 <div class="line"><span class="lineno">  166</span>            Console.WriteLine(<span class="stringliteral">&quot;ImageSectionPath: &quot;</span> + this.ImageSectionPath);</div>
 <div class="line"><span class="lineno">  167</span>            Console.WriteLine(<span class="stringliteral">&quot;ImageRelevePath: &quot;</span> + this.ImageRelevePath);</div>
@@ -332,7 +332,7 @@ Private Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_template_data_8cs_source.html#l00119">119</a> of file <a class="el" href="_template_data_8cs_source.html">TemplateData.cs</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  120</span>        {</div>
 <div class="line"><span class="lineno">  121</span>            CreateDirectory(AppPath);</div>
-<div class="line"><span class="lineno">  122</span>            CreateDirectory(this.ProjectPath);</div>
+<div class="line"><span class="lineno">  122</span>            CreateDirectory(this.TemplatePath);</div>
 <div class="line"><span class="lineno">  123</span>            CreateDirectory(this.ImagePath);</div>
 <div class="line"><span class="lineno">  124</span>            CreateDirectory(this.ImageSectionPath);</div>
 <div class="line"><span class="lineno">  125</span>            CreateDirectory(this.ImageRelevePath);</div>
@@ -674,7 +674,7 @@ Private Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="abd3dd52dc66295f2be40f48723455a65" name="abd3dd52dc66295f2be40f48723455a65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd3dd52dc66295f2be40f48723455a65">&#9670;&#160;</a></span>ProjectPath</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3dd52dc66295f2be40f48723455a65">&#9670;&#160;</a></span>TemplatePath</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,7 +683,7 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string ApplicationInventaire.Core.ProjectDataSet.TemplateInfos.ProjectPath</td>
+          <td class="memname">string ApplicationInventaire.Core.ProjectDataSet.TemplateInfos.TemplatePath</td>
         </tr>
       </table>
   </td>

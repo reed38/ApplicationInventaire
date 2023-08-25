@@ -128,7 +128,7 @@ namespace ApplicationInventaire.MVVM.View
         {
             try
             {
-                Directory.Delete(templateData.myTemplateInfos.ProjectPath, true);
+                Directory.Delete(templateData.myTemplateInfos.TemplatePath, true);
 
             }
             catch (Exception ex)
